@@ -1,3 +1,9 @@
+---
+title: "10 — OOP: Encapsulation"
+parent: "Phase 1 — Fundamentals"
+nav_order: 10
+---
+
 # Module 10 — OOP: Encapsulation
 
 ## What You Will Learn

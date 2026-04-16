@@ -1,3 +1,9 @@
+---
+title: "08 — OOP: Inheritance"
+parent: "Phase 1 — Fundamentals"
+nav_order: 8
+---
+
 # Module 08 — OOP: Inheritance & Polymorphism
 
 ## What You Will Learn

@@ -1,3 +1,9 @@
+---
+title: "11 — Nested & Inner Classes"
+parent: "Phase 1 — Fundamentals"
+nav_order: 11
+---
+
 # Module 11 — Nested & Inner Classes
 
 ## What You Will Learn

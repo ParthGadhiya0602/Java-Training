@@ -1,3 +1,9 @@
+---
+title: "04 — Methods"
+parent: "Phase 1 — Fundamentals"
+nav_order: 4
+---
+
 # Module 04 — Methods
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

@@ -1,3 +1,9 @@
+---
+title: "02 — Java Basics"
+parent: "Phase 1 — Fundamentals"
+nav_order: 2
+---
+
 # Module 02 — Java Basics
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

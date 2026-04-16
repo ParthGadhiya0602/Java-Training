@@ -1,3 +1,9 @@
+---
+title: "03 — Control Flow"
+parent: "Phase 1 — Fundamentals"
+nav_order: 3
+---
+
 # Module 03 — Control Flow
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

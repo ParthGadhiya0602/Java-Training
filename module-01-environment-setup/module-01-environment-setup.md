@@ -1,3 +1,9 @@
+---
+title: "01 — Environment Setup"
+parent: "Phase 1 — Fundamentals"
+nav_order: 1
+---
+
 # Module 01 — Environment Setup
 
 Before writing a single line of Java, you need a solid, reproducible toolchain.

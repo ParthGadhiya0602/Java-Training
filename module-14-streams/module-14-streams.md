@@ -1,3 +1,9 @@
+---
+title: "14 — Streams API"
+parent: "Phase 2 — Core APIs"
+nav_order: 14
+---
+
 # Module 14 — Streams API
 
 ## What You Will Learn

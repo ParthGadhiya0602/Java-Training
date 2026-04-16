@@ -1,3 +1,9 @@
+---
+title: "05 — Arrays & Strings"
+parent: "Phase 1 — Fundamentals"
+nav_order: 5
+---
+
 # Module 05 — Arrays, Strings & Regex
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

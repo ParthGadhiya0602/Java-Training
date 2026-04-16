@@ -1,3 +1,9 @@
+---
+title: "07 — OOP: Classes & Objects"
+parent: "Phase 1 — Fundamentals"
+nav_order: 7
+---
+
 # Module 07 — OOP: Classes & Objects
 
 ## What You Will Learn

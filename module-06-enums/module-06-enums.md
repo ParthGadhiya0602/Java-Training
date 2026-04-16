@@ -1,3 +1,9 @@
+---
+title: "06 — Enums"
+parent: "Phase 1 — Fundamentals"
+nav_order: 6
+---
+
 # Module 06 — Enums
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

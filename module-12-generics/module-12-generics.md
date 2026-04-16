@@ -1,3 +1,9 @@
+---
+title: "12 — Generics"
+parent: "Phase 2 — Core APIs"
+nav_order: 12
+---
+
 # Module 12 — Generics
 
 ## What You Will Learn
