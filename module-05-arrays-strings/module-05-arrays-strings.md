@@ -2,6 +2,7 @@
 title: "05 — Arrays & Strings"
 parent: "Phase 1 — Fundamentals"
 nav_order: 5
+render_with_liquid: false
 ---
 
 # Module 05 — Arrays, Strings & Regex

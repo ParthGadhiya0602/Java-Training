@@ -2,6 +2,7 @@
 title: "06 — Enums"
 parent: "Phase 1 — Fundamentals"
 nav_order: 6
+render_with_liquid: false
 ---
 
 # Module 06 — Enums

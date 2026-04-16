@@ -2,6 +2,7 @@
 title: "12 — Generics"
 parent: "Phase 2 — Core APIs"
 nav_order: 12
+render_with_liquid: false
 ---
 
 # Module 12 — Generics

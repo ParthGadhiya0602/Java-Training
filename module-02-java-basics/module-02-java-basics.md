@@ -2,6 +2,7 @@
 title: "02 — Java Basics"
 parent: "Phase 1 — Fundamentals"
 nav_order: 2
+render_with_liquid: false
 ---
 
 # Module 02 — Java Basics

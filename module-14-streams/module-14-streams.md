@@ -2,6 +2,7 @@
 title: "14 — Streams API"
 parent: "Phase 2 — Core APIs"
 nav_order: 14
+render_with_liquid: false
 ---
 
 # Module 14 — Streams API

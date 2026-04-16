@@ -2,6 +2,7 @@
 title: "11 — Nested & Inner Classes"
 parent: "Phase 1 — Fundamentals"
 nav_order: 11
+render_with_liquid: false
 ---
 
 # Module 11 — Nested & Inner Classes

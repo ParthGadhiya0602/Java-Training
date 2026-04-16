@@ -2,6 +2,7 @@
 title: "13 — Collections Framework"
 parent: "Phase 2 — Core APIs"
 nav_order: 13
+render_with_liquid: false
 ---
 
 # Module 13 — Collections Framework

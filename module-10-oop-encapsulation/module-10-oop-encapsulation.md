@@ -2,6 +2,7 @@
 title: "10 — OOP: Encapsulation"
 parent: "Phase 1 — Fundamentals"
 nav_order: 10
+render_with_liquid: false
 ---
 
 # Module 10 — OOP: Encapsulation

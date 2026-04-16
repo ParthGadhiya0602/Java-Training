@@ -2,6 +2,7 @@
 title: "04 — Methods"
 parent: "Phase 1 — Fundamentals"
 nav_order: 4
+render_with_liquid: false
 ---
 
 # Module 04 — Methods

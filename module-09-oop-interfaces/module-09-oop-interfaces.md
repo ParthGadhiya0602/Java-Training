@@ -2,6 +2,7 @@
 title: "09 — OOP: Interfaces"
 parent: "Phase 1 — Fundamentals"
 nav_order: 9
+render_with_liquid: false
 ---
 
 # Module 09 — OOP: Interfaces & Abstract Classes

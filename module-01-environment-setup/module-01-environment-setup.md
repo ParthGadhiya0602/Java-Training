@@ -2,6 +2,7 @@
 title: "01 — Environment Setup"
 parent: "Phase 1 — Fundamentals"
 nav_order: 1
+render_with_liquid: false
 ---
 
 # Module 01 — Environment Setup

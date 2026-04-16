@@ -2,6 +2,7 @@
 title: "07 — OOP: Classes & Objects"
 parent: "Phase 1 — Fundamentals"
 nav_order: 7
+render_with_liquid: false
 ---
 
 # Module 07 — OOP: Classes & Objects

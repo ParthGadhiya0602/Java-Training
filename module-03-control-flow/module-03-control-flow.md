@@ -2,6 +2,7 @@
 title: "03 — Control Flow"
 parent: "Phase 1 — Fundamentals"
 nav_order: 3
+render_with_liquid: false
 ---
 
 # Module 03 — Control Flow

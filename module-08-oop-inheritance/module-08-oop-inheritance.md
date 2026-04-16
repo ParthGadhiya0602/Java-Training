@@ -2,6 +2,7 @@
 title: "08 — OOP: Inheritance"
 parent: "Phase 1 — Fundamentals"
 nav_order: 8
+render_with_liquid: false
 ---
 
 # Module 08 — OOP: Inheritance & Polymorphism
