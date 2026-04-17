@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  calculator-impl — implementation module
+  ════════════════════════════════════════════════════════════════════
+  • Inherits from parent POM
+  • Depends on calculator-api (compile scope) — inter-module dependency
+  • Contains all test code for the project
+  • ${project.version} picks up 1.0.0 from the parent automatically
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.javatraining</groupId>
+        <artifactId>module-28-build-tools</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>calculator-impl</artifactId>
+    <name>Calculator Implementation</name>
+
+    <dependencies>
+        <!-- Inter-module dependency: compile scope, version matches reactor -->
+        <dependency>
+            <groupId>com.javatraining</groupId>
+            <artifactId>calculator-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- JUnit: version from parent's dependencyManagement -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

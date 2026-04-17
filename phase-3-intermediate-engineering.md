@@ -15,6 +15,6 @@ and the tooling that professional projects use every day.
 | [25](module-25-design-patterns/module-25-design-patterns)         | Design Patterns — creational, structural, behavioural    | ✅     |
 | [26](module-26-unit-testing/module-26-unit-testing)               | Unit Testing — JUnit 5, Mockito, test design             | ✅     |
 | [27](module-27-integration-testing/module-27-integration-testing) | Integration Testing — Testcontainers, REST-assured       | ✅     |
-| 28                                                                | Build Tools — Maven deep-dive, Gradle intro              | 🔜     |
+| [28](module-28-build-tools/module-28-build-tools)                 | Build Tools — Maven deep-dive, Gradle intro              | ✅     |
 | 29                                                                | Logging & Observability — SLF4J, Logback, Micrometer     | 🔜     |
 | 30                                                                | Clean Code & Refactoring — SOLID, code smells, IDE tools | 🔜     |

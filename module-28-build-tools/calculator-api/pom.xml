@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  calculator-api — public API module
+  ════════════════════════════════════════════════════════════════════
+  • Declares parent → inherits properties, pluginManagement, profiles
+  • Contains only interfaces and pure utilities (no implementations)
+  • Other modules depend on this artifact; it intentionally has no
+    runtime dependencies of its own
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.javatraining</groupId>
+        <artifactId>module-28-build-tools</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>calculator-api</artifactId>
+    <name>Calculator API</name>
+
+    <dependencies>
+        <!-- JUnit for testing MathUtils; version pinned in parent's dependencyManagement -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <!-- <version> intentionally omitted — inherited from parent -->
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

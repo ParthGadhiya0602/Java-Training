@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Parent POM — module-28-build-tools
+  ════════════════════════════════════════════════════════════════════
+  packaging = pom  →  this POM is a container, not a JAR artifact.
+  It owns:
+    • <modules>             — declares the child modules in build order
+    • <properties>          — shared version constants
+    • <dependencyManagement>— pin versions once; children omit <version>
+    • <build><pluginManagement> — configure plugins once for all children
+    • <profiles>            — optional build variants (fast, strict)
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.javatraining</groupId>
+    <artifactId>module-28-build-tools</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>                 <!-- ← key: this is a reactor POM -->
+    <name>Module 28 — Build Tools</name>
+
+    <!-- ── Child modules (built in dependency order) ─────────────────────── -->
+    <modules>
+        <module>calculator-api</module>         <!-- no dependencies -->
+        <module>calculator-impl</module>        <!-- depends on calculator-api -->
+    </modules>
+
+    <!-- ── Shared properties ─────────────────────────────────────────────── -->
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.2</junit.version>
+        <surefire.version>3.2.5</surefire.version>
+    </properties>
+
+    <!-- ── BOM-style version pinning ────────────────────────────────────── -->
+    <!--
+      dependencyManagement does NOT add dependencies to child modules.
+      It only pins versions.  Children still declare the dependency but
+      can omit <version> — they inherit it from here.
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- ── Plugin configuration inherited by all children ───────────────── -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <source>21</source>
+                        <target>21</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.4.1</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!-- ── Build profiles ────────────────────────────────────────────────── -->
+    <!--
+      Activate profiles:
+        mvn package -P fast      skip tests
+        mvn package -P strict    enable all compiler warnings
+    -->
+    <profiles>
+        <profile>
+            <id>fast</id>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>strict</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <compilerArgs>
+                                <arg>-Xlint:all</arg>
+                                <arg>-Werror</arg>
+                            </compilerArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
