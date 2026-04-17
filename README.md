@@ -13,8 +13,7 @@ copy-paste familiarity.
   before any runnable code - read the README first, run the code second
 - Code examples are intentionally non-trivial - simple enough to follow,
   complex enough to be worth studying
-- Build tool progression: early modules use **Maven**, later modules introduce
-  **Gradle**, production modules use both side-by-side
+- All modules use **Maven** as the build tool throughout the curriculum
 - Work through modules **in order** - later modules build on earlier ones
 
 ---
@@ -94,9 +93,9 @@ copy-paste familiarity.
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------ |
 | [31](module-31-jdbc/)          | **JDBC** - DriverManager, PreparedStatement, ResultSet, transaction management, HikariCP connection pool, batch updates                                                                                                                                                  | Maven      | -      |
 | [32](module-32-jpa-hibernate/) | **JPA & Hibernate** - EntityManager, Session/SessionFactory, entity lifecycle, relationships (OneToOne/OneToMany/ManyToMany), fetch types (LAZY/EAGER), dirty checking, L1 & L2 cache, N+1 problem & fix, HQL, JPQL, Criteria API, `@Transactional`, Hibernate Validator | Maven      | -      |
-| [33](module-33-spring-data/)   | **Spring Data JPA** - repositories, derived query methods, `@Query`, projections, pagination, sorting, auditing (`@CreatedDate`/`@LastModifiedDate`)                                                                                                                     | Gradle     | -      |
-| [34](module-34-nosql/)         | **NoSQL** - MongoDB with Spring Data (documents, aggregations), Redis with Spring Data (hash, list, pub/sub), use-case comparison                                                                                                                                        | Gradle     | -      |
-| [35](module-35-db-migration/)  | **Database Migration** - Flyway (versioned migrations, repeatable, undo), Liquibase (changeSets, rollback), best practices for zero-downtime migrations                                                                                                                  | Gradle     | -      |
+| [33](module-33-spring-data/)   | **Spring Data JPA** - repositories, derived query methods, `@Query`, projections, pagination, sorting, auditing (`@CreatedDate`/`@LastModifiedDate`)                                                                                                                     | Maven      | -      |
+| [34](module-34-nosql/)         | **NoSQL** - MongoDB with Spring Data (documents, aggregations), Redis with Spring Data (hash, list, pub/sub), use-case comparison                                                                                                                                        | Maven      | -      |
+| [35](module-35-db-migration/)  | **Database Migration** - Flyway (versioned migrations, repeatable, undo), Liquibase (changeSets, rollback), best practices for zero-downtime migrations                                                                                                                  | Maven      | -      |
 
 ---
 
@@ -107,16 +106,16 @@ copy-paste familiarity.
 
 | #                                 | Module                                                                                                                                        | Build Tool | Status |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------ |
-| [36](module-36-spring-core/)      | **Spring Core** - IoC container, DI (constructor/setter/field), bean lifecycle, scopes, AOP (aspects, pointcuts, advice)                      | Gradle     | -      |
-| [37](module-37-spring-boot/)      | **Spring Boot** - auto-configuration internals, starters, profiles, externalized config (`@ConfigurationProperties`), Actuator endpoints      | Gradle     | -      |
-| [38](module-38-lombok-mapstruct/) | **Lombok & MapStruct** - reducing boilerplate (`@Data`, `@Builder`, `@Slf4j`), DTO ↔ entity mapping, Lombok pitfalls                          | Gradle     | -      |
-| [39](module-39-spring-rest/)      | **Spring REST APIs** - `@RestController`, Bean Validation, global error handling (`@ControllerAdvice`), HATEOAS, content negotiation          | Gradle     | -      |
-| [40](module-40-spring-security/)  | **Spring Security** - authentication, JWT (issuing/validating), OAuth2 / OIDC, method-level security (`@PreAuthorize`)                        | Gradle     | -      |
-| [41](module-41-spring-testing/)   | **Spring Testing** - `@SpringBootTest`, test slices (`@WebMvcTest`, `@DataJpaTest`), Testcontainers, WireMock, consumer-driven contract tests | Gradle     | -      |
-| [42](module-42-spring-webflux/)   | **Spring WebFlux & Reactive** - Project Reactor (`Mono`/`Flux`), reactive repositories, backpressure, SSE, when to use reactive vs imperative | Gradle     | -      |
-| [43](module-43-thymeleaf/)        | **Thymeleaf** - template syntax, layouts/fragments, form handling, Spring MVC integration, security dialect                                   | Gradle     | -      |
-| [44](module-44-spring-data-rest/) | **Spring Data REST** - auto-generated REST from repositories, HAL/HAL-FORMS, projections, event handlers, customisation                       | Gradle     | -      |
-| [45](module-45-spring-batch/)     | **Spring Batch** - Job/Step model, ItemReader/Processor/Writer, chunk processing, partitioning, retry/skip, scheduling                        | Gradle     | -      |
+| [36](module-36-spring-core/)      | **Spring Core** - IoC container, DI (constructor/setter/field), bean lifecycle, scopes, AOP (aspects, pointcuts, advice)                      | Maven      | -      |
+| [37](module-37-spring-boot/)      | **Spring Boot** - auto-configuration internals, starters, profiles, externalized config (`@ConfigurationProperties`), Actuator endpoints      | Maven      | -      |
+| [38](module-38-lombok-mapstruct/) | **Lombok & MapStruct** - reducing boilerplate (`@Data`, `@Builder`, `@Slf4j`), DTO ↔ entity mapping, Lombok pitfalls                          | Maven      | -      |
+| [39](module-39-spring-rest/)      | **Spring REST APIs** - `@RestController`, Bean Validation, global error handling (`@ControllerAdvice`), HATEOAS, content negotiation          | Maven      | -      |
+| [40](module-40-spring-security/)  | **Spring Security** - authentication, JWT (issuing/validating), OAuth2 / OIDC, method-level security (`@PreAuthorize`)                        | Maven      | -      |
+| [41](module-41-spring-testing/)   | **Spring Testing** - `@SpringBootTest`, test slices (`@WebMvcTest`, `@DataJpaTest`), Testcontainers, WireMock, consumer-driven contract tests | Maven      | -      |
+| [42](module-42-spring-webflux/)   | **Spring WebFlux & Reactive** - Project Reactor (`Mono`/`Flux`), reactive repositories, backpressure, SSE, when to use reactive vs imperative | Maven      | -      |
+| [43](module-43-thymeleaf/)        | **Thymeleaf** - template syntax, layouts/fragments, form handling, Spring MVC integration, security dialect                                   | Maven      | -      |
+| [44](module-44-spring-data-rest/) | **Spring Data REST** - auto-generated REST from repositories, HAL/HAL-FORMS, projections, event handlers, customisation                       | Maven      | -      |
+| [45](module-45-spring-batch/)     | **Spring Batch** - Job/Step model, ItemReader/Processor/Writer, chunk processing, partitioning, retry/skip, scheduling                        | Maven      | -      |
 
 ---
 
@@ -127,20 +126,20 @@ copy-paste familiarity.
 
 | #                                   | Module                                                                                                                                                          | Build Tool | Status |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------ |
-| [46](module-46-microservices/)      | **Microservices Architecture** - decomposition strategies, inter-service communication, saga pattern, outbox pattern                                            | Gradle     | -      |
-| [47](module-47-spring-cloud/)       | **Spring Cloud** - Config Server, Eureka service discovery, API Gateway, Circuit Breaker (Resilience4j), distributed tracing (Micrometer Tracing)               | Gradle     | -      |
-| [48](module-48-messaging/)          | **Messaging** - Kafka (producers, consumers, Kafka Streams), RabbitMQ (exchanges, routing, dead-letter queues), exactly-once semantics                          | Gradle     | -      |
-| [49](module-49-caching/)            | **Caching** - Spring Cache abstraction, Redis cache-aside pattern, cache warming, TTL, eviction policies, cache invalidation                                    | Gradle     | -      |
-| [50](module-50-api-design/)         | **API Design** - OpenAPI 3 / Swagger, REST versioning strategies, API contracts, consumer-driven contract testing (Pact)                                        | Gradle     | -      |
-| [51](module-51-graphql/)            | **GraphQL with Spring** - schema-first design, queries/mutations/subscriptions, DataFetcher, N+1 problem (DataLoader), federation basics                        | Gradle     | -      |
-| [52](module-52-grpc/)               | **gRPC** - Protocol Buffers (proto3), unary/server-streaming/bidirectional RPCs, gRPC-Java, interceptors, vs REST trade-offs                                    | Gradle     | -      |
-| [53](module-53-docker/)             | **Docker & Containers** - Dockerfile, multi-stage builds, Docker Compose, health checks, image size optimization, Jib (build without Dockerfile)                | Gradle     | -      |
-| [54](module-54-observability/)      | **Observability** - Micrometer metrics, Prometheus, Grafana dashboards, distributed tracing (OpenTelemetry), log aggregation (ELK/Loki)                         | Gradle     | -      |
-| [55](module-55-ci-cd/)              | **CI/CD** - GitHub Actions pipelines, build/test/scan/deploy stages, SonarQube quality gates, artifact publishing, semantic versioning                          | Both       | -      |
-| [56](module-56-performance/)        | **Performance & Profiling** - async-profiler, Java Mission Control, GC tuning, JMeter load testing, virtual threads (Loom) benchmarks                           | Both       | -      |
-| [57](module-57-security-hardening/) | **Security Hardening** - OWASP Top 10 for Java (SQLi, XSS, IDOR, etc.), dependency vulnerability scanning (OWASP Dependency-Check), HashiCorp Vault for secrets | Gradle     | -      |
-| [58](module-58-cloud-deployment/)   | **Cloud Deployment** - Spring Boot on AWS (ECS, EKS, RDS, ElastiCache), GCP (Cloud Run, Cloud SQL), 12-factor app, environment parity                           | Gradle     | -      |
-| [59](module-59-capstone/)           | **Capstone Project** - end-to-end production system: multi-service app, secured REST + gRPC + Kafka, Dockerized, deployed to cloud, CI/CD pipeline              | Both       | -      |
+| [46](module-46-microservices/)      | **Microservices Architecture** - decomposition strategies, inter-service communication, saga pattern, outbox pattern                                            | Maven      | -      |
+| [47](module-47-spring-cloud/)       | **Spring Cloud** - Config Server, Eureka service discovery, API Gateway, Circuit Breaker (Resilience4j), distributed tracing (Micrometer Tracing)               | Maven      | -      |
+| [48](module-48-messaging/)          | **Messaging** - Kafka (producers, consumers, Kafka Streams), RabbitMQ (exchanges, routing, dead-letter queues), exactly-once semantics                          | Maven      | -      |
+| [49](module-49-caching/)            | **Caching** - Spring Cache abstraction, Redis cache-aside pattern, cache warming, TTL, eviction policies, cache invalidation                                    | Maven      | -      |
+| [50](module-50-api-design/)         | **API Design** - OpenAPI 3 / Swagger, REST versioning strategies, API contracts, consumer-driven contract testing (Pact)                                        | Maven      | -      |
+| [51](module-51-graphql/)            | **GraphQL with Spring** - schema-first design, queries/mutations/subscriptions, DataFetcher, N+1 problem (DataLoader), federation basics                        | Maven      | -      |
+| [52](module-52-grpc/)               | **gRPC** - Protocol Buffers (proto3), unary/server-streaming/bidirectional RPCs, gRPC-Java, interceptors, vs REST trade-offs                                    | Maven      | -      |
+| [53](module-53-docker/)             | **Docker & Containers** - Dockerfile, multi-stage builds, Docker Compose, health checks, image size optimization, Jib (build without Dockerfile)                | Maven      | -      |
+| [54](module-54-observability/)      | **Observability** - Micrometer metrics, Prometheus, Grafana dashboards, distributed tracing (OpenTelemetry), log aggregation (ELK/Loki)                         | Maven      | -      |
+| [55](module-55-ci-cd/)              | **CI/CD** - GitHub Actions pipelines, build/test/scan/deploy stages, SonarQube quality gates, artifact publishing, semantic versioning                          | Maven      | -      |
+| [56](module-56-performance/)        | **Performance & Profiling** - async-profiler, Java Mission Control, GC tuning, JMeter load testing, virtual threads (Loom) benchmarks                           | Maven      | -      |
+| [57](module-57-security-hardening/) | **Security Hardening** - OWASP Top 10 for Java (SQLi, XSS, IDOR, etc.), dependency vulnerability scanning (OWASP Dependency-Check), HashiCorp Vault for secrets | Maven      | -      |
+| [58](module-58-cloud-deployment/)   | **Cloud Deployment** - Spring Boot on AWS (ECS, EKS, RDS, ElastiCache), GCP (Cloud Run, Cloud SQL), 12-factor app, environment parity                           | Maven      | -      |
+| [59](module-59-capstone/)           | **Capstone Project** - end-to-end production system: multi-service app, secured REST + gRPC + Kafka, Dockerized, deployed to cloud, CI/CD pipeline              | Maven      | -      |
 
 ---
 

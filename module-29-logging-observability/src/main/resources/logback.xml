@@ -1,0 +1,71 @@
+<!--
+  Logback configuration for the application (src/main/resources/logback.xml).
+  Logback picks up logback-test.xml first (if on the test classpath), then logback.xml.
+
+  Appender types:
+    ConsoleAppender      — writes to stdout/stderr
+    FileAppender         — writes to a single file
+    RollingFileAppender  — rotates by date or size (production standard)
+    AsyncAppender        — wraps another appender; batches writes on a background thread
+-->
+<configuration>
+
+    <!--
+      ══════════════════════════════════════════════════════════
+      CONSOLE APPENDER
+      PatternLayout controls the format of each log line.
+
+      Common conversion words:
+        %d{HH:mm:ss.SSS}  — timestamp
+        [%thread]         — thread name
+        %-5level          — log level (left-padded to 5 chars)
+        %logger{36}       — logger name (class), truncated to 36 chars
+        %X{key}           — MDC value for 'key'
+        %msg              — the log message
+        %n                — platform line separator
+        %ex               — exception with stack trace (auto-appended for Throwable args)
+      ══════════════════════════════════════════════════════════
+    -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%X{requestId}] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+      ══════════════════════════════════════════════════════════
+      ROLLING FILE APPENDER — rotates daily; keeps 30 days of history.
+      Uncomment to enable file logging.
+      ══════════════════════════════════════════════════════════
+    -->
+    <!--
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/app.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%X{requestId}] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    -->
+
+    <!--
+      Root logger — all loggers inherit from this unless overridden below.
+      Level hierarchy (lowest → highest): TRACE < DEBUG < INFO < WARN < ERROR
+      Setting a level here filters out all levels below it.
+    -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <!-- <appender-ref ref="FILE"/> -->
+    </root>
+
+    <!--
+      Package-level override: lower the threshold for our own code to DEBUG.
+      Third-party libraries still log at INFO+ from the root.
+    -->
+    <logger name="com.javatraining" level="DEBUG"/>
+
+</configuration>
