@@ -1,0 +1,21 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Show MongoDB queries -->
+    <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="DEBUG"/>
+
+    <!-- Silence noisy startup -->
+    <logger name="org.springframework"              level="WARN"/>
+    <logger name="org.mongodb.driver"               level="WARN"/>
+    <logger name="com.zaxxer.hikari"                level="WARN"/>
+    <logger name="org.testcontainers"               level="INFO"/>
+    <logger name="tc.redis"                         level="INFO"/>
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
