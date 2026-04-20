@@ -1,0 +1,20 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Show generated SQL — helpful for learning what Spring Data produces -->
+    <logger name="org.hibernate.SQL"                        level="DEBUG"/>
+    <logger name="org.hibernate.orm.jdbc.bind"              level="TRACE"/>
+
+    <!-- Silence noisy framework startup logs -->
+    <logger name="org.springframework"                      level="WARN"/>
+    <logger name="org.hibernate.engine.transaction"         level="WARN"/>
+    <logger name="com.zaxxer.hikari"                        level="WARN"/>
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
