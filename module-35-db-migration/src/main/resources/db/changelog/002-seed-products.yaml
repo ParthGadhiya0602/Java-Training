@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-seed-products
+      author: training
+      comment: "Insert initial product data"
+      changes:
+        - insert:
+            tableName: products
+            columns:
+              - column: {name: name,     value: "MacBook Pro"}
+              - column: {name: category, value: "Electronics"}
+              - column: {name: price,    valueNumeric: 2499.00}
+              - column: {name: in_stock, valueBoolean: true}
+        - insert:
+            tableName: products
+            columns:
+              - column: {name: name,     value: "Java Book"}
+              - column: {name: category, value: "Books"}
+              - column: {name: price,    valueNumeric: 49.99}
+              - column: {name: in_stock, valueBoolean: true}
+        - insert:
+            tableName: products
+            columns:
+              - column: {name: name,     value: "Standing Desk"}
+              - column: {name: category, value: "Furniture"}
+              - column: {name: price,    valueNumeric: 599.00}
+              - column: {name: in_stock, valueBoolean: false}
+      rollback:
+        - delete:
+            tableName: products

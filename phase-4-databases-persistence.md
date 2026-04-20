@@ -18,4 +18,4 @@ explain exactly what SQL every layer generates.
 | [32](module-32-jpa-hibernate/module-32-jpa-hibernate)               | JPA & Hibernate — entities, relationships, fetch types, N+1, cache, JPQL, Criteria API  | ✅     |
 | [33](module-33-spring-data/module-33-spring-data)                   | Spring Data JPA — repositories, derived queries, @Query, projections, pagination         | ✅     |
 | [34](module-34-nosql/module-34-nosql)                               | NoSQL — MongoDB documents & aggregations, Redis hash/list/pub-sub                        | ✅     |
-| [35](module-35-db-migration/module-35-db-migration)                 | Database Migration — Flyway versioned migrations, Liquibase changeSets, zero-downtime    | 🔜     |
+| [35](module-35-db-migration/module-35-db-migration)                 | Database Migration — Flyway versioned migrations, Liquibase changeSets, zero-downtime    | ✅     |

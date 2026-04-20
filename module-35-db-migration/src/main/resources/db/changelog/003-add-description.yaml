@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-add-description
+      author: training
+      comment: "Add nullable description column to products"
+      changes:
+        - addColumn:
+            tableName: products
+            columns:
+              - column:
+                  name: description
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropColumn:
+            tableName: products
+            columnName: description
