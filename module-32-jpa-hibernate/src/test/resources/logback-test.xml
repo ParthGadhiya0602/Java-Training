@@ -1,0 +1,15 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} %-5level %logger{25} — %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Suppress verbose Hibernate startup and SQL noise in test output -->
+    <logger name="org.hibernate"         level="WARN"/>
+    <logger name="com.zaxxer.hikari"     level="WARN"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
