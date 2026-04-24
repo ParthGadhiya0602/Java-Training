@@ -23,4 +23,4 @@ service from scratch and explain exactly what Spring does automatically for you.
 | [42](module-42-spring-webflux/module-42-spring-webflux)                 | Spring WebFlux & Reactive — Mono/Flux, reactive repositories, backpressure, SSE                                          | ✅     |
 | [43](module-43-thymeleaf/module-43-thymeleaf)                           | Thymeleaf — template syntax, layouts/fragments, form handling, security dialect                                          | ✅     |
 | [44](module-44-spring-data-rest/module-44-spring-data-rest)             | Spring Data REST — auto-generated REST, HAL/HAL-FORMS, projections, event handlers                                       | ✅     |
-| [45](module-45-spring-batch/module-45-spring-batch)                     | Spring Batch — Job/Step, ItemReader/Processor/Writer, chunk processing, partitioning, retry/skip                         | 🔜     |
+| [45](module-45-spring-batch/module-45-spring-batch)                     | Spring Batch — Job/Step, ItemReader/Processor/Writer, chunk processing, partitioning, retry/skip                         | ✅     |

@@ -1,0 +1,8 @@
+name,category,price
+Laptop,Electronics,999.00
+Mouse,Accessories,29.00
+Keyboard,Accessories,89.00
+Monitor,Electronics,399.00
+Headset,Electronics,149.99
+Chair,Furniture,299.00
+,InvalidRow,50.00
