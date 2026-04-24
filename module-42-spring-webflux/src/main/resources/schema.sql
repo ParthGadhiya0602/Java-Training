@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS products (
+    id       BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name     VARCHAR(255)  NOT NULL,
+    category VARCHAR(255),
+    price    DECIMAL(38,2) NOT NULL,
+    active   BOOLEAN       NOT NULL DEFAULT TRUE
+);
