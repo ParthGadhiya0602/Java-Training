@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!--/*
+  th:replace replaces THIS element entirely with the referenced fragment.
+  The <head> tag and its children come from the fragment; this tag disappears.
+  Argument 'Products' is passed as the 'title' parameter to page-head(title).
+*/-->
+<head th:replace="~{fragments/layout :: page-head('Products')}"></head>
+
+<body>
+
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+
+<h1>Products</h1>
+
+<!--/* th:if / th:unless — conditional rendering based on expression */-->
+<p th:if="${products.empty}">
+    No products yet.
+    <a th:href="@{/products/new}">Add the first one.</a>
+</p>
+
+<!--/*
+  th:unless is the inverse of th:if.
+  Using unless here to avoid a nested if/else.
+*/-->
+<table th:unless="${products.empty}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Active</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--/*
+      th:each iterates the collection.
+      Syntax: th:each="variableName : ${collectionExpression}"
+      Optional status variable: th:each="item, stat : ${items}"
+        stat.index, stat.count, stat.first, stat.last, stat.odd, stat.even
+    */-->
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}">1</td>
+        <td th:text="${product.name}">Name</td>
+        <td th:text="${product.category}">Category</td>
+        <!--/*
+          #numbers — Thymeleaf utility object for number formatting.
+          formatDecimal(number, minIntDigits, decimalDigits)
+        */-->
+        <td th:text="${#numbers.formatDecimal(product.price, 1, 2)}">0.00</td>
+        <!--/*
+          Conditional (ternary) expression inside th:text.
+          ${condition} ? 'trueValue' : 'falseValue'
+        */-->
+        <td th:text="${product.active} ? 'Yes' : 'No'">Yes</td>
+        <td>
+            <div class="actions">
+                <!--/*
+                  @{} with path variable:  @{/products/{id}/edit(id=${product.id})}
+                  Variables in curly braces are path segments;
+                  those in parentheses are query or path parameters.
+                  id=${product.id} fills the {id} path segment.
+                */-->
+                <a th:href="@{/products/{id}/edit(id=${product.id})}" class="btn btn-primary">Edit</a>
+
+                <!--/*
+                  HTML forms only support GET and POST.
+                  For delete, use a POST form targeting /products/{id}/delete.
+                */-->
+                <form th:action="@{/products/{id}/delete(id=${product.id})}"
+                      method="post"
+                      style="margin:0">
+                    <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Delete this product?')">Delete</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/layout :: page-head('Product Form')}"></head>
+
+<body>
+
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+
+<!--/*
+  Ternary in th:text to show 'Edit' or 'New' depending on whether productId is in the model.
+  productId is only added to the model for the edit flow (GET /{id}/edit, POST /{id}).
+*/-->
+<h1 th:text="${productId != null} ? 'Edit Product' : 'New Product'">Product</h1>
+
+<!--/*
+  th:action — URL expression for the form action attribute.
+  th:object — binds the form to a model attribute; enables the *{field} shorthand inside.
+  method="post" — HTML only supports GET and POST natively.
+
+  Edit form action:  /products/{id}   (maps to @PostMapping("/{id}"))
+  Create form action: /products        (maps to @PostMapping)
+*/-->
+<form th:action="${productId != null} ? @{/products/{id}(id=${productId})} : @{/products}"
+      th:object="${productForm}"
+      method="post">
+
+    <!--/* --- Name field --- */-->
+    <div>
+        <label for="name">Name</label>
+        <!--/*
+          th:field="*{name}" is shorthand for:
+            id="name"
+            name="name"
+            value="${productForm.name}"   (or th:value="*{name}")
+          The *{} selection variable expression works within the th:object scope.
+
+          th:classappend appends a CSS class only when the condition is true.
+          #fields.hasErrors('name') returns true if the 'name' field has validation errors.
+        */-->
+        <input type="text"
+               th:field="*{name}"
+               th:classappend="${#fields.hasErrors('name')} ? 'field-error'"/>
+        <!--/*
+          th:errors renders all error messages for the field.
+          The element is NOT rendered at all if there are no errors for that field.
+        */-->
+        <span class="error" th:errors="*{name}"></span>
+    </div>
+
+    <!--/* --- Price field --- */-->
+    <div>
+        <label for="price">Price</label>
+        <input type="number"
+               step="0.01"
+               th:field="*{price}"
+               th:classappend="${#fields.hasErrors('price')} ? 'field-error'"/>
+        <span class="error" th:errors="*{price}"></span>
+    </div>
+
+    <!--/* --- Category field --- */-->
+    <div>
+        <label for="category">Category</label>
+        <input type="text"
+               th:field="*{category}"
+               th:classappend="${#fields.hasErrors('category')} ? 'field-error'"/>
+        <span class="error" th:errors="*{category}"></span>
+    </div>
+
+    <div style="margin-top:1rem">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a th:href="@{/products}" style="margin-left:0.5rem">Cancel</a>
+    </div>
+
+</form>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

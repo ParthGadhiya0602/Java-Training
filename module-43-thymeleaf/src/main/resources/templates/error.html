@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/layout :: page-head('Error')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<h1>Something went wrong</h1>
+<!--/* ${status} and ${message} are provided by Spring Boot's BasicErrorController */-->
+<p>Status: <strong th:text="${status}">500</strong></p>
+<p th:text="${message}">An unexpected error occurred.</p>
+<a th:href="@{/products}">Back to Products</a>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>
