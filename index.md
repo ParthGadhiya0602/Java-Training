@@ -32,10 +32,10 @@ copy-paste familiarity.
 |---|---|---|
 | [Phase 1 — Fundamentals](phase-1-fundamentals) | 01–11 | Language, OOP, exceptions |
 | [Phase 2 — Core APIs](phase-2-core-apis) | 12–24 | Generics, collections, streams, concurrency, JVM |
-| Phase 3 — Intermediate Engineering | 25–30 | Design patterns, testing, build tools |
-| Phase 4 — Databases & Persistence | 31–35 | JDBC, JPA/Hibernate, Spring Data, migrations |
-| Phase 5 — Spring Ecosystem | 36–45 | Boot, REST, security, reactive, batch |
-| Phase 6 — Production & Architecture | 46–59 | Microservices, cloud, observability, CI/CD |
+| [Phase 3 — Intermediate Engineering](phase-3-intermediate-engineering) | 25–30 | Design patterns, testing, build tools |
+| [Phase 4 — Databases & Persistence](phase-4-databases-persistence) | 31–35 | JDBC, JPA/Hibernate, Spring Data, migrations |
+| [Phase 5 — Spring Ecosystem](phase-5-spring-ecosystem) | 36–45 | Boot, REST, security, reactive, batch |
+| [Phase 6 — Production & Architecture](phase-6-production-architecture) | 46–59 | Microservices, cloud, observability, CI/CD |
 
 > **Total: 59 modules.**  Java 21 LTS throughout.
 
