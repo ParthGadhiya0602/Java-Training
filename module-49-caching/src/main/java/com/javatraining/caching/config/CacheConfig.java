@@ -15,7 +15,7 @@ import java.time.Duration;
  * Spring Boot auto-configures RedisCacheManager (spring.cache.type=redis).
  *
  * In tests spring.cache.type=simple selects ConcurrentMapCacheManager instead,
- * so this customizer is created as a bean but never invoked — no Redis connection needed.
+ * so this customizer is created as a bean but never invoked - no Redis connection needed.
  */
 @Configuration
 @EnableCaching

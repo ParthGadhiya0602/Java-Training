@@ -5,7 +5,7 @@ import java.util.function.*;
 import java.util.stream.Collectors;
 
 /**
- * Module 15 — Functional Patterns
+ * Module 15 - Functional Patterns
  *
  * Higher-order functions, currying, memoization, and the Strategy/Decorator
  * patterns expressed through functional interfaces rather than class hierarchies.
@@ -47,7 +47,7 @@ public class FunctionalPatterns {
         return b -> f.apply(firstArg, b);
     }
 
-    /** Practical curried adder — returns a reusable Function<Integer,Integer>. */
+    /** Practical curried adder - returns a reusable Function<Integer,Integer>. */
     public static Function<Integer, Integer> adder(int addend) {
         return partial(Integer::sum, addend);
     }
@@ -56,7 +56,7 @@ public class FunctionalPatterns {
 
     /**
      * Wrap a Function with a HashMap cache so each unique input is computed
-     * at most once. Not thread-safe — use ConcurrentHashMap for shared caches.
+     * at most once. Not thread-safe - use ConcurrentHashMap for shared caches.
      */
     public static <T, R> Function<T, R> memoize(Function<T, R> fn) {
         Map<T, R> cache = new HashMap<>();

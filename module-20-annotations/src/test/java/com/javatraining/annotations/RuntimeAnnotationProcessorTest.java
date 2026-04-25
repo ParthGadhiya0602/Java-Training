@@ -130,7 +130,7 @@ class RuntimeAnnotationProcessorTest {
     }
 
     @Nested
-    @DisplayName("@Inherited — hasComponent")
+    @DisplayName("@Inherited - hasComponent")
     class InheritedComponent {
         @Test void base_class_has_component() {
             assertTrue(RuntimeAnnotationProcessor.hasComponent(BaseRepository.class));

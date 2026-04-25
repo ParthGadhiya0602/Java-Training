@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Verifies 12-factor Factor III — Config: properties can be overridden externally.
+ * Verifies 12-factor Factor III - Config: properties can be overridden externally.
  *
  * @TestPropertySource simulates what happens when environment variables are injected
  * at deploy time (e.g. APP_ENVIRONMENT=staging in Docker / Kubernetes / ECS).

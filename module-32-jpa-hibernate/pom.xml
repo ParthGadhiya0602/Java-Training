@@ -23,21 +23,21 @@
     </properties>
 
     <dependencies>
-        <!-- Hibernate ORM — brings jakarta.persistence-api 3.1 transitively -->
+        <!-- Hibernate ORM - brings jakarta.persistence-api 3.1 transitively -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
 
-        <!-- Hibernate Validator — Bean Validation 3.0 (Jakarta) implementation -->
+        <!-- Hibernate Validator - Bean Validation 3.0 (Jakarta) implementation -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
         </dependency>
 
-        <!-- Jakarta Expression Language — required by Hibernate Validator for
+        <!-- Jakarta Expression Language - required by Hibernate Validator for
              constraint message interpolation (e.g., "{value} is too small") -->
         <dependency>
             <groupId>org.glassfish.expressly</groupId>
@@ -45,14 +45,14 @@
             <version>5.0.0</version>
         </dependency>
 
-        <!-- H2 in-memory database — JDBC driver and server -->
+        <!-- H2 in-memory database - JDBC driver and server -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
         </dependency>
 
-        <!-- SLF4J + Logback — routes Hibernate's JBoss Logging through SLF4J -->
+        <!-- SLF4J + Logback - routes Hibernate's JBoss Logging through SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

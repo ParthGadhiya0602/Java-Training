@@ -1,14 +1,15 @@
 ---
-title: "Module 53 — Docker & Containers"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 53 - Docker & Containers"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 53
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-53-docker/src){: .btn .btn-outline }
 
-# Module 53 — Docker & Containers
+# Module 53 - Docker & Containers
 
 ## What this module covers
 
@@ -39,15 +40,15 @@ module-53-docker/
 ## Multi-stage Dockerfile
 
 ```dockerfile
-# Stage 1: Build — full JDK + Maven, used only during image construction
+# Stage 1: Build - full JDK + Maven, used only during image construction
 FROM maven:3.9-eclipse-temurin-21 AS builder
 WORKDIR /app
 COPY pom.xml .
-RUN mvn dependency:go-offline -q        # cached layer — only re-runs if pom.xml changes
+RUN mvn dependency:go-offline -q        # cached layer - only re-runs if pom.xml changes
 COPY src ./src
 RUN mvn package -DskipTests -q
 
-# Stage 2: Runtime — slim JRE only (~180 MB vs ~600 MB JDK image)
+# Stage 2: Runtime - slim JRE only (~180 MB vs ~600 MB JDK image)
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
@@ -61,7 +62,7 @@ ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-j
 
 The builder stage contains the JDK, Maven, source code, and all build artifacts.
 None of that belongs in the production image. By copying only the fat JAR into a fresh
-runtime image, the final layer is minimal — no source, no compiler, no Maven cache.
+runtime image, the final layer is minimal - no source, no compiler, no Maven cache.
 
 ### Dependency caching
 
@@ -71,10 +72,10 @@ the dependency download.
 
 ### Container-aware JVM flags
 
-| Flag | Effect |
-|------|--------|
-| `-XX:+UseContainerSupport` | Reads cgroup memory/CPU limits instead of host totals (default on Java 11+, explicit for clarity) |
-| `-XX:MaxRAMPercentage=75.0` | Heap = 75% of the cgroup memory limit, leaving headroom for non-heap |
+| Flag                        | Effect                                                                                            |
+| --------------------------- | ------------------------------------------------------------------------------------------------- |
+| `-XX:+UseContainerSupport`  | Reads cgroup memory/CPU limits instead of host totals (default on Java 11+, explicit for clarity) |
+| `-XX:MaxRAMPercentage=75.0` | Heap = 75% of the cgroup memory limit, leaving headroom for non-heap                              |
 
 Without `UseContainerSupport`, the JVM reads host RAM (e.g., 16 GB) and sizes the heap
 accordingly, crashing the container when it exceeds the cgroup limit.
@@ -107,24 +108,24 @@ accordingly, crashing the container when it exceeds the cgroup limit.
 </plugin>
 ```
 
-| Goal | What it does |
-|------|--------------|
-| `mvn jib:build` | Builds and pushes directly to a remote registry — no Docker daemon required |
-| `mvn jib:dockerBuild` | Loads image into the local Docker daemon |
-| `mvn jib:buildTar` | Writes `target/jib-image.tar` — useful in CI where Docker isn't available |
+| Goal                  | What it does                                                                |
+| --------------------- | --------------------------------------------------------------------------- |
+| `mvn jib:build`       | Builds and pushes directly to a remote registry - no Docker daemon required |
+| `mvn jib:dockerBuild` | Loads image into the local Docker daemon                                    |
+| `mvn jib:buildTar`    | Writes `target/jib-image.tar` - useful in CI where Docker isn't available   |
 
 Jib separates the application into layers (dependencies, resources, classes) so that
-only the changed layer is pushed on rebuild — much faster than re-pushing a fat JAR layer.
+only the changed layer is pushed on rebuild - much faster than re-pushing a fat JAR layer.
 
 ### Dockerfile vs Jib
 
-| | Dockerfile | Jib |
-|---|---|---|
-| Docker daemon needed to build | Yes | No |
-| Layer optimisation | Manual | Automatic (deps / resources / classes) |
-| Non-root user | Manual `adduser` | Default (`nonroot` user) |
-| Build speed (unchanged deps) | Good if layers cached | Excellent (only changed layer) |
-| Transparency | Full control | Convention over configuration |
+|                               | Dockerfile            | Jib                                    |
+| ----------------------------- | --------------------- | -------------------------------------- |
+| Docker daemon needed to build | Yes                   | No                                     |
+| Layer optimisation            | Manual                | Automatic (deps / resources / classes) |
+| Non-root user                 | Manual `adduser`      | Default (`nonroot` user)               |
+| Build speed (unchanged deps)  | Good if layers cached | Excellent (only changed layer)         |
+| Transparency                  | Full control          | Convention over configuration          |
 
 ---
 
@@ -139,7 +140,11 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "wget -qO- http://localhost:8080/actuator/health || exit 1",
+        ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -163,7 +168,7 @@ POST /products          → 201 { id, name, price, category }
 ```
 
 The `POST` endpoint returns `201 Created` with a `Location` header pointing to the
-new resource URI — the standard REST convention for creation responses.
+new resource URI - the standard REST convention for creation responses.
 
 ---
 
@@ -187,11 +192,11 @@ class ProductControllerTest {
 `deleteAll()` + re-seed in `@BeforeEach` gives each test a clean, known state
 without relying on transaction rollback or test execution order.
 
-| Test | Assertion |
-|------|-----------|
-| `get_all_returns_all_products` | 200, array size 2, correct names |
-| `get_by_id_returns_product` | 200, correct name and category |
-| `get_by_unknown_id_returns_404` | 404 |
+| Test                                                 | Assertion                             |
+| ---------------------------------------------------- | ------------------------------------- |
+| `get_all_returns_all_products`                       | 200, array size 2, correct names      |
+| `get_by_id_returns_product`                          | 200, correct name and category        |
+| `get_by_unknown_id_returns_404`                      | 404                                   |
 | `post_creates_product_and_returns_201_with_location` | 201, id assigned, Location header set |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
@@ -201,12 +206,13 @@ Result: **4/4 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| Multi-stage build separates JDK from JRE | Final image contains only the JRE and fat JAR — no compiler, no Maven cache, ~420 MB smaller |
-| `COPY pom.xml` before `COPY src` | Separates dependency resolution into its own layer; Docker cache skips it when only source changes |
-| Non-root `USER spring` in Dockerfile | Container escapes root by default; if the process is exploited, the attacker has no root privileges on the host |
-| `UseContainerSupport` + `MaxRAMPercentage` | JVM reads cgroup limits, not host RAM — prevents OOM kills when the container has a memory limit |
-| Jib alongside Dockerfile | Jib is the faster, daemon-free path for CI; Dockerfile gives full control and is universal |
-| `ResponseEntity.created(location)` for POST | Returns 201 + Location header — the standard HTTP contract for resource creation |
+| Decision                                    | Reason                                                                                                          |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Multi-stage build separates JDK from JRE    | Final image contains only the JRE and fat JAR - no compiler, no Maven cache, ~420 MB smaller                    |
+| `COPY pom.xml` before `COPY src`            | Separates dependency resolution into its own layer; Docker cache skips it when only source changes              |
+| Non-root `USER spring` in Dockerfile        | Container escapes root by default; if the process is exploited, the attacker has no root privileges on the host |
+| `UseContainerSupport` + `MaxRAMPercentage`  | JVM reads cgroup limits, not host RAM - prevents OOM kills when the container has a memory limit                |
+| Jib alongside Dockerfile                    | Jib is the faster, daemon-free path for CI; Dockerfile gives full control and is universal                      |
+| `ResponseEntity.created(location)` for POST | Returns 201 + Location header - the standard HTTP contract for resource creation                                |
+
 {% endraw %}

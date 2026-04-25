@@ -1,30 +1,31 @@
 ---
-title: "09 — OOP: Interfaces"
-parent: "Phase 1 — Fundamentals"
+title: "09 - OOP: Interfaces"
+parent: "Phase 1 - Fundamentals"
 nav_order: 9
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-09-oop-interfaces/src){: .btn .btn-outline }
 
-# Module 09 — OOP: Interfaces & Abstract Classes
+# Module 09 - OOP: Interfaces & Abstract Classes
 
 ## What You Will Learn
 
-| Topic | Key Insight |
-|---|---|
-| Interface fundamentals | Contract only — no state (except constants); a class can implement many |
-| `default` methods | Backwards-compatible behaviour added to an interface; resolved by proximity |
-| `static` methods on interfaces | Utility factories tied to the type — `Comparator.comparing(...)` is the pattern |
+| Topic                           | Key Insight                                                                     |
+| ------------------------------- | ------------------------------------------------------------------------------- |
+| Interface fundamentals          | Contract only - no state (except constants); a class can implement many         |
+| `default` methods               | Backwards-compatible behaviour added to an interface; resolved by proximity     |
+| `static` methods on interfaces  | Utility factories tied to the type - `Comparator.comparing(...)` is the pattern |
 | `private` methods on interfaces | Shared helper logic inside the interface (Java 9+); not visible to implementors |
-| Abstract classes | Partial implementation — can have state, constructors, non-public members |
-| Interface vs abstract class | One axis: interface = capability / role; abstract class = shared implementation |
-| Functional interfaces | Single abstract method → usable as lambda / method reference |
-| `@FunctionalInterface` | Compiler enforces exactly one abstract method |
-| Built-in functional types | `Function`, `Predicate`, `Consumer`, `Supplier`, `BiFunction`, `UnaryOperator` |
-| Composition | `andThen`, `compose`, `and`, `or`, `negate` — build pipelines without loops |
-| Multiple interface inheritance | Diamond problem and how `default` resolution rules solve it |
+| Abstract classes                | Partial implementation - can have state, constructors, non-public members       |
+| Interface vs abstract class     | One axis: interface = capability / role; abstract class = shared implementation |
+| Functional interfaces           | Single abstract method → usable as lambda / method reference                    |
+| `@FunctionalInterface`          | Compiler enforces exactly one abstract method                                   |
+| Built-in functional types       | `Function`, `Predicate`, `Consumer`, `Supplier`, `BiFunction`, `UnaryOperator`  |
+| Composition                     | `andThen`, `compose`, `and`, `or`, `negate` - build pipelines without loops     |
+| Multiple interface inheritance  | Diamond problem and how `default` resolution rules solve it                     |
 
 ---
 
@@ -57,7 +58,7 @@ render_with_liquid: false
          │                  │
          └────────┬──────────┘
               MyService
-         // MUST override log() — compiler forces resolution
+         // MUST override log() - compiler forces resolution
          // OR: Validator.super.log() / Auditable.super.log()
 ```
 
@@ -93,12 +94,12 @@ pipeline.apply("Java")   // length=4, isEven(4)=true  → true
 
 ## Source Files
 
-| File | What it Demonstrates |
-|---|---|
-| `InterfaceFeatures.java` | `default`, `static`, `private` interface methods; diamond resolution; multiple implementation |
-| `AbstractVsInterface.java` | When to use each; Template Method in abstract class; capability interfaces |
-| `FunctionalInterfaces.java` | `@FunctionalInterface`, all built-in types, lambda/method-ref syntax, composition |
-| `OrderPipeline.java` | Real pipeline: validation → enrichment → transformation → output using functional composition |
+| File                        | What it Demonstrates                                                                          |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| `InterfaceFeatures.java`    | `default`, `static`, `private` interface methods; diamond resolution; multiple implementation |
+| `AbstractVsInterface.java`  | When to use each; Template Method in abstract class; capability interfaces                    |
+| `FunctionalInterfaces.java` | `@FunctionalInterface`, all built-in types, lambda/method-ref syntax, composition             |
+| `OrderPipeline.java`        | Real pipeline: validation → enrichment → transformation → output using functional composition |
 
 ---
 
@@ -108,4 +109,5 @@ pipeline.apply("Java")   // length=4, isEven(4)=true  → true
 cd module-09-oop-interfaces
 mvn test
 ```
+
 {% endraw %}

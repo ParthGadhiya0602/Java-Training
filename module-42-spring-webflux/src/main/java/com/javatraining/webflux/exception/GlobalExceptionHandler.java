@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @RestControllerAdvice works in WebFlux exactly as in Spring MVC for annotated controllers.
  *
- * WebExchangeBindException — the WebFlux equivalent of MethodArgumentNotValidException.
+ * WebExchangeBindException - the WebFlux equivalent of MethodArgumentNotValidException.
  * Thrown when @Valid fails on a @RequestBody in an annotated controller.
  * In Spring 6 / Spring Boot 3, WebExchangeBindException extends BindException.
  */

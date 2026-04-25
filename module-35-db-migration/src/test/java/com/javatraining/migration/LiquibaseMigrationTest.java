@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * <p>This test class overrides the default application properties to:
  * <ul>
- *   <li>Disable Flyway — avoids conflict with Flyway migrations on the same DB</li>
+ *   <li>Disable Flyway - avoids conflict with Flyway migrations on the same DB</li>
  *   <li>Enable Liquibase with the master changelog</li>
  *   <li>Use a separate H2 URL (liquibasedb) so Flyway's schema_history table
  *       and Liquibase's DATABASECHANGELOG table never collide</li>

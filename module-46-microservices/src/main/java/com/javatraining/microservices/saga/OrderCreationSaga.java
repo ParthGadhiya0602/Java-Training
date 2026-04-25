@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  *
  * Steps:
  *   1. Persist order as PENDING + outbox event  (local transaction)
- *   2. Reserve inventory via HTTP               (remote call — outside any transaction)
+ *   2. Reserve inventory via HTTP               (remote call - outside any transaction)
  *      ✓ success → confirm order + outbox event (local transaction)
  *      ✗ failure → cancel order + outbox event  (compensating transaction)
  *
@@ -40,10 +40,10 @@ public class OrderCreationSaga {
         boolean reserved = inventoryClient.reserve(pending.getProductId(), pending.getQuantity());
 
         if (reserved) {
-            log.info("Saga step 2: inventory reserved — confirming order {}", pending.getId());
+            log.info("Saga step 2: inventory reserved - confirming order {}", pending.getId());
             return orderService.confirmOrder(pending.getId());
         } else {
-            log.warn("Saga step 2: inventory unavailable — cancelling order {} (compensating tx)",
+            log.warn("Saga step 2: inventory unavailable - cancelling order {} (compensating tx)",
                     pending.getId());
             return orderService.cancelOrder(pending.getId());
         }

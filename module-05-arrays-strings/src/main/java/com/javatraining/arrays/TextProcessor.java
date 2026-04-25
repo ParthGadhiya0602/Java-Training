@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 public class TextProcessor {
 
     // -------------------------------------------------------------------------
-    // Pre-compiled patterns — static final, compiled once
+    // Pre-compiled patterns - static final, compiled once
     // -------------------------------------------------------------------------
     private static final Pattern VALID_NAME  = Pattern.compile("^[A-Za-z]+(\\s[A-Za-z]+)*$");
     private static final Pattern VALID_EMAIL = Pattern.compile(
@@ -98,7 +98,7 @@ public class TextProcessor {
         if (!VALID_EMAIL.matcher(email).matches())
             errors.add("Invalid email: '" + email + "'");
 
-        // Validate phone — strip spaces/dashes before checking
+        // Validate phone - strip spaces/dashes before checking
         String normalPhone = phone.replaceAll("[\\s\\-]", "");
         if (!VALID_PHONE.matcher(normalPhone).matches())
             errors.add("Invalid phone: '" + phone + "'");
@@ -162,7 +162,7 @@ public class TextProcessor {
         sb.append(String.format("  Valid        : %d%n", valid));
         sb.append(String.format("  Invalid      : %d%n%n", invalid));
 
-        // Valid records — sorted by name
+        // Valid records - sorted by name
         if (validArr.length > 0) {
             sb.append("  VALID RECORDS (sorted by name):\n");
             sb.append(String.format("  %-20s %-28s %-12s %3s  %-10s%n",

@@ -136,11 +136,11 @@ class ConnectionPoolTest {
 
     @Test
     void returned_connection_can_be_borrowed_and_used_again() throws Exception {
-        // First borrow — insert
+        // First borrow - insert
         try (Connection c = pool.getConnection()) {
             new ProductRepository(c).insert(Product.of("Reuse Test", 5.00, 1));
         }
-        // Second borrow — count
+        // Second borrow - count
         try (Connection c = pool.getConnection()) {
             assertEquals(1, new ProductRepository(c).count());
         }

@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Module 19 — UDP Sockets
+ * Module 19 - UDP Sockets
  *
  * UDP (User Datagram Protocol):
  *   - Connectionless: no handshake; each packet is independent
@@ -14,9 +14,9 @@ import java.util.concurrent.CountDownLatch;
  *   - Low overhead: useful for real-time media, DNS, game state, telemetry
  *
  * Key classes:
- *   DatagramSocket  — send/receive UDP datagrams
- *   DatagramPacket  — a single UDP datagram (data + address + port)
- *   MulticastSocket — extends DatagramSocket for group multicast
+ *   DatagramSocket  - send/receive UDP datagrams
+ *   DatagramPacket  - a single UDP datagram (data + address + port)
+ *   MulticastSocket - extends DatagramSocket for group multicast
  *
  * Max payload: 65,507 bytes (65,535 - 20 IP header - 8 UDP header).
  * In practice, keep payloads under 1,472 bytes to avoid IP fragmentation
@@ -64,7 +64,7 @@ public class UdpDemo {
     /**
      * Send a UDP datagram to host:port and wait for a reply.
      * Because UDP is connectionless, "connect()" here just sets the default
-     * destination and filters incoming packets — it does not perform a handshake.
+     * destination and filters incoming packets - it does not perform a handshake.
      */
     public static String sendUdp(String host, int port, String message, int timeoutMs)
             throws IOException {

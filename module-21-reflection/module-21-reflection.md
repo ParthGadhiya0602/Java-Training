@@ -1,14 +1,16 @@
 ---
-title: "21 — Reflection API"
-parent: "Phase 2 — Core APIs"
+title: "21 - Reflection API"
+parent: "Phase 2 - Core APIs"
 nav_order: 21
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-21-reflection/src){: .btn .btn-outline }
 
-# Module 21 — Reflection API
+# Module 21 - Reflection API
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -24,17 +26,17 @@ render_with_liquid: false
 
 The Reflection API (`java.lang.reflect`) lets code inspect and manipulate the
 structure of other classes at runtime: read/write fields, invoke methods, create
-instances, and generate proxy objects — all without knowing the types at compile time.
+instances, and generate proxy objects - all without knowing the types at compile time.
 
-| Class | Purpose |
-|---|---|
-| `Class<T>` | Type metadata — the entry point |
-| `Field` | Instance or static field |
-| `Method` | Instance or static method |
-| `Constructor<T>` | Constructor |
-| `Parameter` | Parameter of a method/constructor |
-| `Modifier` | Int bitmask of access flags |
-| `Proxy` | Runtime-generated proxy that implements interfaces |
+| Class            | Purpose                                            |
+| ---------------- | -------------------------------------------------- |
+| `Class<T>`       | Type metadata - the entry point                    |
+| `Field`          | Instance or static field                           |
+| `Method`         | Instance or static method                          |
+| `Constructor<T>` | Constructor                                        |
+| `Parameter`      | Parameter of a method/constructor                  |
+| `Modifier`       | Int bitmask of access flags                        |
+| `Proxy`          | Runtime-generated proxy that implements interfaces |
 
 ---
 
@@ -69,13 +71,13 @@ Modifier.isAbstract(clazz.getModifiers())  // true for abstract classes
 
 ### getDeclared* vs get*
 
-| Method | Returns |
-|---|---|
-| `getDeclaredFields()` | Own fields (any visibility; excludes inherited) |
-| `getFields()` | Public fields of this class and all superclasses |
-| `getDeclaredMethods()` | Own methods (any visibility; excludes inherited) |
-| `getMethods()` | Public methods including inherited ones |
-| `getDeclaredConstructors()` | All constructors of this class |
+| Method                      | Returns                                          |
+| --------------------------- | ------------------------------------------------ |
+| `getDeclaredFields()`       | Own fields (any visibility; excludes inherited)  |
+| `getFields()`               | Public fields of this class and all superclasses |
+| `getDeclaredMethods()`      | Own methods (any visibility; excludes inherited) |
+| `getMethods()`              | Public methods including inherited ones          |
+| `getDeclaredConstructors()` | All constructors of this class                   |
 
 ---
 
@@ -174,19 +176,19 @@ Calculator proxy = (Calculator) Proxy.newProxyInstance(
 ### Rules
 
 - Proxy can only implement **interfaces**, not extend classes
-- `Proxy.isProxyClass(obj.getClass())` — checks if an object is a proxy
-- `Proxy.getInvocationHandler(proxy)` — retrieves the handler
+- `Proxy.isProxyClass(obj.getClass())` - checks if an object is a proxy
+- `Proxy.getInvocationHandler(proxy)` - retrieves the handler
 
 ### Common patterns
 
-| Pattern | How the handler works |
-|---|---|
-| **Logging** | Record method name + args, then delegate |
-| **Timing** | Capture `System.nanoTime()` before/after, then delegate |
-| **Caching** | Return cached result if key (method + args) seen before |
-| **Null guard** | Throw if any arg is null before delegating |
-| **Retry** | Catch exceptions and retry up to N times |
-| **Read-only** | Throw on setter methods; pass getters through |
+| Pattern        | How the handler works                                   |
+| -------------- | ------------------------------------------------------- |
+| **Logging**    | Record method name + args, then delegate                |
+| **Timing**     | Capture `System.nanoTime()` before/after, then delegate |
+| **Caching**    | Return cached result if key (method + args) seen before |
+| **Null guard** | Throw if any arg is null before delegating              |
+| **Retry**      | Catch exceptions and retry up to N times                |
+| **Read-only**  | Throw on setter methods; pass getters through           |
 
 ### Generic proxy factory
 
@@ -233,7 +235,7 @@ for (Field f : obj.getClass().getDeclaredFields()) {
 // hashCode: Objects.hash(field1, field2, ...)
 ```
 
-Records do this automatically — prefer records over hand-rolled reflection-based
+Records do this automatically - prefer records over hand-rolled reflection-based
 equals/hashCode.
 
 ### Plugin loader
@@ -251,25 +253,27 @@ T plugin = (T) ctor.newInstance();
 
 ## Performance Considerations
 
-| Action | Mitigation |
-|---|---|
-| Repeated `getDeclaredMethod` lookups | Cache `Method` / `Field` objects |
-| `setAccessible(true)` on each call | Call once; the flag persists on the object |
-| Proxy dispatch overhead | Profile first; rarely a bottleneck vs business logic |
-| Type erasure for generics | Use `ParameterizedType` via field/method signatures |
+| Action                               | Mitigation                                           |
+| ------------------------------------ | ---------------------------------------------------- |
+| Repeated `getDeclaredMethod` lookups | Cache `Method` / `Field` objects                     |
+| `setAccessible(true)` on each call   | Call once; the flag persists on the object           |
+| Proxy dispatch overhead              | Profile first; rarely a bottleneck vs business logic |
+| Type erasure for generics            | Use `ParameterizedType` via field/method signatures  |
 
 ---
 
 ## When to Use Reflection
 
 **Good uses:**
+
 - Dependency injection containers (Spring, Guice)
 - Object-relational mappers (Hibernate, JPA)
 - JSON/XML serialisation (Jackson, GSON)
 - Test utilities and mocking (JUnit, Mockito)
 
 **Avoid when:**
-- You control the types at compile time — use generics or interfaces instead
+
+- You control the types at compile time - use generics or interfaces instead
 - Performance is critical in a hot path
 - You want compile-time safety
 
@@ -277,13 +281,14 @@ T plugin = (T) ctor.newInstance();
 
 ## Summary
 
-| Task | API |
-|---|---|
-| Get class metadata | `clazz.getDeclaredFields/Methods/Constructors()` |
-| Read/write field | `field.setAccessible(true); field.get/set(obj)` |
-| Invoke method | `method.setAccessible(true); method.invoke(obj, args)` |
-| Create instance | `ctor.setAccessible(true); ctor.newInstance(args)` |
-| Dynamic proxy | `Proxy.newProxyInstance(loader, interfaces, handler)` |
-| Generic type arg | `(ParameterizedType) field.getGenericType()` |
-| Check proxy | `Proxy.isProxyClass(obj.getClass())` |
+| Task               | API                                                    |
+| ------------------ | ------------------------------------------------------ |
+| Get class metadata | `clazz.getDeclaredFields/Methods/Constructors()`       |
+| Read/write field   | `field.setAccessible(true); field.get/set(obj)`        |
+| Invoke method      | `method.setAccessible(true); method.invoke(obj, args)` |
+| Create instance    | `ctor.setAccessible(true); ctor.newInstance(args)`     |
+| Dynamic proxy      | `Proxy.newProxyInstance(loader, interfaces, handler)`  |
+| Generic type arg   | `(ParameterizedType) field.getGenericType()`           |
+| Check proxy        | `Proxy.isProxyClass(obj.getClass())`                   |
+
 {% endraw %}

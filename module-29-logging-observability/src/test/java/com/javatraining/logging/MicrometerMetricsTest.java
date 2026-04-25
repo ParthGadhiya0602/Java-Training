@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for Micrometer metrics.
  *
- * <p>{@link SimpleMeterRegistry} stores all meter state in memory — perfect for
+ * <p>{@link SimpleMeterRegistry} stores all meter state in memory - perfect for
  * unit tests. In production you replace it with a registry bound to Prometheus,
  * Datadog, CloudWatch etc. via a dependency; application code never changes.
  *

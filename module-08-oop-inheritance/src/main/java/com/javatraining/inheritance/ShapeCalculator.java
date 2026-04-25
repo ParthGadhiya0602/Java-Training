@@ -4,25 +4,25 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * TOPIC: Full design — Abstract class (Template Method) + sealed hierarchy
+ * TOPIC: Full design - Abstract class (Template Method) + sealed hierarchy
  *        + polymorphic processing pipeline
  *
  * Design:
- *   AbstractShape — abstract class providing the Template Method pattern.
- *     • area() and perimeter() are abstract — subclasses implement them.
+ *   AbstractShape - abstract class providing the Template Method pattern.
+ *     • area() and perimeter() are abstract - subclasses implement them.
  *     • describe(), scale(), and compareTo() are concrete template methods
  *       that call the abstract hooks.
  *
- *   Sealed interface Shape2D — restricts the set of concrete shapes so that
+ *   Sealed interface Shape2D - restricts the set of concrete shapes so that
  *     switch expressions on shapes are exhaustive.
  *
- *   ShapeCalculator — processes a mixed list of shapes polymorphically:
+ *   ShapeCalculator - processes a mixed list of shapes polymorphically:
  *     total area, largest shape, group by type, scale all by factor.
  */
 public class ShapeCalculator {
 
     // -------------------------------------------------------------------------
-    // 1. Abstract base class — Template Method pattern
+    // 1. Abstract base class - Template Method pattern
     // -------------------------------------------------------------------------
     static abstract class AbstractShape implements Comparable<AbstractShape> {
 
@@ -32,24 +32,24 @@ public class ShapeCalculator {
             this.color = color;
         }
 
-        // Abstract hooks — subclasses MUST implement
+        // Abstract hooks - subclasses MUST implement
         abstract double area();
         abstract double perimeter();
         abstract String shapeName();
 
-        // Template method — uses the hooks, cannot be overridden
+        // Template method - uses the hooks, cannot be overridden
         final String describe() {
             return String.format("%-12s color=%-8s area=%8.2f perimeter=%8.2f",
                 shapeName(), color, area(), perimeter());
         }
 
-        // Template method — creates a scaled copy
+        // Template method - creates a scaled copy
         final AbstractShape scaled(double factor) {
             if (factor <= 0) throw new IllegalArgumentException("Scale factor must be > 0");
             return scaleBy(factor);
         }
 
-        // Hook for scaling — subclasses produce a new instance with scaled dimensions
+        // Hook for scaling - subclasses produce a new instance with scaled dimensions
         protected abstract AbstractShape scaleBy(double factor);
 
         String color() { return color; }
@@ -65,7 +65,7 @@ public class ShapeCalculator {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Concrete shapes — sealed so switch can be exhaustive
+    // 2. Concrete shapes - sealed so switch can be exhaustive
     // -------------------------------------------------------------------------
     static final class Circle extends AbstractShape {
         private final double radius;

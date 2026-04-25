@@ -6,17 +6,17 @@ import java.util.function.*;
 /**
  * TOPIC: Local classes and anonymous classes
  *
- * LOCAL CLASS — defined inside a method body.
+ * LOCAL CLASS - defined inside a method body.
  *   • Has a name; can be instantiated multiple times inside that method.
  *   • Captures effectively-final local variables from the enclosing scope.
  *   • Good for: a reusable helper that needs both a name and local context.
  *
- * ANONYMOUS CLASS — instantiated inline without a declared name.
+ * ANONYMOUS CLASS - instantiated inline without a declared name.
  *   • Exactly one use site; the class body follows the 'new' expression.
  *   • Captures effectively-final local variables.
  *   • Good for: single-use implementations, especially pre-Java-8 listeners.
  *
- * LAMBDA — anonymous function (no class boilerplate).
+ * LAMBDA - anonymous function (no class boilerplate).
  *   • Only works for @FunctionalInterface (exactly one abstract method).
  *   • Cannot store additional state in fields; cannot reference 'this' as itself.
  *   • Preferred over anonymous class whenever the interface is functional.
@@ -31,7 +31,7 @@ import java.util.function.*;
 public class LocalAndAnonymous {
 
     // -------------------------------------------------------------------------
-    // 1. Local class — reusable within one method, captures local variables
+    // 1. Local class - reusable within one method, captures local variables
     // -------------------------------------------------------------------------
 
     /**
@@ -43,7 +43,7 @@ public class LocalAndAnonymous {
     static List<String> filteredLines(String text, Predicate<String> keep, String prefix) {
         String[] lines = text.split("\n");
 
-        // Local class — only visible inside this method body
+        // Local class - only visible inside this method body
         class LineFilter {
             private final String prefix;
 
@@ -74,7 +74,7 @@ public class LocalAndAnonymous {
      * Demonstrates capturing an effectively-final local (width).
      */
     static List<String> formatTable(List<String[]> rows, int colWidth) {
-        // colWidth is effectively final — captured by the local class
+        // colWidth is effectively final - captured by the local class
         class RowFormatter {
             String format(String[] cells) {
                 StringBuilder sb = new StringBuilder("|");
@@ -101,7 +101,7 @@ public class LocalAndAnonymous {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Anonymous class — one-shot implementation inline
+    // 2. Anonymous class - one-shot implementation inline
     // -------------------------------------------------------------------------
 
     /**
@@ -119,7 +119,7 @@ public class LocalAndAnonymous {
         };
     }
 
-    /** Modern equivalent — lambda is cleaner when there is one abstract method. */
+    /** Modern equivalent - lambda is cleaner when there is one abstract method. */
     static Comparator<String> lengthThenAlpha_lambda() {
         return Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder());
     }
@@ -131,7 +131,7 @@ public class LocalAndAnonymous {
     //    two-abstract-method scenario using a custom interface.
     // -------------------------------------------------------------------------
 
-    /** A two-method interface — NOT a functional interface; lambda cannot implement it. */
+    /** A two-method interface - NOT a functional interface; lambda cannot implement it. */
     interface Describable {
         String describe();
         String shortLabel();
@@ -157,7 +157,7 @@ public class LocalAndAnonymous {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Anonymous class with internal state — another case where lambda fails
+    // 4. Anonymous class with internal state - another case where lambda fails
     // -------------------------------------------------------------------------
 
     /**
@@ -167,7 +167,7 @@ public class LocalAndAnonymous {
      */
     static Runnable countdownRunnable(int from) {
         return new Runnable() {
-            private int remaining = from;   // internal field — impossible with lambda
+            private int remaining = from;   // internal field - impossible with lambda
 
             @Override
             public void run() {
@@ -189,7 +189,7 @@ public class LocalAndAnonymous {
         String apply(String s);
     }
 
-    /** Anonymous class version — works but verbose. */
+    /** Anonymous class version - works but verbose. */
     static StringTransform shout_anonymous() {
         return new StringTransform() {
             @Override
@@ -199,7 +199,7 @@ public class LocalAndAnonymous {
         };
     }
 
-    /** Lambda version — preferred; same behaviour, far less ceremony. */
+    /** Lambda version - preferred; same behaviour, far less ceremony. */
     static StringTransform shout_lambda() {
         return s -> s.toUpperCase() + "!!!";
     }
@@ -208,12 +208,12 @@ public class LocalAndAnonymous {
     // Demonstrations
     // -------------------------------------------------------------------------
     static void localClassDemo() {
-        System.out.println("=== Local class — filteredLines ===");
+        System.out.println("=== Local class - filteredLines ===");
         String text = "apple\nbanana\navocado\nblueberry\ncherry";
         List<String> aWords = filteredLines(text, s -> s.startsWith("a"), "> ");
         aWords.forEach(System.out::println);
 
-        System.out.println("\n=== Local class — formatTable ===");
+        System.out.println("\n=== Local class - formatTable ===");
         List<String[]> rows = List.of(
             new String[]{"Name",    "City",      "Score"},
             new String[]{"Alice",   "Bengaluru", "95"},
@@ -232,7 +232,7 @@ public class LocalAndAnonymous {
         words.sort(lengthThenAlpha_lambda());
         System.out.println("lambda:    " + words);
 
-        System.out.println("\n=== Anonymous class — multi-method interface ===");
+        System.out.println("\n=== Anonymous class - multi-method interface ===");
         Describable d = productDescribable("Laptop Pro", 89999.99);
         System.out.println(d.describe());
         System.out.println(d.shortLabel());

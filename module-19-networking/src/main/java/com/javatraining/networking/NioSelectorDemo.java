@@ -10,20 +10,20 @@ import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Module 19 — Non-blocking I/O with Selectors
+ * Module 19 - Non-blocking I/O with Selectors
  *
  * NIO non-blocking channels allow a single thread to multiplex many connections:
  *
- *   ServerSocketChannel — non-blocking analogue of ServerSocket
- *   SocketChannel       — non-blocking analogue of Socket
- *   Selector            — monitors multiple channels for readiness events
- *   SelectionKey        — represents a channel registered with a Selector
+ *   ServerSocketChannel - non-blocking analogue of ServerSocket
+ *   SocketChannel       - non-blocking analogue of Socket
+ *   Selector            - monitors multiple channels for readiness events
+ *   SelectionKey        - represents a channel registered with a Selector
  *
  * SelectionKey interest ops:
- *   OP_ACCEPT   — ServerSocketChannel has a pending connection
- *   OP_CONNECT  — SocketChannel has finished connecting
- *   OP_READ     — channel has data to read
- *   OP_WRITE    — channel has space in its send buffer
+ *   OP_ACCEPT   - ServerSocketChannel has a pending connection
+ *   OP_CONNECT  - SocketChannel has finished connecting
+ *   OP_READ     - channel has data to read
+ *   OP_WRITE    - channel has space in its send buffer
  *
  * Event loop pattern:
  *   while (running) {
@@ -37,7 +37,7 @@ import java.util.concurrent.CountDownLatch;
  *
  * When to use NIO selectors:
  *   YES: proxy servers, protocol gateways, tens of thousands of idle connections
- *   NO:  typical server-side apps — virtual threads handle this more simply
+ *   NO:  typical server-side apps - virtual threads handle this more simply
  */
 public class NioSelectorDemo {
 
@@ -149,8 +149,8 @@ public class NioSelectorDemo {
 
     /**
      * Pipe.open() creates a connected pair of channels:
-     *   sink   — write end
-     *   source — read end
+     *   sink   - write end
+     *   source - read end
      * Useful for in-process producer/consumer without network overhead.
      */
     public static String pipeRoundTrip(String message) throws IOException {

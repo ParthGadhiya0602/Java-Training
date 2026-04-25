@@ -1,7 +1,7 @@
 package com.javatraining.cleancode.solid.srp;
 
 /**
- * SRP — single responsibility: compose and send notifications.
+ * SRP - single responsibility: compose and send notifications.
  * Only changes when the notification format or channel changes.
  */
 public class NotificationService {

@@ -18,7 +18,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * @DataJpaTest + Testcontainers — JPA slice against a real PostgreSQL container.
+ * @DataJpaTest + Testcontainers - JPA slice against a real PostgreSQL container.
  *
  * Why use Testcontainers when @DataJpaTest already works with H2?
  *   - H2 SQL dialect differs from PostgreSQL: window functions, JSON operators,
@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @ServiceConnection (Spring Boot 3.1+):
  *   Reads the container's host, port, database name, user, and password and
- *   auto-registers them as DataSource connection details — no manual
+ *   auto-registers them as DataSource connection details - no manual
  *   @DynamicPropertySource needed for standard containers.
  *
  * Static @Container:

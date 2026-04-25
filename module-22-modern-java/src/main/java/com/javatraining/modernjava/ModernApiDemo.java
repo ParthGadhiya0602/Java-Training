@@ -4,12 +4,12 @@ import java.util.*;
 import java.util.stream.*;
 
 /**
- * Module 22 — Modern Java API Additions (Java 9–21)
+ * Module 22 - Modern Java API Additions (Java 9–21)
  *
  * Selected API improvements across recent Java versions:
  *
  * Java 9:
- *   List.of(), Set.of(), Map.of()  — immutable factory methods
+ *   List.of(), Set.of(), Map.of()  - immutable factory methods
  *   Map.copyOf(), List.copyOf()
  *   Optional.ifPresentOrElse(), Optional.stream(), Optional.or()
  *   Stream.takeWhile(), dropWhile(), iterate(seed, hasNext, next), ofNullable()
@@ -21,7 +21,7 @@ import java.util.stream.*;
  *
  * Java 11:
  *   String.isBlank(), strip(), stripLeading(), stripTrailing(), lines(), repeat()
- *   Collection.toArray(IntFunction) — toArray(String[]::new)
+ *   Collection.toArray(IntFunction) - toArray(String[]::new)
  *   Optional.isEmpty()
  *
  * Java 12:
@@ -34,7 +34,7 @@ import java.util.stream.*;
  *   Text blocks (final)
  *
  * Java 16:
- *   Stream.toList()   — unmodifiable, shorter than collect(Collectors.toList())
+ *   Stream.toList()   - unmodifiable, shorter than collect(Collectors.toList())
  *   instanceof pattern variables (final)
  *   Records (final)
  *
@@ -42,7 +42,7 @@ import java.util.stream.*;
  *   Sealed classes (final)
  *
  * Java 21:
- *   Virtual threads (final) — covered in Module 17
+ *   Virtual threads (final) - covered in Module 17
  *   Pattern matching for switch (final)
  *   Record patterns (final)
  *   Sequenced collections (SequencedCollection, SequencedMap)
@@ -106,7 +106,7 @@ public class ModernApiDemo {
         return primary.filter(s -> !s.isBlank()).or(() -> fallback);
     }
 
-    /** Optional.ifPresentOrElse() — handle both branches in one call. */
+    /** Optional.ifPresentOrElse() - handle both branches in one call. */
     public static String describeOptional(Optional<String> opt) {
         StringBuilder sb = new StringBuilder();
         opt.ifPresentOrElse(
@@ -116,21 +116,21 @@ public class ModernApiDemo {
         return sb.toString();
     }
 
-    /** Optional.stream() — bridge Optional into Stream pipelines. */
+    /** Optional.stream() - bridge Optional into Stream pipelines. */
     public static List<String> flattenOptionals(List<Optional<String>> opts) {
         return opts.stream()
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
     }
 
-    /** Optional.isEmpty() (Java 11) — explicit empty check. */
+    /** Optional.isEmpty() (Java 11) - explicit empty check. */
     public static boolean isEmpty(Optional<?> opt) { return opt.isEmpty(); }
 
     // ── Stream additions (Java 9+) ────────────────────────────────────────────
 
     /**
-     * takeWhile() — takes elements while predicate is true (stops at first false).
-     * dropWhile() — drops elements while predicate is true (passes rest through).
+     * takeWhile() - takes elements while predicate is true (stops at first false).
+     * dropWhile() - drops elements while predicate is true (passes rest through).
      * Both are short-circuiting and work well with ordered streams.
      */
     public static List<Integer> takeWhileLessThan(List<Integer> list, int limit) {
@@ -142,7 +142,7 @@ public class ModernApiDemo {
     }
 
     /**
-     * Stream.iterate(seed, hasNext, next) — bounded iteration without limit().
+     * Stream.iterate(seed, hasNext, next) - bounded iteration without limit().
      * Generates: seed, next(seed), next(next(seed)), ... while hasNext is true.
      */
     public static List<Integer> generateRange(int start, int end) {
@@ -151,7 +151,7 @@ public class ModernApiDemo {
     }
 
     /**
-     * Stream.ofNullable() — wraps null as an empty stream, non-null as a one-element stream.
+     * Stream.ofNullable() - wraps null as an empty stream, non-null as a one-element stream.
      * Avoids null checks before flatMap.
      */
     public static List<String> processNullable(String value) {
@@ -160,16 +160,16 @@ public class ModernApiDemo {
             .collect(Collectors.toList());
     }
 
-    /** Stream.toList() (Java 16) — shorter than collect(Collectors.toList()). */
+    /** Stream.toList() (Java 16) - shorter than collect(Collectors.toList()). */
     public static List<Integer> toList(Stream<Integer> stream) {
         return stream.toList();
     }
 
-    // ── var — local type inference (Java 10) ─────────────────────────────────
+    // ── var - local type inference (Java 10) ─────────────────────────────────
 
     /**
      * var infers the type from the right-hand side at compile time.
-     * It does NOT make Java dynamically typed — the type is fixed at compilation.
+     * It does NOT make Java dynamically typed - the type is fixed at compilation.
      * Only works for local variables with an initializer.
      */
     public static Map<String, List<Integer>> groupByLength(List<String> words) {

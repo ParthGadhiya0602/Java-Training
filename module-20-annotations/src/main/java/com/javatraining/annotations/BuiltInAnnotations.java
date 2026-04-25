@@ -3,21 +3,21 @@ package com.javatraining.annotations;
 import java.util.List;
 
 /**
- * Module 20 — Built-in Java Annotations
+ * Module 20 - Built-in Java Annotations
  *
  * Java ships several annotation types used by the compiler and JVM:
  *
  * Compiler directives:
- *   @Override          — method overrides a superclass/interface method
- *   @Deprecated        — element should no longer be used
- *   @SuppressWarnings  — suppress named compiler warnings
- *   @FunctionalInterface — interface must have exactly one abstract method
- *   @SafeVarargs       — suppress heap-pollution warning for varargs generics
+ *   @Override          - method overrides a superclass/interface method
+ *   @Deprecated        - element should no longer be used
+ *   @SuppressWarnings  - suppress named compiler warnings
+ *   @FunctionalInterface - interface must have exactly one abstract method
+ *   @SafeVarargs       - suppress heap-pollution warning for varargs generics
  *
  * Tool / documentation:
- *   @Documented   — appears in Javadoc (meta-annotation)
- *   @Inherited    — subclasses inherit the annotation (meta-annotation)
- *   @Repeatable   — same annotation can appear multiple times (meta-annotation)
+ *   @Documented   - appears in Javadoc (meta-annotation)
+ *   @Inherited    - subclasses inherit the annotation (meta-annotation)
+ *   @Repeatable   - same annotation can appear multiple times (meta-annotation)
  */
 public class BuiltInAnnotations {
 
@@ -26,7 +26,7 @@ public class BuiltInAnnotations {
     /**
      * @Override tells the compiler "this method must override something".
      * Without it, a typo in the method name silently creates a new method
-     * instead of overriding — a common source of bugs.
+     * instead of overriding - a common source of bugs.
      */
     public static class Animal {
         public String sound() { return "..."; }
@@ -46,8 +46,8 @@ public class BuiltInAnnotations {
     /**
      * @Deprecated marks code that should no longer be used.
      * Since Java 9, @Deprecated has two optional elements:
-     *   since   — version when it was deprecated
-     *   forRemoval — whether it will be removed in a future release
+     *   since   - version when it was deprecated
+     *   forRemoval - whether it will be removed in a future release
      */
     @Deprecated(since = "2.0", forRemoval = true)
     public static String legacyFormat(int value) {
@@ -62,12 +62,12 @@ public class BuiltInAnnotations {
 
     /**
      * Common warning names:
-     *   "unchecked"      — unchecked cast with generics
-     *   "deprecation"    — using deprecated API
-     *   "rawtypes"       — raw type usage (no type parameter)
-     *   "unused"         — unused variable or method
-     *   "serial"         — missing serialVersionUID
-     *   "all"            — suppress everything (use sparingly)
+     *   "unchecked"      - unchecked cast with generics
+     *   "deprecation"    - using deprecated API
+     *   "rawtypes"       - raw type usage (no type parameter)
+     *   "unused"         - unused variable or method
+     *   "serial"         - missing serialVersionUID
+     *   "all"            - suppress everything (use sparingly)
      */
     @SuppressWarnings("deprecation")
     public static String callLegacy(int v) {
@@ -89,7 +89,7 @@ public class BuiltInAnnotations {
     public interface Transformer<T, R> {
         R transform(T input);
 
-        // Default and static methods are allowed — they don't count as abstract.
+        // Default and static methods are allowed - they don't count as abstract.
         default Transformer<T, R> andLog() {
             return input -> {
                 R result = this.transform(input);

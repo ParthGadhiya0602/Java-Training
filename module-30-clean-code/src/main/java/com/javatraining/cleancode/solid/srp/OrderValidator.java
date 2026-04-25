@@ -1,7 +1,7 @@
 package com.javatraining.cleancode.solid.srp;
 
 /**
- * SRP — single responsibility: validate an order.
+ * SRP - single responsibility: validate an order.
  * Only changes when validation rules change.
  */
 public class OrderValidator {

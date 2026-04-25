@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <p>{@code @DataMongoTest} loads only MongoDB-related beans (documents, repositories,
  * {@link org.springframework.data.mongodb.core.MongoTemplate}).  When
  * {@code de.flapdoodle.embed.mongo.spring3x} is on the test classpath, Spring Boot
- * auto-configures an in-process embedded MongoDB — no external server needed.
+ * auto-configures an in-process embedded MongoDB - no external server needed.
  *
  * <p>Each test rolls back through collection cleanup in {@code @BeforeEach}.
  */

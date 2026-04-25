@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Verifies OWASP A01 (Broken Access Control) defences on the order API.
  *
  * EmbeddedKafka is included so the NotificationListener connects cleanly
- * on context startup — it has no effect on the security assertions.
+ * on context startup - it has no effect on the security assertions.
  */
 @SpringBootTest
 @AutoConfigureMockMvc

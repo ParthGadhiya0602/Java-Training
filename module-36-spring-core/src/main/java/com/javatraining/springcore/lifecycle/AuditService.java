@@ -13,12 +13,12 @@ import java.util.List;
  *
  * <p>Lifecycle order:
  * <ol>
- *   <li>Constructor — Spring instantiates the bean</li>
- *   <li>Dependencies injected — @Autowired fields/setters populated</li>
- *   <li>{@code @PostConstruct} — called once, before the bean is used;
+ *   <li>Constructor - Spring instantiates the bean</li>
+ *   <li>Dependencies injected - @Autowired fields/setters populated</li>
+ *   <li>{@code @PostConstruct} - called once, before the bean is used;
  *       safe to reference injected dependencies here</li>
- *   <li>Bean in use — handles application calls</li>
- *   <li>{@code @PreDestroy} — called on context shutdown;
+ *   <li>Bean in use - handles application calls</li>
+ *   <li>{@code @PreDestroy} - called on context shutdown;
  *       use to close resources (connections, thread pools, files)</li>
  * </ol>
  */

@@ -1,14 +1,15 @@
 ---
-title: "02 — Java Basics"
-parent: "Phase 1 — Fundamentals"
+title: "02 - Java Basics"
+parent: "Phase 1 - Fundamentals"
 nav_order: 2
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-02-java-basics/src){: .btn .btn-outline }
 
-# Module 02 — Java Basics
+# Module 02 - Java Basics
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21
 
@@ -23,9 +24,9 @@ render_with_liquid: false
 5. [Autoboxing & the Integer Cache Trap](#5-autoboxing--the-integer-cache-trap)
 6. [Operators](#6-operators)
 7. [Operator Precedence](#7-operator-precedence)
-8. [var — Local Type Inference](#8-var--local-type-inference)
-9. [BigDecimal — Why double Fails for Money](#9-bigdecimal--why-double-fails-for-money)
-10. [Practical Exercise — Expense Calculator](#10-practical-exercise--expense-calculator)
+8. [var - Local Type Inference](#8-var--local-type-inference)
+9. [BigDecimal - Why double Fails for Money](#9-bigdecimal--why-double-fails-for-money)
+10. [Practical Exercise - Expense Calculator](#10-practical-exercise--expense-calculator)
 11. [Exercises](#11-exercises)
 
 ---
@@ -42,14 +43,14 @@ Before writing any Java, you need a mental model of what happens when you run it
 
 **Three-step process:**
 
-1. `javac Hello.java` — The Java compiler reads your source code and produces
-   **bytecode** (`.class` file). Bytecode is NOT machine code — it is an
+1. `javac Hello.java` - The Java compiler reads your source code and produces
+   **bytecode** (`.class` file). Bytecode is NOT machine code - it is an
    intermediate format that no real CPU understands natively.
 
 2. The **JVM (Java Virtual Machine)** reads the bytecode and either interprets
    it or compiles it further to native machine code via the **JIT compiler**.
 
-3. The JVM is what makes Java "write once, run anywhere" — the same `.class`
+3. The JVM is what makes Java "write once, run anywhere" - the same `.class`
    file runs on Windows, macOS, and Linux as long as a JVM is installed.
 
 ```
@@ -79,29 +80,29 @@ Heap stores objects.**
 
 ## 2. Primitive Types
 
-Java has exactly **8 primitive types**. They are not objects — they have no
+Java has exactly **8 primitive types**. They are not objects - they have no
 methods, no null value, and live directly on the stack.
 
 ### The 8 Primitives
 
-| Type | Size | Range | Default | Use for |
-|------|------|-------|---------|---------|
-| `byte` | 8-bit | -128 to 127 | 0 | Raw binary data, file I/O |
-| `short` | 16-bit | -32,768 to 32,767 | 0 | Rarely used directly |
-| `int` | 32-bit | -2.1B to 2.1B | 0 | Default choice for integers |
-| `long` | 64-bit | -9.2 × 10¹⁸ to 9.2 × 10¹⁸ | 0L | IDs, timestamps, large counts |
-| `float` | 32-bit | ~7 decimal digits | 0.0f | Graphics, rarely in business logic |
-| `double` | 64-bit | ~15 decimal digits | 0.0 | Default choice for decimals |
-| `char` | 16-bit | 0 to 65,535 (Unicode) | '\u0000' | A single character |
-| `boolean` | 1-bit* | true / false | false | Flags, conditions |
+| Type      | Size    | Range                     | Default  | Use for                            |
+| --------- | ------- | ------------------------- | -------- | ---------------------------------- |
+| `byte`    | 8-bit   | -128 to 127               | 0        | Raw binary data, file I/O          |
+| `short`   | 16-bit  | -32,768 to 32,767         | 0        | Rarely used directly               |
+| `int`     | 32-bit  | -2.1B to 2.1B             | 0        | Default choice for integers        |
+| `long`    | 64-bit  | -9.2 × 10¹⁸ to 9.2 × 10¹⁸ | 0L       | IDs, timestamps, large counts      |
+| `float`   | 32-bit  | ~7 decimal digits         | 0.0f     | Graphics, rarely in business logic |
+| `double`  | 64-bit  | ~15 decimal digits        | 0.0      | Default choice for decimals        |
+| `char`    | 16-bit  | 0 to 65,535 (Unicode)     | '\u0000' | A single character                 |
+| `boolean` | 1-bit\* | true / false              | false    | Flags, conditions                  |
 
-> *`boolean` is 1-bit logically, but JVMs typically store it as 1 byte or 4 bytes
+> \*`boolean` is 1-bit logically, but JVMs typically store it as 1 byte or 4 bytes
 > depending on context (array vs local variable).
 
 ### Declaring and Initializing
 
 ```java
-// Declaration only — field gets default value, local variable does NOT
+// Declaration only - field gets default value, local variable does NOT
 int count;           // local var: COMPILE ERROR if used before init
                      // class field: default is 0
 
@@ -116,15 +117,15 @@ boolean active = true;
 
 ### Numeric Literal Formats
 
-Java supports 4 ways to write integer literals — they are all the same value:
+Java supports 4 ways to write integer literals - they are all the same value:
 
 ```java
 int decimal = 255;          // base 10 (everyday)
-int hex     = 0xFF;         // base 16 — prefix 0x
-int octal   = 0377;         // base 8  — prefix 0
-int binary  = 0b11111111;   // base 2  — prefix 0b (Java 7+)
+int hex     = 0xFF;         // base 16 - prefix 0x
+int octal   = 0377;         // base 8  - prefix 0
+int binary  = 0b11111111;   // base 2  - prefix 0b (Java 7+)
 
-System.out.println(decimal == hex);    // true — all 255
+System.out.println(decimal == hex);    // true - all 255
 System.out.println(decimal == binary); // true
 ```
 
@@ -136,15 +137,15 @@ int  phonePincode = 400_001;
 int  rgb          = 0xFF_A5_00;   // works in hex too
 ```
 
-### Stack vs Heap — Where Variables Live
+### Stack vs Heap - Where Variables Live
 
 ```
   Method: calculate(int a, int b)
   ┌─────────────────────────────┐
   │  STACK FRAME                │
-  │  a = 10   (int — 4 bytes)   │  ← primitive lives HERE
-  │  b = 3    (int — 4 bytes)   │
-  │  result = 13 (int — 4 bytes)│
+  │  a = 10   (int - 4 bytes)   │  ← primitive lives HERE
+  │  b = 3    (int - 4 bytes)   │
+  │  result = 13 (int - 4 bytes)│
   └─────────────────────────────┘
 
   String s = "hello";
@@ -161,7 +162,7 @@ int  rgb          = 0xFF_A5_00;   // works in hex too
 
 **Key implication:** When you pass a primitive to a method, Java passes a
 **copy**. Changing it inside the method does not affect the caller.
-When you pass an object, Java passes a copy of the **reference** — the object
+When you pass an object, Java passes a copy of the **reference** - the object
 itself is shared.
 
 ---
@@ -198,9 +199,9 @@ String s3 = new String("hello"); // explicitly creates a NEW heap object
 ```
 
 ```java
-System.out.println(s1 == s2);      // true  — same Pool reference
-System.out.println(s1 == s3);      // false — different objects
-System.out.println(s1.equals(s3)); // true  — same content
+System.out.println(s1 == s2);      // true  - same Pool reference
+System.out.println(s1 == s3);      // false - different objects
+System.out.println(s1.equals(s3)); // true  - same content
 ```
 
 > **Rule:** Always use `.equals()` to compare String content.
@@ -211,7 +212,7 @@ System.out.println(s1.equals(s3)); // true  — same content
 
 ## 4. Type Casting
 
-### Widening (Implicit) — Safe, No Data Loss
+### Widening (Implicit) - Safe, No Data Loss
 
 Java automatically converts a smaller type to a larger type.
 
@@ -228,7 +229,7 @@ double d = l;         // long → double: automatic BUT may lose precision
                       // for very large longs (> 2^53 ≈ 9 quadrillion)
 ```
 
-### Narrowing (Explicit) — Risky, May Lose Data
+### Narrowing (Explicit) - Risky, May Lose Data
 
 You must explicitly cast when going from a larger to a smaller type.
 The compiler forces you to acknowledge the risk.
@@ -249,10 +250,10 @@ byte   tiny      = (byte) 200;   // 200 > 127 (byte max) → wraps to -56 (!)
                               11001000  = -56 (two's complement interpretation)
 ```
 
-This silent data corruption is why narrowing requires an explicit cast — the
+This silent data corruption is why narrowing requires an explicit cast - the
 compiler is asking you to confirm you understand the risk.
 
-### Integer Overflow — Silent Corruption
+### Integer Overflow - Silent Corruption
 
 ```java
 int max = Integer.MAX_VALUE; // 2,147,483,647
@@ -292,7 +293,7 @@ Integer boxed = 42;    // autoboxing: compiler inserts Integer.valueOf(42)
 int unboxed   = boxed; // unboxing:   compiler inserts boxed.intValue()
 ```
 
-### The Integer Cache — A Production Bug Source
+### The Integer Cache - A Production Bug Source
 
 `Integer.valueOf()` caches instances for values **-128 to 127**.
 Outside that range, it creates a new object every time.
@@ -300,12 +301,12 @@ Outside that range, it creates a new object every time.
 ```java
 Integer a = 127;
 Integer b = 127;
-System.out.println(a == b); // true  — same cached instance
+System.out.println(a == b); // true  - same cached instance
 
 Integer c = 128;
 Integer d = 128;
-System.out.println(c == d); // false — different objects!
-System.out.println(c.equals(d)); // true — use this instead
+System.out.println(c == d); // false - different objects!
+System.out.println(c.equals(d)); // true - use this instead
 ```
 
 ```
@@ -321,7 +322,7 @@ System.out.println(c.equals(d)); // true — use this instead
   Integer.valueOf(128) → new Integer(128) every time (different object!)
 ```
 
-### Null Unboxing — Hidden NPE
+### Null Unboxing - Hidden NPE
 
 ```java
 Integer value = null;
@@ -349,11 +350,11 @@ a / b  →  3        // INTEGER division: truncates toward zero (NOT floor)
 a % b  →  1        // remainder (modulo)
 ```
 
-**Integer division pitfall — truncation vs floor:**
+**Integer division pitfall - truncation vs floor:**
 
 ```java
  7 / 2  →  3    // truncates toward zero
--7 / 2  → -3    // NOT -4 — truncates toward zero (in Java, C, and most languages)
+-7 / 2  → -3    // NOT -4 - truncates toward zero (in Java, C, and most languages)
 ```
 
 **Modulo sign follows the dividend:**
@@ -375,17 +376,17 @@ int b = x++;  // POST-increment: b = 6 FIRST, then x becomes 7
 // Result: a=6, b=6, x=7
 ```
 
-### Logical Operators — Short-Circuit Evaluation
+### Logical Operators - Short-Circuit Evaluation
 
 `&&` and `||` **stop evaluating** as soon as the result is determined.
 
 ```java
 int x = 0;
 
-// Safe — right side is NEVER reached because left is false
+// Safe - right side is NEVER reached because left is false
 boolean r = (x != 0) && (10 / x > 1);   // no ArithmeticException
 
-// Safe — right side is NEVER reached because left is true
+// Safe - right side is NEVER reached because left is true
 boolean r2 = (x == 0) || (10 / x > 1);  // no ArithmeticException
 ```
 
@@ -405,7 +406,7 @@ boolean r2 = (x == 0) || (10 / x > 1);  // no ArithmeticException
   └────────────┘           └────────────┘
 ```
 
-### Bitwise Operators — Flags and Masks
+### Bitwise Operators - Flags and Masks
 
 Used for permission flags, protocol encoding, and performance-critical code.
 
@@ -419,7 +420,7 @@ a ^ b  →  0b0110  = 6    // XOR:  bit set if EXACTLY ONE is 1
 ~a     →  ...11110101    // NOT:  flip all bits
 ```
 
-**Real-world pattern — permission flags in one int:**
+**Real-world pattern - permission flags in one int:**
 
 ```java
 final int READ    = 0b001;   // bit 0
@@ -456,7 +457,7 @@ A concise inline if/else that produces a value:
 // Syntax: condition ? valueIfTrue : valueIfFalse
 String label = score >= 60 ? "Pass" : "Fail";
 
-// Chained ternary — readable if kept to 3 levels max
+// Chained ternary - readable if kept to 3 levels max
 String grade = score >= 90 ? "A"
              : score >= 80 ? "B"
              : score >= 70 ? "C"
@@ -466,9 +467,9 @@ String grade = score >= 90 ? "A"
 ### instanceof with Pattern Matching (Java 16+)
 
 ```java
-// Old style: check then cast — redundant
+// Old style: check then cast - redundant
 if (obj instanceof String) {
-    String s = (String) obj;   // you already know it's a String — why cast again?
+    String s = (String) obj;   // you already know it's a String - why cast again?
     System.out.println(s.length());
 }
 
@@ -512,7 +513,7 @@ Higher rows bind tighter (like `*` before `+`).
 **Common traps:**
 
 ```java
-2 + 3 * 4      →  14  (not 20 — multiplication first)
+2 + 3 * 4      →  14  (not 20 - multiplication first)
 true || false && false  →  true  (reads as: true || (false && false))
 ```
 
@@ -520,10 +521,10 @@ true || false && false  →  true  (reads as: true || (false && false))
 
 ---
 
-## 8. `var` — Local Type Inference
+## 8. `var` - Local Type Inference
 
 `var` tells the compiler to infer the type from the right-hand side.
-It is **not** dynamic typing — the type is fixed at compile time.
+It is **not** dynamic typing - the type is fixed at compile time.
 
 ```java
 var count = 0;          // inferred: int
@@ -546,14 +547,14 @@ var x = getValue();                   // too vague
 **Where `var` does NOT work:**
 
 ```java
-var x;               // no initializer — can't infer
+var x;               // no initializer - can't infer
 var x = null;        // null has no type
 // method parameters, return types, or class fields
 ```
 
 ---
 
-## 9. BigDecimal — Why `double` Fails for Money
+## 9. BigDecimal - Why `double` Fails for Money
 
 ### The Problem
 
@@ -575,14 +576,14 @@ Just as `1/3` cannot be written exactly in decimal (0.333...),
   Stored as 64-bit double: 0.1000000000000000055511151231257827021181583404541015625
 ```
 
-### The Solution — BigDecimal
+### The Solution - BigDecimal
 
 ```java
-BigDecimal a = new BigDecimal("0.10");   // pass as String — exact
-BigDecimal b = new BigDecimal("0.03");   // pass as String — exact
+BigDecimal a = new BigDecimal("0.10");   // pass as String - exact
+BigDecimal b = new BigDecimal("0.03");   // pass as String - exact
 BigDecimal c = a.add(b);
 
-System.out.println(c);           // 0.13 — exact
+System.out.println(c);           // 0.13 - exact
 System.out.println(c.compareTo(new BigDecimal("0.13")) == 0); // true
 ```
 
@@ -595,28 +596,28 @@ System.out.println(c.compareTo(new BigDecimal("0.13")) == 0); // true
 ```java
 BigDecimal price = new BigDecimal("100.00");
 BigDecimal gst   = price.multiply(new BigDecimal("0.18"));
-// gst = 18.0000 — too many decimal places
+// gst = 18.0000 - too many decimal places
 
 BigDecimal rounded = gst.setScale(2, RoundingMode.HALF_UP); // 18.00
 ```
 
-| RoundingMode | Behaviour |
-|---|---|
-| `HALF_UP` | 2.345 → 2.35 (standard rounding — use for money) |
-| `HALF_DOWN` | 2.345 → 2.34 |
-| `FLOOR` | always rounds toward negative infinity |
-| `CEILING` | always rounds toward positive infinity |
-| `HALF_EVEN` | banker's rounding — rounds to nearest even digit |
+| RoundingMode | Behaviour                                        |
+| ------------ | ------------------------------------------------ |
+| `HALF_UP`    | 2.345 → 2.35 (standard rounding - use for money) |
+| `HALF_DOWN`  | 2.345 → 2.34                                     |
+| `FLOOR`      | always rounds toward negative infinity           |
+| `CEILING`    | always rounds toward positive infinity           |
+| `HALF_EVEN`  | banker's rounding - rounds to nearest even digit |
 
 ---
 
-## 10. Practical Exercise — Expense Calculator
+## 10. Practical Exercise - Expense Calculator
 
 See the source files for the full implementation:
 
-- `TypesAndVariables.java` — every type with deliberate edge cases
-- `Operators.java` — every operator category with non-obvious behaviours
-- `ExpenseCalculator.java` — real-world scenario tying it all together:
+- `TypesAndVariables.java` - every type with deliberate edge cases
+- `Operators.java` - every operator category with non-obvious behaviours
+- `ExpenseCalculator.java` - real-world scenario tying it all together:
   uses BigDecimal for GST calculation, bitwise flags for expense status,
   and compound operators for budget tracking
 
@@ -641,31 +642,38 @@ These are meant to be done before looking at the solutions.
 
 **1. Overflow prediction**
 What is the output of:
+
 ```java
 byte b = (byte) 200;
 System.out.println(b);
 ```
+
 Explain using binary representation.
 
 **2. Floating-point trap**
 What does this print?
+
 ```java
 for (double d = 0.0; d != 1.0; d += 0.1) {
     System.out.println(d);
 }
 ```
+
 Will it terminate? Why or why not?
 
 **3. BigDecimal constructor difference**
 What is the difference between these two?
+
 ```java
 new BigDecimal(0.1)
 new BigDecimal("0.1")
 ```
+
 Print both and explain.
 
 **4. Short-circuit guard**
 Rewrite this so it never throws ArithmeticException, without using try/catch:
+
 ```java
 int[] arr = {};
 System.out.println(arr.length > 0 & arr[0] == 5);
@@ -679,5 +687,5 @@ Design a bitmask permission system for a user role that supports:
 
 ## Next
 
-[Module 03 — Control Flow](../module-03-control-flow/)
+[Module 03 - Control Flow](../module-03-control-flow/)
 {% endraw %}

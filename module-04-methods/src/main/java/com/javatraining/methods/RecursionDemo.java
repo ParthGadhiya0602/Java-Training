@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * TOPIC: Recursion — base case, recursive case, call stack, memoization.
+ * TOPIC: Recursion - base case, recursive case, call stack, memoization.
  *
  * Covers:
  * - Factorial: simplest recursion (base + recursive case)
- * - Fibonacci: naive O(2^n) vs memoized O(n) — why memoization matters
+ * - Fibonacci: naive O(2^n) vs memoized O(n) - why memoization matters
  * - Binary search: divide-and-conquer, why (low+high)/2 overflows
- * - Merge sort: recursive sort — split, sort, merge
+ * - Merge sort: recursive sort - split, sort, merge
  * - Tower of Hanoi: classic puzzle with elegant recursive solution
  * - Power set: exponential output, shows recursion depth management
  * - Tail-recursive simulation: converting to loop when stack depth is a concern
@@ -19,7 +19,7 @@ import java.util.List;
 public class RecursionDemo {
 
     // =========================================================================
-    // 1. FACTORIAL — simplest example: n! = n × (n-1)!
+    // 1. FACTORIAL - simplest example: n! = n × (n-1)!
     // =========================================================================
     static long factorial(int n) {
         if (n < 0)  throw new IllegalArgumentException("n must be >= 0");
@@ -27,7 +27,7 @@ public class RecursionDemo {
         return (long) n * factorial(n - 1);   // recursive case
     }
 
-    // Iterative equivalent — same result, no stack frames
+    // Iterative equivalent - same result, no stack frames
     static long factorialIterative(int n) {
         long result = 1;
         for (int i = 2; i <= n; i++) result *= i;
@@ -35,12 +35,12 @@ public class RecursionDemo {
     }
 
     // =========================================================================
-    // 2. FIBONACCI — naive vs memoized
+    // 2. FIBONACCI - naive vs memoized
     //    Demonstrates why naive recursion can be exponential and how
     //    memoization fixes it with the same recursive structure.
     // =========================================================================
 
-    // Naive: O(2^n) — fib(40) makes ~2 billion calls
+    // Naive: O(2^n) - fib(40) makes ~2 billion calls
     static long fibNaive(int n) {
         if (n <= 1) return n;                          // base cases: fib(0)=0, fib(1)=1
         return fibNaive(n - 1) + fibNaive(n - 2);     // two recursive calls (problem!)
@@ -55,13 +55,13 @@ public class RecursionDemo {
               / \    / \    / \
           fib(2) fib(1) ...
 
-     fib(3) is computed TWICE, fib(2) THREE times — exponential redundancy.
+     fib(3) is computed TWICE, fib(2) THREE times - exponential redundancy.
     */
 
-    // Memoized: O(n) — cache results, never recompute
+    // Memoized: O(n) - cache results, never recompute
     static long fibMemo(int n, long[] cache) {
         if (n <= 1) return n;
-        if (cache[n] != 0) return cache[n];        // already computed — reuse
+        if (cache[n] != 0) return cache[n];        // already computed - reuse
         cache[n] = fibMemo(n - 1, cache) + fibMemo(n - 2, cache);
         return cache[n];
     }
@@ -72,7 +72,7 @@ public class RecursionDemo {
         return fibMemo(n, new long[n + 1]);
     }
 
-    // Bottom-up dynamic programming — O(n) time, O(1) space (best approach)
+    // Bottom-up dynamic programming - O(n) time, O(1) space (best approach)
     static long fibDP(int n) {
         if (n <= 1) return n;
         long prev2 = 0, prev1 = 1;
@@ -85,7 +85,7 @@ public class RecursionDemo {
     }
 
     // =========================================================================
-    // 3. BINARY SEARCH — divide and conquer on a sorted array
+    // 3. BINARY SEARCH - divide and conquer on a sorted array
     // =========================================================================
     static int binarySearch(int[] arr, int target, int low, int high) {
         if (low > high) return -1;                    // base case: not found
@@ -106,10 +106,10 @@ public class RecursionDemo {
     }
 
     // =========================================================================
-    // 4. MERGE SORT — recursive divide-and-conquer sorting O(n log n)
+    // 4. MERGE SORT - recursive divide-and-conquer sorting O(n log n)
     // =========================================================================
     static void mergeSort(int[] arr, int left, int right) {
-        if (left >= right) return;      // base case: 0 or 1 elements — already sorted
+        if (left >= right) return;      // base case: 0 or 1 elements - already sorted
 
         int mid = left + (right - left) / 2;
         mergeSort(arr, left, mid);      // sort left half
@@ -172,7 +172,7 @@ public class RecursionDemo {
     */
 
     // =========================================================================
-    // 6. POWER SET — all subsets of a set (2^n subsets)
+    // 6. POWER SET - all subsets of a set (2^n subsets)
     //    Classic example of building results through recursion
     // =========================================================================
     static List<List<Integer>> powerSet(int[] set) {
@@ -203,13 +203,13 @@ public class RecursionDemo {
     //    risks StackOverflow. Always convert to a loop for large inputs.
     // =========================================================================
 
-    // Tail-recursive sum — Java won't optimize this
+    // Tail-recursive sum - Java won't optimize this
     static long sumTailRec(int n, long accumulator) {
         if (n == 0) return accumulator;        // base case
         return sumTailRec(n - 1, accumulator + n); // tail call (last operation)
     }
 
-    // Iterative equivalent — safe for any n
+    // Iterative equivalent - safe for any n
     static long sumIterative(int n) {
         long acc = 0;
         while (n > 0) { acc += n--; }

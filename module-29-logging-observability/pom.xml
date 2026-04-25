@@ -22,7 +22,7 @@
 
     <dependencies>
         <!--
-          SLF4J API — the logging facade.
+          SLF4J API - the logging facade.
           Application code depends only on this; the binding is chosen at runtime.
           Think of it like JDBC: your code calls the API, the vendor provides the driver.
         -->
@@ -33,7 +33,7 @@
         </dependency>
 
         <!--
-          Logback Classic — the SLF4J binding + implementation.
+          Logback Classic - the SLF4J binding + implementation.
           Provides Logger, ConsoleAppender, RollingFileAppender, PatternLayout etc.
           Logback-classic already ships with logback-core transitively.
         -->
@@ -44,7 +44,7 @@
         </dependency>
 
         <!--
-          Micrometer Core — the metrics facade (analogous to SLF4J for metrics).
+          Micrometer Core - the metrics facade (analogous to SLF4J for metrics).
           Provides Counter, Timer, Gauge, DistributionSummary and MeterRegistry.
           SimpleMeterRegistry (used in tests) is bundled in micrometer-core itself.
         -->

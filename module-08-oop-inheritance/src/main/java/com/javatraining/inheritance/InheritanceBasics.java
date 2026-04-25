@@ -1,12 +1,12 @@
 package com.javatraining.inheritance;
 
 /**
- * TOPIC: Inheritance basics — extends, super, constructor chaining,
+ * TOPIC: Inheritance basics - extends, super, constructor chaining,
  *        method overriding, covariant return types, and final.
  *
  * Core rules:
  *   • super(...) must be the FIRST statement in a child constructor.
- *     If omitted, the compiler inserts super() — the no-arg parent constructor.
+ *     If omitted, the compiler inserts super() - the no-arg parent constructor.
  *   • @Override forces the compiler to verify the method actually overrides something.
  *     Omitting it is legal but allows silent bugs (typo creates an overload, not override).
  *   • Covariant return: an overriding method may narrow the return type to a subtype.
@@ -32,7 +32,7 @@ public class InheritanceBasics {
             this.speedKmh = 0;
         }
 
-        // Can be overridden — virtual by default in Java
+        // Can be overridden - virtual by default in Java
         void accelerate(int by) {
             speedKmh += by;
             System.out.printf("  %s accelerates to %d km/h%n", label(), speedKmh);
@@ -43,7 +43,7 @@ public class InheritanceBasics {
             System.out.printf("  %s brakes to %d km/h%n", label(), speedKmh);
         }
 
-        // final method — no subclass may override this
+        // final method - no subclass may override this
         final String label() { return year + " " + make + " " + model; }
 
         String fuelType() { return "Petrol"; }
@@ -60,11 +60,11 @@ public class InheritanceBasics {
         private final int doors;
 
         Car(String make, String model, int year, int doors) {
-            super(make, model, year);   // chain upward — must be first
+            super(make, model, year);   // chain upward - must be first
             this.doors = doors;
         }
 
-        // Convenience constructor — chains to sibling
+        // Convenience constructor - chains to sibling
         Car(String make, String model, int year) {
             this(make, model, year, 4);
         }
@@ -73,7 +73,7 @@ public class InheritanceBasics {
 
         @Override
         void accelerate(int by) {
-            // Augment — call parent, then add extra behaviour
+            // Augment - call parent, then add extra behaviour
             super.accelerate(by);
             if (speedKmh > 120) {
                 System.out.println("  [Car] Warning: high speed!");
@@ -123,7 +123,7 @@ public class InheritanceBasics {
 
     // -------------------------------------------------------------------------
     // 2. Covariant return type
-    //    Builder returns "this" type — so Builder.withX() returns Builder,
+    //    Builder returns "this" type - so Builder.withX() returns Builder,
     //    but ExtendedBuilder.withX() can return ExtendedBuilder.
     // -------------------------------------------------------------------------
     static class Builder {
@@ -142,7 +142,7 @@ public class InheritanceBasics {
     static class ExtendedBuilder extends Builder {
         String email = "";
 
-        // Covariant return — return type is ExtendedBuilder (subtype of Builder)
+        // Covariant return - return type is ExtendedBuilder (subtype of Builder)
         @Override
         ExtendedBuilder withName(String n) { super.withName(n); return this; }
 
@@ -160,7 +160,7 @@ public class InheritanceBasics {
     }
 
     // -------------------------------------------------------------------------
-    // 3. final class — cannot be extended
+    // 3. final class - cannot be extended
     //    ImmutableMoney is final to prevent subclasses from breaking immutability.
     // -------------------------------------------------------------------------
     static final class ImmutableMoney {
@@ -248,7 +248,7 @@ public class InheritanceBasics {
     static void covariantReturnDemo() {
         System.out.println("\n=== Covariant Return (Builder) ===");
 
-        // ExtendedBuilder chain — no cast needed because withName returns ExtendedBuilder
+        // ExtendedBuilder chain - no cast needed because withName returns ExtendedBuilder
         ExtendedBuilder b = new ExtendedBuilder()
             .withName("Alice")
             .withAge(30)

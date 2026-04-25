@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /**
  * Verifies that the LoggingAspect intercepts service calls correctly.
  *
- * <p>Spring AOP works via CGLIB proxies — the injected bean is a proxy
+ * <p>Spring AOP works via CGLIB proxies - the injected bean is a proxy
  * that wraps the actual target.  Advice only fires on external method calls
  * routed through the proxy, not on internal this.method() calls.
  */

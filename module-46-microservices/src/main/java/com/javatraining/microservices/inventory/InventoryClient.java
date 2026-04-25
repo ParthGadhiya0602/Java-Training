@@ -10,7 +10,7 @@ import org.springframework.web.client.RestClientException;
 /**
  * HTTP client for the inventory-service.
  *
- * Uses Spring Boot 3.2's RestClient — the synchronous successor to RestTemplate.
+ * Uses Spring Boot 3.2's RestClient - the synchronous successor to RestTemplate.
  * RestClient.Builder is auto-configured as a prototype bean, allowing each client
  * to set its own baseUrl without affecting others.
  *

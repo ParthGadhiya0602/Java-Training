@@ -18,13 +18,13 @@ import java.util.*;
  *
  * Key rules:
  *   • binarySearch requires the list to be sorted ascending by the same order
- *   • unmodifiable views wrap without copying — the underlying list can still be mutated
+ *   • unmodifiable views wrap without copying - the underlying list can still be mutated
  *   • synchronized views are thread-safe for individual operations but NOT for compound ops
  */
 public class CollectionAlgorithms {
 
     // -------------------------------------------------------------------------
-    // 1. Sorting — natural order, custom Comparator, reverse
+    // 1. Sorting - natural order, custom Comparator, reverse
     // -------------------------------------------------------------------------
 
     /** Sorts a list of strings by length, then alphabetically for equal lengths. */

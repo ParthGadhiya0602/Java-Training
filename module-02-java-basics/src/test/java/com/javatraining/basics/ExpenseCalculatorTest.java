@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("ExpenseCalculator — practical type and operator tests")
+@DisplayName("ExpenseCalculator - practical type and operator tests")
 class ExpenseCalculatorTest {
 
     @Test

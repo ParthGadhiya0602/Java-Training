@@ -5,14 +5,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 12-factor app Factor III — Config: all configuration loaded from environment.
+ * 12-factor app Factor III - Config: all configuration loaded from environment.
  *
  * In production these values come from environment variables (Spring Boot maps
  * APP_ENVIRONMENT → app.environment, APP_REGION → app.region, etc.) or from a
  * secrets manager (Vault, AWS Secrets Manager, GCP Secret Manager).
  *
  * The record constructor binding enforces required properties at startup via
- * @NotBlank — the app refuses to start if a required value is missing.
+ * @NotBlank - the app refuses to start if a required value is missing.
  */
 @ConfigurationProperties(prefix = "app")
 @Validated

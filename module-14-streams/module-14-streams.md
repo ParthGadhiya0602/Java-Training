@@ -1,24 +1,25 @@
 ---
-title: "14 — Streams API"
-parent: "Phase 2 — Core APIs"
+title: "14 - Streams API"
+parent: "Phase 2 - Core APIs"
 nav_order: 14
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-14-streams/src){: .btn .btn-outline }
 
-# Module 14 — Streams API
+# Module 14 - Streams API
 
 ## What You Will Learn
 
-| Category | Operations |
-|---|---|
-| Creating streams | `Collection.stream()`, `Stream.of()`, `Stream.generate()`, `Stream.iterate()`, `IntStream.range()` |
-| Intermediate (lazy) | `filter`, `map`, `flatMap`, `distinct`, `sorted`, `peek`, `limit`, `skip`, `mapToInt/Long/Double` |
-| Terminal (eager) | `collect`, `forEach`, `count`, `reduce`, `findFirst/Any`, `anyMatch/allMatch/noneMatch`, `min/max`, `toArray` |
-| Collectors | `toList`, `toSet`, `toMap`, `groupingBy`, `partitioningBy`, `joining`, `counting`, `summarizingInt`, `teeing` |
-| Primitive streams | `IntStream`, `LongStream`, `DoubleStream` — `sum`, `average`, `range`, `rangeClosed` |
+| Category            | Operations                                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Creating streams    | `Collection.stream()`, `Stream.of()`, `Stream.generate()`, `Stream.iterate()`, `IntStream.range()`            |
+| Intermediate (lazy) | `filter`, `map`, `flatMap`, `distinct`, `sorted`, `peek`, `limit`, `skip`, `mapToInt/Long/Double`             |
+| Terminal (eager)    | `collect`, `forEach`, `count`, `reduce`, `findFirst/Any`, `anyMatch/allMatch/noneMatch`, `min/max`, `toArray` |
+| Collectors          | `toList`, `toSet`, `toMap`, `groupingBy`, `partitioningBy`, `joining`, `counting`, `summarizingInt`, `teeing` |
+| Primitive streams   | `IntStream`, `LongStream`, `DoubleStream` - `sum`, `average`, `range`, `rangeClosed`                          |
 
 ---
 
@@ -28,9 +29,9 @@ render_with_liquid: false
 Source → [Intermediate ops (lazy)] → Terminal op (triggers execution)
 
 list.stream()          // source
-    .filter(...)       // lazy — nothing runs yet
-    .map(...)          // lazy — nothing runs yet
-    .collect(...)      // terminal — pipeline executes NOW
+    .filter(...)       // lazy - nothing runs yet
+    .map(...)          // lazy - nothing runs yet
+    .collect(...)      // terminal - pipeline executes NOW
 ```
 
 ---
@@ -82,12 +83,12 @@ Collectors.teeing(c1, c2, merger)        → merges results of two collectors
 
 ## Source Files
 
-| File | What it Demonstrates |
-|---|---|
-| `StreamBasics.java` | Creating streams, filter/map/sorted/limit/skip, terminal ops, `Optional` from streams |
-| `CollectorsDeep.java` | `groupingBy`, `partitioningBy`, `toMap`, `joining`, `summarizingInt`, `teeing`, downstream collectors |
-| `PrimitiveStreams.java` | `IntStream`/`LongStream`/`DoubleStream`, boxing/unboxing, `range`/`rangeClosed`, statistics |
-| `StreamPatterns.java` | `flatMap`, lazy evaluation, `generate`/`iterate`, real-world pipelines |
+| File                    | What it Demonstrates                                                                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| `StreamBasics.java`     | Creating streams, filter/map/sorted/limit/skip, terminal ops, `Optional` from streams                 |
+| `CollectorsDeep.java`   | `groupingBy`, `partitioningBy`, `toMap`, `joining`, `summarizingInt`, `teeing`, downstream collectors |
+| `PrimitiveStreams.java` | `IntStream`/`LongStream`/`DoubleStream`, boxing/unboxing, `range`/`rangeClosed`, statistics           |
+| `StreamPatterns.java`   | `flatMap`, lazy evaluation, `generate`/`iterate`, real-world pipelines                                |
 
 ---
 
@@ -97,4 +98,5 @@ Collectors.teeing(c1, c2, merger)        → merges results of two collectors
 cd module-14-streams
 mvn test
 ```
+
 {% endraw %}

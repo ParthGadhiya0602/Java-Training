@@ -4,12 +4,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Module 22 — Records (Java 16+)
+ * Module 22 - Records (Java 16+)
  *
  * A record is a transparent, immutable data carrier.
  * The compiler auto-generates:
  *   - private final fields for each component
- *   - public accessor methods (name(), age(), ...)  — NOT getXxx()
+ *   - public accessor methods (name(), age(), ...)  - NOT getXxx()
  *   - canonical constructor
  *   - equals(), hashCode(), toString()
  *

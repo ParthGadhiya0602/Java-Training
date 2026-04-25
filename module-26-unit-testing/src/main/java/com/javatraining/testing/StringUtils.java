@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * Pure string utility functions — ideal subjects for parameterized tests because
+ * Pure string utility functions - ideal subjects for parameterized tests because
  * each method maps a single input to a deterministic output with no side effects.
  */
 public final class StringUtils {

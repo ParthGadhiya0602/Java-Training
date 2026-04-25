@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.function.BiFunction;
 
 /**
- * Module 21 — Dynamic Proxies
+ * Module 21 - Dynamic Proxies
  *
  * java.lang.reflect.Proxy creates a proxy object at runtime that implements
  * one or more interfaces. All method calls are dispatched to an InvocationHandler.

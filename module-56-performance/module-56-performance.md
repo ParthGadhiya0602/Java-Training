@@ -1,14 +1,15 @@
 ---
-title: "Module 56 — Performance & Profiling"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 56 - Performance & Profiling"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 56
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-56-performance/src){: .btn .btn-outline }
 
-# Module 56 — Performance & Profiling
+# Module 56 - Performance & Profiling
 
 ## What this module covers
 
@@ -44,15 +45,15 @@ src/test/java/com/javatraining/performance/
 
 ### What changed in Java 21
 
-| | Platform thread | Virtual thread |
-|---|---|---|
-| Backed by | OS thread (1:1) | JVM scheduler (M:N) |
-| Cost per thread | ~1 MB stack, OS kernel object | ~few KB heap object |
-| Blocking behavior | Blocks OS thread | Unmounts from carrier — carrier is free |
-| Max practical concurrency | ~thousands | ~millions |
-| API | `new Thread(...)` | `Thread.ofVirtual()`, `newVirtualThreadPerTaskExecutor()` |
+|                           | Platform thread               | Virtual thread                                            |
+| ------------------------- | ----------------------------- | --------------------------------------------------------- |
+| Backed by                 | OS thread (1:1)               | JVM scheduler (M:N)                                       |
+| Cost per thread           | ~1 MB stack, OS kernel object | ~few KB heap object                                       |
+| Blocking behavior         | Blocks OS thread              | Unmounts from carrier - carrier is free                   |
+| Max practical concurrency | ~thousands                    | ~millions                                                 |
+| API                       | `new Thread(...)`             | `Thread.ofVirtual()`, `newVirtualThreadPerTaskExecutor()` |
 
-### The key property — carrier unmounting
+### The key property - carrier unmounting
 
 When a virtual thread calls a blocking operation (`Thread.sleep`, `LockSupport.park`,
 blocking I/O, `synchronized` on an uncontended monitor), the JVM **unmounts** it from its
@@ -83,7 +84,7 @@ public String submit(String payload) {
     tasks.put(taskId, TaskStatus.PENDING);
     executor.submit(() -> {
         tasks.put(taskId, TaskStatus.RUNNING);
-        Thread.sleep(100);   // unmounts the virtual thread — carrier is free
+        Thread.sleep(100);   // unmounts the virtual thread - carrier is free
         tasks.put(taskId, TaskStatus.DONE);
         return null;
     });
@@ -104,7 +105,7 @@ void virtual_threads_support_more_concurrent_blockers_than_carrier_thread_count(
         for (int i = 0; i < taskCount; i++) {
             executor.submit(() -> {
                 allWaiting.countDown();
-                release.await();   // blocks — virtual thread unmounts here
+                release.await();   // blocks - virtual thread unmounts here
                 return null;
             });
         }
@@ -119,9 +120,10 @@ This test would deadlock with `Executors.newFixedThreadPool(10)` because the 10 
 would be exhausted waiting on `release` while new tasks can't be scheduled to decrement
 `allWaiting`.
 
-### Pinning — the one gotcha
+### Pinning - the one gotcha
 
 Virtual threads are **pinned** (cannot unmount) when:
+
 - Inside a `synchronized` block that blocks
 - Calling native code that blocks
 
@@ -132,7 +134,7 @@ JFR event `jdk.VirtualThreadPinned` captures pinning incidents in production.
 
 ---
 
-## JMH — Java Microbenchmark Harness
+## JMH - Java Microbenchmark Harness
 
 ### Setup
 
@@ -152,7 +154,7 @@ JFR event `jdk.VirtualThreadPinned` captures pinning incidents in production.
 
 `jmh-generator-annprocess` generates synthetic runner classes from `@Benchmark` methods
 at compile time. When using `annotationProcessorPaths` in the compiler plugin, all other
-processors (e.g., Lombok) must also be listed explicitly — otherwise auto-discovery is
+processors (e.g., Lombok) must also be listed explicitly - otherwise auto-discovery is
 replaced by the explicit list.
 
 ### Benchmark class
@@ -190,10 +192,10 @@ mvn package -DskipTests
 # Run all benchmarks with default settings
 java -jar target/performance-0.0.1-SNAPSHOT.jar
 
-# Quick run (fewer iterations — useful for smoke-testing the setup)
+# Quick run (fewer iterations - useful for smoke-testing the setup)
 java -jar target/performance-0.0.1-SNAPSHOT.jar VirtualThreadBenchmark -f 1 -wi 2 -i 3
 
-# Expected output (throughput ops/s — higher is better):
+# Expected output (throughput ops/s - higher is better):
 # Benchmark                           (taskCount)  Mode  Cnt    Score    Error  Units
 # VirtualThreadBenchmark.virtualThreads        100  thrpt   10  187.432 ± 3.21  ops/s
 # VirtualThreadBenchmark.fixedThreadPool       100  thrpt   10    7.143 ± 0.08  ops/s
@@ -201,12 +203,12 @@ java -jar target/performance-0.0.1-SNAPSHOT.jar VirtualThreadBenchmark -f 1 -wi 
 
 ### Common mistakes
 
-| Mistake | Effect | Fix |
-|---|---|---|
-| Too few warm-up iterations | JIT not fully compiled — scores too low | `@Warmup(iterations = 5, time = 2)` |
-| `@Fork(0)` or no fork | Shares JVM state with test runner — unreliable | Always use `@Fork(value = 2)` |
-| Benchmarking inside `@Test` | Surefire JVM overhead, shared JIT cache | Always use separate JVM via fat JAR |
-| Dead-code elimination | JVM optimises away unmeasured results | Use `Blackhole.consume(result)` |
+| Mistake                     | Effect                                         | Fix                                 |
+| --------------------------- | ---------------------------------------------- | ----------------------------------- |
+| Too few warm-up iterations  | JIT not fully compiled - scores too low        | `@Warmup(iterations = 5, time = 2)` |
+| `@Fork(0)` or no fork       | Shares JVM state with test runner - unreliable | Always use `@Fork(value = 2)`       |
+| Benchmarking inside `@Test` | Surefire JVM overhead, shared JIT cache        | Always use separate JVM via fat JAR |
+| Dead-code elimination       | JVM optimises away unmeasured results          | Use `Blackhole.consume(result)`     |
 
 ---
 
@@ -219,18 +221,18 @@ require safepoints (unlike JVisualVM).
 # Download
 curl -sL https://github.com/async-profiler/async-profiler/releases/download/v3.0/async-profiler-3.0-macos.zip | tar -xz
 
-# CPU profiling — attach to running JVM
+# CPU profiling - attach to running JVM
 ./asprof -d 30 -f flamegraph.html <pid>
 
-# Allocation profiling — track heap allocations
+# Allocation profiling - track heap allocations
 ./asprof -e alloc -d 30 -f alloc.html <pid>
 
-# Wall-clock profiling — includes time blocked/sleeping (useful for virtual threads)
+# Wall-clock profiling - includes time blocked/sleeping (useful for virtual threads)
 ./asprof -e wall -d 30 -f wall.html <pid>
 ```
 
 For virtual thread profiling, use `-e wall` (wall-clock mode). CPU mode only captures
-threads actively running on CPU — parked virtual threads won't appear.
+threads actively running on CPU - parked virtual threads won't appear.
 
 ### With Spring Boot
 
@@ -243,7 +245,7 @@ java $JAVA_OPTS -jar target/performance-0.0.1-SNAPSHOT.jar
 
 ## Java Flight Recorder (JFR)
 
-JFR is built into the JDK — no agent or license required since Java 11.
+JFR is built into the JDK - no agent or license required since Java 11.
 
 ```bash
 # Start with flight recorder enabled
@@ -256,13 +258,13 @@ jcmd <pid> JFR.stop
 
 ### Useful event types
 
-| Event | What it captures |
-|---|---|
-| `jdk.VirtualThreadPinned` | Virtual thread pinned to carrier (degraded concurrency) |
-| `jdk.GarbageCollection` | GC pauses, type, cause |
-| `jdk.ExecutionSample` | CPU sampling (like async-profiler but lower resolution) |
-| `jdk.ObjectAllocationInNewTLAB` | Allocation hot spots |
-| `jdk.ThreadStart` / `jdk.ThreadEnd` | Thread lifecycle |
+| Event                               | What it captures                                        |
+| ----------------------------------- | ------------------------------------------------------- |
+| `jdk.VirtualThreadPinned`           | Virtual thread pinned to carrier (degraded concurrency) |
+| `jdk.GarbageCollection`             | GC pauses, type, cause                                  |
+| `jdk.ExecutionSample`               | CPU sampling (like async-profiler but lower resolution) |
+| `jdk.ObjectAllocationInNewTLAB`     | Allocation hot spots                                    |
+| `jdk.ThreadStart` / `jdk.ThreadEnd` | Thread lifecycle                                        |
 
 Open `recording.jfr` in **JDK Mission Control (JMC)** for visual analysis.
 
@@ -272,12 +274,12 @@ Open `recording.jfr` in **JDK Mission Control (JMC)** for visual analysis.
 
 ### GC selection
 
-| Collector | Flag | When to use |
-|---|---|---|
-| G1 (default, JDK 9+) | `-XX:+UseG1GC` | General purpose — balanced pause/throughput |
-| ZGC | `-XX:+UseZGC` | Low-latency — sub-millisecond pauses; Java 21+ fully generational |
-| Shenandoah | `-XX:+UseShenandoahGC` | Low-latency alternative; concurrent compaction |
-| Serial | `-XX:+UseSerialGC` | Single-core or very small heaps (e.g., CLI tools) |
+| Collector            | Flag                   | When to use                                                       |
+| -------------------- | ---------------------- | ----------------------------------------------------------------- |
+| G1 (default, JDK 9+) | `-XX:+UseG1GC`         | General purpose - balanced pause/throughput                       |
+| ZGC                  | `-XX:+UseZGC`          | Low-latency - sub-millisecond pauses; Java 21+ fully generational |
+| Shenandoah           | `-XX:+UseShenandoahGC` | Low-latency alternative; concurrent compaction                    |
+| Serial               | `-XX:+UseSerialGC`     | Single-core or very small heaps (e.g., CLI tools)                 |
 
 ### Key JVM flags
 
@@ -331,10 +333,10 @@ and mean response time under high concurrency.
 
 ## Tests
 
-| Class | Type | Tests |
-|---|---|---|
-| `VirtualThreadTest` | JUnit 5, no Spring | 2 |
-| `TaskControllerTest` | `@SpringBootTest` + MockMvc | 2 |
+| Class                | Type                        | Tests |
+| -------------------- | --------------------------- | ----- |
+| `VirtualThreadTest`  | JUnit 5, no Spring          | 2     |
+| `TaskControllerTest` | `@SpringBootTest` + MockMvc | 2     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **4/4 pass**
@@ -343,11 +345,12 @@ Result: **4/4 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `CountDownLatch` barrier test over time comparison | Timing tests are flaky on slow CI machines; the barrier test proves the structural property (concurrent blocking beyond carrier count) — not a number |
-| JMH benchmarks in `src/main/java`, not `src/test/java` | `jmh-generator-annprocess` generates runner classes into `target/generated-sources/annotations`; test-scope source sets have separate compilation with different annotation processors |
-| Explicit `annotationProcessorPaths` with both Lombok and JMH | `annotationProcessorPaths` replaces classpath scanning — omitting Lombok silently breaks `@Slf4j`, `@Data`, etc. |
-| `spring.threads.virtual.enabled=true` as the only config | Spring Boot 3.2+ plumbing change; zero application code changes demonstrates the "drop-in" nature of virtual thread adoption |
-| Wall-clock profiling (`-e wall`) for virtual threads | CPU profiling misses parked virtual threads; wall-clock shows all threads including those blocked on I/O or locks |
+| Decision                                                     | Reason                                                                                                                                                                                 |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CountDownLatch` barrier test over time comparison           | Timing tests are flaky on slow CI machines; the barrier test proves the structural property (concurrent blocking beyond carrier count) - not a number                                  |
+| JMH benchmarks in `src/main/java`, not `src/test/java`       | `jmh-generator-annprocess` generates runner classes into `target/generated-sources/annotations`; test-scope source sets have separate compilation with different annotation processors |
+| Explicit `annotationProcessorPaths` with both Lombok and JMH | `annotationProcessorPaths` replaces classpath scanning - omitting Lombok silently breaks `@Slf4j`, `@Data`, etc.                                                                       |
+| `spring.threads.virtual.enabled=true` as the only config     | Spring Boot 3.2+ plumbing change; zero application code changes demonstrates the "drop-in" nature of virtual thread adoption                                                           |
+| Wall-clock profiling (`-e wall`) for virtual threads         | CPU profiling misses parked virtual threads; wall-clock shows all threads including those blocked on I/O or locks                                                                      |
+
 {% endraw %}

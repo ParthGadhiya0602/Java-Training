@@ -6,28 +6,28 @@ import java.util.stream.Collectors;
 /**
  * TOPIC: Practical collection patterns
  *
- * Pattern 1 — Frequency map (histogram)
+ * Pattern 1 - Frequency map (histogram)
  *   Count occurrences; find mode; build anagram groups.
  *
- * Pattern 2 — Multimap (key → many values)
- *   Map<K, List<V>> — one key maps to a list of values.
+ * Pattern 2 - Multimap (key → many values)
+ *   Map<K, List<V>> - one key maps to a list of values.
  *   Used for grouping, inverted indexes, graph adjacency lists.
  *
- * Pattern 3 — Bidirectional map
+ * Pattern 3 - Bidirectional map
  *   Two HashMaps: forward (K→V) and inverse (V→K).
  *   O(1) lookup in both directions; keys and values must be unique.
  *
- * Pattern 4 — Sliding window with Deque
+ * Pattern 4 - Sliding window with Deque
  *   O(n) maximum/minimum of every window of size k.
  *   Monotonic deque keeps the index of the window's best element at front.
  *
- * Pattern 5 — Top-K with PriorityQueue
+ * Pattern 5 - Top-K with PriorityQueue
  *   Find k most frequent elements in O(n log k).
  */
 public class CollectionPatterns {
 
     // -------------------------------------------------------------------------
-    // Pattern 1 — Frequency map
+    // Pattern 1 - Frequency map
     // -------------------------------------------------------------------------
 
     /** Builds a frequency map: element → count. */
@@ -73,7 +73,7 @@ public class CollectionPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 2 — Multimap
+    // Pattern 2 - Multimap
     // -------------------------------------------------------------------------
     static final class Multimap<K, V> {
         private final Map<K, List<V>> map = new LinkedHashMap<>();
@@ -111,7 +111,7 @@ public class CollectionPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 3 — Bidirectional map
+    // Pattern 3 - Bidirectional map
     // -------------------------------------------------------------------------
     static final class BiMap<K, V> {
         private final Map<K, V> forward = new HashMap<>();
@@ -142,7 +142,7 @@ public class CollectionPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 4 — Sliding window maximum (monotonic deque)
+    // Pattern 4 - Sliding window maximum (monotonic deque)
     //    For each window of size k, return the maximum element.
     //    The deque stores INDICES, in decreasing order of their values.
     //    Front of deque is always the index of the current window maximum.
@@ -169,7 +169,7 @@ public class CollectionPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 5 — Top-K most frequent elements
+    // Pattern 5 - Top-K most frequent elements
     //    Build a frequency map, then use a min-heap of size k.
     //    O(n log k) time; returns elements in descending frequency order.
     // -------------------------------------------------------------------------

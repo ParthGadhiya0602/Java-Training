@@ -20,11 +20,11 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * WireMock — HTTP stub server for external service dependencies.
+ * WireMock - HTTP stub server for external service dependencies.
  *
  * Why WireMock instead of @MockBean?
- *   @MockBean replaces the whole Java object — no real HTTP happens.
- *   WireMock starts a real HTTP server — the RestTemplate, headers, serialization,
+ *   @MockBean replaces the whole Java object - no real HTTP happens.
+ *   WireMock starts a real HTTP server - the RestTemplate, headers, serialization,
  *   timeout settings, and retry logic all run exactly as in production.
  *   This catches bugs that @MockBean cannot: wrong URL construction, missing headers,
  *   incorrect JSON field names, timeout configuration errors.
@@ -51,7 +51,7 @@ class PricingClientWireMockTest {
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
-        // wireMock::baseUrl is called WHEN the property is resolved, not immediately —
+        // wireMock::baseUrl is called WHEN the property is resolved, not immediately -
         // safe because WireMock has already started at this point.
         registry.add("pricing.service.url", wireMock::baseUrl);
     }

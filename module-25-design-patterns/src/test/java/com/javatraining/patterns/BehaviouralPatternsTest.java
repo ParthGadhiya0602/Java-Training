@@ -345,7 +345,7 @@ class BehaviouralPatternsTest {
         BehaviouralPatterns.AreaVisitor area = new BehaviouralPatterns.AreaVisitor();
         BehaviouralPatterns.DescribeVisitor desc = new BehaviouralPatterns.DescribeVisitor();
 
-        // Same shapes, two visitors — no modification to shapes needed
+        // Same shapes, two visitors - no modification to shapes needed
         for (BehaviouralPatterns.Shape s : shapes) {
             assertNotNull(BehaviouralPatterns.visit(s, area));
             assertNotNull(BehaviouralPatterns.visit(s, desc));

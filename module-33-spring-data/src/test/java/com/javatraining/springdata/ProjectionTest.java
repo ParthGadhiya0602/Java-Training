@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * <h2>Interface projection</h2>
  * Spring Data creates a JDK dynamic proxy that implements the projection interface.
- * Only the declared getter columns are SELECTed — {@code SELECT name, email} instead
+ * Only the declared getter columns are SELECTed - {@code SELECT name, email} instead
  * of {@code SELECT *}.
  *
  * <h2>DTO projection</h2>
@@ -82,10 +82,10 @@ class ProjectionTest {
     @Test
     void interface_projection_does_not_include_salary_field() {
         // The projection interface only declares getName() and getEmail().
-        // There is no getSalary() method — the salary column is not fetched.
+        // There is no getSalary() method - the salary column is not fetched.
         List<EmployeeSummary> summaries = employees.findByActiveTrue();
         assertThat(summaries).isNotEmpty();
-        // If salary were accidentally exposed, compilation would fail — this
+        // If salary were accidentally exposed, compilation would fail - this
         // test documents the intent rather than asserting at runtime.
     }
 

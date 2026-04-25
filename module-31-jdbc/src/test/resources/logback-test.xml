@@ -1,7 +1,7 @@
 <configuration>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss} %-5level %logger{25} — %msg%n</pattern>
+            <pattern>%d{HH:mm:ss} %-5level %logger{25} - %msg%n</pattern>
         </encoder>
     </appender>
 

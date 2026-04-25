@@ -1,7 +1,7 @@
 package com.javatraining.basics;
 
 /**
- * TOPIC: All Java operators — arithmetic, relational, logical, bitwise,
+ * TOPIC: All Java operators - arithmetic, relational, logical, bitwise,
  * shift, assignment, ternary, and instanceof (with pattern matching).
  *
  * KEY INSIGHT: Operator precedence causes more bugs than most people realize.
@@ -15,11 +15,11 @@ public class Operators {
     static void arithmetic() {
         int a = 10, b = 3;
 
-        System.out.println(a + b);   // 13  — addition
-        System.out.println(a - b);   // 7   — subtraction
-        System.out.println(a * b);   // 30  — multiplication
-        System.out.println(a / b);   // 3   — integer division: TRUNCATES toward zero
-        System.out.println(a % b);   // 1   — remainder (modulo)
+        System.out.println(a + b);   // 13  - addition
+        System.out.println(a - b);   // 7   - subtraction
+        System.out.println(a * b);   // 30  - multiplication
+        System.out.println(a / b);   // 3   - integer division: TRUNCATES toward zero
+        System.out.println(a % b);   // 1   - remainder (modulo)
 
         // Integer division gotcha: always truncates, never rounds
         System.out.println(7 / 2);   // 3, not 3.5
@@ -30,7 +30,7 @@ public class Operators {
         System.out.println(a / (double) b);  // 3.3333...
         System.out.println(a / 3.0);         // 3.3333...
 
-        // Floating point is NOT precise — never use == for float/double
+        // Floating point is NOT precise - never use == for float/double
         double result = 0.1 + 0.2;
         System.out.println(result);            // 0.30000000000000004 (!)
         System.out.println(result == 0.3);     // false (!)
@@ -60,7 +60,7 @@ public class Operators {
     }
 
     // -------------------------------------------------------------------------
-    // LOGICAL OPERATORS — short-circuit evaluation is critical to understand
+    // LOGICAL OPERATORS - short-circuit evaluation is critical to understand
     // -------------------------------------------------------------------------
     static void logical() {
         // && (AND) and || (OR) short-circuit: the right side is NOT evaluated
@@ -68,7 +68,7 @@ public class Operators {
         int x = 0;
 
         // Short-circuit AND: if left is false, right is skipped
-        boolean r1 = (x != 0) && (10 / x > 1); // NO division by zero — skipped!
+        boolean r1 = (x != 0) && (10 / x > 1); // NO division by zero - skipped!
         System.out.println(r1); // false
 
         // Short-circuit OR: if left is true, right is skipped
@@ -90,7 +90,7 @@ public class Operators {
     }
 
     // -------------------------------------------------------------------------
-    // BITWISE & SHIFT OPERATORS — used in flags, performance-critical code, crypto
+    // BITWISE & SHIFT OPERATORS - used in flags, performance-critical code, crypto
     // -------------------------------------------------------------------------
     static void bitwise() {
         int a = 0b1010;  // 10 in binary: bits 1 and 3 set
@@ -103,10 +103,10 @@ public class Operators {
 
         // Shift operators: much faster than multiplication/division by powers of 2
         int n = 1;
-        System.out.println(n << 3);  // 8  — left shift = multiply by 2^3
-        System.out.println(8 >> 2);  // 2  — right shift (signed) = divide by 2^2
-        System.out.println(-1 >> 1); // -1 — preserves sign bit
-        System.out.println(-1 >>> 1);// 2147483647 — unsigned right shift (zero fill)
+        System.out.println(n << 3);  // 8  - left shift = multiply by 2^3
+        System.out.println(8 >> 2);  // 2  - right shift (signed) = divide by 2^2
+        System.out.println(-1 >> 1); // -1 - preserves sign bit
+        System.out.println(-1 >>> 1);// 2147483647 - unsigned right shift (zero fill)
 
         // Real-world use: checking and setting flags using a bitmask
         int permissions = 0b000; // no permissions
@@ -125,7 +125,7 @@ public class Operators {
     }
 
     // -------------------------------------------------------------------------
-    // ASSIGNMENT OPERATORS — compound assignments
+    // ASSIGNMENT OPERATORS - compound assignments
     // -------------------------------------------------------------------------
     static void assignment() {
         int x = 10;
@@ -142,7 +142,7 @@ public class Operators {
     }
 
     // -------------------------------------------------------------------------
-    // TERNARY OPERATOR — concise if/else for expressions
+    // TERNARY OPERATOR - concise if/else for expressions
     // -------------------------------------------------------------------------
     static void ternary() {
         int score = 75;
@@ -158,18 +158,18 @@ public class Operators {
     }
 
     // -------------------------------------------------------------------------
-    // instanceof — type checking, and pattern matching (Java 16+)
+    // instanceof - type checking, and pattern matching (Java 16+)
     // -------------------------------------------------------------------------
     static void instanceofDemo() {
         Object obj = "Hello, Java!";
 
-        // Old style — check then cast (two operations, boilerplate)
+        // Old style - check then cast (two operations, boilerplate)
         if (obj instanceof String) {
             String s = (String) obj; // redundant cast
             System.out.println(s.length());
         }
 
-        // Pattern matching (Java 16+) — check, bind, and cast in one expression
+        // Pattern matching (Java 16+) - check, bind, and cast in one expression
         if (obj instanceof String s) {
             // 's' is in scope and already typed as String
             System.out.println(s.toUpperCase());
@@ -183,14 +183,14 @@ public class Operators {
     }
 
     // -------------------------------------------------------------------------
-    // OPERATOR PRECEDENCE — where bugs hide
+    // OPERATOR PRECEDENCE - where bugs hide
     // -------------------------------------------------------------------------
     static void precedence() {
         // Higher precedence binds tighter (like * before +)
         int result = 2 + 3 * 4;       // 14, not 20 (multiplication first)
         int result2 = (2 + 3) * 4;    // 20
 
-        // Conditional with assignment — a classic trap
+        // Conditional with assignment - a classic trap
         boolean a = true, b = false;
         boolean trap = a || b && !a;   // reads as: a || (b && (!a)) = true
         boolean clear = (a || b) && !a; // false

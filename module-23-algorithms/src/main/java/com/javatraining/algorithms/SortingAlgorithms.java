@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * Module 23 — Sorting Algorithms
+ * Module 23 - Sorting Algorithms
  *
  * Algorithm     | Best      | Average   | Worst     | Space  | Stable
  * --------------|-----------|-----------|-----------|--------|-------
@@ -18,7 +18,7 @@ import java.util.Comparator;
  *
  * Java's Arrays.sort() uses:
  *   - Dual-pivot Quicksort for primitives
- *   - TimSort (merge + insertion) for objects — stable, O(n log n)
+ *   - TimSort (merge + insertion) for objects - stable, O(n log n)
  */
 public class SortingAlgorithms {
 
@@ -47,7 +47,7 @@ public class SortingAlgorithms {
 
     /**
      * Finds the minimum of the unsorted portion and swaps it to the front.
-     * Always O(n²) — no early exit possible.
+     * Always O(n²) - no early exit possible.
      * O(1) space, NOT stable.
      */
     public static void selectionSort(int[] arr) {

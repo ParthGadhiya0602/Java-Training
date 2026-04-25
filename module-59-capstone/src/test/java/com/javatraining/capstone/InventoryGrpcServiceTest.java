@@ -17,7 +17,7 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests the gRPC InventoryService in isolation using an in-process server —
+ * Tests the gRPC InventoryService in isolation using an in-process server -
  * no network port, no Spring context. Same pattern as module 52.
  */
 class InventoryGrpcServiceTest {

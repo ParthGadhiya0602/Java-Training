@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("VarargsDemo — variable-length argument lists")
+@DisplayName("VarargsDemo - variable-length argument lists")
 class VarargsTest {
 
     @Test

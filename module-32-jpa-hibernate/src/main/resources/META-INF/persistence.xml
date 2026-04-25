@@ -18,19 +18,19 @@
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
-            <!-- Default JDBC URL — overridden per test class via JpaUtil.createEmf(dbName) -->
+            <!-- Default JDBC URL - overridden per test class via JpaUtil.createEmf(dbName) -->
             <property name="jakarta.persistence.jdbc.driver"   value="org.h2.Driver"/>
             <property name="jakarta.persistence.jdbc.url"      value="jdbc:h2:mem:jpadefault;DB_CLOSE_DELAY=-1"/>
             <property name="jakarta.persistence.jdbc.user"     value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
 
             <!-- create-drop: schema created on EMF open, dropped on EMF close.
-                 Ideal for tests — each test class gets a completely fresh schema. -->
+                 Ideal for tests - each test class gets a completely fresh schema. -->
             <property name="hibernate.hbm2ddl.auto"    value="create-drop"/>
             <property name="hibernate.dialect"         value="org.hibernate.dialect.H2Dialect"/>
 
             <!-- Show SQL in test output only if you want to see what Hibernate sends.
-                 Disabled by default — logback-test.xml controls verbosity instead. -->
+                 Disabled by default - logback-test.xml controls verbosity instead. -->
             <property name="hibernate.show_sql"        value="false"/>
             <property name="hibernate.format_sql"      value="true"/>
 

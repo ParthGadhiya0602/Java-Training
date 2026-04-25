@@ -1,15 +1,16 @@
 ---
-title: "Module 28 — Build Tools"
-parent: "Phase 3 — Intermediate Engineering"
+title: "Module 28 - Build Tools"
+parent: "Phase 3 - Intermediate Engineering"
 nav_order: 28
 render_with_liquid: false
 ---
+
 {% raw %}
 
-# Module 28 — Build Tools
+# Module 28 - Build Tools
 
 Maven and Gradle both compile code, resolve dependencies, run tests, and package
-artifacts.  This module covers Maven in depth and introduces Gradle as its
+artifacts. This module covers Maven in depth and introduces Gradle as its
 modern counterpart.
 
 ---
@@ -18,7 +19,7 @@ modern counterpart.
 
 ### Three Lifecycles
 
-Maven has three independent lifecycles.  Every lifecycle is a sequence of phases;
+Maven has three independent lifecycles. Every lifecycle is a sequence of phases;
 running a phase runs all phases before it.
 
 ```
@@ -82,9 +83,9 @@ A multi-module (reactor) build groups related modules under one parent POM.
   │         <module>calculator-api</module>
   │         <module>calculator-impl</module>
   │       </modules>
-  │     └ <dependencyManagement> — version pinning for all children
-  │     └ <build><pluginManagement> — plugin config for all children
-  │     └ <profiles> — optional build variants
+  │     └ <dependencyManagement> - version pinning for all children
+  │     └ <build><pluginManagement> - plugin config for all children
+  │     └ <profiles> - optional build variants
   │
   ├── calculator-api/                 ← API module  (no implementation)
   │   pom.xml
@@ -96,14 +97,14 @@ A multi-module (reactor) build groups related modules under one parent POM.
         └ <dependency> on calculator-api  ← inter-module dependency
 ```
 
-**Build order** — Maven resolves the dependency graph and builds `calculator-api`
+**Build order** - Maven resolves the dependency graph and builds `calculator-api`
 before `calculator-impl` automatically, even if you list them in reverse order in
 `<modules>`.
 
 ### dependencyManagement vs dependencies
 
 ```xml
-<!-- Parent POM — pins the version, does NOT add the dependency -->
+<!-- Parent POM - pins the version, does NOT add the dependency -->
 <dependencyManagement>
     <dependencies>
         <dependency>
@@ -115,7 +116,7 @@ before `calculator-impl` automatically, even if you list them in reverse order i
     </dependencies>
 </dependencyManagement>
 
-<!-- Child POM — opts in, but omits <version> -->
+<!-- Child POM - opts in, but omits <version> -->
 <dependencies>
     <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -137,7 +138,7 @@ before `calculator-impl` automatically, even if you list them in reverse order i
   test             ✗        ✓     ✗        ✗         junit-jupiter, mockito
   provided         ✓        ✓     ✗        ✗         servlet-api (server provides it)
   runtime          ✗        ✓     ✓        ✓         postgresql JDBC driver
-  system           ✓        ✓     ✗        ✗         avoid — uses absolute local path
+  system           ✓        ✓     ✗        ✗         avoid - uses absolute local path
 
   Compile = on the compiler's classpath
   Runtime = on the JVM classpath when the app runs
@@ -283,7 +284,7 @@ mvn -pl calculator-impl -am test  # also build upstream modules (-am)
 
 ---
 
-## Maven vs Gradle — Side-by-Side
+## Maven vs Gradle - Side-by-Side
 
 ```
   Feature                  Maven                        Gradle (Kotlin DSL)
@@ -350,7 +351,7 @@ tasks.register("hello") {
 ## Gradle Wrapper
 
 The Gradle wrapper ensures every developer and CI server uses the **exact same
-Gradle version** — no installation required.
+Gradle version** - no installation required.
 
 ```
   gradle-demo/
@@ -379,7 +380,7 @@ distributionUrl=https\://services.gradle.org/distributions/gradle-8.8-bin.zip
 
 ## Incremental Builds
 
-Gradle tracks **inputs and outputs** for every task.  If they haven't changed
+Gradle tracks **inputs and outputs** for every task. If they haven't changed
 since the last run, the task is skipped:
 
 ```
@@ -390,12 +391,12 @@ since the last run, the task is skipped:
   > Task :greeter-impl:test       UP-TO-DATE   ← tests skipped
   BUILD SUCCESSFUL in 0s
 
-  Maven always reruns the full lifecycle phase — no equivalent optimisation.
+  Maven always reruns the full lifecycle phase - no equivalent optimisation.
 ```
 
 ---
 
-## Module 28 — What Was Built
+## Module 28 - What Was Built
 
 This module **is** a Maven multi-module project:
 
@@ -410,11 +411,13 @@ This module **is** a Maven multi-module project:
       └── src/
 ```
 
-Gradle equivalent lives in `gradle-demo/` — same two-module structure using
+Gradle equivalent lives in `gradle-demo/` - same two-module structure using
 Kotlin DSL (`settings.gradle.kts`, `build.gradle.kts`, subproject build files).
 Run it with `./gradlew build` if Gradle is installed, or generate the wrapper:
+
 ```bash
 gradle wrapper --gradle-version 8.8
 ./gradlew build
 ```
+
 {% endraw %}

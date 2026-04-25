@@ -3,7 +3,7 @@ package com.javatraining.annotations;
 import com.javatraining.annotations.AnnotationDefinitions.*;
 
 /**
- * Module 20 — Annotated sample classes used by tests and the processor.
+ * Module 20 - Annotated sample classes used by tests and the processor.
  *
  * These classes demonstrate how the custom annotations from AnnotationDefinitions
  * are applied to real code so that RuntimeAnnotationProcessor can read them.
@@ -44,7 +44,7 @@ public class AnnotationUsageExamples {
         public String find(String id) { return id; }
     }
 
-    /** Does NOT re-declare @Component — inherits it from BaseRepository. */
+    /** Does NOT re-declare @Component - inherits it from BaseRepository. */
     public static class UserRepository extends BaseRepository {
         public String findByName(String name) { return name; }
     }

@@ -11,21 +11,21 @@ import static org.junit.jupiter.api.Assertions.*;
  * Demonstrates test design principles applied to BankAccount.
  *
  * Principles shown:
- *   AAA            — Arrange / Act / Assert: three clearly separated phases per test
- *   Isolation       — @BeforeEach creates a fresh instance; no shared mutable state
- *   Naming          — method names read as sentences describing observable behaviour
- *   Single concept  — each test verifies exactly one thing
- *   Edge cases      — zero amount, exact-balance withdrawal, empty history
- *   Boundaries      — very first and last valid/invalid values
- *   Exception detail— verify exception type AND message AND field values
- *   State integrity — failed operations must leave the object unchanged
- *   Immutability    — returned views must not allow mutation
- *   F.I.R.S.T.     — Fast, Isolated, Repeatable, Self-validating, Timely
+ *   AAA            - Arrange / Act / Assert: three clearly separated phases per test
+ *   Isolation       - @BeforeEach creates a fresh instance; no shared mutable state
+ *   Naming          - method names read as sentences describing observable behaviour
+ *   Single concept  - each test verifies exactly one thing
+ *   Edge cases      - zero amount, exact-balance withdrawal, empty history
+ *   Boundaries      - very first and last valid/invalid values
+ *   Exception detail- verify exception type AND message AND field values
+ *   State integrity - failed operations must leave the object unchanged
+ *   Immutability    - returned views must not allow mutation
+ *   F.I.R.S.T.     - Fast, Isolated, Repeatable, Self-validating, Timely
  */
-@DisplayName("BankAccount — test design principles")
+@DisplayName("BankAccount - test design principles")
 class TestDesignTest {
 
-    // Named constant — avoids magic numbers in assertions
+    // Named constant - avoids magic numbers in assertions
     static final double INITIAL_BALANCE = 500.0;
 
     BankAccount account;

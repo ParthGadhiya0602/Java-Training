@@ -3,20 +3,20 @@ package com.javatraining.methods;
 import java.util.Arrays;
 
 /**
- * TOPIC: Pass-by-value — Java's only argument-passing mechanism.
+ * TOPIC: Pass-by-value - Java's only argument-passing mechanism.
  *
  * Three distinct scenarios every Java developer must understand:
- *   1. Primitive argument    — caller NEVER sees changes inside method
- *   2. Object mutation       — caller SEES changes made to the object's state
- *   3. Reference reassignment — caller NEVER sees the reassignment
+ *   1. Primitive argument    - caller NEVER sees changes inside method
+ *   2. Object mutation       - caller SEES changes made to the object's state
+ *   3. Reference reassignment - caller NEVER sees the reassignment
  */
 public class PassByValueDemo {
 
     // =========================================================================
-    // SCENARIO 1: Primitive — a copy of the value is passed
+    // SCENARIO 1: Primitive - a copy of the value is passed
     // =========================================================================
     static void doubleIt(int x) {
-        x = x * 2;   // modifies the LOCAL copy — original is untouched
+        x = x * 2;   // modifies the LOCAL copy - original is untouched
     }
 
     // The classic "swap" method that doesn't work in Java for primitives:
@@ -24,11 +24,11 @@ public class PassByValueDemo {
         int temp = a;
         a = b;
         b = temp;
-        // a and b are local copies — caller's variables are unchanged
+        // a and b are local copies - caller's variables are unchanged
     }
 
     // =========================================================================
-    // SCENARIO 2: Object mutation — the reference copy points to the same object
+    // SCENARIO 2: Object mutation - the reference copy points to the same object
     // =========================================================================
     static void appendItems(int[] arr) {
         // Mutating the object (arr[0] = ...) IS visible because both the
@@ -43,7 +43,7 @@ public class PassByValueDemo {
     }
 
     // =========================================================================
-    // SCENARIO 3: Reference reassignment — never visible to caller
+    // SCENARIO 3: Reference reassignment - never visible to caller
     // =========================================================================
     static void tryToReplace(int[] arr) {
         arr = new int[]{999, 888, 777};  // only changes the LOCAL reference
@@ -66,7 +66,7 @@ public class PassByValueDemo {
             if (n < min) min = n;
             if (n > max) max = n;
         }
-        // min and max are local — caller sees nothing
+        // min and max are local - caller sees nothing
     }
 
     // Solution 1: use a result array (mutation IS visible)
@@ -79,7 +79,7 @@ public class PassByValueDemo {
         }
     }
 
-    // Solution 2 (preferred): return a record — clean, immutable, type-safe
+    // Solution 2 (preferred): return a record - clean, immutable, type-safe
     record MinMax(int min, int max) {}
 
     static MinMax minMaxClean(int[] data) {
@@ -92,7 +92,7 @@ public class PassByValueDemo {
     }
 
     // =========================================================================
-    // Defensive copying — when a method SHOULD NOT let callers mutate internals
+    // Defensive copying - when a method SHOULD NOT let callers mutate internals
     // =========================================================================
     static class ImmutableCalendar {
         private final int[] holidays;  // should never be changed from outside
@@ -103,7 +103,7 @@ public class PassByValueDemo {
         }
 
         int[] getHolidays() {
-            // Return a copy too — don't expose the internal array
+            // Return a copy too - don't expose the internal array
             return Arrays.copyOf(holidays, holidays.length);
         }
     }

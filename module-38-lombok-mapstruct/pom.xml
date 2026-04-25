@@ -16,7 +16,7 @@
     <artifactId>module-38-lombok-mapstruct</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>module-38-lombok-mapstruct</name>
-    <description>Lombok and MapStruct — boilerplate reduction and DTO mapping</description>
+    <description>Lombok and MapStruct - boilerplate reduction and DTO mapping</description>
 
     <properties>
         <java.version>21</java.version>
@@ -80,7 +80,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!-- Exclude Lombok from the fat jar — it's compile-only -->
+                    <!-- Exclude Lombok from the fat jar - it's compile-only -->
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

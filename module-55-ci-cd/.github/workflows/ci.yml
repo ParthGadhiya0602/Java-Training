@@ -23,7 +23,7 @@ jobs:
         with:
           java-version: "21"
           distribution: temurin
-          # Cache ~/.m2/repository — skips re-downloading dependencies on every run
+          # Cache ~/.m2/repository - skips re-downloading dependencies on every run
           cache: maven
 
       - name: Build, test, and generate coverage report
@@ -31,7 +31,7 @@ jobs:
         run: mvn --batch-mode verify
 
       - name: SonarQube scan
-        # Only on push — pull requests from forks cannot access repo secrets
+        # Only on push - pull requests from forks cannot access repo secrets
         if: github.event_name == 'push'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -49,7 +49,7 @@ jobs:
     name: Build Docker image
     needs: build-test-scan
     runs-on: ubuntu-latest
-    # Only build images from main — not from pull requests
+    # Only build images from main - not from pull requests
     if: github.ref == 'refs/heads/main'
 
     steps:
@@ -67,6 +67,6 @@ jobs:
           tags: |
             java-training/module-55:${{ github.sha }}
             java-training/module-55:latest
-          # Layer cache — reuses layers from the most recent main-branch build
+          # Layer cache - reuses layers from the most recent main-branch build
           cache-from: type=gha
           cache-to: type=gha,mode=max

@@ -3,10 +3,10 @@
   Logback picks up logback-test.xml first (if on the test classpath), then logback.xml.
 
   Appender types:
-    ConsoleAppender      — writes to stdout/stderr
-    FileAppender         — writes to a single file
-    RollingFileAppender  — rotates by date or size (production standard)
-    AsyncAppender        — wraps another appender; batches writes on a background thread
+    ConsoleAppender      - writes to stdout/stderr
+    FileAppender         - writes to a single file
+    RollingFileAppender  - rotates by date or size (production standard)
+    AsyncAppender        - wraps another appender; batches writes on a background thread
 -->
 <configuration>
 
@@ -16,14 +16,14 @@
       PatternLayout controls the format of each log line.
 
       Common conversion words:
-        %d{HH:mm:ss.SSS}  — timestamp
-        [%thread]         — thread name
-        %-5level          — log level (left-padded to 5 chars)
-        %logger{36}       — logger name (class), truncated to 36 chars
-        %X{key}           — MDC value for 'key'
-        %msg              — the log message
-        %n                — platform line separator
-        %ex               — exception with stack trace (auto-appended for Throwable args)
+        %d{HH:mm:ss.SSS}  - timestamp
+        [%thread]         - thread name
+        %-5level          - log level (left-padded to 5 chars)
+        %logger{36}       - logger name (class), truncated to 36 chars
+        %X{key}           - MDC value for 'key'
+        %msg              - the log message
+        %n                - platform line separator
+        %ex               - exception with stack trace (auto-appended for Throwable args)
       ══════════════════════════════════════════════════════════
     -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -34,7 +34,7 @@
 
     <!--
       ══════════════════════════════════════════════════════════
-      ROLLING FILE APPENDER — rotates daily; keeps 30 days of history.
+      ROLLING FILE APPENDER - rotates daily; keeps 30 days of history.
       Uncomment to enable file logging.
       ══════════════════════════════════════════════════════════
     -->
@@ -53,7 +53,7 @@
     -->
 
     <!--
-      Root logger — all loggers inherit from this unless overridden below.
+      Root logger - all loggers inherit from this unless overridden below.
       Level hierarchy (lowest → highest): TRACE < DEBUG < INFO < WARN < ERROR
       Setting a level here filters out all levels below it.
     -->

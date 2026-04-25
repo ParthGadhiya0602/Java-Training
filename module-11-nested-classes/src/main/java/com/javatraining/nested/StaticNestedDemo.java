@@ -14,18 +14,18 @@ import java.util.*;
  *   • You want to group helper types with the type they serve
  *   • You are implementing the Builder pattern (builder lives inside the target type)
  *
- * Instantiation: new Outer.Nested() — no outer instance required.
+ * Instantiation: new Outer.Nested() - no outer instance required.
  */
 public class StaticNestedDemo {
 
     // -------------------------------------------------------------------------
     // 1. Linked list with a private static nested Node
-    //    Node is an implementation detail — hidden from outside world.
+    //    Node is an implementation detail - hidden from outside world.
     //    Making it static avoids the memory leak of holding outer references.
     // -------------------------------------------------------------------------
     static final class LinkedStack<T> {
 
-        // private — callers never see this class; it's an internal detail
+        // private - callers never see this class; it's an internal detail
         private static final class Node<T> {
             final T       value;
             final Node<T> next;
@@ -71,12 +71,12 @@ public class StaticNestedDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Immutable Key-Value Entry — static nested record (Java 16+)
+    // 2. Immutable Key-Value Entry - static nested record (Java 16+)
     //    Used as the building block of a simple read-only map.
     // -------------------------------------------------------------------------
     static final class ReadOnlyMap<K, V> {
 
-        // Public static nested record — part of the public API surface
+        // Public static nested record - part of the public API surface
         record Entry<K, V>(K key, V value) {
             Entry {
                 Objects.requireNonNull(key,   "key");
@@ -108,12 +108,12 @@ public class StaticNestedDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Request / Response — static nested classes as a related cluster
+    // 3. Request / Response - static nested classes as a related cluster
     //    HTTP-style request/response pair; both tightly scoped to HttpClient.
     // -------------------------------------------------------------------------
     static final class HttpClient {
 
-        // Static nested — models a request; no need to touch the client instance
+        // Static nested - models a request; no need to touch the client instance
         static final class Request {
             private final String              method;
             private final String              url;
@@ -157,7 +157,7 @@ public class StaticNestedDemo {
             }
         }
 
-        // Static nested — models a response
+        // Static nested - models a response
         static final class Response {
             private final int    statusCode;
             private final String body;

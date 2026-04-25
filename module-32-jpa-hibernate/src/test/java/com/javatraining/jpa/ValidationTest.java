@@ -19,12 +19,12 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Demonstrates Bean Validation 3.0 (Jakarta) with Hibernate Validator.
  *
- * <p>Validation runs at the application layer — independently of the database.
+ * <p>Validation runs at the application layer - independently of the database.
  * The same {@link Validator} instance is used in REST controller layers,
  * service methods, and is also invoked automatically by Hibernate before
  * flushing entities to the DB.
  *
- * <p>No database or EntityManager is needed here — just a {@link Validator}.
+ * <p>No database or EntityManager is needed here - just a {@link Validator}.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ValidationTest {

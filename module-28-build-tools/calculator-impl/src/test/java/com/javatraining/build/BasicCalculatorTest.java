@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * This test class is in {@code calculator-impl}, which depends on
  * {@code calculator-api}.  The Calculator interface comes from the api module;
- * BasicCalculator comes from this module — a cross-module dependency in action.
+ * BasicCalculator comes from this module - a cross-module dependency in action.
  */
 class BasicCalculatorTest {
 

@@ -17,10 +17,10 @@ import java.util.Map;
  * REST-assured against a real HTTP stack without any external server process.
  *
  * Endpoints:
- *   GET    /api/products             — list all products (or filter by ?category=X)
- *   GET    /api/products/{id}        — get by id; 404 if not found
- *   POST   /api/products             — create; 201 with created product; 400 on bad input
- *   DELETE /api/products/{id}        — delete; 204 if deleted; 404 if not found
+ *   GET    /api/products             - list all products (or filter by ?category=X)
+ *   GET    /api/products/{id}        - get by id; 404 if not found
+ *   POST   /api/products             - create; 201 with created product; 400 on bad input
+ *   DELETE /api/products/{id}        - delete; 204 if deleted; 404 if not found
  */
 public class ProductApiServer {
 

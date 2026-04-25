@@ -3,7 +3,7 @@ package com.javatraining.algorithms;
 import java.util.*;
 
 /**
- * Module 23 — Core Data Structures (hand-rolled implementations)
+ * Module 23 - Core Data Structures (hand-rolled implementations)
  *
  * Understanding internals helps choose the right JDK collection.
  *
@@ -13,7 +13,7 @@ import java.util.*;
  * Linked list      | O(n)    | O(n)    | O(1)    | O(1)    | given node ref
  * Stack (array)    | O(1)    | O(n)    | O(1)*   | O(1)    |
  * Queue (circular) | O(1)    | O(n)    | O(1)*   | O(1)    |
- * Hash map         | —       | O(1)*   | O(1)*   | O(1)*   | amortised
+ * Hash map         | -       | O(1)*   | O(1)*   | O(1)*   | amortised
  * Binary search tree| O(log n)| O(log n)| O(log n)| O(log n)| balanced
  * Min-heap         | O(1) min| O(n)    | O(log n)| O(log n)|
  */

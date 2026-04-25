@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 /**
- * Module 21 — Reflection: Practical Patterns
+ * Module 21 - Reflection: Practical Patterns
  *
  * Real-world reflection patterns used in frameworks:
  *   - Simple dependency injection container

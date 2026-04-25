@@ -16,7 +16,7 @@
     <artifactId>module-35-db-migration</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>module-35-db-migration</name>
-    <description>Database Migration — Flyway and Liquibase</description>
+    <description>Database Migration - Flyway and Liquibase</description>
 
     <properties>
         <java.version>21</java.version>

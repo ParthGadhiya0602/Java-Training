@@ -1,30 +1,31 @@
 ---
-title: "Module 27 — Integration Testing"
-parent: "Phase 3 — Intermediate Engineering"
+title: "Module 27 - Integration Testing"
+parent: "Phase 3 - Intermediate Engineering"
 nav_order: 27
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-27-integration-testing/src){: .btn .btn-outline }
 
-# Module 27 — Integration Testing
+# Module 27 - Integration Testing
 
 Integration tests verify that components work correctly together with real
-infrastructure — a real database, a real HTTP stack, a real message broker.
+infrastructure - a real database, a real HTTP stack, a real message broker.
 This module covers two tools that make this practical in Java:
 
-| Tool | Role |
-|------|------|
-| **REST-assured** | Fluent HTTP client DSL for asserting REST API responses |
-| **Testcontainers** | Manages Docker containers from JUnit test code |
+| Tool               | Role                                                    |
+| ------------------ | ------------------------------------------------------- |
+| **REST-assured**   | Fluent HTTP client DSL for asserting REST API responses |
+| **Testcontainers** | Manages Docker containers from JUnit test code          |
 
 ---
 
 ## Why Integration Tests?
 
 Unit tests with mocks verify that code compiles and individual methods behave
-correctly in isolation.  Integration tests catch a different class of bug:
+correctly in isolation. Integration tests catch a different class of bug:
 
 - SQL that works in H2 fails on PostgreSQL (different type system, RETURNING clause, BIGSERIAL)
 - HTTP serialisation / deserialisation edge cases (number types, null fields)
@@ -94,12 +95,12 @@ static void startServer() {
 ```
 
 Starting the server once in `@BeforeAll` avoids the overhead of restarting it for
-every test.  `@BeforeEach` clears the in-memory repository so each test has a clean
+every test. `@BeforeEach` clears the in-memory repository so each test has a clean
 slate.
 
 ---
 
-## REST-assured — Key Patterns
+## REST-assured - Key Patterns
 
 ### Path parameters
 
@@ -152,7 +153,7 @@ when().get("/api/products/{id}", id).then().statusCode(200);
 
 ---
 
-## Testcontainers — Core Concepts
+## Testcontainers - Core Concepts
 
 Testcontainers starts a real Docker container from your JUnit test code and tears
 it down automatically when the test suite finishes.
@@ -242,6 +243,7 @@ try (PreparedStatement ps = conn.prepareStatement(sql)) {
 ```
 
 Testing against real PostgreSQL catches:
+
 - `BIGSERIAL` auto-increment behaviour (always positive, always unique, always increasing)
 - `DECIMAL(10,2)` precision rounding
 - `RETURNING` clause (not supported in H2 by default)
@@ -257,7 +259,7 @@ class MyContainerTest { ... }
 
 When Docker is not available (e.g. CI without Docker-in-Docker, or a developer
 machine without Docker Desktop), the entire test class is **skipped** rather than
-failing.  The build stays green; the skip is visible in the test report.
+failing. The build stays green; the skip is visible in the test report.
 
 ---
 
@@ -268,9 +270,10 @@ new PostgreSQLContainer<>("postgres:16-alpine")
 ```
 
 Prefer:
-- **Pinned versions** (`postgres:16-alpine`) over `latest` — reproducible builds
-- **Alpine variants** where available — smaller image, faster pull
-- **Official images** — well-tested, minimal attack surface
+
+- **Pinned versions** (`postgres:16-alpine`) over `latest` - reproducible builds
+- **Alpine variants** where available - smaller image, faster pull
+- **Official images** - well-tested, minimal attack surface
 
 ---
 
@@ -281,24 +284,25 @@ Prefer:
         /  \
        / E2E \      few, expensive, slow, realistic
       /--------\
-     / Integration\  this module — real infra, focused scope
+     / Integration\  this module - real infra, focused scope
     /------------\
    /  Unit Tests  \  many, fast, isolated, mock dependencies
   /________________\
 ```
 
 Integration tests sit in the middle: they use real infrastructure but test a
-bounded scope (one repository, one service, one API layer).  Keep them focused
+bounded scope (one repository, one service, one API layer). Keep them focused
 and fast by using containers instead of shared test databases.
 
 ---
 
-## JdbcProductRepository — Key Design Decisions
+## JdbcProductRepository - Key Design Decisions
 
-| Decision | Rationale |
-|----------|-----------|
-| Accepts `Connection` (not `DataSource`) | Tests can control transactions; simpler for demos |
-| Wraps `SQLException` in `RuntimeException` | Keeps the `ProductRepository` interface clean |
-| Uses `RETURNING id` instead of `getGeneratedKeys()` | More explicit; shows PostgreSQL-specific SQL |
-| Maps rows with a private `mapRow()` helper | Single point of change if column names change |
+| Decision                                            | Rationale                                         |
+| --------------------------------------------------- | ------------------------------------------------- |
+| Accepts `Connection` (not `DataSource`)             | Tests can control transactions; simpler for demos |
+| Wraps `SQLException` in `RuntimeException`          | Keeps the `ProductRepository` interface clean     |
+| Uses `RETURNING id` instead of `getGeneratedKeys()` | More explicit; shows PostgreSQL-specific SQL      |
+| Maps rows with a private `mapRow()` helper          | Single point of change if column names change     |
+
 {% endraw %}

@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /**
- * Module 19 — TCP Sockets
+ * Module 19 - TCP Sockets
  *
  * TCP (Transmission Control Protocol) provides:
  *   - Reliable, ordered, error-checked byte stream
@@ -15,16 +15,16 @@ import java.util.concurrent.*;
  *   - Full-duplex: both sides can send and receive simultaneously
  *
  * Key classes:
- *   ServerSocket   — listens on a port, accepts incoming connections
- *   Socket         — one end of a TCP connection (client or accepted server side)
- *   InetAddress    — IP address (v4 and v6)
- *   InetSocketAddress — IP + port combined
+ *   ServerSocket   - listens on a port, accepts incoming connections
+ *   Socket         - one end of a TCP connection (client or accepted server side)
+ *   InetAddress    - IP address (v4 and v6)
+ *   InetSocketAddress - IP + port combined
  *
  * Lifecycle:
  *   Server: ServerSocket(port) → accept() → getInputStream/getOutputStream → close()
  *   Client: Socket(host, port) → getInputStream/getOutputStream → close()
  *
- * Always use try-with-resources — sockets hold OS file descriptors.
+ * Always use try-with-resources - sockets hold OS file descriptors.
  */
 public class TcpDemo {
 
@@ -142,10 +142,10 @@ public class TcpDemo {
 
     /**
      * Key socket options:
-     *   SO_TIMEOUT    — read timeout in ms (0 = block forever)
-     *   SO_KEEPALIVE  — OS sends periodic probes to detect dead connections
-     *   TCP_NODELAY   — disable Nagle's algorithm (send small packets immediately)
-     *   SO_REUSEADDR  — allow binding to a port in TIME_WAIT state
+     *   SO_TIMEOUT    - read timeout in ms (0 = block forever)
+     *   SO_KEEPALIVE  - OS sends periodic probes to detect dead connections
+     *   TCP_NODELAY   - disable Nagle's algorithm (send small packets immediately)
+     *   SO_REUSEADDR  - allow binding to a port in TIME_WAIT state
      */
     public static Map<String, Object> inspectSocketOptions(Socket socket) throws SocketException {
         return Map.of(

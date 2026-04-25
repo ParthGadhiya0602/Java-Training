@@ -3,7 +3,7 @@ package com.javatraining.concurrency;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Module 18 — Java Memory Model (JMM)
+ * Module 18 - Java Memory Model (JMM)
  *
  * The JMM defines which values a read is allowed to see.
  * Without explicit synchronization, the JVM and CPU may:
@@ -22,12 +22,12 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class MemoryModelDemo {
 
-    // ── Unsafe publication — the problem ─────────────────────────────────────
+    // ── Unsafe publication - the problem ─────────────────────────────────────
 
     /**
      * BROKEN: without synchronization another thread may see a partially
      * constructed object or an old null value even after set() is called.
-     * This is a teaching example — do not use in production.
+     * This is a teaching example - do not use in production.
      */
     public static class UnsafeHolder {
         private Object value;                     // no synchronization
@@ -38,7 +38,7 @@ public class MemoryModelDemo {
     // ── Safe publication patterns ─────────────────────────────────────────────
 
     /**
-     * Pattern 1 — volatile field.
+     * Pattern 1 - volatile field.
      * Volatile write HB volatile read: any thread that reads a non-null
      * value is guaranteed to see the fully constructed object.
      */
@@ -49,9 +49,9 @@ public class MemoryModelDemo {
     }
 
     /**
-     * Pattern 2 — final field.
+     * Pattern 2 - final field.
      * The JMM guarantees that final fields are visible to all threads
-     * after the constructor returns — no synchronization needed.
+     * after the constructor returns - no synchronization needed.
      * Immutable objects published through any mechanism are safe.
      */
     public static final class ImmutablePoint {
@@ -61,7 +61,7 @@ public class MemoryModelDemo {
     }
 
     /**
-     * Pattern 3 — static initializer.
+     * Pattern 3 - static initializer.
      * Class loading is thread-safe: the JVM holds a lock during
      * static initialisation. Useful for singleton-style factories.
      */
@@ -71,7 +71,7 @@ public class MemoryModelDemo {
         public static SingletonViaStatic getInstance() { return INSTANCE; }
     }
 
-    // ── Double-checked locking — correct implementation ───────────────────────
+    // ── Double-checked locking - correct implementation ───────────────────────
 
     /**
      * DCL requires volatile on the instance field (Java 5+).
@@ -132,7 +132,7 @@ public class MemoryModelDemo {
         private final AtomicReference<ImmutablePoint> ref =
             new AtomicReference<>(new ImmutablePoint(0, 0));
 
-        /** Atomically update — retries if another thread raced and won. */
+        /** Atomically update - retries if another thread raced and won. */
         public void shift(int dx, int dy) {
             ImmutablePoint prev, next;
             do {

@@ -86,7 +86,7 @@ class LombokAnnotationsTest {
 
         assertThat(p.getName()).isEqualTo("Laptop");
         assertThat(p.getPrice()).isEqualByComparingTo("999.00");
-        // Setters do not exist — Product has no setName() etc.
+        // Setters do not exist - Product has no setName() etc.
         // Trying to call p.setName("X") would be a compilation error.
     }
 
@@ -116,9 +116,9 @@ class LombokAnnotationsTest {
     void required_args_constructor_wired_service_via_constructor_injection() {
         // @RequiredArgsConstructor generated a constructor for every final field
         // (EmailGateway). Spring used that constructor to inject the dependency.
-        // The service is non-null and operational — proof the constructor was used.
+        // The service is non-null and operational - proof the constructor was used.
         assertThat(notificationService).isNotNull();
-        // Non-final field sentCount is NOT in the constructor — its value comes
+        // Non-final field sentCount is NOT in the constructor - its value comes
         // from the field initializer (= 0). Across the shared Spring context it may
         // be non-zero if other tests ran first, so we only assert it is non-negative.
         assertThat(notificationService.getSentCount()).isGreaterThanOrEqualTo(0);

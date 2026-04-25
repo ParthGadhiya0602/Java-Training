@@ -45,7 +45,7 @@ public class ProductService {
         return toResponse(repository.save(product));
     }
 
-    // Calls the external pricing service — can be stubbed with WireMock in tests
+    // Calls the external pricing service - can be stubbed with WireMock in tests
     public BigDecimal getLivePrice(Long id) {
         findById(id);  // ensure product exists
         return pricingClient.getPrice(id);

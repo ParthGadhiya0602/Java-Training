@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
-// Stateless JWT utility — no state, pure functions.
+// Stateless JWT utility - no state, pure functions.
 // Uses HMAC-SHA-256. Secret must be at least 32 bytes (256 bits).
 @Component
 public class JwtUtil {
@@ -54,7 +54,7 @@ public class JwtUtil {
     }
 
     private Claims parseClaims(String token) {
-        // Throws JwtException (signature mismatch, expired, malformed) — callers must handle
+        // Throws JwtException (signature mismatch, expired, malformed) - callers must handle
         return Jwts.parser()
                 .verifyWith(signingKey())
                 .build()

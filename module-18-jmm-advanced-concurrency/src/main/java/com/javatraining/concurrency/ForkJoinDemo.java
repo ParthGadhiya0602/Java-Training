@@ -5,18 +5,18 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Module 18 — Fork/Join Framework
+ * Module 18 - Fork/Join Framework
  *
  * ForkJoinPool is designed for divide-and-conquer parallelism:
- *   fork()  — schedule a subtask asynchronously
- *   join()  — wait for a subtask result
- *   invoke()— fork + join in one call
+ *   fork()  - schedule a subtask asynchronously
+ *   join()  - wait for a subtask result
+ *   invoke()- fork + join in one call
  *
  * Work-stealing: idle threads steal tasks from the tails of busy
  * threads' deques, keeping all CPUs busy without coordination overhead.
  *
- * RecursiveTask<V>   — returns a value (like Callable)
- * RecursiveAction    — void (like Runnable)
+ * RecursiveTask<V>   - returns a value (like Callable)
+ * RecursiveAction    - void (like Runnable)
  *
  * Threshold: split until problem size <= threshold, then solve sequentially.
  * Too small a threshold → too much overhead from task creation.
@@ -151,10 +151,10 @@ public class ForkJoinDemo {
         return copy;
     }
 
-    // ── Fibonacci (RecursiveTask — classic teaching example) ─────────────────
+    // ── Fibonacci (RecursiveTask - classic teaching example) ─────────────────
 
     /**
-     * Naive parallel Fibonacci — each subproblem below threshold is solved
+     * Naive parallel Fibonacci - each subproblem below threshold is solved
      * sequentially to avoid exponential task explosion.
      * NOT efficient in practice (memoization is better), but illustrates fork/join.
      */

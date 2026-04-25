@@ -5,16 +5,16 @@ import java.util.*;
 /**
  * TOPIC: Set and Map family
  *
- * Set — no duplicates
- *   HashSet        — O(1) add/contains; no iteration order guarantee
- *   LinkedHashSet  — O(1) add/contains; preserves insertion order
- *   TreeSet        — O(log n) add/contains; sorted natural/Comparator order
+ * Set - no duplicates
+ *   HashSet        - O(1) add/contains; no iteration order guarantee
+ *   LinkedHashSet  - O(1) add/contains; preserves insertion order
+ *   TreeSet        - O(log n) add/contains; sorted natural/Comparator order
  *                    Also implements NavigableSet (floor, ceiling, headSet, tailSet)
  *
- * Map — key→value, no duplicate keys
- *   HashMap        — O(1) get/put; no order guarantee
- *   LinkedHashMap  — O(1) get/put; preserves insertion order (or access order)
- *   TreeMap        — O(log n) get/put; sorted by key; implements NavigableMap
+ * Map - key→value, no duplicate keys
+ *   HashMap        - O(1) get/put; no order guarantee
+ *   LinkedHashMap  - O(1) get/put; preserves insertion order (or access order)
+ *   TreeMap        - O(log n) get/put; sorted by key; implements NavigableMap
  *                    (floorKey, ceilingKey, headMap, tailMap, subMap)
  *
  * Choosing a Map/Set:
@@ -25,7 +25,7 @@ import java.util.*;
 public class SetsAndMaps {
 
     // -------------------------------------------------------------------------
-    // 1. Set operations — union, intersection, difference
+    // 1. Set operations - union, intersection, difference
     // -------------------------------------------------------------------------
 
     /** Returns a new set containing all elements from both sets (union). */
@@ -55,7 +55,7 @@ public class SetsAndMaps {
     }
 
     // -------------------------------------------------------------------------
-    // 2. LinkedHashSet — deduplication preserving insertion order
+    // 2. LinkedHashSet - deduplication preserving insertion order
     // -------------------------------------------------------------------------
 
     /** Removes duplicates from a list while preserving first-occurrence order. */
@@ -64,7 +64,7 @@ public class SetsAndMaps {
     }
 
     // -------------------------------------------------------------------------
-    // 3. TreeSet — sorted set, range operations
+    // 3. TreeSet - sorted set, range operations
     // -------------------------------------------------------------------------
 
     /**
@@ -113,7 +113,7 @@ public class SetsAndMaps {
     }
 
     // -------------------------------------------------------------------------
-    // 4. HashMap — frequency counting, grouping
+    // 4. HashMap - frequency counting, grouping
     // -------------------------------------------------------------------------
 
     /** Returns a map of each element to its occurrence count in the list. */
@@ -137,7 +137,7 @@ public class SetsAndMaps {
     }
 
     // -------------------------------------------------------------------------
-    // 5. TreeMap — NavigableMap range queries
+    // 5. TreeMap - NavigableMap range queries
     // -------------------------------------------------------------------------
 
     /**

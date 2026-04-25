@@ -1,28 +1,29 @@
 ---
-title: "07 — OOP: Classes & Objects"
-parent: "Phase 1 — Fundamentals"
+title: "07 - OOP: Classes & Objects"
+parent: "Phase 1 - Fundamentals"
 nav_order: 7
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-07-oop-classes/src){: .btn .btn-outline }
 
-# Module 07 — OOP: Classes & Objects
+# Module 07 - OOP: Classes & Objects
 
 ## What You Will Learn
 
-| Topic | Key Insight |
-|---|---|
-| Class anatomy | fields, constructors, methods, static members — where each lives in memory |
-| Constructor chaining | `this(...)` eliminates duplication; telescoping constructors vs builder |
-| `this` reference | disambiguation, chaining, passing self as argument |
-| Static members | class-level state and behaviour; initialisation order |
-| Object lifecycle | allocation on heap, GC eligibility, `finalize` is dead — use `Cleaner` |
-| `equals` / `hashCode` contract | symmetry, transitivity, consistency; why violating it breaks `HashMap` |
-| `toString` | always override it — the debugger and logs will thank you |
-| Records (Java 16+) | immutable data carriers; compact constructor for validation |
-| `var` with objects | type inference at declaration site |
+| Topic                          | Key Insight                                                                |
+| ------------------------------ | -------------------------------------------------------------------------- |
+| Class anatomy                  | fields, constructors, methods, static members - where each lives in memory |
+| Constructor chaining           | `this(...)` eliminates duplication; telescoping constructors vs builder    |
+| `this` reference               | disambiguation, chaining, passing self as argument                         |
+| Static members                 | class-level state and behaviour; initialisation order                      |
+| Object lifecycle               | allocation on heap, GC eligibility, `finalize` is dead - use `Cleaner`     |
+| `equals` / `hashCode` contract | symmetry, transitivity, consistency; why violating it breaks `HashMap`     |
+| `toString`                     | always override it - the debugger and logs will thank you                  |
+| Records (Java 16+)             | immutable data carriers; compact constructor for validation                |
+| `var` with objects             | type inference at declaration site                                         |
 
 ---
 
@@ -96,7 +97,7 @@ new MyClass()
 ## Record vs Class
 
 ```
-// class — 30+ lines boilerplate
+// class - 30+ lines boilerplate
 class Point {
     private final int x, y;
     public Point(int x, int y) { this.x = x; this.y = y; }
@@ -107,10 +108,10 @@ class Point {
     @Override public String toString() { ... }
 }
 
-// record — 1 line, same semantics
+// record - 1 line, same semantics
 record Point(int x, int y) {}
 
-// compact constructor — add validation
+// compact constructor - add validation
 record Point(int x, int y) {
     Point {                              // no parameter list here
         if (x < 0 || y < 0)
@@ -124,12 +125,12 @@ record Point(int x, int y) {
 
 ## Source Files
 
-| File | What it Demonstrates |
-|---|---|
-| `ClassAnatomy.java` | Fields, constructors, `this`, static members, initialisation order |
-| `EqualsHashCode.java` | Correct `equals`/`hashCode` with all five contract rules, `HashMap`/`HashSet` behaviour |
-| `RecordsDemo.java` | Records, compact constructors, record patterns (Java 21), `with`-style copying |
-| `BankAccount.java` | Full class design: encapsulation, invariants, `equals`/`hashCode`, `toString`, static factory, object lifecycle |
+| File                  | What it Demonstrates                                                                                            |
+| --------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `ClassAnatomy.java`   | Fields, constructors, `this`, static members, initialisation order                                              |
+| `EqualsHashCode.java` | Correct `equals`/`hashCode` with all five contract rules, `HashMap`/`HashSet` behaviour                         |
+| `RecordsDemo.java`    | Records, compact constructors, record patterns (Java 21), `with`-style copying                                  |
+| `BankAccount.java`    | Full class design: encapsulation, invariants, `equals`/`hashCode`, `toString`, static factory, object lifecycle |
 
 ---
 
@@ -140,4 +141,5 @@ cd module-07-oop-classes
 mvn test          # compile + run all JUnit 5 tests
 mvn compile exec:java -Dexec.mainClass=com.javatraining.oop.ClassAnatomy
 ```
+
 {% endraw %}

@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.function.IntPredicate;
 
 /**
- * Module 23 — Search Algorithms
+ * Module 23 - Search Algorithms
  *
  * Algorithm        | Time         | Space | Prerequisite
  * -----------------|--------------|-------|-------------
@@ -16,11 +16,11 @@ import java.util.function.IntPredicate;
  * Exponential srch | O(log n)     | O(1)  | sorted, unbounded range
  *
  * Binary search variants:
- *   Standard        — returns any matching index
- *   Left bound      — returns first (leftmost) index equal to target
- *   Right bound     — returns last (rightmost) index equal to target
- *   Lower bound     — returns first index >= target (like C++ lower_bound)
- *   Upper bound     — returns first index > target  (like C++ upper_bound)
+ *   Standard        - returns any matching index
+ *   Left bound      - returns first (leftmost) index equal to target
+ *   Right bound     - returns last (rightmost) index equal to target
+ *   Lower bound     - returns first index >= target (like C++ lower_bound)
+ *   Upper bound     - returns first index > target  (like C++ upper_bound)
  */
 public class SearchAlgorithms {
 
@@ -42,7 +42,7 @@ public class SearchAlgorithms {
         return -1;
     }
 
-    // ── Binary search — standard ──────────────────────────────────────────────
+    // ── Binary search - standard ──────────────────────────────────────────────
 
     /**
      * Returns any index where arr[i] == target, or -1 if not found.
@@ -72,7 +72,7 @@ public class SearchAlgorithms {
         else                         return bsHelper(arr, target, lo, mid - 1);
     }
 
-    // ── Binary search — bounds ────────────────────────────────────────────────
+    // ── Binary search - bounds ────────────────────────────────────────────────
 
     /**
      * Left bound: index of the first occurrence of target, or -1.
@@ -161,7 +161,7 @@ public class SearchAlgorithms {
     /**
      * Finds the range where target might be by doubling the index,
      * then binary searches that range.
-     * O(log n) — useful when the array size is unknown or very large.
+     * O(log n) - useful when the array size is unknown or very large.
      */
     public static int exponentialSearch(int[] arr, int target) {
         if (arr.length == 0) return -1;
@@ -183,7 +183,7 @@ public class SearchAlgorithms {
 
     /**
      * Finds any peak element: arr[i] >= arr[i-1] and arr[i] >= arr[i+1].
-     * Uses binary search — O(log n). Assumes arr is not empty.
+     * Uses binary search - O(log n). Assumes arr is not empty.
      * A peak always exists (the maximum is always a peak).
      */
     public static int findPeak(int[] arr) {

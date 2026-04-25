@@ -6,22 +6,22 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
- * Module 18 — Concurrent Collections
+ * Module 18 - Concurrent Collections
  *
  * java.util.concurrent ships thread-safe collections designed for concurrent access:
  *
- *   ConcurrentHashMap          — scalable hash map; segment-level locking
- *   CopyOnWriteArrayList       — reads are lock-free; writes copy the array
- *   CopyOnWriteArraySet        — backed by CopyOnWriteArrayList
- *   BlockingQueue family       — producer-consumer with blocking operations
- *     ArrayBlockingQueue       — bounded, backed by array
- *     LinkedBlockingQueue      — optionally bounded, backed by linked nodes
- *     PriorityBlockingQueue    — unbounded, ordered by Comparator
- *     DelayQueue               — elements become available after a delay
- *     SynchronousQueue         — zero-capacity rendezvous point
- *   ConcurrentLinkedQueue      — unbounded lock-free queue
- *   ConcurrentLinkedDeque      — unbounded lock-free deque
- *   ConcurrentSkipListMap/Set  — sorted, concurrent equivalents of TreeMap/Set
+ *   ConcurrentHashMap          - scalable hash map; segment-level locking
+ *   CopyOnWriteArrayList       - reads are lock-free; writes copy the array
+ *   CopyOnWriteArraySet        - backed by CopyOnWriteArrayList
+ *   BlockingQueue family       - producer-consumer with blocking operations
+ *     ArrayBlockingQueue       - bounded, backed by array
+ *     LinkedBlockingQueue      - optionally bounded, backed by linked nodes
+ *     PriorityBlockingQueue    - unbounded, ordered by Comparator
+ *     DelayQueue               - elements become available after a delay
+ *     SynchronousQueue         - zero-capacity rendezvous point
+ *   ConcurrentLinkedQueue      - unbounded lock-free queue
+ *   ConcurrentLinkedDeque      - unbounded lock-free deque
+ *   ConcurrentSkipListMap/Set  - sorted, concurrent equivalents of TreeMap/Set
  */
 public class ConcurrentCollections {
 
@@ -32,12 +32,12 @@ public class ConcurrentCollections {
      * different segments without a global lock.
      *
      * Atomic update methods to know:
-     *   compute(k, (k,v) -> newV)       — compute from current value
-     *   computeIfAbsent(k, k -> v)      — only if absent
-     *   computeIfPresent(k, (k,v) -> v) — only if present
-     *   merge(k, v, (old,new) -> merged)— combine or insert
-     *   putIfAbsent(k, v)               — atomic insert-if-absent
-     *   replace(k, expect, update)      — CAS update
+     *   compute(k, (k,v) -> newV)       - compute from current value
+     *   computeIfAbsent(k, k -> v)      - only if absent
+     *   computeIfPresent(k, (k,v) -> v) - only if present
+     *   merge(k, v, (old,new) -> merged)- combine or insert
+     *   putIfAbsent(k, v)               - atomic insert-if-absent
+     *   replace(k, expect, update)      - CAS update
      */
     public static Map<String, Integer> wordFrequency(List<String> words) {
         ConcurrentHashMap<String, Integer> freq = new ConcurrentHashMap<>();
@@ -59,7 +59,7 @@ public class ConcurrentCollections {
         return map;
     }
 
-    /** forEachEntry: parallel iteration — runs action in ForkJoinPool. */
+    /** forEachEntry: parallel iteration - runs action in ForkJoinPool. */
     public static Map<String, Integer> incrementAll(Map<String, Integer> source) {
         ConcurrentHashMap<String, Integer> result = new ConcurrentHashMap<>(source);
         result.replaceAll((k, v) -> v + 1);
@@ -102,12 +102,12 @@ public class ConcurrentCollections {
 
     /**
      * BlockingQueue API:
-     *   put(e)            — insert, blocks if full
-     *   take()            — remove, blocks if empty
-     *   offer(e, t, unit) — insert with timeout
-     *   poll(t, unit)     — remove with timeout
-     *   offer(e)          — non-blocking insert; returns false if full
-     *   peek()            — inspect head without removing
+     *   put(e)            - insert, blocks if full
+     *   take()            - remove, blocks if empty
+     *   offer(e, t, unit) - insert with timeout
+     *   poll(t, unit)     - remove with timeout
+     *   offer(e)          - non-blocking insert; returns false if full
+     *   peek()            - inspect head without removing
      */
     public static List<Integer> producerConsumer(int itemCount) throws InterruptedException {
         BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(16);
@@ -184,7 +184,7 @@ public class ConcurrentCollections {
         return map;
     }
 
-    /** Range query on ConcurrentSkipListMap — safe under concurrent modification. */
+    /** Range query on ConcurrentSkipListMap - safe under concurrent modification. */
     public static Map<Integer, String> rangeQuery(ConcurrentSkipListMap<Integer, String> map,
                                                     int fromKey, int toKey) {
         return new LinkedHashMap<>(map.subMap(fromKey, true, toKey, true));

@@ -9,25 +9,25 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /**
- * ItemProcessor — transforms a CSV row into a domain entity.
+ * ItemProcessor - transforms a CSV row into a domain entity.
  *
  * Two outcomes per item:
  *
- *   Return a Product   — item is passed to the writer (written to DB).
+ *   Return a Product   - item is passed to the writer (written to DB).
  *
- *   Return null        — item is silently FILTERED (not written, not counted as a skip).
+ *   Return null        - item is silently FILTERED (not written, not counted as a skip).
  *                        Spring Batch increments filterCount on the StepExecution.
  *                        Use this for logically invalid data that should be dropped
  *                        without marking the step as failed.
  *
- *   Throw an exception — item is a SKIP candidate if the exception type is configured
+ *   Throw an exception - item is a SKIP candidate if the exception type is configured
  *                        with .faultTolerant().skip(...).skipLimit(...) on the step.
  *                        Spring Batch increments processSkipCount and retries the chunk
  *                        without the failing item.
  *
  * Distinction: filter (null return) vs skip (exception):
- *   Filter: "this row is not relevant to us" — expected, silent
- *   Skip:   "this row is broken in a way we tolerate" — logged, counted
+ *   Filter: "this row is not relevant to us" - expected, silent
+ *   Skip:   "this row is broken in a way we tolerate" - logged, counted
  */
 @Component
 public class ProductItemProcessor implements ItemProcessor<ProductCsvRow, Product> {

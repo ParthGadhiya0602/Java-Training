@@ -13,13 +13,13 @@ import static org.hamcrest.Matchers.*;
  * Integration tests for {@link ProductApiServer} using REST-assured.
  *
  * What REST-assured demonstrates:
- *   given()           — build request: headers, content-type, body
- *   when()            — specify HTTP method and path
- *   then()            — assert status code and response body
- *   .body("field", …) — GPath expression + Hamcrest matcher for JSON assertions
- *   .extract()        — pull values from the response for use in subsequent steps
- *   path parameters   — /api/products/{id} binding
- *   query parameters  — ?category=X filtering
+ *   given()           - build request: headers, content-type, body
+ *   when()            - specify HTTP method and path
+ *   then()            - assert status code and response body
+ *   .body("field", …) - GPath expression + Hamcrest matcher for JSON assertions
+ *   .extract()        - pull values from the response for use in subsequent steps
+ *   path parameters   - /api/products/{id} binding
+ *   query parameters  - ?category=X filtering
  *
  * The embedded {@link ProductApiServer} starts on port 0 (OS-assigned) in
  * {@code @BeforeAll} and is torn down in {@code @AfterAll}.

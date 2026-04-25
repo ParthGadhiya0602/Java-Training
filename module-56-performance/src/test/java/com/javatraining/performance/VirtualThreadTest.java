@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Pure Java 21 tests — no Spring context, no HTTP server.
+ * Pure Java 21 tests - no Spring context, no HTTP server.
  * These tests prove behavioral facts about virtual threads that the JMH benchmarks
  * quantify: namely that virtual threads unmount from their carrier while blocked,
  * allowing far more concurrent waiters than there are OS threads.
@@ -35,7 +35,7 @@ class VirtualThreadTest {
      * Proves that virtual threads unmount from carrier threads during blocking.
      *
      * 500 tasks all call {@code release.await()} simultaneously. A fixed thread pool
-     * of size N could only block N tasks at once — with N < 500 it would deadlock
+     * of size N could only block N tasks at once - with N < 500 it would deadlock
      * (tasks waiting for the latch that can't complete because no thread can run).
      *
      * With virtual threads, all 500 can block concurrently regardless of carrier count,
@@ -52,7 +52,7 @@ class VirtualThreadTest {
             for (int i = 0; i < taskCount; i++) {
                 executor.submit(() -> {
                     allWaiting.countDown();   // signal: "I have reached the blocking point"
-                    release.await();          // block — virtual thread unmounts here
+                    release.await();          // block - virtual thread unmounts here
                     return null;
                 });
             }

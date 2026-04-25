@@ -12,11 +12,11 @@ import org.springframework.context.annotation.Configuration;
  * <p>Auto-configuration works by shipping @Configuration classes annotated
  * with conditions:
  * <ul>
- *   <li>{@code @ConditionalOnClass} — only if a class is on the classpath
+ *   <li>{@code @ConditionalOnClass} - only if a class is on the classpath
  *       (e.g. configure JPA only when Hibernate is present)</li>
- *   <li>{@code @ConditionalOnMissingBean} — only if the user hasn't already
+ *   <li>{@code @ConditionalOnMissingBean} - only if the user hasn't already
  *       defined their own bean (lets the user override the default)</li>
- *   <li>{@code @ConditionalOnProperty} — only if a property has the right value
+ *   <li>{@code @ConditionalOnProperty} - only if a property has the right value
  *       (feature flags, enable/disable switches)</li>
  * </ul>
  */

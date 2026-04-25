@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Conditionals — if/else correctness")
+@DisplayName("Conditionals - if/else correctness")
 class ConditionalTest {
 
     @ParameterizedTest(name = "score={0} → grade={1}")

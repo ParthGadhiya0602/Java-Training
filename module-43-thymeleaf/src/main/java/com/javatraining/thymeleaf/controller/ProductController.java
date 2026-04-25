@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @Controller — returns view names (template paths), not serialized response bodies.
+ * @Controller - returns view names (template paths), not serialized response bodies.
  *
  * Key patterns:
- *   Model — a Map passed to the template; attributes are accessible via ${name} expressions
- *   @ModelAttribute — binds request parameters to a bean and adds it to the model
- *   BindingResult — holds validation errors; MUST immediately follow @ModelAttribute param
- *   redirect: prefix — tells Spring MVC to send an HTTP 302 redirect instead of rendering
+ *   Model - a Map passed to the template; attributes are accessible via ${name} expressions
+ *   @ModelAttribute - binds request parameters to a bean and adds it to the model
+ *   BindingResult - holds validation errors; MUST immediately follow @ModelAttribute param
+ *   redirect: prefix - tells Spring MVC to send an HTTP 302 redirect instead of rendering
  *
  * POST-Redirect-GET pattern:
  *   Always redirect after a successful POST to prevent duplicate submission on browser refresh.
@@ -63,7 +63,7 @@ public class ProductController {
         // BindingResult MUST be the parameter immediately after @ModelAttribute
         // If it were separated, Spring would throw a 400 before the method body runs
         if (result.hasErrors()) {
-            // Return the form view — errors are already in the BindingResult in the model
+            // Return the form view - errors are already in the BindingResult in the model
             return "products/form";
         }
         productService.create(productForm);
@@ -89,7 +89,7 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    // Scoped to this controller — redirects to list on not-found rather than showing an error page
+    // Scoped to this controller - redirects to list on not-found rather than showing an error page
     @ExceptionHandler(ProductNotFoundException.class)
     public String handleNotFound() {
         return "redirect:/products";

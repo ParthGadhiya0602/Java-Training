@@ -5,7 +5,7 @@ on:
   push:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
-      - "v[0-9]+.[0-9]+.[0-9]+-*"    # pre-release: v1.2.3-rc.1
+      - "v[0-9]+.[0-9]+.[0-9]+-*" # pre-release: v1.2.3-rc.1
 
 jobs:
   release:
@@ -29,7 +29,7 @@ jobs:
 
       - name: Extract version from tag
         id: version
-        # GITHUB_REF_NAME is e.g. "v1.2.3" — strip the leading "v"
+        # GITHUB_REF_NAME is e.g. "v1.2.3" - strip the leading "v"
         run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
 
       - name: Set POM version to release version

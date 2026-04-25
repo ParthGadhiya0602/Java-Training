@@ -1,17 +1,18 @@
 ---
-title: "Module 26 — Unit Testing"
-parent: "Phase 3 — Intermediate Engineering"
+title: "Module 26 - Unit Testing"
+parent: "Phase 3 - Intermediate Engineering"
 nav_order: 26
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-26-unit-testing/src){: .btn .btn-outline }
 
-# Module 26 — Unit Testing
+# Module 26 - Unit Testing
 
 Unit tests verify individual classes and methods in isolation, catching regressions
-before they reach production.  This module covers JUnit 5 (Jupiter) end-to-end and
+before they reach production. This module covers JUnit 5 (Jupiter) end-to-end and
 Mockito for mocking collaborators.
 
 ---
@@ -20,11 +21,11 @@ Mockito for mocking collaborators.
 
 JUnit 5 is made up of three components:
 
-| Component | Role |
-|-----------|------|
+| Component          | Role                                                              |
+| ------------------ | ----------------------------------------------------------------- |
 | **JUnit Platform** | Launcher foundation; integrates with Maven Surefire, Gradle, IDEs |
-| **JUnit Vintage**  | Runs JUnit 3/4 tests on the Platform for migration |
-| **JUnit Jupiter** | The new programming and extension model (what you write) |
+| **JUnit Vintage**  | Runs JUnit 3/4 tests on the Platform for migration                |
+| **JUnit Jupiter**  | The new programming and extension model (what you write)          |
 
 The `junit-jupiter` artifact is an aggregator that pulls in the API, engine,
 and parameterized-tests support.
@@ -40,7 +41,7 @@ static void suiteSetUp() { ... }
 @AfterAll    // runs once after the last test; must be static
 static void suiteTearDown() { ... }
 
-@BeforeEach  // runs before every test method — use to reset mutable state
+@BeforeEach  // runs before every test method - use to reset mutable state
 void setUp() { subject = new Calculator(); }
 
 @AfterEach   // runs after every test method
@@ -85,12 +86,12 @@ assertTimeout(Duration.ofSeconds(1), () -> calculator.factorial(20));
 void addition() { ... }
 ```
 
-Appears verbatim in IDE and CI reports — use it to describe observable behaviour
+Appears verbatim in IDE and CI reports - use it to describe observable behaviour
 rather than repeating the method name.
 
 ---
 
-## @Nested — Logical Grouping
+## @Nested - Logical Grouping
 
 ```java
 @Nested
@@ -153,7 +154,7 @@ many times they're called (idempotency, randomness bounds, etc.).
 ## Assumptions
 
 ```java
-// Aborts (skips) the test if the condition is false — not a failure
+// Aborts (skips) the test if the condition is false - not a failure
 assumeTrue(System.getenv("CI") != null, "Only run in CI");
 
 // Runs the assertion only if the condition holds; test always passes otherwise
@@ -187,15 +188,15 @@ class MyTest {
 
 ---
 
-## Mockito — Core Concepts
+## Mockito - Core Concepts
 
-| Concept | Meaning |
-|---------|---------|
-| **Mock** | A fully controlled fake; all methods return defaults; void methods do nothing |
-| **Stub** | A programmed return value: `when(x.method()).thenReturn(y)` |
-| **Spy**  | A partial mock wrapping a real object; real methods run unless individually stubbed |
-| **Verify** | Assert that a mock method was (or was not) called |
-| **Captor** | Intercept and inspect the actual argument passed to a mock |
+| Concept    | Meaning                                                                             |
+| ---------- | ----------------------------------------------------------------------------------- |
+| **Mock**   | A fully controlled fake; all methods return defaults; void methods do nothing       |
+| **Stub**   | A programmed return value: `when(x.method()).thenReturn(y)`                         |
+| **Spy**    | A partial mock wrapping a real object; real methods run unless individually stubbed |
+| **Verify** | Assert that a mock method was (or was not) called                                   |
+| **Captor** | Intercept and inspect the actual argument passed to a mock                          |
 
 ---
 
@@ -216,6 +217,7 @@ class OrderServiceTest {
 ```
 
 `MockitoExtension` uses **STRICT_STUBS** by default:
+
 - Unused stubbings fail the test (tells you what to remove)
 - Argument mismatches in stubbings are reported
 
@@ -290,7 +292,7 @@ assertEquals(OrderStatus.CONFIRMED, saved.status());
 ```
 
 Use `ArgumentCaptor` when you need to assert on complex object state that was
-passed to a collaborator — not just that the method was called.
+passed to a collaborator - not just that the method was called.
 
 ---
 
@@ -306,11 +308,11 @@ argThat(o -> o.total() > 0)  // custom predicate
 ```
 
 Rule: when using `any()` matchers in a stubbing or verify, **all** arguments must
-use matchers — you cannot mix literals and matchers.
+use matchers - you cannot mix literals and matchers.
 
 ---
 
-## @Spy — Partial Mocking
+## @Spy - Partial Mocking
 
 ```java
 @Spy BankAccount account = new BankAccount("acc", 200.0);
@@ -332,7 +334,7 @@ to another without stubbing the entire class.
 
 ## Test Design Principles
 
-### AAA — Arrange / Act / Assert
+### AAA - Arrange / Act / Assert
 
 ```java
 @Test
@@ -350,13 +352,13 @@ void deposit_increases_balance_by_exact_amount() {
 
 ### F.I.R.S.T.
 
-| Letter | Meaning |
-|--------|---------|
-| **F**ast | Tests run in milliseconds; slow tests are skipped |
-| **I**solated | Each test sets up its own state; no shared mutable fields |
-| **R**epeatable | Same result every run, on every machine |
-| **S**elf-validating | Pass/fail — no human inspection needed |
-| **T**imely | Written alongside (or before) the code |
+| Letter              | Meaning                                                   |
+| ------------------- | --------------------------------------------------------- |
+| **F**ast            | Tests run in milliseconds; slow tests are skipped         |
+| **I**solated        | Each test sets up its own state; no shared mutable fields |
+| **R**epeatable      | Same result every run, on every machine                   |
+| **S**elf-validating | Pass/fail - no human inspection needed                    |
+| **T**imely          | Written alongside (or before) the code                    |
 
 ### Name tests as sentences
 
@@ -368,7 +370,7 @@ void transaction_list_is_unmodifiable()
 
 ### Test one concept per test
 
-Small, focused tests are easier to diagnose.  If a test fails, you know exactly
+Small, focused tests are easier to diagnose. If a test fails, you know exactly
 which behaviour broke.
 
 ### State integrity after failure
@@ -386,6 +388,7 @@ assertTrue(account.transactions().isEmpty(), "no partial transaction");
 ```java
 static final double INITIAL_BALANCE = 500.0;
 assertEquals(INITIAL_BALANCE + depositAmount, account.balance());
-// vs: assertEquals(700.0, account.balance())  — cryptic and brittle
+// vs: assertEquals(700.0, account.balance())  - cryptic and brittle
 ```
+
 {% endraw %}

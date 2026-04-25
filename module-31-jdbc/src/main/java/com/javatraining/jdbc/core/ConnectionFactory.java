@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Thin wrapper around {@link DriverManager} — the simplest way to obtain a JDBC
+ * Thin wrapper around {@link DriverManager} - the simplest way to obtain a JDBC
  * connection.
  *
  * <p><strong>DriverManager</strong> opens a brand-new physical connection on every
@@ -20,7 +20,7 @@ import java.sql.SQLException;
  *   ConnectionFactory factory = new ConnectionFactory(
  *       "jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1", "sa", "");
  *   try (Connection conn = factory.getConnection()) {
- *       // use conn — auto-closed by try-with-resources
+ *       // use conn - auto-closed by try-with-resources
  *   }
  * </pre>
  */

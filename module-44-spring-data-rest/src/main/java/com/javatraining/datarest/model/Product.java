@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 /**
  * JPA entity exposed by Spring Data REST.
  *
- * active defaults to false here (no @Builder.Default) — the ProductEventHandler
+ * active defaults to false here (no @Builder.Default) - the ProductEventHandler
  * sets it to true in @HandleBeforeCreate, centralising the creation policy in one place.
  * This is intentional: event handlers are a natural place to enforce invariants.
  */

@@ -9,7 +9,7 @@ import org.springframework.boot.web.server.Shutdown;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Verifies 12-factor Factor IX — Disposability: graceful shutdown is configured.
+ * Verifies 12-factor Factor IX - Disposability: graceful shutdown is configured.
  *
  * When Kubernetes sends SIGTERM, Spring Boot:
  *   1. Stops accepting new requests

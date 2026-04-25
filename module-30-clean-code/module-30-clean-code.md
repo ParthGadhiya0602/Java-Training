@@ -1,42 +1,43 @@
 ---
-title: "Module 30 — Clean Code & Refactoring"
-parent: "Phase 3 — Intermediate Engineering"
+title: "Module 30 - Clean Code & Refactoring"
+parent: "Phase 3 - Intermediate Engineering"
 nav_order: 30
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-30-clean-code/src){: .btn .btn-outline }
 
-# Module 30 — Clean Code & Refactoring
+# Module 30 - Clean Code & Refactoring
 
-Clean code is not about style preferences — it is about reducing the cost of change.
+Clean code is not about style preferences - it is about reducing the cost of change.
 This module covers the five SOLID principles with before/after examples, the most
 common code smells, and the refactoring moves that fix them.
 
 ---
 
-## SOLID — Overview
+## SOLID - Overview
 
 ```
-  S  Single Responsibility  — A class should have only one reason to change
-  O  Open/Closed            — Open for extension; closed for modification
-  L  Liskov Substitution    — Subtypes must be substitutable for their base type
-  I  Interface Segregation  — No client should depend on methods it does not use
-  D  Dependency Inversion   — Depend on abstractions, not on concretions
+  S  Single Responsibility  - A class should have only one reason to change
+  O  Open/Closed            - Open for extension; closed for modification
+  L  Liskov Substitution    - Subtypes must be substitutable for their base type
+  I  Interface Segregation  - No client should depend on methods it does not use
+  D  Dependency Inversion   - Depend on abstractions, not on concretions
 ```
 
 ---
 
-## S — Single Responsibility Principle
+## S - Single Responsibility Principle
 
-One class, one reason to change.  A "God class" that validates, persists, notifies,
-and invoices has four independent reasons to change — and four teams editing the
+One class, one reason to change. A "God class" that validates, persists, notifies,
+and invoices has four independent reasons to change - and four teams editing the
 same file.
 
 ```
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  BEFORE — OrderServiceGod                                                  │
+  │  BEFORE - OrderServiceGod                                                  │
   │                                                                            │
   │  processOrder(order) {                                                     │
   │      validate()       ← reason 1: business rules change                   │
@@ -49,7 +50,7 @@ same file.
   └────────────────────────────────────────────────────────────────────────────┘
 
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  AFTER — each class has exactly one responsibility                         │
+  │  AFTER - each class has exactly one responsibility                         │
   │                                                                            │
   │  OrderValidator      → validate(order)         1 reason to change         │
   │  OrderRepository     → save(order)             1 reason to change         │
@@ -63,14 +64,14 @@ same file.
 
 ---
 
-## O — Open/Closed Principle
+## O - Open/Closed Principle
 
 Software entities should be **open for extension** but **closed for modification**.
 New behaviour is added by adding new code, not by editing existing code.
 
 ```
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  BEFORE — if/else ladder (OCP violation)                                   │
+  │  BEFORE - if/else ladder (OCP violation)                                   │
   │                                                                            │
   │  double calculate(double total, String type) {                             │
   │      if (type.equals("VIP"))      return total * 0.20;                     │
@@ -81,7 +82,7 @@ New behaviour is added by adding new code, not by editing existing code.
   └────────────────────────────────────────────────────────────────────────────┘
 
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  AFTER — polymorphism (OCP compliant)                                      │
+  │  AFTER - polymorphism (OCP compliant)                                      │
   │                                                                            │
   │  interface DiscountPolicy { double calculate(double total); }              │
   │                                                                            │
@@ -90,20 +91,20 @@ New behaviour is added by adding new code, not by editing existing code.
   │  DiscountPolicies.vip()      → 20%                                         │
   │  DiscountPolicies.seasonal() → flat $N  ← new type, zero edits elsewhere  │
   │                                                                            │
-  │  PricingEngine(DiscountPolicy policy) — never needs to change              │
+  │  PricingEngine(DiscountPolicy policy) - never needs to change              │
   └────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## L — Liskov Substitution Principle
+## L - Liskov Substitution Principle
 
 Any code that works with a base type must work correctly with any of its subtypes,
 without knowing the concrete type.
 
 ```
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  CLASSIC VIOLATION — Square extends Rectangle                              │
+  │  CLASSIC VIOLATION - Square extends Rectangle                              │
   │                                                                            │
   │  class Rectangle { int width, height; }                                    │
   │  class Square extends Rectangle {                                          │
@@ -119,7 +120,7 @@ without knowing the concrete type.
   └────────────────────────────────────────────────────────────────────────────┘
 
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  FIX — parallel hierarchy via interface                                    │
+  │  FIX - parallel hierarchy via interface                                    │
   │                                                                            │
   │  interface Shape { double area(); double perimeter(); }                    │
   │                                                                            │
@@ -133,14 +134,14 @@ without knowing the concrete type.
 
 ---
 
-## I — Interface Segregation Principle
+## I - Interface Segregation Principle
 
 Clients should not be forced to implement interfaces they do not use.
 A fat interface forces implementing classes to provide stubs for irrelevant methods.
 
 ```
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  BEFORE — fat Worker interface (ISP violation)                             │
+  │  BEFORE - fat Worker interface (ISP violation)                             │
   │                                                                            │
   │  interface Worker { void work(); void eat(); void charge(); }              │
   │                                                                            │
@@ -152,7 +153,7 @@ A fat interface forces implementing classes to provide stubs for irrelevant meth
   └────────────────────────────────────────────────────────────────────────────┘
 
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  AFTER — segregated interfaces                                             │
+  │  AFTER - segregated interfaces                                             │
   │                                                                            │
   │  interface Workable     { String work(); }                                 │
   │  interface Feedable     { String eat(String food); }                       │
@@ -167,23 +168,23 @@ A fat interface forces implementing classes to provide stubs for irrelevant meth
 
 ---
 
-## D — Dependency Inversion Principle
+## D - Dependency Inversion Principle
 
 High-level modules should not depend on low-level modules.
 Both should depend on abstractions.
 
 ```
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  BEFORE — tight coupling (DIP violation)                                   │
+  │  BEFORE - tight coupling (DIP violation)                                   │
   │                                                                            │
   │  class AlertService {                                                      │
   │      private final EmailSender sender = new EmailSender(); ← hard-coded   │
-  │      // To switch to SMS: edit AlertService — DIP broken                  │
+  │      // To switch to SMS: edit AlertService - DIP broken                  │
   │  }                                                                         │
   └────────────────────────────────────────────────────────────────────────────┘
 
   ┌────────────────────────────────────────────────────────────────────────────┐
-  │  AFTER — depend on the abstraction                                         │
+  │  AFTER - depend on the abstraction                                         │
   │                                                                            │
   │  interface MessageSender { String send(recipient, message); }             │
   │                                                                            │
@@ -210,13 +211,13 @@ Both should depend on abstractions.
   ┌──────────────────────────┬────────────────────────────────────────────────┐
   │  Code Smell              │  Refactoring Move                              │
   ├──────────────────────────┼────────────────────────────────────────────────┤
-  │  God Class               │  Extract Class — split into focused classes    │
-  │  Long Method             │  Extract Method — name the intent              │
+  │  God Class               │  Extract Class - split into focused classes    │
+  │  Long Method             │  Extract Method - name the intent              │
   │  Duplicate Code          │  Extract Method / Pull Up Method               │
   │  Primitive Obsession     │  Replace Primitive with Object (value object)  │
-  │  Data Clump              │  Extract Class — group always-together fields  │
+  │  Data Clump              │  Extract Class - group always-together fields  │
   │  Magic Number / String   │  Replace Magic Number with Named Constant      │
-  │  Feature Envy            │  Move Method — method belongs in another class │
+  │  Feature Envy            │  Move Method - method belongs in another class │
   │  Switch/if-else chain    │  Replace Conditional with Polymorphism         │
   │  Refused Bequest         │  Replace Inheritance with Delegation           │
   │  Inappropriate Intimacy  │  Move Field / Extract Class                    │
@@ -226,10 +227,10 @@ Both should depend on abstractions.
 ### Primitive Obsession → Value Object
 
 ```java
-// BEFORE — raw String; no validation, no behaviour
+// BEFORE - raw String; no validation, no behaviour
 void register(String email, String phone) { ... }
 
-// AFTER — always-valid objects with built-in behaviour
+// AFTER - always-valid objects with built-in behaviour
 record EmailAddress(String value) {
     EmailAddress {
         if (!value.contains("@")) throw new IllegalArgumentException(...);
@@ -244,12 +245,12 @@ void register(EmailAddress email, PhoneNumber phone) { ... }
 ### Data Clump → Money Value Object
 
 ```java
-// BEFORE — amount and currency travel everywhere as separate primitives
+// BEFORE - amount and currency travel everywhere as separate primitives
 void charge(double amount, String currency) { ... }
 void refund(double amount, String currency) { ... }
 // Easy to pass mismatched values, no precision guarantee
 
-// AFTER — encapsulated, validated, precision-correct
+// AFTER - encapsulated, validated, precision-correct
 record Money(BigDecimal amount, String currency) {
     Money add(Money other) { ... }       // currency mismatch is a compile error
     Money subtract(Money other) { ... }  // can't go negative accidentally
@@ -259,19 +260,19 @@ record Money(BigDecimal amount, String currency) {
 ### Duplicate Code → Extract Method
 
 ```java
-// BEFORE — header/footer duplicated in every generator
+// BEFORE - header/footer duplicated in every generator
 String generatePdf() {
-    String header = "=== Report — " + LocalDate.now() + " ==="; // duplicated
+    String header = "=== Report - " + LocalDate.now() + " ==="; // duplicated
     String footer = "=== END ===";                               // duplicated
     ...
 }
 String generateCsv() {
-    String header = "=== Report — " + LocalDate.now() + " ==="; // same
+    String header = "=== Report - " + LocalDate.now() + " ==="; // same
     ...
 }
 
-// AFTER — extracted once, called everywhere
-private String buildHeader() { return "=== " + title + " — " + LocalDate.now() + " ==="; }
+// AFTER - extracted once, called everywhere
+private String buildHeader() { return "=== " + title + " - " + LocalDate.now() + " ==="; }
 private String buildFooter(int count) { return "=== END (" + count + " items) ==="; }
 ```
 
@@ -313,19 +314,19 @@ double tax = total * VAT_RATE;
 ## Method Design Rules
 
 ```
-  ✓  Do one thing — if you can't summarise a method in one sentence, split it
-  ✓  Keep it short — aim for methods visible without scrolling (~20 lines max)
+  ✓  Do one thing - if you can't summarise a method in one sentence, split it
+  ✓  Keep it short - aim for methods visible without scrolling (~20 lines max)
   ✓  One level of abstraction per method
-  ✓  No side effects — a method named get* should never mutate state
-  ✓  Command-Query Separation — a method either does something or returns something
-  ✗  No flag arguments — boolean param means the method does two things
+  ✓  No side effects - a method named get* should never mutate state
+  ✓  Command-Query Separation - a method either does something or returns something
+  ✗  No flag arguments - boolean param means the method does two things
      bad:  render(boolean isMobile)
      good: renderMobile() / renderDesktop()
 ```
 
 ---
 
-## Module 30 — What Was Built
+## Module 30 - What Was Built
 
 ```
   module-30-clean-code/

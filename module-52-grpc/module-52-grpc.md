@@ -1,21 +1,22 @@
 ---
-title: "Module 52 — gRPC with Spring Boot"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 52 - gRPC with Spring Boot"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 52
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-52-grpc/src){: .btn .btn-outline }
 
-# Module 52 — gRPC with Spring Boot
+# Module 52 - gRPC with Spring Boot
 
 ## What this module covers
 
 Protocol Buffers schema definition, code generation via `protobuf-maven-plugin`,
 a Spring Boot gRPC server with `net.devh:grpc-server-spring-boot-starter`,
 a `@GrpcGlobalServerInterceptor` for cross-cutting concerns, and
-in-process unit testing with `InProcessServerBuilder` — no Spring context, no port binding.
+in-process unit testing with `InProcessServerBuilder` - no Spring context, no port binding.
 
 ---
 
@@ -92,6 +93,7 @@ public class BookServiceImpl extends BookServiceGrpc.BookServiceImplBase {
 ```
 
 The gRPC streaming contract:
+
 - Unary: call `onNext` once, then `onCompleted`
 - Server-streaming: call `onNext` N times, then `onCompleted`
 - Errors: call `onError` instead of `onCompleted`
@@ -116,7 +118,7 @@ public class LoggingInterceptor implements ServerInterceptor {
 ```
 
 `@GrpcGlobalServerInterceptor` registers the bean as an interceptor for every service
-on the server — equivalent to adding it manually to every `ServerBuilder`. No explicit
+on the server - equivalent to adding it manually to every `ServerBuilder`. No explicit
 wiring in `BookServiceImpl` needed.
 
 ---
@@ -144,7 +146,7 @@ void tearDown() throws InterruptedException {
 }
 ```
 
-`InProcessServerBuilder` wires the service and interceptor in-memory — no TCP,
+`InProcessServerBuilder` wires the service and interceptor in-memory - no TCP,
 no Spring context. `directExecutor()` makes calls synchronous, so assertions run
 on the same thread with no async coordination.
 
@@ -176,15 +178,15 @@ assertThatThrownBy(() -> stub.getBook(GetBookRequest.newBuilder().setId(999L).bu
 
 ## gRPC vs REST trade-offs
 
-| Dimension        | gRPC                              | REST/HTTP             |
-|------------------|-----------------------------------|-----------------------|
-| Protocol         | HTTP/2, binary (Protobuf)         | HTTP/1.1+, text (JSON)|
-| Schema           | Mandatory (`.proto`)              | Optional (OpenAPI)    |
-| Code generation  | Yes — client + server stubs       | Optional              |
-| Streaming        | Unary, server, client, bidi       | SSE / WebSocket       |
-| Browser support  | Needs grpc-web proxy              | Native                |
-| Latency          | Lower (binary, multiplexed)       | Higher                |
-| Discoverability  | Reflection API                    | Swagger UI            |
+| Dimension       | gRPC                        | REST/HTTP              |
+| --------------- | --------------------------- | ---------------------- |
+| Protocol        | HTTP/2, binary (Protobuf)   | HTTP/1.1+, text (JSON) |
+| Schema          | Mandatory (`.proto`)        | Optional (OpenAPI)     |
+| Code generation | Yes - client + server stubs | Optional               |
+| Streaming       | Unary, server, client, bidi | SSE / WebSocket        |
+| Browser support | Needs grpc-web proxy        | Native                 |
+| Latency         | Lower (binary, multiplexed) | Higher                 |
+| Discoverability | Reflection API              | Swagger UI             |
 
 gRPC is the right choice for internal service-to-service calls with high throughput
 or streaming requirements; REST is better for public-facing APIs where browser or
@@ -194,9 +196,9 @@ third-party client support matters.
 
 ## Tests
 
-| Class                  | Type        | Count |
-|------------------------|-------------|-------|
-| `BookServiceImplTest`  | JUnit 5     | 4     |
+| Class                 | Type    | Count |
+| --------------------- | ------- | ----- |
+| `BookServiceImplTest` | JUnit 5 | 4     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **4/4 pass**
@@ -205,11 +207,12 @@ Result: **4/4 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `InProcessServerBuilder` over `@SpringBootTest` | No Spring context needed; service has no Spring dependencies in production logic; tests are faster and hermetic |
-| `directExecutor()` | Keeps calls synchronous — no `CountDownLatch` or `CompletableFuture` needed in tests |
-| `grpc-server-spring-boot-starter` over manual `ServerBuilder` | Auto-configures port, TLS, health check, and interceptor discovery from Spring beans |
-| `@GrpcGlobalServerInterceptor` over per-service registration | Interceptor applies automatically to all current and future services; zero wiring |
-| `Status.NOT_FOUND.asRuntimeException()` | gRPC status codes are the standard error signalling mechanism; clients check `StatusRuntimeException.getStatus().getCode()` |
+| Decision                                                      | Reason                                                                                                                      |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `InProcessServerBuilder` over `@SpringBootTest`               | No Spring context needed; service has no Spring dependencies in production logic; tests are faster and hermetic             |
+| `directExecutor()`                                            | Keeps calls synchronous - no `CountDownLatch` or `CompletableFuture` needed in tests                                        |
+| `grpc-server-spring-boot-starter` over manual `ServerBuilder` | Auto-configures port, TLS, health check, and interceptor discovery from Spring beans                                        |
+| `@GrpcGlobalServerInterceptor` over per-service registration  | Interceptor applies automatically to all current and future services; zero wiring                                           |
+| `Status.NOT_FOUND.asRuntimeException()`                       | gRPC status codes are the standard error signalling mechanism; clients check `StatusRuntimeException.getStatus().getCode()` |
+
 {% endraw %}

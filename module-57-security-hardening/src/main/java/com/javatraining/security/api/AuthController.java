@@ -23,7 +23,7 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     public Map<String, String> register(@Valid @RequestBody RegisterRequest request) {
         // In a real app: hash password, persist user, return 201.
-        // The focus here is the validation layer — @Valid enforces constraints
+        // The focus here is the validation layer - @Valid enforces constraints
         // before this method body is ever reached.
         return Map.of("username", request.username(), "message", "registered");
     }

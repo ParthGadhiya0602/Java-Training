@@ -16,7 +16,7 @@ import org.springframework.validation.annotation.Validated;
  *   <li>{@code app.feature-flags.notifications-enabled} → {@code featureFlags.notificationsEnabled}</li>
  * </ul>
  *
- * <p>{@code @Validated} triggers Bean Validation on startup — a misconfigured
+ * <p>{@code @Validated} triggers Bean Validation on startup - a misconfigured
  * property fails fast with a clear error rather than a mysterious NullPointerException
  * somewhere deep in the application.
  */
@@ -43,7 +43,7 @@ public class AppProperties {
     public void setFeatureFlags(FeatureFlags featureFlags) { this.featureFlags = featureFlags; }
 
     /**
-     * Nested properties object — bound from {@code app.feature-flags.*}.
+     * Nested properties object - bound from {@code app.feature-flags.*}.
      * Must be a mutable class (not a record) for relaxed binding to work.
      */
     public static class FeatureFlags {

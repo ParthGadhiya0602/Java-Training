@@ -10,8 +10,8 @@ import java.util.Optional;
 /**
  * CRUD repository for {@link Product} using raw JDBC.
  *
- * <p>Every public method uses {@link PreparedStatement} — never raw
- * {@link Statement} with string concatenation — to prevent SQL injection
+ * <p>Every public method uses {@link PreparedStatement} - never raw
+ * {@link Statement} with string concatenation - to prevent SQL injection
  * and enable query-plan caching in the database engine.
  *
  * <p>Resources ({@code PreparedStatement}, {@code ResultSet}) are always
@@ -73,7 +73,7 @@ public class ProductRepository {
         return products;
     }
 
-    /** Returns the number of rows in the products table — efficient COUNT(*). */
+    /** Returns the number of rows in the products table - efficient COUNT(*). */
     public int count() throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) FROM products");
              ResultSet rs = ps.executeQuery()) {
@@ -112,7 +112,7 @@ public class ProductRepository {
     // ── private helper ────────────────────────────────────────────────────────
 
     /** Maps the current ResultSet row to a Product.  Column access by name
-     *  is safer than by index — resilient to SELECT column reordering. */
+     *  is safer than by index - resilient to SELECT column reordering. */
     private Product mapRow(ResultSet rs) throws SQLException {
         return new Product(
                 rs.getInt("id"),

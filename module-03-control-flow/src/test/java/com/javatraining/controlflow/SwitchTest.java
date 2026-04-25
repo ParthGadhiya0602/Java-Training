@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Switch — expression, yield, pattern matching")
+@DisplayName("Switch - expression, yield, pattern matching")
 class SwitchTest {
 
     @ParameterizedTest(name = "month={0} → season={1}")
@@ -35,10 +35,10 @@ class SwitchTest {
     @CsvSource({
         "1,  2024, 31",   // January
         "4,  2024, 30",   // April
-        "2,  2024, 29",   // Feb 2024 — leap year
-        "2,  2023, 28",   // Feb 2023 — not leap
-        "2,  2100, 28",   // Feb 2100 — divisible by 100 but not 400
-        "2,  2000, 29",   // Feb 2000 — divisible by 400
+        "2,  2024, 29",   // Feb 2024 - leap year
+        "2,  2023, 28",   // Feb 2023 - not leap
+        "2,  2100, 28",   // Feb 2100 - divisible by 100 but not 400
+        "2,  2000, 29",   // Feb 2000 - divisible by 400
     })
     @DisplayName("daysInMonth handles leap year rules correctly")
     void daysInMonth(int month, int year, int expected) {

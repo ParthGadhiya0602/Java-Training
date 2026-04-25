@@ -15,11 +15,11 @@ import java.util.List;
  *
  * <p>Key differences from a JPA entity:
  * <ul>
- *   <li>No table joins — tags are an embedded array, not a separate collection.</li>
+ *   <li>No table joins - tags are an embedded array, not a separate collection.</li>
  *   <li>Id is a {@code String} (MongoDB ObjectId) not a {@code Long}.</li>
  *   <li>{@code @Field} controls the JSON field name in the stored document
  *       ({@code in_stock} rather than the Java field name {@code inStock}).</li>
- *   <li>No schema enforcement — documents in the same collection can have
+ *   <li>No schema enforcement - documents in the same collection can have
  *       different shapes; the Java class is the agreed schema.</li>
  * </ul>
  */
@@ -46,7 +46,7 @@ public class Product {
     @Field("in_stock")
     private boolean inStock;
 
-    /** Embedded array — no join table, no foreign key. */
+    /** Embedded array - no join table, no foreign key. */
     private List<String> tags = new ArrayList<>();
 
     protected Product() {}

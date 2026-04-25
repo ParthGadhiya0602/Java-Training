@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * Pure JUnit 5 — no Spring context needed.
+ * Pure JUnit 5 - no Spring context needed.
  * InProcessServerBuilder wires the service and interceptor directly in-memory,
  * giving fast, hermetic tests with no port binding.
  */

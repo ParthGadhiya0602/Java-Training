@@ -44,6 +44,6 @@ class ProductApiProviderPactTest {
 
     @State("product with id 1 exists")
     void productWithId1Exists() {
-        // ProductRepository pre-loads product 1 — no action needed
+        // ProductRepository pre-loads product 1 - no action needed
     }
 }

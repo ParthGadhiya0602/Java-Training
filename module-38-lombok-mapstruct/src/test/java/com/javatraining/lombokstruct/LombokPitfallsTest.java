@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Demonstrates the four most important Lombok pitfalls.
- * No Spring context needed — these are pure Java behaviour demonstrations.
+ * No Spring context needed - these are pure Java behaviour demonstrations.
  */
 class LombokPitfallsTest {
 
@@ -27,7 +27,7 @@ class LombokPitfallsTest {
     @Data
     static class MutableKey {
         private String id;
-        private String email;  // mutable — included in hashCode
+        private String email;  // mutable - included in hashCode
     }
 
     @Test
@@ -47,7 +47,7 @@ class LombokPitfallsTest {
         // on each element which would compare the same reference and return true,
         // masking the real broken-bucket problem.
         assertThat(set.contains(key)).isFalse();
-        // The set still has 1 element — the object is present but unreachable
+        // The set still has 1 element - the object is present but unreachable
         assertThat(set).hasSize(1);
     }
 
@@ -93,7 +93,7 @@ class LombokPitfallsTest {
     /**
      * When @Builder is the only annotation, Lombok generates an all-args constructor
      * (package-private) for the builder to use. This removes Java's implicit
-     * no-args constructor — breaking Jackson deserialization, JPA proxy creation,
+     * no-args constructor - breaking Jackson deserialization, JPA proxy creation,
      * and any code using new Foo().
      *
      * <p>Fix: explicitly add @NoArgsConstructor + @AllArgsConstructor alongside @Builder.
@@ -111,7 +111,7 @@ class LombokPitfallsTest {
     void builder_and_no_args_constructor_coexist_when_declared_explicitly() {
         // no-args constructor works (needed by Jackson, JPA, etc.)
         FixedUserBean fromNoArgs = new FixedUserBean();
-        // Fields default to null — no-args constructor doesn't throw
+        // Fields default to null - no-args constructor doesn't throw
         assertThat(fromNoArgs.getName()).isNull();
 
         // Builder also works
@@ -144,7 +144,7 @@ class LombokPitfallsTest {
     @ToString
     static class Manager {
         private String name;
-        // Holds a list of reports — not circular because Employee excludes manager
+        // Holds a list of reports - not circular because Employee excludes manager
         private List<Employee> reports = new ArrayList<>();
     }
 

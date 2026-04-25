@@ -6,20 +6,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
- * Module 17 — Virtual Threads (Java 21)
+ * Module 17 - Virtual Threads (Java 21)
  *
  * Virtual threads are lightweight threads managed by the JVM, not the OS.
  * Key properties:
  *   - Cheap to create: millions fit in memory (vs ~1k platform threads)
  *   - Cheap to block: a blocking virtual thread unmounts from its carrier
  *     thread, freeing the carrier to run another virtual thread
- *   - No pool needed: create one per task — the JVM multiplexes onto
+ *   - No pool needed: create one per task - the JVM multiplexes onto
  *     a small pool of carrier (platform) threads
  *   - Same API: Thread, synchronized, locks, Thread.sleep all work
  *
  * When to use virtual threads:
- *   YES: I/O-bound tasks — HTTP calls, DB queries, file I/O
- *   NO:  CPU-bound tasks — they still need platform threads
+ *   YES: I/O-bound tasks - HTTP calls, DB queries, file I/O
+ *   NO:  CPU-bound tasks - they still need platform threads
  *   NO:  Tasks that hold locks for a long time (pinning risk)
  *
  * Pinning: a virtual thread is "pinned" to its carrier when inside a
@@ -30,7 +30,7 @@ public class VirtualThreadsDemo {
 
     // ── Creating virtual threads ──────────────────────────────────────────────
 
-    /** Thread.ofVirtual() — builder API for virtual threads. */
+    /** Thread.ofVirtual() - builder API for virtual threads. */
     public static Thread startVirtual(String name, Runnable task) {
         return Thread.ofVirtual()
                      .name(name)
@@ -97,8 +97,8 @@ public class VirtualThreadsDemo {
     /**
      * Structured Concurrency (java.util.concurrent.StructuredTaskScope)
      * ensures that child tasks do not outlive their parent scope:
-     *   ShutdownOnFailure — cancel all siblings if any task fails
-     *   ShutdownOnSuccess — cancel all siblings when first task succeeds
+     *   ShutdownOnFailure - cancel all siblings if any task fails
+     *   ShutdownOnSuccess - cancel all siblings when first task succeeds
      *
      * This demo uses plain fork/join to show the pattern without the
      * preview API, which requires --enable-preview flag.
@@ -149,7 +149,7 @@ public class VirtualThreadsDemo {
 
     /**
      * Classic server pattern made viable again with virtual threads:
-     * one thread per connection — simple, readable, no callback hell.
+     * one thread per connection - simple, readable, no callback hell.
      *
      * Previously this required async/reactive frameworks because platform
      * threads were too expensive.  Virtual threads restore simple blocking code.

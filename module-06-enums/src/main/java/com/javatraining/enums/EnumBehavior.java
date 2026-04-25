@@ -1,13 +1,13 @@
 package com.javatraining.enums;
 
 /**
- * TOPIC: Enums with behaviour — abstract methods (constant-specific body),
+ * TOPIC: Enums with behaviour - abstract methods (constant-specific body),
  * interface implementation, and the Strategy pattern via enum.
  */
 public class EnumBehavior {
 
     // -------------------------------------------------------------------------
-    // 1. Abstract method — each constant provides its own implementation
+    // 1. Abstract method - each constant provides its own implementation
     //    This is the most powerful feature of Java enums.
     // -------------------------------------------------------------------------
     enum Operation {
@@ -46,7 +46,7 @@ public class EnumBehavior {
 
         Operation(String symbol) { this.symbol = symbol; }
 
-        // Every constant MUST override this — compiler enforces it
+        // Every constant MUST override this - compiler enforces it
         public abstract double apply(double x, double y);
 
         @Override
@@ -54,7 +54,7 @@ public class EnumBehavior {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Enum implementing an interface — pluggable behaviour
+    // 2. Enum implementing an interface - pluggable behaviour
     // -------------------------------------------------------------------------
     interface Taxable {
         double taxRate();
@@ -65,7 +65,7 @@ public class EnumBehavior {
         FOOD        (0.05),   //  5% GST
         ELECTRONICS (0.18),   // 18% GST
         LUXURY      (0.28),   // 28% GST
-        MEDICINE    (0.00),   //  0% GST — exempt
+        MEDICINE    (0.00),   //  0% GST - exempt
         SERVICES    (0.18);   // 18% GST
 
         private final double rate;
@@ -81,7 +81,7 @@ public class EnumBehavior {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Strategy pattern via enum — discount calculation
+    // 3. Strategy pattern via enum - discount calculation
     //    No class explosion, no factory, no boilerplate.
     // -------------------------------------------------------------------------
     enum DiscountStrategy {
@@ -125,7 +125,7 @@ public class EnumBehavior {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Combining interface + abstract method — richer behaviour
+    // 4. Combining interface + abstract method - richer behaviour
     // -------------------------------------------------------------------------
     interface Describable {
         String describe();

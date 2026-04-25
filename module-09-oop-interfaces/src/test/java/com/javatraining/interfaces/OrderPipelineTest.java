@@ -186,7 +186,7 @@ class OrderPipelineTest {
     }
 
     // -----------------------------------------------------------------------
-    // GstTaxStrategy — standalone
+    // GstTaxStrategy - standalone
     // -----------------------------------------------------------------------
     @Test
     void gst_electronics_18() {
@@ -206,7 +206,7 @@ class OrderPipelineTest {
     }
 
     // -----------------------------------------------------------------------
-    // TieredDiscountStrategy — standalone
+    // TieredDiscountStrategy - standalone
     // -----------------------------------------------------------------------
     @Test
     void platinum_tier_discount_is_10() {

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AccessModifiersTest {
 
     // -----------------------------------------------------------------------
-    // BankAccount — invariant enforcement
+    // BankAccount - invariant enforcement
     // -----------------------------------------------------------------------
     @Test
     void deposit_increases_balance() {
@@ -47,7 +47,7 @@ class AccessModifiersTest {
         AccessModifiers.BankAccount acc =
             new AccessModifiers.BankAccount("A1", "Alice", 10_000, 1_000);
         acc.withdraw(1_000);
-        acc.resetDailyWithdrawals();  // package-private — accessible in same package
+        acc.resetDailyWithdrawals();  // package-private - accessible in same package
         acc.withdraw(1_000);          // should succeed after reset
         assertEquals(8_000.0, acc.balance(), 1e-9);
     }
@@ -86,7 +86,7 @@ class AccessModifiersTest {
     }
 
     // -----------------------------------------------------------------------
-    // Temperature — factories and subclass access
+    // Temperature - factories and subclass access
     // -----------------------------------------------------------------------
     @Test
     void celsius_factory_converts_correctly() {

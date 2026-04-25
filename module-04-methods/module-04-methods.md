@@ -1,14 +1,15 @@
 ---
-title: "04 — Methods"
-parent: "Phase 1 — Fundamentals"
+title: "04 - Methods"
+parent: "Phase 1 - Fundamentals"
 nav_order: 4
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-04-methods/src){: .btn .btn-outline }
 
-# Module 04 — Methods
+# Module 04 - Methods
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21
 
@@ -21,13 +22,13 @@ render_with_liquid: false
 3. [Return Types](#3-return-types)
 4. [Static vs Instance Methods](#4-static-vs-instance-methods)
 5. [Method Overloading](#5-method-overloading)
-6. [Overload Resolution — How the Compiler Chooses](#6-overload-resolution--how-the-compiler-chooses)
+6. [Overload Resolution - How the Compiler Chooses](#6-overload-resolution--how-the-compiler-chooses)
 7. [Varargs](#7-varargs)
 8. [Pass-by-Value vs Pass-by-Reference](#8-pass-by-value-vs-pass-by-reference)
 9. [The Call Stack](#9-the-call-stack)
 10. [Recursion](#10-recursion)
-11. [Recursion vs Iteration — When to Use Each](#11-recursion-vs-iteration--when-to-use-each)
-12. [Practical Exercise — BankAccount](#12-practical-exercise--bankaccount)
+11. [Recursion vs Iteration - When to Use Each](#11-recursion-vs-iteration--when-to-use-each)
+12. [Practical Exercise - BankAccount](#12-practical-exercise--bankaccount)
 13. [Exercises](#13-exercises)
 
 ---
@@ -38,9 +39,10 @@ A **method** is a named block of code that performs a task. It can accept
 inputs (parameters), execute statements, and optionally return an output.
 
 Methods exist for two reasons:
-1. **Reuse** — write the logic once, call it from anywhere
-2. **Abstraction** — give a name to a complex operation so callers don't need
-   to know *how* it works, only *what* it does
+
+1. **Reuse** - write the logic once, call it from anywhere
+2. **Abstraction** - give a name to a complex operation so callers don't need
+   to know _how_ it works, only _what_ it does
 
 ```
   Without methods (duplicated logic):            With methods (single definition):
@@ -77,14 +79,14 @@ Methods exist for two reasons:
   }                                                           ┘
 ```
 
-| Part | Description |
-|------|-------------|
-| **Access modifier** | `public` / `protected` / (package-private) / `private` — who can call this method |
-| **Return type** | The type of value the method produces. `void` means it returns nothing |
-| **Method name** | camelCase by convention. Should be a verb: `calculate`, `find`, `validate` |
-| **Parameter list** | Zero or more `type name` pairs, comma-separated |
-| **Body** | The statements that execute when the method is called |
-| **return** | Exits the method and optionally sends a value back to the caller |
+| Part                | Description                                                                       |
+| ------------------- | --------------------------------------------------------------------------------- |
+| **Access modifier** | `public` / `protected` / (package-private) / `private` - who can call this method |
+| **Return type**     | The type of value the method produces. `void` means it returns nothing            |
+| **Method name**     | camelCase by convention. Should be a verb: `calculate`, `find`, `validate`        |
+| **Parameter list**  | Zero or more `type name` pairs, comma-separated                                   |
+| **Body**            | The statements that execute when the method is called                             |
+| **return**          | Exits the method and optionally sends a value back to the caller                  |
 
 ### Method Signature
 
@@ -94,17 +96,17 @@ Return type is NOT part of the signature.
 ```java
 double tax(double amount)                  // signature: tax(double)
 double tax(double amount, String currency) // signature: tax(double, String)
-// These are two different methods — they have different signatures (overloading)
+// These are two different methods - they have different signatures (overloading)
 
 double tax(double amount)                  // signature: tax(double)
-int    tax(double amount)                  // COMPILE ERROR — same signature, different return type
+int    tax(double amount)                  // COMPILE ERROR - same signature, different return type
 ```
 
 ---
 
 ## 3. Return Types
 
-### void — No Return Value
+### void - No Return Value
 
 ```java
 static void printSeparator(char c, int length) {
@@ -127,12 +129,12 @@ static double circleArea(double radius) {
 double area = circleArea(5.0);
 ```
 
-### Early Return — Guard Clauses
+### Early Return - Guard Clauses
 
 Early returns make the "happy path" obvious by handling edge cases first:
 
 ```java
-// Without early return — hard to follow
+// Without early return - hard to follow
 static String processOrder(Order order) {
     String result;
     if (order != null) {
@@ -151,7 +153,7 @@ static String processOrder(Order order) {
     return result;
 }
 
-// With early return (guard clauses) — much cleaner
+// With early return (guard clauses) - much cleaner
 static String processOrder(Order order) {
     if (order == null)     return "Null order";
     if (!order.isValid())  return "Invalid order";
@@ -171,7 +173,7 @@ They have no `this` reference and cannot access instance fields.
 
 ```java
 public class MathUtils {
-    // static: no object state needed — just pure computation on inputs
+    // static: no object state needed - just pure computation on inputs
     public static int add(int a, int b) { return a + b; }
     public static double square(double n) { return n * n; }
 }
@@ -181,6 +183,7 @@ int sum = MathUtils.add(3, 4);
 ```
 
 Use static methods for:
+
 - Utility/helper operations (stateless, pure functions)
 - Factory methods (`Integer.valueOf()`, `List.of()`)
 - Operations that don't logically belong to any single object
@@ -191,7 +194,7 @@ Belong to an **object**. They have access to `this` (the current object's state)
 
 ```java
 public class Counter {
-    private int count = 0;  // instance field — each object has its own
+    private int count = 0;  // instance field - each object has its own
 
     public void increment() { this.count++; }    // modifies THIS object's count
     public int  getCount()  { return this.count; }
@@ -201,12 +204,12 @@ Counter c1 = new Counter();
 Counter c2 = new Counter();
 c1.increment(); c1.increment();
 c2.increment();
-System.out.println(c1.getCount()); // 2  — independent state
+System.out.println(c1.getCount()); // 2  - independent state
 System.out.println(c2.getCount()); // 1
 ```
 
 ```
-  Static vs Instance — memory model:
+  Static vs Instance - memory model:
 
   Class definition (loaded once):
   ┌───────────────────────────────────────────┐
@@ -256,13 +259,13 @@ log("Connection failed", "ERROR", exception);  // calls version 3
 
 ### What Makes Overloads Distinct
 
-| Distinguishes overloads? | Example |
-|--------------------------|---------|
-| Number of parameters | `add(int a)` vs `add(int a, int b)` |
-| Type of parameters | `print(int n)` vs `print(double n)` |
+| Distinguishes overloads? | Example                                                |
+| ------------------------ | ------------------------------------------------------ |
+| Number of parameters     | `add(int a)` vs `add(int a, int b)`                    |
+| Type of parameters       | `print(int n)` vs `print(double n)`                    |
 | Order of parameter types | `copy(String src, int n)` vs `copy(int n, String src)` |
-| Return type alone | NOT ENOUGH — compile error |
-| Parameter names alone | NOT ENOUGH — compile error |
+| Return type alone        | NOT ENOUGH - compile error                             |
+| Parameter names alone    | NOT ENOUGH - compile error                             |
 
 ```java
 // COMPILE ERROR: same signature (name + param types), different return type only
@@ -272,7 +275,7 @@ String getValue(String key) { ... }  // ← error
 
 ---
 
-## 6. Overload Resolution — How the Compiler Chooses
+## 6. Overload Resolution - How the Compiler Chooses
 
 When you call an overloaded method, the compiler follows a strict priority order
 to find the best match. Understanding this prevents subtle bugs.
@@ -280,10 +283,10 @@ to find the best match. Understanding this prevents subtle bugs.
 ```
   Priority order (highest to lowest):
 
-  1. Exact match          — types match exactly
-  2. Widening             — compiler promotes type (int → long, float → double)
-  3. Autoboxing           — primitive ↔ wrapper (int → Integer)
-  4. Varargs              — matches ... parameter last
+  1. Exact match          - types match exactly
+  2. Widening             - compiler promotes type (int → long, float → double)
+  3. Autoboxing           - primitive ↔ wrapper (int → Integer)
+  4. Varargs              - matches ... parameter last
 ```
 
 ```java
@@ -298,7 +301,7 @@ show(10);      // → int: 10    (exact match)
 show(10L);     // → long: 10   (exact match)
 
 Integer x = 5;
-show(x);       // → Integer: 5 (exact match — autoboxing not needed)
+show(x);       // → Integer: 5 (exact match - autoboxing not needed)
 show(5);       // → int: 5     (exact match wins over autoboxing to Integer)
 ```
 
@@ -350,14 +353,14 @@ static void log(String level, String... messages) { ... }  // OK
 // 2. Only ONE varargs parameter per method
 // static void bad(int... a, String... b) { ... }   // COMPILE ERROR
 
-// 3. Null is valid and becomes a null array — guard against it
+// 3. Null is valid and becomes a null array - guard against it
 static void safeLog(String... messages) {
     if (messages == null) return;   // caller passed null explicitly
     for (String m : messages) System.out.println(m);
 }
 ```
 
-### Varargs and Overloading — A Subtle Trap
+### Varargs and Overloading - A Subtle Trap
 
 ```java
 static void display(String s)      { System.out.println("String:  " + s); }
@@ -379,7 +382,7 @@ This is one of the most misunderstood topics in Java.
 The confusion arises because the "value" passed for an object is a **copy of
 the reference** (memory address), not a copy of the object itself.
 
-### Primitives — A True Copy
+### Primitives - A True Copy
 
 ```java
 static void tryToDouble(int x) {
@@ -389,7 +392,7 @@ static void tryToDouble(int x) {
 
 int n = 10;
 tryToDouble(n);
-System.out.println("Outside: " + n);  // still 10 — original unchanged
+System.out.println("Outside: " + n);  // still 10 - original unchanged
 ```
 
 ```
@@ -408,7 +411,7 @@ System.out.println("Outside: " + n);  // still 10 — original unchanged
   After return: x is gone.  n is still 10.
 ```
 
-### Objects — The Reference is Copied, Not the Object
+### Objects - The Reference is Copied, Not the Object
 
 ```java
 static void appendBang(StringBuilder sb) {
@@ -417,7 +420,7 @@ static void appendBang(StringBuilder sb) {
 
 StringBuilder msg = new StringBuilder("Hello");
 appendBang(msg);
-System.out.println(msg);  // "Hello!" — the object WAS modified
+System.out.println(msg);  // "Hello!" - the object WAS modified
 ```
 
 ```
@@ -435,7 +438,7 @@ System.out.println(msg);  // "Hello!" — the object WAS modified
   └────────────────────┘
 ```
 
-### Reassigning the Reference — Not Visible to Caller
+### Reassigning the Reference - Not Visible to Caller
 
 ```java
 static void tryToReplace(StringBuilder sb) {
@@ -445,7 +448,7 @@ static void tryToReplace(StringBuilder sb) {
 
 StringBuilder msg = new StringBuilder("Original");
 tryToReplace(msg);
-System.out.println(msg);  // "Original" — the replacement is invisible to caller
+System.out.println(msg);  // "Original" - the replacement is invisible to caller
 ```
 
 ```
@@ -517,7 +520,7 @@ If recursion has no base case (or too many frames), the stack runs out of memory
 
 ```java
 static int infinite(int n) {
-    return infinite(n + 1);  // no base case — stack grows forever
+    return infinite(n + 1);  // no base case - stack grows forever
 }
 // infinite(0) → StackOverflowError after ~10,000 frames (JVM default stack size)
 ```
@@ -532,8 +535,8 @@ frame size.
 
 A method is **recursive** if it calls itself. Every valid recursive method has:
 
-1. **Base case** — a condition where it returns without calling itself (stops recursion)
-2. **Recursive case** — calls itself with a **smaller/simpler** input (makes progress)
+1. **Base case** - a condition where it returns without calling itself (stops recursion)
+2. **Recursive case** - calls itself with a **smaller/simpler** input (makes progress)
 
 ```
   Recursive definition of factorial:
@@ -551,17 +554,17 @@ static long factorial(int n) {
 }
 ```
 
-### Fibonacci — Two Recursive Calls
+### Fibonacci - Two Recursive Calls
 
 ```java
-// Naive recursive Fibonacci — exponential time O(2^n), DO NOT use in production
+// Naive recursive Fibonacci - exponential time O(2^n), DO NOT use in production
 static long fibNaive(int n) {
     if (n <= 1) return n;             // base cases: fib(0)=0, fib(1)=1
     return fibNaive(n - 1) + fibNaive(n - 2);  // two recursive calls
 }
-// fibNaive(40) makes ~2 billion calls — extremely slow
+// fibNaive(40) makes ~2 billion calls - extremely slow
 
-// With memoization (cache already-computed results) — O(n) time
+// With memoization (cache already-computed results) - O(n) time
 static long fibMemo(int n, long[] cache) {
     if (n <= 1) return n;
     if (cache[n] != 0) return cache[n];   // return cached result
@@ -570,14 +573,14 @@ static long fibMemo(int n, long[] cache) {
 }
 ```
 
-### Binary Search — Divide and Conquer Recursion
+### Binary Search - Divide and Conquer Recursion
 
 ```java
 // Array must be sorted. Returns index of target, or -1 if not found.
 static int binarySearch(int[] arr, int target, int low, int high) {
     if (low > high) return -1;          // base case: search space exhausted
 
-    int mid = low + (high - low) / 2;  // avoid (low+high)/2 — integer overflow risk
+    int mid = low + (high - low) / 2;  // avoid (low+high)/2 - integer overflow risk
     if (arr[mid] == target) return mid; // base case: found it
 
     if (arr[mid] < target)
@@ -596,7 +599,7 @@ static int binarySearch(int[] arr, int target, int low, int high) {
 
 ---
 
-## 11. Recursion vs Iteration — When to Use Each
+## 11. Recursion vs Iteration - When to Use Each
 
 ```
   ┌─────────────────────────────────────────────────────────────────┐
@@ -635,32 +638,35 @@ static int binarySearch(int[] arr, int target, int low, int high) {
 
 ### Files in This Module
 
-| File | What it demonstrates |
-|------|----------------------|
-| `MethodBasics.java` | Anatomy, static vs instance, early return, guard clauses |
-| `OverloadingDemo.java` | Overloading, overload resolution, widening + autoboxing traps |
-| `VarargsDemo.java` | Varargs, varargs + overloading, null safety |
-| `PassByValueDemo.java` | Primitive copy, object mutation, reference reassignment |
-| `RecursionDemo.java` | Factorial, Fibonacci (naive + memoized), binary search, power set |
-| `BankAccount.java` | Practical exercise — ties all concepts together |
+| File                   | What it demonstrates                                              |
+| ---------------------- | ----------------------------------------------------------------- |
+| `MethodBasics.java`    | Anatomy, static vs instance, early return, guard clauses          |
+| `OverloadingDemo.java` | Overloading, overload resolution, widening + autoboxing traps     |
+| `VarargsDemo.java`     | Varargs, varargs + overloading, null safety                       |
+| `PassByValueDemo.java` | Primitive copy, object mutation, reference reassignment           |
+| `RecursionDemo.java`   | Factorial, Fibonacci (naive + memoized), binary search, power set |
+| `BankAccount.java`     | Practical exercise - ties all concepts together                   |
 
-### BankAccount — What it Demonstrates
+### BankAccount - What it Demonstrates
 
 A `BankAccount` class that uses:
+
 - Instance methods for account operations vs static factory/utility methods
 - Overloaded `deposit()` and `withdraw()` (int, double, String amount)
-- Varargs `transferAll(BankAccount... accounts)` — distribute balance across accounts
+- Varargs `transferAll(BankAccount... accounts)` - distribute balance across accounts
 - Recursion for compound interest calculation over time periods
 - Pass-by-value demonstration via a `transfer()` method
 - Guard clauses with early return for input validation
 
 **Run:**
+
 ```bash
 cd module-04-methods
 mvn compile exec:java -Dexec.mainClass="com.javatraining.methods.BankAccount"
 ```
 
 **Test:**
+
 ```bash
 mvn test
 ```
@@ -669,19 +675,21 @@ mvn test
 
 ## 13. Exercises
 
-**1. Overloading — Volume Calculator**
+**1. Overloading - Volume Calculator**
 Write overloaded `volume()` methods for:
-- `volume(double side)` — cube
-- `volume(double length, double width, double height)` — cuboid
-- `volume(double radius)` — this conflicts with cube! How do you resolve it?
-  (Hint: use a different name, or a wrapper type — discuss the design limitation)
 
-**2. Varargs — Statistics**
+- `volume(double side)` - cube
+- `volume(double length, double width, double height)` - cuboid
+- `volume(double radius)` - this conflicts with cube! How do you resolve it?
+  (Hint: use a different name, or a wrapper type - discuss the design limitation)
+
+**2. Varargs - Statistics**
 Write `stats(double... values)` that returns a record containing
 `min`, `max`, `sum`, and `average`. Handle the empty case.
 
 **3. Pass-by-value**
 Predict the output of:
+
 ```java
 static void modify(int[] arr, int scalar) {
     arr[0] = arr[0] * scalar;   // (A)
@@ -693,15 +701,17 @@ modify(data, 3);
 System.out.println(data[0]);   // what does this print?
 System.out.println(data[2]);   // what does this print?
 ```
-Explain *why* for each line: (A), (B), (C).
 
-**4. Recursion — Tower of Hanoi**
+Explain _why_ for each line: (A), (B), (C).
+
+**4. Recursion - Tower of Hanoi**
 Write `hanoi(int n, String from, String to, String via)` that prints the
 moves to solve the Tower of Hanoi for `n` disks. For `n=3` the output
 should show 7 moves.
 
 **5. Recursion → Iteration**
 Convert this recursive method to an iterative one:
+
 ```java
 static int sumDigits(int n) {
     if (n < 10) return n;
@@ -713,5 +723,5 @@ static int sumDigits(int n) {
 
 ## Next
 
-[Module 05 — Arrays, Strings & Regex](../module-05-arrays-strings/)
+[Module 05 - Arrays, Strings & Regex](../module-05-arrays-strings/)
 {% endraw %}

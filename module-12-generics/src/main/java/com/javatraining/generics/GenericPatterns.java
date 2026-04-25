@@ -6,29 +6,29 @@ import java.util.function.*;
 /**
  * TOPIC: Real-world generic patterns
  *
- * Pattern 1 — Result<T>
+ * Pattern 1 - Result<T>
  *   A typed union of Success<T> and Failure<T>.  Avoids checked exceptions
  *   in pipeline code by making the error an explicit value.
  *   (Mirrors Rust's Result, Scala's Either, Haskell's Either.)
  *
- * Pattern 2 — Generic LRU Cache
+ * Pattern 2 - Generic LRU Cache
  *   A fixed-capacity cache that evicts the least-recently-used entry.
  *   Uses LinkedHashMap with accessOrder=true.
  *
- * Pattern 3 — Type-safe heterogeneous container
+ * Pattern 3 - Type-safe heterogeneous container
  *   A map that can store values of different types in the SAME container
  *   while remaining fully type-safe.  Each entry's key carries its Class<T>
  *   token, which acts as the type guarantee.
  *   (Joshua Bloch, Effective Java Item 33.)
  *
- * Pattern 4 — Generic pipeline
+ * Pattern 4 - Generic pipeline
  *   A chain of Function<I,O> steps where each step's output type is the
  *   next step's input type.  Built with a fluent API using bounded wildcards.
  */
 public class GenericPatterns {
 
     // -------------------------------------------------------------------------
-    // Pattern 1 — Result<T>
+    // Pattern 1 - Result<T>
     // -------------------------------------------------------------------------
     sealed interface Result<T> permits Result.Success, Result.Failure {
 
@@ -41,7 +41,7 @@ public class GenericPatterns {
         static <T> Result<T> failure(String msg){ return new Failure<>(msg); }
         static <T> Result<T> failure(String msg, Throwable t){ return new Failure<>(msg, t); }
 
-        /** Wraps a throwing supplier — any exception becomes a Failure. */
+        /** Wraps a throwing supplier - any exception becomes a Failure. */
         static <T> Result<T> of(ThrowingSupplier<T> supplier) {
             try {
                 return success(supplier.get());
@@ -90,7 +90,7 @@ public class GenericPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 2 — Generic LRU Cache
+    // Pattern 2 - Generic LRU Cache
     // -------------------------------------------------------------------------
     static final class LruCache<K, V> {
         private final int capacity;
@@ -126,7 +126,7 @@ public class GenericPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 3 — Type-safe heterogeneous container
+    // Pattern 3 - Type-safe heterogeneous container
     // -------------------------------------------------------------------------
     static final class TypeSafeMap {
         private final Map<Class<?>, Object> store = new LinkedHashMap<>();
@@ -149,7 +149,7 @@ public class GenericPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 4 — Generic pipeline
+    // Pattern 4 - Generic pipeline
     //    Pipeline<I,O> is a chain of transformation steps.
     //    andThen() extends the chain with a new step, tracking both input
     //    and output types.

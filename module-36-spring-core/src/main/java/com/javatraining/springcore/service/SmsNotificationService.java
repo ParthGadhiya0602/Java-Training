@@ -3,7 +3,7 @@ package com.javatraining.springcore.service;
 import org.springframework.stereotype.Service;
 
 /**
- * Secondary implementation — injected by name via {@code @Qualifier("smsNotificationService")}.
+ * Secondary implementation - injected by name via {@code @Qualifier("smsNotificationService")}.
  */
 @Service
 public class SmsNotificationService implements NotificationService {

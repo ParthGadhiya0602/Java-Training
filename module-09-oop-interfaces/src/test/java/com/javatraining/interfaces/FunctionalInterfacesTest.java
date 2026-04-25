@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FunctionalInterfacesTest {
 
     // -----------------------------------------------------------------------
-    // Custom Transformer — andThen composition
+    // Custom Transformer - andThen composition
     // -----------------------------------------------------------------------
     @Test
     void transformer_single_application() {
@@ -80,7 +80,7 @@ class FunctionalInterfacesTest {
     void function_compose_right_to_left() {
         Function<String, Integer> length = String::length;
         Function<Integer, String> asHex  = Integer::toHexString;
-        // compose: asHex(length(x)) — same logical result as andThen above
+        // compose: asHex(length(x)) - same logical result as andThen above
         Function<String, String>  chain  = asHex.compose(length);
         assertEquals("5", chain.apply("Hello"));
     }

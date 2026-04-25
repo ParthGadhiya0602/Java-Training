@@ -1,42 +1,46 @@
 ---
-title: "18 — JMM & Advanced Concurrency"
-parent: "Phase 2 — Core APIs"
+title: "18 - JMM & Advanced Concurrency"
+parent: "Phase 2 - Core APIs"
 nav_order: 18
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-18-jmm-advanced-concurrency/src){: .btn .btn-outline }
 
-# Module 18 — Java Memory Model & Advanced Concurrency
+# Module 18 - Java Memory Model & Advanced Concurrency
+
 {: .no_toc }
 
-**Goal:** Understand the Java Memory Model, safe publication, and the advanced concurrency utilities — synchronizers, concurrent collections, and the Fork/Join framework.
+**Goal:** Understand the Java Memory Model, safe publication, and the advanced concurrency utilities - synchronizers, concurrent collections, and the Fork/Join framework.
 
 ---
 
 ## Table of Contents
+
 {: .no_toc .text-delta }
+
 1. TOC
-{:toc}
+   {:toc}
 
 ---
 
 ## Java Memory Model (JMM)
 
-The JMM defines which value a thread is allowed to see when it reads a variable. Without explicit synchronisation, CPUs and the JVM may reorder instructions and cache writes — so a thread may see a stale value even after another thread "wrote" the new one.
+The JMM defines which value a thread is allowed to see when it reads a variable. Without explicit synchronisation, CPUs and the JVM may reorder instructions and cache writes - so a thread may see a stale value even after another thread "wrote" the new one.
 
 ### Happens-before (HB)
 
 If action A happens-before action B, then all effects of A are visible to B.
 
-| Relationship | HB edge |
-|---|---|
-| `monitor.unlock()` | → next `monitor.lock()` on the same object |
-| `volatile` write | → subsequent `volatile` read of the same variable |
-| `Thread.start()` | → all actions in the started thread |
-| Thread death | → `Thread.join()` return in the joining thread |
-| HB is transitive | A HB B and B HB C ⟹ A HB C |
+| Relationship       | HB edge                                           |
+| ------------------ | ------------------------------------------------- |
+| `monitor.unlock()` | → next `monitor.lock()` on the same object        |
+| `volatile` write   | → subsequent `volatile` read of the same variable |
+| `Thread.start()`   | → all actions in the started thread               |
+| Thread death       | → `Thread.join()` return in the joining thread    |
+| HB is transitive   | A HB B and B HB C ⟹ A HB C                        |
 
 ### Safe publication patterns
 
@@ -44,18 +48,18 @@ If action A happens-before action B, then all effects of A are visible to B.
 // 1. volatile field
 private volatile Config config;
 
-// 2. final fields — visible to all threads after constructor returns
+// 2. final fields - visible to all threads after constructor returns
 public final class Point { public final int x, y; ... }
 
-// 3. static initialiser — class loading is thread-safe
+// 3. static initialiser - class loading is thread-safe
 private static final Singleton INSTANCE = new Singleton();
 
-// 4. AtomicReference — CAS-based lock-free reference update
+// 4. AtomicReference - CAS-based lock-free reference update
 AtomicReference<Config> ref = new AtomicReference<>(initial);
 ref.compareAndSet(expected, updated);
 ```
 
-### Double-checked locking — requires volatile
+### Double-checked locking - requires volatile
 
 ```java
 private volatile static DCLSingleton instance;
@@ -98,7 +102,7 @@ public long p1, p2, p3, p4, p5, p6, p7;  // 7 × 8 bytes padding
 
 ## Advanced Synchronizers
 
-### Semaphore — bounded concurrency
+### Semaphore - bounded concurrency
 
 ```java
 Semaphore sem = new Semaphore(3);   // at most 3 concurrent holders
@@ -110,7 +114,7 @@ sem.tryAcquire(100, MILLISECONDS);  // non-blocking with timeout
 
 Use for: connection pools, rate limiting, resource guards.
 
-### CyclicBarrier — reusable N-party barrier
+### CyclicBarrier - reusable N-party barrier
 
 ```java
 CyclicBarrier barrier = new CyclicBarrier(workers, () -> log("phase complete"));
@@ -119,7 +123,7 @@ barrier.await();   // blocks until all workers have called await()
 // All released simultaneously; barrier resets for the next phase
 ```
 
-### Phaser — flexible multi-phase barrier
+### Phaser - flexible multi-phase barrier
 
 ```java
 Phaser phaser = new Phaser(workers) {
@@ -133,7 +137,7 @@ phaser.arriveAndDeregister();    // arrive then permanently leave
 
 Use when: tasks join or leave between phases, or phases have different party counts.
 
-### Exchanger — two-thread rendezvous
+### Exchanger - two-thread rendezvous
 
 ```java
 Exchanger<Buffer> exchanger = new Exchanger<>();
@@ -152,14 +156,14 @@ Classic use: double-buffering between a producer and consumer.
 ### ConcurrentHashMap
 
 ```java
-// Atomic update — no external lock needed
+// Atomic update - no external lock needed
 map.merge(key, 1, Integer::sum);                    // increment or insert 1
 map.computeIfAbsent(key, k -> new ArrayList<>());   // lazy init nested structure
 map.replaceAll((k, v) -> v + 1);                    // update all values
 int total = map.reduceValues(1, Integer::sum);      // parallel reduce
 ```
 
-**Never** put `null` keys or values — it throws `NullPointerException`.
+**Never** put `null` keys or values - it throws `NullPointerException`.
 
 ### CopyOnWriteArrayList
 
@@ -173,13 +177,13 @@ Write cost: O(n) copy on every mutation. Use only when reads vastly outnumber wr
 
 ### BlockingQueue family
 
-| Type | Bounded? | Ordering |
-|---|---|---|
-| `ArrayBlockingQueue` | Yes | FIFO |
-| `LinkedBlockingQueue` | Optional | FIFO |
-| `PriorityBlockingQueue` | No | Comparator |
-| `DelayQueue` | No | Delay expiry |
-| `SynchronousQueue` | Zero capacity | Rendezvous |
+| Type                    | Bounded?      | Ordering     |
+| ----------------------- | ------------- | ------------ |
+| `ArrayBlockingQueue`    | Yes           | FIFO         |
+| `LinkedBlockingQueue`   | Optional      | FIFO         |
+| `PriorityBlockingQueue` | No            | Comparator   |
+| `DelayQueue`            | No            | Delay expiry |
+| `SynchronousQueue`      | Zero capacity | Rendezvous   |
 
 ```java
 BlockingQueue<Task> q = new LinkedBlockingQueue<>(100);
@@ -214,9 +218,9 @@ ForkJoinPool pool = new ForkJoinPool();
 long result = pool.invoke(new SumTask(array, 0, array.length));
 ```
 
-- `RecursiveTask<V>` — returns a value
-- `RecursiveAction` — void result
-- `invokeAll(left, right)` — fork both, wait for both
+- `RecursiveTask<V>` - returns a value
+- `RecursiveAction` - void result
+- `invokeAll(left, right)` - fork both, wait for both
 
 ### Threshold selection
 
@@ -224,32 +228,36 @@ Too small → task-creation overhead dominates. Too large → poor parallelism. 
 
 ### Work-stealing
 
-Each worker thread has a deque. When idle, it steals tasks from the *tail* of a busy thread's deque. This keeps all cores busy with minimal coordination.
+Each worker thread has a deque. When idle, it steals tasks from the _tail_ of a busy thread's deque. This keeps all cores busy with minimal coordination.
 
 ---
 
 ## Source Files
 
-| File | What it covers |
-|---|---|
-| `MemoryModelDemo.java` | Happens-before, volatile publication, final fields, DCL, init-on-demand holder, AtomicReference CAS, false sharing |
-| `SynchronizersDemo.java` | Semaphore (pool + throttle), CyclicBarrier, Phaser, Exchanger (swap + double-buffer) |
+| File                         | What it covers                                                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MemoryModelDemo.java`       | Happens-before, volatile publication, final fields, DCL, init-on-demand holder, AtomicReference CAS, false sharing                          |
+| `SynchronizersDemo.java`     | Semaphore (pool + throttle), CyclicBarrier, Phaser, Exchanger (swap + double-buffer)                                                        |
 | `ConcurrentCollections.java` | ConcurrentHashMap (merge/compute), CopyOnWriteArrayList, BlockingQueue, PriorityBlockingQueue, ConcurrentSkipListMap, ConcurrentLinkedQueue |
-| `ForkJoinDemo.java` | RecursiveTask (sum, max, Fibonacci), RecursiveAction (merge sort), work-stealing pool stats |
+| `ForkJoinDemo.java`          | RecursiveTask (sum, max, Fibonacci), RecursiveAction (merge sort), work-stealing pool stats                                                 |
 
 ---
 
 ## Common Mistakes
 
 {: .warning }
+
 > **DCL without `volatile` is broken.** The JVM can reorder object construction and assignment, publishing a reference before the object is fully initialised.
 
 {: .warning }
+
 > **`ConcurrentHashMap` does not allow null keys or values.** Unlike `HashMap`, any null will throw `NullPointerException` immediately.
 
 {: .warning }
+
 > **Don't block inside a `ForkJoinTask`.** Blocking a FJ thread ties up a carrier and reduces parallelism. Use `managedBlock` if you must block inside a task.
 
 {: .tip }
+
 > **Prefer init-on-demand holder over DCL.** It is simpler, has no volatile overhead, and is guaranteed correct by the class-loading specification.
-{% endraw %}
+> {% endraw %}

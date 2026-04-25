@@ -3,16 +3,16 @@ package com.javatraining.cleancode.smells;
 /**
  * Refactoring: Replace Primitive Obsession with a Value Object.
  *
- * <p><strong>Smell — primitive obsession:</strong>
+ * <p><strong>Smell - primitive obsession:</strong>
  * <pre>
  *   // Scattered validation; easy to pass an invalid string
  *   void sendEmail(String email, String subject) { ... }
  *   void register(String name, String email, String phone) { ... }
  * </pre>
  *
- * <p><strong>Fix — dedicated value object:</strong>
+ * <p><strong>Fix - dedicated value object:</strong>
  * Validation is centralised in the constructor.  An {@code EmailAddress} instance
- * is always valid by construction — impossible to create an invalid one.
+ * is always valid by construction - impossible to create an invalid one.
  * Methods that accept EmailAddress are self-documenting.
  */
 public record EmailAddress(String value) {

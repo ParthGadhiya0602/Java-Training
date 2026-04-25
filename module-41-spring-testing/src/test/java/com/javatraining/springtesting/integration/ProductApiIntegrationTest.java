@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
- * Full integration test — @SpringBootTest(RANDOM_PORT).
+ * Full integration test - @SpringBootTest(RANDOM_PORT).
  *
  * Starts the complete Spring context including the embedded web server on a random port.
  * Uses TestRestTemplate which makes real HTTP calls to the running server.
@@ -27,13 +27,13 @@ import static org.mockito.Mockito.when;
  *   here, and its behaviour is covered by the dedicated WireMock test.
  *
  * Why RANDOM_PORT (not MOCK)?
- *   TestRestTemplate requires a real port — it calls the server over TCP.
+ *   TestRestTemplate requires a real port - it calls the server over TCP.
  *   RANDOM_PORT avoids conflicts with other running services.
  *   MOCK (MockMvc) is sufficient for slice and security tests but does not exercise
  *   the servlet container, filter chains at the container level, or connection handling.
  *
  * Transaction isolation: @SpringBootTest does NOT roll back transactions between tests
- * (unlike @DataJpaTest). Each test must leave the database in a known state — here that
+ * (unlike @DataJpaTest). Each test must leave the database in a known state - here that
  * means creating new objects and not relying on cross-test state.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -41,7 +41,7 @@ class ProductApiIntegrationTest {
 
     @Autowired TestRestTemplate restTemplate;
 
-    // PricingClient talks to an external service — stub it so tests are self-contained
+    // PricingClient talks to an external service - stub it so tests are self-contained
     @MockBean PricingClient pricingClient;
 
     @Test

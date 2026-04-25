@@ -26,7 +26,7 @@ import java.util.Optional;
  * </pre>
  *
  * <p>Restoring {@code autoCommit} in {@code finally} is critical when the
- * connection comes from a pool — the next borrower must not inherit an open
+ * connection comes from a pool - the next borrower must not inherit an open
  * transaction.
  */
 public class OrderRepository {
@@ -42,7 +42,7 @@ public class OrderRepository {
      * <ol>
      *   <li>Deducts {@code quantity} from {@code product.stock_qty} (only if sufficient stock)</li>
      *   <li>Inserts an order record with status {@code CONFIRMED}</li>
-     *   <li>Commits both changes — or rolls back entirely on any failure</li>
+     *   <li>Commits both changes - or rolls back entirely on any failure</li>
      * </ol>
      *
      * <p>The stock check uses an atomic {@code UPDATE ... WHERE stock_qty >= ?} rather

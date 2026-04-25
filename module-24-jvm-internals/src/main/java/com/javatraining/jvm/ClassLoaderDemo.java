@@ -9,15 +9,15 @@ import java.nio.file.Path;
 import java.util.*;
 
 /**
- * Module 24 — ClassLoaders
+ * Module 24 - ClassLoaders
  *
  * The JVM loads classes lazily and on demand via a hierarchy of ClassLoaders.
  *
  * ClassLoader hierarchy (Java 9+ module system):
- *   Bootstrap ClassLoader   — loads rt.jar / JDK core classes (java.lang, java.util …)
+ *   Bootstrap ClassLoader   - loads rt.jar / JDK core classes (java.lang, java.util …)
  *                             implemented in native code; getParent() returns null
- *   Platform ClassLoader    — loads java.* modules not in bootstrap (formerly ext)
- *   Application ClassLoader — loads classpath entries (your code + dependencies)
+ *   Platform ClassLoader    - loads java.* modules not in bootstrap (formerly ext)
+ *   Application ClassLoader - loads classpath entries (your code + dependencies)
  *
  * Delegation model (parent-first):
  *   1. Ask parent to load the class
@@ -27,11 +27,11 @@ import java.util.*;
  * This prevents user code from replacing java.lang.String with a malicious copy.
  *
  * Key ClassLoader API:
- *   ClassLoader.getSystemClassLoader()   — application class loader
- *   clazz.getClassLoader()               — loader that defined the class
- *   Thread.currentThread().getContextClassLoader()  — context loader (for frameworks)
- *   loader.loadClass("pkg.Name")         — trigger loading (with parent delegation)
- *   loader.findClass("pkg.Name")         — override point for custom loaders
+ *   ClassLoader.getSystemClassLoader()   - application class loader
+ *   clazz.getClassLoader()               - loader that defined the class
+ *   Thread.currentThread().getContextClassLoader()  - context loader (for frameworks)
+ *   loader.loadClass("pkg.Name")         - trigger loading (with parent delegation)
+ *   loader.findClass("pkg.Name")         - override point for custom loaders
  *
  * Custom ClassLoader use-cases:
  *   - Plugin / hot-reload systems
@@ -89,9 +89,9 @@ public class ClassLoaderDemo {
     // ── loadClass vs Class.forName ────────────────────────────────────────────
 
     /**
-     * loadClass(name) — does NOT run static initialisers (initialize=false).
-     * Class.forName(name) — runs static initialisers immediately.
-     * Class.forName(name, false, loader) — load without initialising.
+     * loadClass(name) - does NOT run static initialisers (initialize=false).
+     * Class.forName(name) - runs static initialisers immediately.
+     * Class.forName(name, false, loader) - load without initialising.
      */
     public static Optional<Class<?>> tryLoadClass(String fqn) {
         try {
@@ -113,7 +113,7 @@ public class ClassLoaderDemo {
 
     /**
      * A ClassLoader that can define a class directly from a byte array.
-     * Demonstrates defineClass() — the primitive operation all loaders use.
+     * Demonstrates defineClass() - the primitive operation all loaders use.
      * Useful for: bytecode generation (ASM), instrumentation, testing.
      */
     public static class ByteArrayClassLoader extends ClassLoader {
@@ -149,8 +149,8 @@ public class ClassLoaderDemo {
      * produces two incompatible Class objects.
      *
      * Returns a map with:
-     *   "sameClass"   — whether both Class objects are the same reference
-     *   "castable"    — whether an instance from loader1 can be cast to loader2's type
+     *   "sameClass"   - whether both Class objects are the same reference
+     *   "castable"    - whether an instance from loader1 can be cast to loader2's type
      */
     public static Map<String, Boolean> classIdentityDemo(ClassLoader loader1,
                                                            ClassLoader loader2,

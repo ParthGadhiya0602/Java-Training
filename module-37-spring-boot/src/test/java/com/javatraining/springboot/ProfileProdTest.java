@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *   app.database.pool-size=50
  * </pre>
  *
- * <p>No actual database connection is made — DatabaseProperties is purely
+ * <p>No actual database connection is made - DatabaseProperties is purely
  * a typed value holder. The PostgreSQL URL is just a string here.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)

@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Verifies @ConfigurationProperties binding, nested objects, @Validated,
  * and @ConditionalOnProperty / @ConditionalOnMissingBean behaviour.
  *
- * <p>No active profile — base application.properties values apply.
+ * <p>No active profile - base application.properties values apply.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class ConfigurationPropertiesTest {

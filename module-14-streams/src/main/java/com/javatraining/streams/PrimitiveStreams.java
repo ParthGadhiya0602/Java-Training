@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.*;
 
 /**
- * TOPIC: Primitive streams — IntStream, LongStream, DoubleStream
+ * TOPIC: Primitive streams - IntStream, LongStream, DoubleStream
  *
  * Why primitive streams?
  *   Stream<Integer> boxes each int into an Integer object.
@@ -45,7 +45,7 @@ public class PrimitiveStreams {
     }
 
     // -------------------------------------------------------------------------
-    // 2. mapToInt / mapToLong / mapToDouble — Object stream → primitive stream
+    // 2. mapToInt / mapToLong / mapToDouble - Object stream → primitive stream
     // -------------------------------------------------------------------------
 
     record Employee(String name, String dept, int salary) {}
@@ -80,7 +80,7 @@ public class PrimitiveStreams {
     }
 
     // -------------------------------------------------------------------------
-    // 3. LongStream — useful for large aggregations avoiding int overflow
+    // 3. LongStream - useful for large aggregations avoiding int overflow
     // -------------------------------------------------------------------------
 
     /** Computes n! using LongStream.rangeClosed (exact for n ≤ 20). */
@@ -123,7 +123,7 @@ public class PrimitiveStreams {
     }
 
     // -------------------------------------------------------------------------
-    // 5. mapToObj — primitive stream → object stream
+    // 5. mapToObj - primitive stream → object stream
     // -------------------------------------------------------------------------
 
     /** Generates the first n Fibonacci numbers. */

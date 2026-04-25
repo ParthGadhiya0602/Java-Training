@@ -1,18 +1,19 @@
 ---
-title: "Module 33 — Spring Data JPA"
-parent: "Phase 4 — Databases & Persistence"
+title: "Module 33 - Spring Data JPA"
+parent: "Phase 4 - Databases & Persistence"
 nav_order: 33
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-33-spring-data/src){: .btn .btn-outline }
 
-# Module 33 — Spring Data JPA
+# Module 33 - Spring Data JPA
 
 Spring Data JPA sits on top of JPA/Hibernate and eliminates most boilerplate.
 You define an interface that extends `JpaRepository` and Spring generates the
-implementation at runtime — no SQL, no JPQL for common queries, no transaction
+implementation at runtime - no SQL, no JPQL for common queries, no transaction
 management code.
 
 ---
@@ -43,7 +44,7 @@ management code.
 ## Derived Query Methods
 
 Spring Data parses the method name at startup and generates JPQL.
-No `@Query` annotation needed — the name IS the query.
+No `@Query` annotation needed - the name IS the query.
 
 ```
   Method name anatomy:
@@ -73,20 +74,20 @@ No `@Query` annotation needed — the name IS the query.
 
 ---
 
-## @Query — JPQL and Native SQL
+## @Query - JPQL and Native SQL
 
 When derived names become unwieldy, or you need full query control:
 
 ```java
-// JPQL — entity/field names (not table/column):
+// JPQL - entity/field names (not table/column):
 @Query("SELECT e FROM Employee e WHERE e.salary > :threshold ORDER BY e.salary DESC")
 List<Employee> findHighEarners(@Param("threshold") BigDecimal threshold);
 
-// JOIN FETCH — avoids N+1 when you'll access a LAZY association:
+// JOIN FETCH - avoids N+1 when you'll access a LAZY association:
 @Query("SELECT e FROM Employee e JOIN FETCH e.department d WHERE d.name = :deptName")
 List<Employee> findByDepartmentNameFetched(@Param("deptName") String deptName);
 
-// Native SQL — raw SQL; useful for DB-specific syntax:
+// Native SQL - raw SQL; useful for DB-specific syntax:
 @Query(value = "SELECT * FROM employees WHERE salary > :threshold ORDER BY salary DESC",
        nativeQuery = true)
 List<Employee> findHighEarnersNative(@Param("threshold") BigDecimal threshold);
@@ -94,15 +95,15 @@ List<Employee> findHighEarnersNative(@Param("threshold") BigDecimal threshold);
 
 ---
 
-## @Modifying — Bulk UPDATE and DELETE
+## @Modifying - Bulk UPDATE and DELETE
 
 ```java
-// Bulk UPDATE — skips loading entities into memory:
+// Bulk UPDATE - skips loading entities into memory:
 @Modifying
 @Query("UPDATE Employee e SET e.active = false WHERE e.department.id = :deptId")
 int deactivateByDepartmentId(@Param("deptId") Long deptId);
 
-// Bulk DELETE — removes rows without loading them:
+// Bulk DELETE - removes rows without loading them:
 @Modifying
 @Query("DELETE FROM Employee e WHERE e.active = false AND e.salary < :threshold")
 int deleteInactiveBelow(@Param("threshold") BigDecimal threshold);
@@ -119,9 +120,9 @@ int deleteInactiveBelow(@Param("threshold") BigDecimal threshold);
 
 ---
 
-## Projections — Fetch Only What You Need
+## Projections - Fetch Only What You Need
 
-Two flavours — interface proxy (no extra class) vs record DTO (type-safe, no proxy).
+Two flavours - interface proxy (no extra class) vs record DTO (type-safe, no proxy).
 
 ### Interface Projection
 
@@ -131,7 +132,7 @@ public interface EmployeeSummary {
     String getName();
     String getEmail();
 
-    // Default method — runs in Java, no extra query:
+    // Default method - runs in Java, no extra query:
     default String getDisplayName() {
         return getName() + " <" + getEmail() + ">";
     }
@@ -141,7 +142,7 @@ public interface EmployeeSummary {
 List<EmployeeSummary> findByActiveTrue();
 
 // Spring generates: SELECT name, email FROM employees WHERE active = true
-// Only the declared columns are fetched — no SELECT *.
+// Only the declared columns are fetched - no SELECT *.
 ```
 
 ### DTO Projection (Record)
@@ -154,7 +155,7 @@ public record EmployeeNameDto(String name, BigDecimal salary) {}
 @Query("SELECT new com.example.EmployeeNameDto(e.name, e.salary) " +
        "FROM Employee e WHERE e.active = true ORDER BY e.salary DESC")
 List<EmployeeNameDto> findActiveSalaries();
-// Constructs the record directly in the query — no proxy overhead.
+// Constructs the record directly in the query - no proxy overhead.
 ```
 
 ```
@@ -175,15 +176,15 @@ List<EmployeeNameDto> findActiveSalaries();
 ## Pagination and Sorting
 
 ```java
-// PageRequest.of(page, size)             — 0-indexed page number
-// PageRequest.of(page, size, Sort.by())  — with sorting
+// PageRequest.of(page, size)             - 0-indexed page number
+// PageRequest.of(page, size, Sort.by())  - with sorting
 
 Page<Employee> page = repo.findByActiveTrue(
     PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "salary")));
 
-page.getContent();          // List<Employee> — entities on this page
-page.getTotalElements();    // long — total count across ALL pages
-page.getTotalPages();       // int  — ceil(total / pageSize)
+page.getContent();          // List<Employee> - entities on this page
+page.getTotalElements();    // long - total count across ALL pages
+page.getTotalPages();       // int  - ceil(total / pageSize)
 page.isFirst();             // boolean
 page.isLast();              // boolean
 page.hasNext();             // boolean
@@ -214,7 +215,7 @@ Sort sort = Sort.by(Direction.ASC, "department.name")
 
 ---
 
-## Auditing — @CreatedDate / @LastModifiedDate
+## Auditing - @CreatedDate / @LastModifiedDate
 
 ```java
 // 1. Enable auditing:
@@ -247,16 +248,16 @@ public class Employee {
 
 ### Auditing in @DataJpaTest
 
-`@DataJpaTest` is a slice — it does NOT load `JpaAuditingConfig` from `src/main`.
+`@DataJpaTest` is a slice - it does NOT load `JpaAuditingConfig` from `src/main`.
 Two options to activate auditing inside the slice:
 
 ```java
-// Option A — import the production config:
+// Option A - import the production config:
 @DataJpaTest
 @Import(JpaAuditingConfig.class)
 class MyTest { … }
 
-// Option B — inner @TestConfiguration (supplements, does not replace):
+// Option B - inner @TestConfiguration (supplements, does not replace):
 @DataJpaTest
 class AuditingTest {
     @TestConfiguration
@@ -304,6 +305,7 @@ class EmployeeRepositoryTest {
 ## Transaction Management
 
 Spring Data repositories are transactional by default:
+
 - `findAll`, `findById`, etc. run in a **read-only** transaction.
 - `save`, `delete`, `@Modifying` queries run in a **read-write** transaction.
 
@@ -324,36 +326,36 @@ public class EmployeeService {
 
 ---
 
-## Module 33 — What Was Built
+## Module 33 - What Was Built
 
 ```
   module-33-spring-data/
   ├── pom.xml           (Spring Boot 3.3.5, spring-boot-starter-data-jpa, H2, starter-test)
   └── src/
       ├── main/java/com/javatraining/springdata/
-      │   ├── SpringDataApplication.java   — @SpringBootApplication entry point
+      │   ├── SpringDataApplication.java   - @SpringBootApplication entry point
       │   ├── entity/
-      │   │   ├── Department.java          — @OneToMany(cascade=ALL, orphanRemoval=true)
-      │   │   └── Employee.java            — @ManyToOne(LAZY), @CreatedDate, @LastModifiedDate
+      │   │   ├── Department.java          - @OneToMany(cascade=ALL, orphanRemoval=true)
+      │   │   └── Employee.java            - @ManyToOne(LAZY), @CreatedDate, @LastModifiedDate
       │   ├── repository/
-      │   │   ├── EmployeeRepository.java  — derived queries, @Query JPQL/native,
+      │   │   ├── EmployeeRepository.java  - derived queries, @Query JPQL/native,
       │   │   │                              @Modifying, projections, pagination
       │   │   └── DepartmentRepository.java
       │   ├── projection/
-      │   │   ├── EmployeeSummary.java     — interface projection with default method
-      │   │   └── EmployeeNameDto.java     — record DTO projection
+      │   │   ├── EmployeeSummary.java     - interface projection with default method
+      │   │   └── EmployeeNameDto.java     - record DTO projection
       │   └── config/
-      │       └── JpaAuditingConfig.java   — @EnableJpaAuditing
+      │       └── JpaAuditingConfig.java   - @EnableJpaAuditing
       └── test/java/com/javatraining/springdata/
-          ├── DerivedQueriesTest.java  12 tests — findByEmail, findByName, findBySalaryBetween,
+          ├── DerivedQueriesTest.java  12 tests - findByEmail, findByName, findBySalaryBetween,
           │                                       findByDepartmentName, countByActive, …
-          ├── CustomQueryTest.java      8 tests — @Query JPQL, native SQL, @Modifying
+          ├── CustomQueryTest.java      8 tests - @Query JPQL, native SQL, @Modifying
           │                                       UPDATE/DELETE, JOIN FETCH
-          ├── ProjectionTest.java       6 tests — interface projection, default method,
+          ├── ProjectionTest.java       6 tests - interface projection, default method,
           │                                       DTO record projection, ordering
-          ├── PaginationSortingTest.java 8 tests — Page metadata, last page, empty beyond range,
+          ├── PaginationSortingTest.java 8 tests - Page metadata, last page, empty beyond range,
           │                                       sort ascending/descending, multi-field sort
-          └── AuditingTest.java         5 tests — @CreatedDate populated, @LastModifiedDate
+          └── AuditingTest.java         5 tests - @CreatedDate populated, @LastModifiedDate
                                                   updated, updatable=false, @TestConfiguration
 ```
 
@@ -364,18 +366,19 @@ Total: **39 tests**, all passing.
 ## Key Takeaways
 
 ```
-  JpaRepository         — extends CrudRepository + PagingAndSortingRepository
-  Derived query methods — method name parsed to JPQL at startup; zero boilerplate
-  @Query JPQL           — full control; uses entity/field names (not table/column)
-  @Query nativeQuery    — raw SQL; database-specific syntax
-  @Modifying            — required for UPDATE/DELETE; clears persistence context
-  Interface projection  — JDK proxy; only declared columns fetched
-  DTO projection        — JPQL 'new' expression; record; no proxy
-  Page / Pageable       — LIMIT+OFFSET SQL + total COUNT; hasNext/hasPrevious
-  Sort                  — ORDER BY; single or multi-field; ASC/DESC
-  @CreatedDate          — set once on INSERT; updatable = false
-  @LastModifiedDate     — updated on every flush
-  @DataJpaTest          — JPA slice; transactional rollback; import auditing config
-  @TestConfiguration    — supplements slice context; does NOT replace auto-config
+  JpaRepository         - extends CrudRepository + PagingAndSortingRepository
+  Derived query methods - method name parsed to JPQL at startup; zero boilerplate
+  @Query JPQL           - full control; uses entity/field names (not table/column)
+  @Query nativeQuery    - raw SQL; database-specific syntax
+  @Modifying            - required for UPDATE/DELETE; clears persistence context
+  Interface projection  - JDK proxy; only declared columns fetched
+  DTO projection        - JPQL 'new' expression; record; no proxy
+  Page / Pageable       - LIMIT+OFFSET SQL + total COUNT; hasNext/hasPrevious
+  Sort                  - ORDER BY; single or multi-field; ASC/DESC
+  @CreatedDate          - set once on INSERT; updatable = false
+  @LastModifiedDate     - updated on every flush
+  @DataJpaTest          - JPA slice; transactional rollback; import auditing config
+  @TestConfiguration    - supplements slice context; does NOT replace auto-config
 ```
+
 {% endraw %}

@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Simple bank account — used as the subject-under-test for test design demos.
+ * Simple bank account - used as the subject-under-test for test design demos.
  * Demonstrates stateful objects with validation, custom exceptions, and immutable
  * transaction history; all ideal properties for exercising good test design.
  */

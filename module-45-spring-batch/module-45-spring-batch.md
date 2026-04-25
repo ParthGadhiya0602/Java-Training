@@ -1,20 +1,21 @@
 ---
-title: "Module 45 — Spring Batch"
-parent: "Phase 5 — Spring Ecosystem"
+title: "Module 45 - Spring Batch"
+parent: "Phase 5 - Spring Ecosystem"
 nav_order: 45
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-45-spring-batch/src){: .btn .btn-outline }
 
-# Module 45 — Spring Batch
+# Module 45 - Spring Batch
 
 ## Overview
 
 Spring Batch is a framework for processing large volumes of data reliably.
 It structures work as **Jobs** composed of **Steps**, each Step reading,
-transforming, and writing records in fixed-size **chunks** — so a failure
+transforming, and writing records in fixed-size **chunks** - so a failure
 mid-way through 10 million rows means at most one chunk is re-processed,
 not the entire file.
 
@@ -25,9 +26,9 @@ not the entire file.
 ```
 Job
 └── Step  (can have many; run in sequence or conditionally)
-    ├── ItemReader     — reads ONE item at a time; null signals end-of-input
-    ├── ItemProcessor  — transforms the item; null means filter (don't write)
-    └── ItemWriter     — receives the full chunk buffer and writes it atomically
+    ├── ItemReader     - reads ONE item at a time; null signals end-of-input
+    ├── ItemProcessor  - transforms the item; null means filter (don't write)
+    └── ItemWriter     - receives the full chunk buffer and writes it atomically
 ```
 
 **Chunk-oriented processing flow (per chunk of size N):**
@@ -52,7 +53,7 @@ failing chunk item-by-item to isolate and skip the bad item.
 
 ```java
 // Spring Boot auto-configures JobRepository, JobLauncher, and JobExplorer.
-// @EnableBatchProcessing DISABLES that auto-config — do NOT use it.
+// @EnableBatchProcessing DISABLES that auto-config - do NOT use it.
 
 @Bean
 public Job productImportJob(JobRepository jobRepository, Step importStep,
@@ -107,7 +108,7 @@ public FlatFileItemReader<ProductCsvRow> productReader(
 `stepExecutionContext` via `@Value` SpEL expressions. The bean is a scoped
 proxy at startup; the real instance is created when the step runs.
 
-**Elvis fallback `?: 'products.csv'`** — evaluated when the step scope activates.
+**Elvis fallback `?: 'products.csv'`** - evaluated when the step scope activates.
 Allows `launchStep("importStep")` in tests without passing any parameters.
 
 **`ProductCsvRow` must be a mutable JavaBean** (no-arg constructor + setters)
@@ -125,14 +126,14 @@ public class ProductCsvRow {
 
 ---
 
-## 4. `ItemProcessor` — filter vs skip
+## 4. `ItemProcessor` - filter vs skip
 
 The processor is the data quality gate. Two distinct outcomes:
 
-| Processor returns | Spring Batch action | Counter incremented |
-|---|---|---|
-| a non-null item | passes item to writer | `writeCount` |
-| `null` | silently drops the item | `filterCount` |
+| Processor returns   | Spring Batch action                                                           | Counter incremented                     |
+| ------------------- | ----------------------------------------------------------------------------- | --------------------------------------- |
+| a non-null item     | passes item to writer                                                         | `writeCount`                            |
+| `null`              | silently drops the item                                                       | `filterCount`                           |
 | throws an exception | rolls back chunk; re-runs item-by-item; if `skip` configured, item is skipped | `processSkipCount` (within `skipCount`) |
 
 ```java
@@ -142,7 +143,7 @@ public class ProductItemProcessor implements ItemProcessor<ProductCsvRow, Produc
     @Override
     public Product process(ProductCsvRow row) {
         if (row.getName() == null || row.getName().isBlank()) {
-            return null;               // filter — increments filterCount, NOT skipCount
+            return null;               // filter - increments filterCount, NOT skipCount
         }
         if (row.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Invalid price: " + row.getPrice());
@@ -171,7 +172,7 @@ public RepositoryItemWriter<Product> productWriter(ProductRepository repo) {
 }
 ```
 
-The writer participates in the chunk's transaction automatically — same
+The writer participates in the chunk's transaction automatically - same
 `EntityManager` / transaction context.
 
 ---
@@ -188,7 +189,7 @@ public class JobCompletionListener implements JobExecutionListener {
 
     @Override
     public void beforeJob(JobExecution jobExecution) {
-        log.info("Job '{}' starting — parameters: {}",
+        log.info("Job '{}' starting - parameters: {}",
                 jobExecution.getJobInstance().getJobName(),
                 jobExecution.getJobParameters());
     }
@@ -196,7 +197,7 @@ public class JobCompletionListener implements JobExecutionListener {
     @Override
     public void afterJob(JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
-            log.info("Completed — products in DB: {}", repository.count());
+            log.info("Completed - products in DB: {}", repository.count());
         } else {
             log.error("Failed: {}", jobExecution.getAllFailureExceptions());
         }
@@ -229,16 +230,16 @@ public class ImportStepListener implements StepExecutionListener {
 
 **`StepExecution` counters:**
 
-| Counter | Meaning |
-|---|---|
-| `readCount` | items successfully read |
-| `writeCount` | items successfully written |
-| `filterCount` | items returning null from processor |
-| `readSkipCount` | items skipped due to read exception |
+| Counter            | Meaning                                  |
+| ------------------ | ---------------------------------------- |
+| `readCount`        | items successfully read                  |
+| `writeCount`       | items successfully written               |
+| `filterCount`      | items returning null from processor      |
+| `readSkipCount`    | items skipped due to read exception      |
 | `processSkipCount` | items skipped due to processor exception |
-| `writeSkipCount` | items skipped due to writer exception |
-| `skipCount` | sum of all three skip counters |
-| `rollbackCount` | chunk transaction rollbacks |
+| `writeSkipCount`   | items skipped due to writer exception    |
+| `skipCount`        | sum of all three skip counters           |
+| `rollbackCount`    | chunk transaction rollbacks              |
 
 ---
 
@@ -327,14 +328,14 @@ Remote partitioning (distributing work across JVMs) requires Spring Batch Integr
 
 `@SpringBatchTest` adds to the application context:
 
-| Bean | Purpose |
-|---|---|
-| `JobLauncherTestUtils` | launch full jobs or individual steps programmatically |
-| `JobRepositoryTestUtils` | clean up `BATCH_*` metadata tables between tests |
-| `StepScopeTestExecutionListener` | activates step scope for `@StepScope` bean injection |
-| `JobScopeTestExecutionListener` | activates job scope for `@JobScope` bean injection |
+| Bean                             | Purpose                                               |
+| -------------------------------- | ----------------------------------------------------- |
+| `JobLauncherTestUtils`           | launch full jobs or individual steps programmatically |
+| `JobRepositoryTestUtils`         | clean up `BATCH_*` metadata tables between tests      |
+| `StepScopeTestExecutionListener` | activates step scope for `@StepScope` bean injection  |
+| `JobScopeTestExecutionListener`  | activates job scope for `@JobScope` bean injection    |
 
-Must be combined with `@SpringBootTest` (or `@ContextConfiguration`) — `@SpringBatchTest`
+Must be combined with `@SpringBootTest` (or `@ContextConfiguration`) - `@SpringBatchTest`
 alone does not load the application context.
 
 ```java
@@ -392,15 +393,15 @@ and `repository.deleteAll()` in `@BeforeEach` instead.
 **`StepScopeTestExecutionListener` method-scanning caveat (Spring Batch 5.x):**
 The listener scans the test class for any method returning `StepExecution` to use
 as a factory for step scope activation. Do not declare helper methods with that
-return type — inline the stream logic instead.
+return type - inline the stream logic instead.
 
 ---
 
 ## Key takeaways
 
 - Spring Batch structures work as Jobs → Steps → chunks; each chunk is one
-  transaction — failure rolls back only that chunk, not the whole job
-- Do not use `@EnableBatchProcessing` in Spring Boot 3.x — it disables the
+  transaction - failure rolls back only that chunk, not the whole job
+- Do not use `@EnableBatchProcessing` in Spring Boot 3.x - it disables the
   auto-configuration. Use `JobBuilder`/`StepBuilder` directly (factory classes deprecated)
 - `@StepScope` enables per-step bean creation and late-binding of `jobParameters` /
   `stepExecutionContext` via SpEL; the Elvis `?:` fallback lets tests call
@@ -412,5 +413,5 @@ return type — inline the stream logic instead.
 - Test with `@SpringBatchTest + @SpringBootTest`; `JobLauncherTestUtils.launchJob()`
   runs the full job, `launchStep("name")` runs one step in isolation
 - Clean up between tests with `jobRepositoryTestUtils.removeJobExecutions()` and
-  `repository.deleteAll()` — no `@Transactional` on the test class
-{% endraw %}
+  `repository.deleteAll()` - no `@Transactional` on the test class
+  {% endraw %}

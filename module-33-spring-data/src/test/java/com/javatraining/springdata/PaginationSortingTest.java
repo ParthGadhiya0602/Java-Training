@@ -29,8 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * <p>The returned {@link Page} object carries:
  * <ul>
- *   <li>{@code getContent()} — entities on this page</li>
- *   <li>{@code getTotalElements()} — total count (extra COUNT query)</li>
+ *   <li>{@code getContent()} - entities on this page</li>
+ *   <li>{@code getTotalElements()} - total count (extra COUNT query)</li>
  *   <li>{@code getTotalPages()}</li>
  *   <li>{@code isFirst()} / {@code isLast()} / {@code hasNext()}</li>
  * </ul>
@@ -138,7 +138,7 @@ class PaginationSortingTest {
 
     @Test
     void multi_field_sort_is_stable() {
-        // Sort by active ASC (all same), then name ASC — tests multi-property Sort
+        // Sort by active ASC (all same), then name ASC - tests multi-property Sort
         Page<Employee> page = employees.findByActiveTrue(
                 PageRequest.of(0, 8,
                         Sort.by(Sort.Direction.ASC, "active")

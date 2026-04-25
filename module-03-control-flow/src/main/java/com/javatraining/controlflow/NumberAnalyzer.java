@@ -22,7 +22,7 @@ package com.javatraining.controlflow;
 public class NumberAnalyzer {
 
     // =========================================================================
-    // 1. isPrime — for loop + break
+    // 1. isPrime - for loop + break
     // =========================================================================
     static boolean isPrime(int n) {
         if (n < 2) return false;       // 0 and 1 are not prime
@@ -38,7 +38,7 @@ public class NumberAnalyzer {
     }
 
     // =========================================================================
-    // 2. Sieve of Eratosthenes — for loops + continue + labels
+    // 2. Sieve of Eratosthenes - for loops + continue + labels
     //    Finds ALL primes up to a limit efficiently.
     // =========================================================================
     static int[] sieve(int limit) {
@@ -49,7 +49,7 @@ public class NumberAnalyzer {
 
         // For each prime p, mark all its multiples as composite
         for (int p = 2; p * p <= limit; p++) {
-            if (isComposite[p]) continue;   // p is already marked — skip
+            if (isComposite[p]) continue;   // p is already marked - skip
             for (int multiple = p * p; multiple <= limit; multiple += p) {
                 isComposite[multiple] = true;
             }
@@ -70,7 +70,7 @@ public class NumberAnalyzer {
     }
 
     // =========================================================================
-    // 3. Prime Factorization — while + for + labeled break
+    // 3. Prime Factorization - while + for + labeled break
     // =========================================================================
     static int[] primeFactors(int n) {
         if (n < 2) return new int[0];
@@ -84,7 +84,7 @@ public class NumberAnalyzer {
             n /= 2;
         }
 
-        // Now n must be odd — only check odd divisors
+        // Now n must be odd - only check odd divisors
         for (int f = 3; f * f <= n; f += 2) {
             while (n % f == 0) {       // divide out all copies of f
                 factors[count++] = f;
@@ -102,7 +102,7 @@ public class NumberAnalyzer {
     }
 
     // =========================================================================
-    // 4. Digital root — while loop
+    // 4. Digital root - while loop
     //    Repeatedly sum digits until a single digit remains.
     // =========================================================================
     static int digitalRoot(int n) {
@@ -120,7 +120,7 @@ public class NumberAnalyzer {
     }
 
     // =========================================================================
-    // 5. Pattern Printer — nested for loops + continue
+    // 5. Pattern Printer - nested for loops + continue
     //    Prints a right-angled triangle and a number diamond.
     // =========================================================================
     static void printTriangle(int height) {
@@ -153,10 +153,10 @@ public class NumberAnalyzer {
     }
 
     // =========================================================================
-    // 6. FizzBuzz — for loop + switch expression
+    // 6. FizzBuzz - for loop + switch expression
     // =========================================================================
     static String fizzBuzz(int n) {
-        // Using switch on a computed int key — elegant alternative to if/else chains
+        // Using switch on a computed int key - elegant alternative to if/else chains
         return switch ((n % 3 == 0 ? 1 : 0) + (n % 5 == 0 ? 2 : 0)) {
             case 0 -> String.valueOf(n);
             case 1 -> "Fizz";
@@ -167,10 +167,10 @@ public class NumberAnalyzer {
     }
 
     // =========================================================================
-    // Main — ties all analyses together using do-while + switch dispatch
+    // Main - ties all analyses together using do-while + switch dispatch
     // =========================================================================
     public static void main(String[] args) {
-        // Simulated "menu choices" — replace with Scanner.nextInt() for interactive use
+        // Simulated "menu choices" - replace with Scanner.nextInt() for interactive use
         int[] menuChoices = {1, 2, 3, 4, 5, 6, 0};
         int choiceIndex = 0;
 

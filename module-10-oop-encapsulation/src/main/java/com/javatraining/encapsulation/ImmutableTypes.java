@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.util.*;
 
 /**
- * TOPIC: Immutability — how to build truly immutable classes
+ * TOPIC: Immutability - how to build truly immutable classes
  *
  * An immutable object's state never changes after construction.
  * Benefits:
  *   • Thread-safe without synchronisation
  *   • Safe to share and cache
  *   • Eliminates temporal coupling and aliasing bugs
- *   • Easier to reason about — no "what state is this in?" questions
+ *   • Easier to reason about - no "what state is this in?" questions
  *
  * The immutability checklist:
  *   1. All fields private final
@@ -24,7 +24,7 @@ import java.util.*;
 public class ImmutableTypes {
 
     // -------------------------------------------------------------------------
-    // 1. Unsafe mutable class — demonstrates aliasing / escaping reference bugs
+    // 1. Unsafe mutable class - demonstrates aliasing / escaping reference bugs
     //    DO NOT use this style in production; shown to explain WHY we need defence.
     // -------------------------------------------------------------------------
     static class UnsafeSchedule {
@@ -33,7 +33,7 @@ public class ImmutableTypes {
 
         UnsafeSchedule(String name, List<LocalDate> slots) {
             this.name  = name;
-            this.slots = slots; // aliased — caller still holds the original list!
+            this.slots = slots; // aliased - caller still holds the original list!
         }
 
         List<LocalDate> slots() { return slots; } // exposes internal mutable state
@@ -48,17 +48,17 @@ public class ImmutableTypes {
 
         ImmutableSchedule(String name, List<LocalDate> slots) {
             this.name  = Objects.requireNonNull(name, "name");
-            // Defensive copy IN — detach from caller's list, wrap unmodifiable
+            // Defensive copy IN - detach from caller's list, wrap unmodifiable
             this.slots = Collections.unmodifiableList(new ArrayList<>(
                 Objects.requireNonNull(slots, "slots")));
         }
 
         String name() { return name; }
 
-        // Defensive copy OUT — return a new list; caller cannot affect internals
+        // Defensive copy OUT - return a new list; caller cannot affect internals
         List<LocalDate> slots() { return new ArrayList<>(slots); }
 
-        // "with" pattern — create a modified copy without mutation
+        // "with" pattern - create a modified copy without mutation
         ImmutableSchedule withName(String newName) {
             return new ImmutableSchedule(newName, slots);
         }
@@ -81,7 +81,7 @@ public class ImmutableTypes {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Immutable Money — canonical example with arithmetic
+    // 3. Immutable Money - canonical example with arithmetic
     //    Uses long paise to avoid floating-point imprecision.
     // -------------------------------------------------------------------------
     static final class Money {
@@ -147,11 +147,11 @@ public class ImmutableTypes {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Immutable complex object — Period with mutable Date fields
+    // 4. Immutable complex object - Period with mutable Date fields
     //    Dates are mutable; must copy both in AND out.
     // -------------------------------------------------------------------------
     static final class DateRange {
-        private final LocalDate start; // LocalDate is immutable — no copy needed
+        private final LocalDate start; // LocalDate is immutable - no copy needed
         private final LocalDate end;
 
         DateRange(LocalDate start, LocalDate end) {
@@ -163,7 +163,7 @@ public class ImmutableTypes {
             this.end   = end;
         }
 
-        // LocalDate is already immutable — safe to return directly
+        // LocalDate is already immutable - safe to return directly
         LocalDate start() { return start; }
         LocalDate end()   { return end;   }
 
@@ -210,11 +210,11 @@ public class ImmutableTypes {
         UnsafeSchedule unsafe = new UnsafeSchedule("Doctor", slots);
         System.out.println("Before: " + unsafe.slots().size() + " slots");
 
-        // Caller mutates the original list — schedule is silently corrupted!
+        // Caller mutates the original list - schedule is silently corrupted!
         slots.add(LocalDate.of(2024, 1, 20));
         System.out.println("After adding to external list: " + unsafe.slots().size() + " slots");
 
-        // Caller mutates via the getter — also corrupted!
+        // Caller mutates via the getter - also corrupted!
         unsafe.slots().add(LocalDate.of(2024, 2, 1));
         System.out.println("After mutating via getter:     " + unsafe.slots().size() + " slots");
     }
@@ -238,7 +238,7 @@ public class ImmutableTypes {
         returned.add(LocalDate.of(2024, 3, 1));
         System.out.println("After mutating returned list: " + s1.slotCount() + " slots (unchanged)");
 
-        // "with" pattern — non-destructive update
+        // "with" pattern - non-destructive update
         ImmutableSchedule s2 = s1.withSlot(LocalDate.of(2024, 2, 5));
         System.out.println("s1 slots: " + s1.slotCount() + "  s2 slots: " + s2.slotCount());
 

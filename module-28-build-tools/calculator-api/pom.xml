@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  calculator-api — public API module
+  calculator-api - public API module
   ════════════════════════════════════════════════════════════════════
   • Declares parent → inherits properties, pluginManagement, profiles
   • Contains only interfaces and pure utilities (no implementations)
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <!-- <version> intentionally omitted — inherited from parent -->
+            <!-- <version> intentionally omitted - inherited from parent -->
             <scope>test</scope>
         </dependency>
     </dependencies>

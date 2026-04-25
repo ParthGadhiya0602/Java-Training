@@ -1,14 +1,15 @@
 ---
-title: "05 — Arrays & Strings"
-parent: "Phase 1 — Fundamentals"
+title: "05 - Arrays & Strings"
+parent: "Phase 1 - Fundamentals"
 nav_order: 5
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-05-arrays-strings/src){: .btn .btn-outline }
 
-# Module 05 — Arrays, Strings & Regex
+# Module 05 - Arrays, Strings & Regex
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21
 
@@ -19,14 +20,14 @@ render_with_liquid: false
 1. [Arrays](#1-arrays)
 2. [Multi-Dimensional & Jagged Arrays](#2-multi-dimensional--jagged-arrays)
 3. [The Arrays Utility Class](#3-the-arrays-utility-class)
-4. [String — Immutability & the String Pool](#4-string--immutability--the-string-pool)
-5. [String API — Every Method You Actually Use](#5-string-api--every-method-you-actually-use)
+4. [String - Immutability & the String Pool](#4-string--immutability--the-string-pool)
+5. [String API - Every Method You Actually Use](#5-string-api--every-method-you-actually-use)
 6. [String Concatenation & Performance](#6-string-concatenation--performance)
 7. [StringBuilder & StringJoiner](#7-stringbuilder--stringjoiner)
 8. [Text Blocks (Java 13+)](#8-text-blocks-java-13)
 9. [Regular Expressions](#9-regular-expressions)
 10. [Regex Groups & Named Groups](#10-regex-groups--named-groups)
-11. [Practical Exercise — CSV Text Processor](#11-practical-exercise--csv-text-processor)
+11. [Practical Exercise - CSV Text Processor](#11-practical-exercise--csv-text-processor)
 12. [Exercises](#12-exercises)
 
 ---
@@ -34,22 +35,22 @@ render_with_liquid: false
 ## 1. Arrays
 
 An **array** is a fixed-size, ordered container that holds elements of a
-single type. All elements are stored in contiguous memory — this makes
+single type. All elements are stored in contiguous memory - this makes
 index access O(1) but resizing impossible (you must create a new array).
 
 ### Declaration and Initialization
 
 ```java
-// Declaration — no memory allocated yet
+// Declaration - no memory allocated yet
 int[] numbers;
 
-// Allocation — memory allocated, elements set to default values
+// Allocation - memory allocated, elements set to default values
 numbers = new int[5];        // [0, 0, 0, 0, 0]
 
 // Combined declaration + allocation
 int[] scores = new int[3];   // [0, 0, 0]
 
-// Array literal — declare, allocate, and initialize at once
+// Array literal - declare, allocate, and initialize at once
 int[] primes = {2, 3, 5, 7, 11};
 
 // new keyword form of literal (required when passing inline to a method)
@@ -60,13 +61,13 @@ printAll(new int[]{10, 20, 30});
 
 Every newly created array is pre-filled with the type's default value:
 
-| Element type | Default value |
-|---|---|
-| `int`, `long`, `short`, `byte` | `0` |
-| `double`, `float` | `0.0` |
-| `boolean` | `false` |
-| `char` | `'\u0000'` (null char) |
-| Any object / String | `null` |
+| Element type                   | Default value          |
+| ------------------------------ | ---------------------- |
+| `int`, `long`, `short`, `byte` | `0`                    |
+| `double`, `float`              | `0.0`                  |
+| `boolean`                      | `false`                |
+| `char`                         | `'\u0000'` (null char) |
+| Any object / String            | `null`                 |
 
 ### Memory Layout
 
@@ -87,21 +88,21 @@ Every newly created array is pre-filled with the type's default value:
 ```java
 int[] data = {10, 20, 30, 40, 50};
 
-// Length — number of elements (NOT last index)
+// Length - number of elements (NOT last index)
 System.out.println(data.length);    // 5
 
 // Last valid index is always length - 1
 System.out.println(data[data.length - 1]);  // 50
 
-// ArrayIndexOutOfBoundsException — accessing out-of-range index
-// data[5];   ← throws at runtime — no compile-time check
+// ArrayIndexOutOfBoundsException - accessing out-of-range index
+// data[5];   ← throws at runtime - no compile-time check
 // data[-1];  ← throws at runtime
 
-// Arrays are objects — they have identity
+// Arrays are objects - they have identity
 int[] a = {1, 2, 3};
 int[] b = {1, 2, 3};
-System.out.println(a == b);              // false — different objects
-System.out.println(Arrays.equals(a, b)); // true  — same content
+System.out.println(a == b);              // false - different objects
+System.out.println(Arrays.equals(a, b)); // true  - same content
 ```
 
 ### Copying Arrays
@@ -109,23 +110,23 @@ System.out.println(Arrays.equals(a, b)); // true  — same content
 ```java
 int[] src = {1, 2, 3, 4, 5};
 
-// System.arraycopy — fastest, most flexible (src, srcPos, dest, destPos, length)
+// System.arraycopy - fastest, most flexible (src, srcPos, dest, destPos, length)
 int[] dest1 = new int[5];
 System.arraycopy(src, 0, dest1, 0, src.length);  // copy all
 
-// Arrays.copyOf — creates a new array of specified length
+// Arrays.copyOf - creates a new array of specified length
 int[] dest2 = Arrays.copyOf(src, 3);       // [1, 2, 3]    (truncates)
 int[] dest3 = Arrays.copyOf(src, 8);       // [1,2,3,4,5,0,0,0] (pads with 0)
 
-// Arrays.copyOfRange — copy a slice
+// Arrays.copyOfRange - copy a slice
 int[] dest4 = Arrays.copyOfRange(src, 1, 4); // [2, 3, 4]  (index 1 inclusive to 4 exclusive)
 
-// clone() — shallow copy of the whole array
+// clone() - shallow copy of the whole array
 int[] dest5 = src.clone();                   // [1, 2, 3, 4, 5]
 ```
 
 > **Shallow vs Deep copy:** For primitive arrays, all copies are deep (no
-> shared state). For object arrays, all copies are shallow — both arrays point
+> shared state). For object arrays, all copies are shallow - both arrays point
 > to the **same** objects. Modifying an object through one array IS visible via
 > the other.
 
@@ -137,7 +138,7 @@ int[] dest5 = src.clone();                   // [1, 2, 3, 4, 5]
 
 ```java
 // Declaration: int[rows][cols]
-int[][] matrix = new int[3][4];    // 3 rows, 4 cols — all 0
+int[][] matrix = new int[3][4];    // 3 rows, 4 cols - all 0
 
 // Literal initialization
 int[][] grid = {
@@ -161,7 +162,7 @@ for (int row = 0; row < grid.length; row++) {
 ```
   grid memory layout:
 
-  STACK          HEAP (outer array — array of references)
+  STACK          HEAP (outer array - array of references)
   ┌───────┐      ┌──────┬──────┬──────┐
   │grid ──┼─────►│ ref0 │ ref1 │ ref2 │
   └───────┘      └──┬───┴──┬───┴──┬───┘
@@ -225,7 +226,7 @@ System.out.println(Arrays.equals(a, b));         // true (1D comparison)
 
 int[][] m1 = {{1,2},{3,4}};
 int[][] m2 = {{1,2},{3,4}};
-System.out.println(Arrays.equals(m1, m2));       // false! (shallow — compares refs)
+System.out.println(Arrays.equals(m1, m2));       // false! (shallow - compares refs)
 System.out.println(Arrays.deepEquals(m1, m2));   // true   (recursive content check)
 
 // --- Printing ---
@@ -239,13 +240,13 @@ String[] words2 = {"a", "b", "c"};
 List<String> list = Arrays.asList(words2);        // fixed-size List backed by the array
 ```
 
-> **`Arrays.asList()` trap:** The returned List is **fixed-size** — you can
+> **`Arrays.asList()` trap:** The returned List is **fixed-size** - you can
 > call `set()` but NOT `add()` or `remove()`. It throws `UnsupportedOperationException`.
 > To get a mutable list: `new ArrayList<>(Arrays.asList(arr))`
 
 ---
 
-## 4. String — Immutability & the String Pool
+## 4. String - Immutability & the String Pool
 
 ### String is Immutable
 
@@ -254,7 +255,7 @@ operation returns a **new** String object.
 
 ```java
 String s = "hello";
-s.toUpperCase();                  // creates a new String "HELLO" — s is unchanged
+s.toUpperCase();                  // creates a new String "HELLO" - s is unchanged
 System.out.println(s);            // still "hello"
 
 s = s.toUpperCase();              // now s points to the new String
@@ -271,11 +272,12 @@ System.out.println(s);            // "HELLO"
 ```
 
 **Why immutability?**
-- **Thread safety** — multiple threads can read the same String with no locks
-- **String Pool** — safe to share because nobody can change the content
-- **Security** — file paths, network addresses, credentials can't be altered
+
+- **Thread safety** - multiple threads can read the same String with no locks
+- **String Pool** - safe to share because nobody can change the content
+- **Security** - file paths, network addresses, credentials can't be altered
   after validation
-- **HashMap keys** — hashCode never changes, safe to use as key
+- **HashMap keys** - hashCode never changes, safe to use as key
 
 ### The String Pool
 
@@ -288,15 +290,15 @@ String s2 = "java";           // reuses the SAME pool entry
 String s3 = new String("java"); // FORCES a new heap object, bypasses pool
 String s4 = s3.intern();       // manually adds s3's value to pool, returns pool ref
 
-System.out.println(s1 == s2);  // true  — same pool reference
-System.out.println(s1 == s3);  // false — s3 is not in pool
-System.out.println(s1 == s4);  // true  — s4 was interned
+System.out.println(s1 == s2);  // true  - same pool reference
+System.out.println(s1 == s3);  // false - s3 is not in pool
+System.out.println(s1 == s4);  // true  - s4 was interned
 
-// Compile-time constant folding — compiler combines literal expressions
+// Compile-time constant folding - compiler combines literal expressions
 String s5 = "ja" + "va";       // compiler sees this as "java" at compile time
-System.out.println(s1 == s5);  // true — compiler-folded into pool literal
+System.out.println(s1 == s5);  // true - compiler-folded into pool literal
 
-// Runtime concatenation — NOT folded
+// Runtime concatenation - NOT folded
 String part = "ja";
 String s6 = part + "va";       // runtime: creates new heap object
 System.out.println(s1 == s6);  // false
@@ -319,20 +321,20 @@ System.out.println(s1 == s6);  // false
 
 ---
 
-## 5. String API — Every Method You Actually Use
+## 5. String API - Every Method You Actually Use
 
 ### Inspection
 
 ```java
 String s = "  Hello, World!  ";
 
-s.length()                    // 18 — includes spaces
-s.isEmpty()                   // false — true only if length() == 0
-s.isBlank()                   // false — true if only whitespace (Java 11+)
+s.length()                    // 18 - includes spaces
+s.isEmpty()                   // false - true only if length() == 0
+s.isBlank()                   // false - true if only whitespace (Java 11+)
 s.charAt(7)                   // 'W'
-s.indexOf('o')                // 4  — first occurrence, -1 if not found
-s.lastIndexOf('o')            // 9  — last occurrence
-s.indexOf("World")            // 8  — substring search
+s.indexOf('o')                // 4  - first occurrence, -1 if not found
+s.lastIndexOf('o')            // 9  - last occurrence
+s.indexOf("World")            // 8  - substring search
 s.contains("World")           // true
 s.startsWith("  Hello")       // true
 s.endsWith("!  ")             // true
@@ -343,8 +345,8 @@ s.endsWith("!  ")             // true
 ```java
 String s = "Hello, World!";
 
-s.substring(7)                // "World!" — from index 7 to end
-s.substring(7, 12)            // "World"  — [7, 12) — 12 is exclusive
+s.substring(7)                // "World!" - from index 7 to end
+s.substring(7, 12)            // "World"  - [7, 12) - 12 is exclusive
 s.charAt(0)                   // 'H'
 s.toCharArray()               // char[] {'H','e','l','l','o',',', ...}
 ```
@@ -356,27 +358,27 @@ String s = "  Hello, World!  ";
 
 s.toLowerCase()               // "  hello, world!  "
 s.toUpperCase()               // "  HELLO, WORLD!  "
-s.trim()                      // "Hello, World!"  — removes ASCII whitespace
-s.strip()                     // "Hello, World!"  — Unicode-aware (Java 11+, prefer this)
+s.trim()                      // "Hello, World!"  - removes ASCII whitespace
+s.strip()                     // "Hello, World!"  - Unicode-aware (Java 11+, prefer this)
 s.stripLeading()              // "Hello, World!  "
 s.stripTrailing()             // "  Hello, World!"
-s.replace('l', 'r')           // "  Herro, Worrd!  " — char replacement
-s.replace("World", "Java")    // "  Hello, Java!  " — literal string replacement
-s.replaceAll("\\s+", "-")     // regex replacement — all whitespace runs → "-"
+s.replace('l', 'r')           // "  Herro, Worrd!  " - char replacement
+s.replace("World", "Java")    // "  Hello, Java!  " - literal string replacement
+s.replaceAll("\\s+", "-")     // regex replacement - all whitespace runs → "-"
 s.replaceFirst("\\s", "_")    // replaces FIRST whitespace match only
 ```
 
 ### Splitting & Joining
 
 ```java
-// split — returns String[], regex-based
+// split - returns String[], regex-based
 "a,b,c,d".split(",")          // ["a", "b", "c", "d"]
 "a,,b".split(",")             // ["a", "", "b"]
 "a,,b".split(",", -1)         // ["a", "", "b"]   (limit=-1 keeps trailing empties)
 "a,,b,,".split(",")           // ["a", "", "b"]   (trailing empties dropped by default)
-"one two  three".split("\\s+")// ["one", "two", "three"] — one or more spaces
+"one two  three".split("\\s+")// ["one", "two", "three"] - one or more spaces
 
-// join — static method
+// join - static method
 String.join(", ", "Alice", "Bob", "Charlie") // "Alice, Bob, Charlie"
 String.join("-", List.of("2024", "04", "15")) // "2024-04-15"
 ```
@@ -387,10 +389,10 @@ String.join("-", List.of("2024", "04", "15")) // "2024-04-15"
 String a = "Hello";
 String b = "hello";
 
-a.equals(b)                   // false — case-sensitive
+a.equals(b)                   // false - case-sensitive
 a.equalsIgnoreCase(b)         // true
-a.compareTo(b)                // negative — 'H' < 'h' in Unicode
-a.compareToIgnoreCase(b)      // 0 — equal ignoring case
+a.compareTo(b)                // negative - 'H' < 'h' in Unicode
+a.compareToIgnoreCase(b)      // 0 - equal ignoring case
 ```
 
 ### Conversion
@@ -400,7 +402,7 @@ a.compareToIgnoreCase(b)      // 0 — equal ignoring case
 String.valueOf(42)            // "42"
 String.valueOf(3.14)          // "3.14"
 String.valueOf(true)          // "true"
-Integer.toString(255, 16)     // "ff" — base-16 representation
+Integer.toString(255, 16)     // "ff" - base-16 representation
 
 // String → primitive
 Integer.parseInt("42")        // 42
@@ -415,9 +417,9 @@ String.format("%-10s %5d", "item", 42)  // "item        42"
 ### Useful Java 11–21 String Methods
 
 ```java
-"  \t\n  ".isBlank()          // true  — whitespace-only check
+"  \t\n  ".isBlank()          // true  - whitespace-only check
 "line1\nline2\nline3"
-    .lines()                  // Stream<String> — split by line terminators
+    .lines()                  // Stream<String> - split by line terminators
     .collect(...)
 
 "abc".repeat(3)               // "abcabcabc" (Java 11+)
@@ -433,10 +435,10 @@ String.format("%-10s %5d", "item", 42)  // "item        42"
 
 ## 6. String Concatenation & Performance
 
-### The + Operator in Loops — Hidden Performance Trap
+### The + Operator in Loops - Hidden Performance Trap
 
 ```java
-// WRONG — creates a new String object on EVERY iteration
+// WRONG - creates a new String object on EVERY iteration
 String result = "";
 for (int i = 0; i < 10_000; i++) {
     result += i;    // internally: result = new StringBuilder(result).append(i).toString()
@@ -452,7 +454,7 @@ for (int i = 0; i < 10_000; i++) {
 ```
 
 ```java
-// CORRECT — one StringBuilder, append is amortized O(1)
+// CORRECT - one StringBuilder, append is amortized O(1)
 StringBuilder sb = new StringBuilder();
 for (int i = 0; i < 10_000; i++) {
     sb.append(i);
@@ -467,7 +469,7 @@ when it can. You only need to manually use `StringBuilder` in loops or when
 building strings conditionally across many statements.
 
 ```java
-// Fine — compiler optimizes this to a single StringBuilder chain
+// Fine - compiler optimizes this to a single StringBuilder chain
 String name = "Alice";
 int age = 30;
 String msg = "Name: " + name + ", Age: " + age;
@@ -477,14 +479,14 @@ String msg = "Name: " + name + ", Age: " + age;
 
 ## 7. StringBuilder & StringJoiner
 
-### StringBuilder — Mutable String Buffer
+### StringBuilder - Mutable String Buffer
 
 ```java
 StringBuilder sb = new StringBuilder("Hello");
 
 sb.append(", ")                 // "Hello, "
   .append("World")             // "Hello, World"
-  .append('!');                // "Hello, World!"  (chaining — each append returns 'this')
+  .append('!');                // "Hello, World!"  (chaining - each append returns 'this')
 
 sb.insert(5, " Beautiful");    // "Hello Beautiful, World!"
 sb.delete(5, 15);              // "Hello, World!"   (delete [5,15))
@@ -497,12 +499,12 @@ sb.charAt(0)                   // 'a'
 sb.indexOf("J")                // 4
 sb.toString()                  // produce the final immutable String
 
-// Capacity management — StringBuilder pre-allocates internal buffer
+// Capacity management - StringBuilder pre-allocates internal buffer
 new StringBuilder()            // default capacity: 16 chars
-new StringBuilder(256)         // pre-allocate 256 — avoids resizing in tight loops
+new StringBuilder(256)         // pre-allocate 256 - avoids resizing in tight loops
 ```
 
-### StringJoiner — Joining with a Delimiter
+### StringJoiner - Joining with a Delimiter
 
 ```java
 // Joining with separator, optional prefix and suffix
@@ -529,13 +531,13 @@ String.join(" | ", list)           // joins any Iterable
 Text blocks let you write multi-line strings without escape sequences.
 
 ```java
-// Old way — unreadable, error-prone
+// Old way - unreadable, error-prone
 String json = "{\n" +
               "  \"name\": \"Alice\",\n" +
               "  \"age\": 30\n" +
               "}";
 
-// Text block — what you see is what you get
+// Text block - what you see is what you get
 String json = """
         {
           "name": "Alice",
@@ -600,7 +602,7 @@ replace text. Java uses `java.util.regex.Pattern` and `Matcher`.
   {n}      exactly n times
   {n,}     n or more times
   {n,m}    between n and m times (inclusive)
-  *?  +?   lazy (match as few as possible — default is greedy)
+  *?  +?   lazy (match as few as possible - default is greedy)
 
   Anchors:
   ^        start of string (or line in MULTILINE mode)
@@ -609,9 +611,9 @@ replace text. Java uses `java.util.regex.Pattern` and `Matcher`.
   \B       non-word boundary
 
   Groups:
-  (abc)    capturing group — can be referenced as \1, \2, etc.
-  (?:abc)  non-capturing group — groups without capturing
-  (?=abc)  positive lookahead — matches position followed by "abc"
+  (abc)    capturing group - can be referenced as \1, \2, etc.
+  (?:abc)  non-capturing group - groups without capturing
+  (?=abc)  positive lookahead - matches position followed by "abc"
   (?!abc)  negative lookahead
 ```
 
@@ -620,16 +622,16 @@ replace text. Java uses `java.util.regex.Pattern` and `Matcher`.
 ```java
 import java.util.regex.*;
 
-// Compile once, reuse many times — Pattern is immutable and thread-safe
+// Compile once, reuse many times - Pattern is immutable and thread-safe
 Pattern emailPattern = Pattern.compile(
     "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
 );
 
-// Matcher is stateful — create per-use
+// Matcher is stateful - create per-use
 Matcher m = emailPattern.matcher("user@example.com");
-System.out.println(m.matches());   // true — matches() checks the ENTIRE string
+System.out.println(m.matches());   // true - matches() checks the ENTIRE string
 
-// find() — searches for pattern anywhere in the string (partial match)
+// find() - searches for pattern anywhere in the string (partial match)
 Pattern digits = Pattern.compile("\\d+");
 Matcher finder = digits.matcher("Order 12345 placed on 2024-04-15");
 while (finder.find()) {
@@ -649,16 +651,16 @@ while (finder.find()) {
   Pattern: "Hello"
 
   ┌─────────────────┬───────────────────────────────────────────────┐
-  │  matches()      │ false — requires ENTIRE string to match       │
-  │  find()         │ true  — finds "Hello" anywhere in the string  │
-  │  lookingAt()    │ false — must match from the START (not end)   │
+  │  matches()      │ false - requires ENTIRE string to match       │
+  │  find()         │ true  - finds "Hello" anywhere in the string  │
+  │  lookingAt()    │ false - must match from the START (not end)   │
   └─────────────────┴───────────────────────────────────────────────┘
 ```
 
 ### Quick String Methods with Regex
 
 ```java
-// String.matches() — shorthand for full-string match
+// String.matches() - shorthand for full-string match
 "12345".matches("\\d+")              // true
 "12a45".matches("\\d+")             // false
 
@@ -689,7 +691,7 @@ if (m.find()) {
 }
 ```
 
-### Named Groups — Self-Documenting Patterns
+### Named Groups - Self-Documenting Patterns
 
 ```java
 // Named group syntax: (?<name>pattern)
@@ -713,7 +715,7 @@ if (m.matches()) {
     "(\\d{4})-(\\d{2})-(\\d{2})",
     "$3/$2/$1"
 )
-// "15/04/2024" — rearranged using back-references
+// "15/04/2024" - rearranged using back-references
 ```
 
 ### Common Production Patterns
@@ -744,7 +746,7 @@ if (m.matches()) {
 "<[^>]*>"  →  replace with ""
 ```
 
-> **Compile Pattern objects once.** `Pattern.compile()` is expensive —
+> **Compile Pattern objects once.** `Pattern.compile()` is expensive -
 > it parses and compiles the regex. Store compiled patterns as
 > `static final` fields to avoid recompiling on every call.
 
@@ -754,16 +756,17 @@ if (m.matches()) {
 
 ### Files in this Module
 
-| File | What it demonstrates |
-|------|----------------------|
-| `ArraysDemo.java` | Arrays, copying, sorting, Arrays utility class, object arrays |
-| `StringsDemo.java` | Immutability, String pool, full String API, text blocks |
-| `RegexDemo.java` | Pattern/Matcher, groups, named groups, common patterns |
-| `TextProcessor.java` | Practical CSV parser + validator combining all three topics |
+| File                 | What it demonstrates                                          |
+| -------------------- | ------------------------------------------------------------- |
+| `ArraysDemo.java`    | Arrays, copying, sorting, Arrays utility class, object arrays |
+| `StringsDemo.java`   | Immutability, String pool, full String API, text blocks       |
+| `RegexDemo.java`     | Pattern/Matcher, groups, named groups, common patterns        |
+| `TextProcessor.java` | Practical CSV parser + validator combining all three topics   |
 
-### TextProcessor — What it Does
+### TextProcessor - What it Does
 
 Processes a CSV file of user records:
+
 - Uses `split()` and `String` methods to parse each row
 - Validates email and phone fields using compiled `Pattern` objects
 - Uses `StringBuilder` to build formatted output reports
@@ -771,12 +774,14 @@ Processes a CSV file of user records:
 - Handles malformed rows with clear error messages
 
 **Run:**
+
 ```bash
 cd module-05-arrays-strings
 mvn compile exec:java -Dexec.mainClass="com.javatraining.arrays.TextProcessor"
 ```
 
 **Test:**
+
 ```bash
 mvn test
 ```
@@ -799,9 +804,10 @@ ignoring punctuation. Use `split()` and regex.
 
 **4. StringBuilder performance**
 Measure the time difference between:
+
 - Building a 100,000-character string with `+` in a loop
 - Building it with `StringBuilder`
-Use `System.nanoTime()` for timing.
+  Use `System.nanoTime()` for timing.
 
 **5. Regex extractor**
 Write a method that extracts all URLs from a block of HTML text using
@@ -811,5 +817,5 @@ Write a method that extracts all URLs from a block of HTML text using
 
 ## Next
 
-[Module 06 — Enums](../module-06-enums/)
+[Module 06 - Enums](../module-06-enums/)
 {% endraw %}

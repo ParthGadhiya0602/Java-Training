@@ -1,5 +1,5 @@
 /*
- * settings.gradle.kts — Gradle Settings Script
+ * settings.gradle.kts - Gradle Settings Script
  * ════════════════════════════════════════════════════════════════════
  * Evaluated first in every Gradle build (Initialization phase).
  * Responsibilities:
@@ -12,7 +12,7 @@
 
 rootProject.name = "gradle-demo"
 
-// Declare subprojects — Gradle looks for <name>/build.gradle.kts in each
+// Declare subprojects - Gradle looks for <name>/build.gradle.kts in each
 include("greeter-api", "greeter-impl")
 
 /*

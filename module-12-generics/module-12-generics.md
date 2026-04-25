@@ -1,25 +1,26 @@
 ---
-title: "12 — Generics"
-parent: "Phase 2 — Core APIs"
+title: "12 - Generics"
+parent: "Phase 2 - Core APIs"
 nav_order: 12
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-12-generics/src){: .btn .btn-outline }
 
-# Module 12 — Generics
+# Module 12 - Generics
 
 ## What You Will Learn
 
-| Concept | Summary |
-|---|---|
-| Generic classes & methods | `class Pair<A,B>`, `<T> T pick(T[] arr)` |
-| Bounded type parameters | `<T extends Comparable<T>>`, `<T extends Number & Cloneable>` |
-| Wildcards | `?`, `? extends T` (upper-bounded), `? super T` (lower-bounded) |
-| PECS | Producer Extends, Consumer Super — when to use which wildcard |
-| Type erasure | What the JVM really sees; why `new T()` is illegal |
-| Generic patterns | Result<T>, generic cache, generic pipeline, type-safe heterogeneous container |
+| Concept                   | Summary                                                                       |
+| ------------------------- | ----------------------------------------------------------------------------- |
+| Generic classes & methods | `class Pair<A,B>`, `<T> T pick(T[] arr)`                                      |
+| Bounded type parameters   | `<T extends Comparable<T>>`, `<T extends Number & Cloneable>`                 |
+| Wildcards                 | `?`, `? extends T` (upper-bounded), `? super T` (lower-bounded)               |
+| PECS                      | Producer Extends, Consumer Super - when to use which wildcard                 |
+| Type erasure              | What the JVM really sees; why `new T()` is illegal                            |
+| Generic patterns          | Result<T>, generic cache, generic pipeline, type-safe heterogeneous container |
 
 ---
 
@@ -39,7 +40,7 @@ String s = (String) list.get(0);  String s = list.get(0);  // no cast
 ## Bounded Type Parameters
 
 ```java
-// Upper bound — T must be Comparable to itself
+// Upper bound - T must be Comparable to itself
 <T extends Comparable<T>> T max(T a, T b) {
     return a.compareTo(b) >= 0 ? a : b;
 }
@@ -50,19 +51,19 @@ String s = (String) list.get(0);  String s = list.get(0);  // no cast
 
 ---
 
-## Wildcards — PECS Rule
+## Wildcards - PECS Rule
 
 ```
 PECS: Producer Extends, Consumer Super
 
-void copy(List<? extends Number> src,    // PRODUCER — you only READ from it
-          List<? super   Number> dst) {  // CONSUMER — you only WRITE to it
+void copy(List<? extends Number> src,    // PRODUCER - you only READ from it
+          List<? super   Number> dst) {  // CONSUMER - you only WRITE to it
     for (Number n : src) dst.add(n);
 }
 
-Unbounded  ?            — read as Object; cannot write (except null)
-Upper      ? extends T  — safe to READ as T; cannot write
-Lower      ? super T    — safe to WRITE T; can only read as Object
+Unbounded  ?            - read as Object; cannot write (except null)
+Upper      ? extends T  - safe to READ as T; cannot write
+Lower      ? super T    - safe to WRITE T; can only read as Object
 ```
 
 ---
@@ -86,11 +87,11 @@ Consequences:
 
 ## Source Files
 
-| File | What it Demonstrates |
-|---|---|
-| `GenericClasses.java` | Generic classes, generic methods, bounded type params, multiple bounds |
-| `Wildcards.java` | All three wildcard forms, PECS in action, unbounded wildcards |
-| `TypeErasure.java` | Erasure effects, bridge methods, `@SuppressWarnings("unchecked")`, Class tokens |
+| File                   | What it Demonstrates                                                              |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| `GenericClasses.java`  | Generic classes, generic methods, bounded type params, multiple bounds            |
+| `Wildcards.java`       | All three wildcard forms, PECS in action, unbounded wildcards                     |
+| `TypeErasure.java`     | Erasure effects, bridge methods, `@SuppressWarnings("unchecked")`, Class tokens   |
 | `GenericPatterns.java` | Result<T>, generic LRU cache, type-safe heterogeneous container, generic pipeline |
 
 ---
@@ -101,4 +102,5 @@ Consequences:
 cd module-12-generics
 mvn test
 ```
+
 {% endraw %}

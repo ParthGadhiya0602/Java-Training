@@ -3,30 +3,30 @@ package com.javatraining.encapsulation;
 import java.util.*;
 
 /**
- * TOPIC: Builder pattern — three variants
+ * TOPIC: Builder pattern - three variants
  *
  * Problem: a class with many optional fields leads to telescoping constructors:
  *   new Pizza("large", "thin", true, false, null, "extra", "regular", null, false)
  * Which argument is which? In what order? Are nulls valid?
  *
- * Solution 1 — Classic Builder:
+ * Solution 1 - Classic Builder:
  *   Required fields in the Builder constructor.
  *   Optional fields as fluent setters on the Builder.
  *   build() validates the complete state.
  *
- * Solution 2 — Step Builder (staged interface chain):
+ * Solution 2 - Step Builder (staged interface chain):
  *   Each required field is a separate interface step.
  *   Compiler forces you to set required fields in order.
  *   Cannot call build() until all required fields are set.
  *
- * Solution 3 — Copy Builder (toBuilder()):
+ * Solution 3 - Copy Builder (toBuilder()):
  *   Immutable object provides toBuilder() returning a pre-filled Builder.
  *   Change only what you need, call build() for the new instance.
  */
 public class BuilderPattern {
 
     // -------------------------------------------------------------------------
-    // 1. Classic Builder — Pizza example
+    // 1. Classic Builder - Pizza example
     // -------------------------------------------------------------------------
     static final class Pizza {
         // Required
@@ -57,7 +57,7 @@ public class BuilderPattern {
         List<String> toppings()     { return new ArrayList<>(toppings); } // defensive copy
         String       notes()        { return notes; }
 
-        // Copy builder — return a pre-filled builder for non-destructive updates
+        // Copy builder - return a pre-filled builder for non-destructive updates
         Builder toBuilder() { return new Builder(this); }
 
         @Override
@@ -69,17 +69,17 @@ public class BuilderPattern {
 
         // ── Builder ──────────────────────────────────────────────────────────
         static final class Builder {
-            // Required — set in constructor
+            // Required - set in constructor
             private final String size;
             private final String crust;
 
-            // Optional — default values
+            // Optional - default values
             private boolean      extraCheese = false;
             private boolean      extraSauce  = false;
             private List<String> toppings    = new ArrayList<>();
             private String       notes       = null;
 
-            // New build — requires the two mandatory fields
+            // New build - requires the two mandatory fields
             Builder(String size, String crust) {
                 if (size  == null || size.isBlank())  throw new IllegalArgumentException("size");
                 if (crust == null || crust.isBlank()) throw new IllegalArgumentException("crust");
@@ -87,7 +87,7 @@ public class BuilderPattern {
                 this.crust = crust.toUpperCase();
             }
 
-            // Copy constructor — pre-fill from existing Pizza
+            // Copy constructor - pre-fill from existing Pizza
             private Builder(Pizza pizza) {
                 this.size        = pizza.size;
                 this.crust       = pizza.crust;
@@ -111,7 +111,7 @@ public class BuilderPattern {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Step Builder — compile-time enforcement of required fields
+    // 2. Step Builder - compile-time enforcement of required fields
     //    Interfaces form a chain: NameStep → EmailStep → BuildStep
     //    You cannot skip a step or call build() early.
     // -------------------------------------------------------------------------
@@ -182,7 +182,7 @@ public class BuilderPattern {
             }
         }
 
-        // Entry point — returns the FIRST step (NameStep); nothing else is visible
+        // Entry point - returns the FIRST step (NameStep); nothing else is visible
         static NameStep builder() { return new StepBuilder(); }
 
         @Override
@@ -194,7 +194,7 @@ public class BuilderPattern {
     }
 
     // -------------------------------------------------------------------------
-    // 3. HTTP Request — builder with validation in build(), copy builder
+    // 3. HTTP Request - builder with validation in build(), copy builder
     // -------------------------------------------------------------------------
     static final class HttpRequest {
         private final String         method;
@@ -284,13 +284,13 @@ public class BuilderPattern {
         System.out.println(margherita);
         System.out.println(bbqChicken);
 
-        // Copy builder — make a variant without extra cheese
+        // Copy builder - make a variant without extra cheese
         Pizza lighter = margherita.toBuilder().noExtraCheese().build();
         System.out.println("Lighter copy: " + lighter);
     }
 
     static void stepBuilderDemo() {
-        System.out.println("\n=== Step Builder (Employee — compile-time required fields) ===");
+        System.out.println("\n=== Step Builder (Employee - compile-time required fields) ===");
 
         // Compiler enforces: name → email → department → (optionals) → build()
         // You cannot skip to build() without going through name/email/dept first.
@@ -307,7 +307,7 @@ public class BuilderPattern {
             .name("Bob Patel")
             .email("bob@company.com")
             .department("Marketing")
-            .build();  // optional fields omitted — defaults apply
+            .build();  // optional fields omitted - defaults apply
 
         System.out.println(alice);
         System.out.println(bob);
@@ -338,7 +338,7 @@ public class BuilderPattern {
             .build();
         System.out.println(postReq);
 
-        // Copy builder — reuse the POST config but change the URL and body
+        // Copy builder - reuse the POST config but change the URL and body
         HttpRequest putReq = postReq.toBuilder()
             .put("https://api.example.com/users/42")
             .body("{\"name\":\"Alice Updated\"}")

@@ -1,7 +1,7 @@
 package com.javatraining.cleancode.solid.ocp;
 
 /**
- * OCP — high-level engine that is closed for modification.
+ * OCP - high-level engine that is closed for modification.
  * It depends on the {@link DiscountPolicy} abstraction, not on concrete types.
  * Adding a new discount type never requires editing this class.
  */

@@ -6,11 +6,11 @@ import org.springframework.data.rest.core.config.Projection;
 import java.math.BigDecimal;
 
 /**
- * Projection — a read-only view of an entity that limits the fields returned.
+ * Projection - a read-only view of an entity that limits the fields returned.
  *
  * @Projection(name, types):
- *   name  — the projection identifier used in the ?projection= query parameter
- *   types — the entity class this projection applies to
+ *   name  - the projection identifier used in the ?projection= query parameter
+ *   types - the entity class this projection applies to
  *
  * Usage:
  *   GET /api/products/1?projection=summary
@@ -24,7 +24,7 @@ import java.math.BigDecimal;
  *
  * Excerpt projections (optional):
  *   @RepositoryRestResource(excerptProjection = ProductSummary.class)
- *   Applied automatically to COLLECTION resources — individual items in the list
+ *   Applied automatically to COLLECTION resources - individual items in the list
  *   are shown as summaries. Full detail is still available at GET /api/products/{id}.
  */
 @Projection(name = "summary", types = Product.class)
@@ -32,5 +32,5 @@ public interface ProductSummary {
     Long getId();
     String getName();
     BigDecimal getPrice();
-    // category and active are intentionally omitted — this is a public price-list view
+    // category and active are intentionally omitted - this is a public price-list view
 }

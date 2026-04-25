@@ -9,10 +9,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Exposes deployment metadata — useful for verifying which version and environment
+ * Exposes deployment metadata - useful for verifying which version and environment
  * is running without accessing the filesystem or shell.
  *
- * 12-factor Factor XI — Logs / Factor X — Dev/prod parity:
+ * 12-factor Factor XI - Logs / Factor X - Dev/prod parity:
  * The same image runs in every environment; only environment variables differ.
  * This endpoint makes the active config observable.
  */

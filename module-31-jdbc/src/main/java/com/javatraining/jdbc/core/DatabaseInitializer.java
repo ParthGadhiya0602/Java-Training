@@ -9,8 +9,8 @@ import java.sql.Statement;
  *
  * <p>Two tables:
  * <ul>
- *   <li>{@code products} — catalogue of items with name, price, stock quantity</li>
- *   <li>{@code orders}   — placed orders that reference a product (FK)</li>
+ *   <li>{@code products} - catalogue of items with name, price, stock quantity</li>
+ *   <li>{@code orders}   - placed orders that reference a product (FK)</li>
  * </ul>
  *
  * <p>{@code IF NOT EXISTS / IF EXISTS} guards make these methods idempotent,

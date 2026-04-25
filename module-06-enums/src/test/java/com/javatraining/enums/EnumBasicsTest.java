@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EnumBasicsTest {
 
     // -----------------------------------------------------------------------
-    // Direction — built-in enum methods
+    // Direction - built-in enum methods
     // -----------------------------------------------------------------------
     @Test
     void direction_ordinal_follows_declaration_order() {
@@ -33,7 +33,7 @@ class EnumBasicsTest {
     }
 
     // -----------------------------------------------------------------------
-    // HttpStatus — fields, predicates, reverse lookup
+    // HttpStatus - fields, predicates, reverse lookup
     // -----------------------------------------------------------------------
     @ParameterizedTest
     @CsvSource({
@@ -75,7 +75,7 @@ class EnumBasicsTest {
     }
 
     // -----------------------------------------------------------------------
-    // Planet — computed properties
+    // Planet - computed properties
     // -----------------------------------------------------------------------
     @Test
     void earth_surface_weight_matches_input_mass() {

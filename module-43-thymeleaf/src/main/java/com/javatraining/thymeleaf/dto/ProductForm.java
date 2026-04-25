@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 /**
  * Form-backing bean for product create/edit.
  *
- * Must be a mutable JavaBean (with getters AND setters) — not a record.
+ * Must be a mutable JavaBean (with getters AND setters) - not a record.
  * Thymeleaf's th:field uses setters when binding submitted form values to the object.
  * Records have no setters, so Spring's DataBinder cannot populate them from POST params.
  *

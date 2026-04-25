@@ -4,18 +4,18 @@ import java.util.*;
 import java.util.function.Supplier;
 
 /**
- * Module 25 — Creational Patterns
+ * Module 25 - Creational Patterns
  *
  * Creational patterns abstract the object-creation process, decoupling
  * callers from the concrete classes they need.
  *
  * Patterns covered:
- *   Singleton      — one instance per JVM; thread-safe via init-on-demand holder
- *   Factory Method — subclass decides which object to create
- *   Abstract Factory — family of related objects without specifying concrete classes
- *   Builder        — step-by-step construction of complex objects
- *   Prototype      — clone an existing object as the starting point
- *   Object Pool    — reuse expensive-to-create objects
+ *   Singleton      - one instance per JVM; thread-safe via init-on-demand holder
+ *   Factory Method - subclass decides which object to create
+ *   Abstract Factory - family of related objects without specifying concrete classes
+ *   Builder        - step-by-step construction of complex objects
+ *   Prototype      - clone an existing object as the starting point
+ *   Object Pool    - reuse expensive-to-create objects
  *
  * Modern Java note:
  *   Records replace many simple value-object builders.
@@ -54,7 +54,7 @@ public class CreationalPatterns {
     /**
      * The creator declares a factory method; subclasses override it to return
      * different concrete products.  The creator's other methods use the product
-     * through the abstract interface — they never mention concrete types.
+     * through the abstract interface - they never mention concrete types.
      */
     public interface Notification {
         void send(String recipient, String message);
@@ -137,7 +137,7 @@ public class CreationalPatterns {
         public Checkbox createCheckbox() { return new DarkCheckbox(); }
     }
 
-    /** Application doesn't know which theme it's using — fully decoupled. */
+    /** Application doesn't know which theme it's using - fully decoupled. */
     public static List<String> renderUI(UIFactory factory) {
         return List.of(
             factory.createButton().render(),

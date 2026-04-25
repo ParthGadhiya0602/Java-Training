@@ -4,10 +4,10 @@ import java.lang.reflect.*;
 import java.util.*;
 
 /**
- * Module 21 — Reflection: Reading and Writing Fields, Invoking Methods
+ * Module 21 - Reflection: Reading and Writing Fields, Invoking Methods
  *
  * setAccessible(true) bypasses access control (public/private/protected).
- * From Java 9+, the module system can restrict this — requires opens in
+ * From Java 9+, the module system can restrict this - requires opens in
  * module-info.java or --add-opens JVM flags for non-test code.
  *
  * Key risk: reflection breaks encapsulation and disables compiler checks.

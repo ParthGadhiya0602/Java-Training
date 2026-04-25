@@ -27,7 +27,7 @@ class SerializationDemoTest {
             p.setCachedTax(0.2);
             byte[] bytes = SerializationDemo.serialize(p);
             SerializationDemo.Product p2 = SerializationDemo.deserialize(bytes, SerializationDemo.Product.class);
-            assertEquals(0.0, p2.getCachedTax(), 0.0001); // transient — reset to default
+            assertEquals(0.0, p2.getCachedTax(), 0.0001); // transient - reset to default
         }
     }
 

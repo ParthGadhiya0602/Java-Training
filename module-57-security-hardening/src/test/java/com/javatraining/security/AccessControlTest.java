@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Verifies OWASP A01 (Broken Access Control) defences.
  *
- * @WithMockUser injects a synthetic SecurityContext — no real credentials are
+ * @WithMockUser injects a synthetic SecurityContext - no real credentials are
  * submitted, and the UserDetailsService is not invoked. This isolates the access
  * control policy from the authentication mechanism.
  */

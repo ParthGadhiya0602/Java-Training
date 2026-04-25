@@ -1,14 +1,15 @@
 ---
-title: "Module 59 — Capstone"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 59 - Capstone"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 59
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-59-capstone/src){: .btn .btn-outline }
 
-# Module 59 — Capstone
+# Module 59 - Capstone
 
 ## What this module covers
 
@@ -79,7 +80,7 @@ src/main/java/com/javatraining/capstone/
 │   ├── OrderController.java      # REST endpoints
 │   └── InsufficientStockException.java  # @ResponseStatus(422)
 ├── inventory/
-│   ├── InventoryServiceImpl.java # @GrpcService — in-memory stock map
+│   ├── InventoryServiceImpl.java # @GrpcService - in-memory stock map
 │   └── InventoryClient.java      # gRPC blocking stub wrapper
 ├── event/
 │   └── OrderEventPublisher.java  # KafkaTemplate → "orders" topic
@@ -106,7 +107,7 @@ docker-compose.yml                # app + Kafka + Zookeeper
 
 ---
 
-## gRPC — InventoryService
+## gRPC - InventoryService
 
 ```protobuf
 service InventoryService {
@@ -122,7 +123,7 @@ disables it and `InventoryGrpcServiceTest` creates its own `InProcessServerBuild
 
 ---
 
-## Kafka — order events
+## Kafka - order events
 
 ```
 Producer (OrderEventPublisher)
@@ -156,12 +157,12 @@ messages produced before the consumer starts are still received.
 .headers(Customizer.withDefaults())       // DENY framing, nosniff, cache-control
 ```
 
-| Endpoint | USER | ADMIN |
-|---|---|---|
-| `POST /api/orders` | ✅ | ✅ |
-| `GET /api/orders/{id}` | ✅ | ✅ |
-| `GET /api/orders` (list all) | ❌ 403 | ✅ |
-| `GET /actuator/**` | ✅ (no auth) | ✅ |
+| Endpoint                     | USER         | ADMIN |
+| ---------------------------- | ------------ | ----- |
+| `POST /api/orders`           | ✅           | ✅    |
+| `GET /api/orders/{id}`       | ✅           | ✅    |
+| `GET /api/orders` (list all) | ❌ 403       | ✅    |
+| `GET /actuator/**`           | ✅ (no auth) | ✅    |
 
 ---
 
@@ -188,7 +189,7 @@ spring.threads.virtual.enabled=true
 ```
 
 Spring Boot configures Tomcat's thread pool with `VirtualThreadExecutor`. Each HTTP
-request runs on a virtual thread — I/O blocks (gRPC call, DB write, Kafka send) unmount
+request runs on a virtual thread - I/O blocks (gRPC call, DB write, Kafka send) unmount
 the carrier thread instead of stalling it, allowing far more concurrent requests than the
 carrier thread count (≈ number of CPU cores).
 
@@ -196,15 +197,16 @@ carrier thread count (≈ number of CPU cores).
 
 ## Testing approach
 
-| Class | What's real | What's mocked | Tests |
-|---|---|---|---|
-| `InventoryGrpcServiceTest` | `InventoryServiceImpl` via in-process gRPC | nothing (no Spring) | 2 |
-| `OrderFlowIntegrationTest` | REST → `OrderService` → H2 + Kafka | `InventoryClient` | 3 |
-| `SecurityTest` | Full security filter chain | nothing | 2 |
+| Class                      | What's real                                | What's mocked       | Tests |
+| -------------------------- | ------------------------------------------ | ------------------- | ----- |
+| `InventoryGrpcServiceTest` | `InventoryServiceImpl` via in-process gRPC | nothing (no Spring) | 2     |
+| `OrderFlowIntegrationTest` | REST → `OrderService` → H2 + Kafka         | `InventoryClient`   | 3     |
+| `SecurityTest`             | Full security filter chain                 | nothing             | 2     |
 
 **Why mock `InventoryClient` in `OrderFlowIntegrationTest`?**
 The gRPC client connects to `localhost:9090`. Testing via an actual running gRPC server
 in a Spring integration test would require port coordination and restart costs. Instead:
+
 - `InventoryGrpcServiceTest` proves the server logic is correct
 - `@MockBean InventoryClient` proves the orchestration (order creation flow) is correct
 - The boundary between them is the Java interface `InventoryClient.checkStock()`
@@ -226,7 +228,8 @@ The gRPC port 9090 and REST port 8080 are both exposed.
 ## CI (GitHub Actions)
 
 `.github/workflows/ci.yml` runs on every push and PR:
-1. `mvn --batch-mode verify` — compiles, runs all 7 tests
+
+1. `mvn --batch-mode verify` - compiles, runs all 7 tests
 2. Uploads Surefire reports as an artifact
 3. On `main` only: builds the Docker image (verifies the Dockerfile is valid)
 
@@ -234,11 +237,11 @@ The gRPC port 9090 and REST port 8080 are both exposed.
 
 ## Tests
 
-| Class | Coverage | Tests |
-|---|---|---|
-| `InventoryGrpcServiceTest` | gRPC service logic | 2 |
-| `OrderFlowIntegrationTest` | REST + Kafka + JPA + Micrometer | 3 |
-| `SecurityTest` | Access control (A01) | 2 |
+| Class                      | Coverage                        | Tests |
+| -------------------------- | ------------------------------- | ----- |
+| `InventoryGrpcServiceTest` | gRPC service logic              | 2     |
+| `OrderFlowIntegrationTest` | REST + Kafka + JPA + Micrometer | 3     |
+| `SecurityTest`             | Access control (A01)            | 2     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **7/7 pass**
@@ -247,12 +250,13 @@ Result: **7/7 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `@MockBean InventoryClient` in flow tests | Decouples gRPC correctness test from orchestration test; avoids starting a gRPC server in the Spring context |
-| `@EmbeddedKafka` on every Spring test class | `@KafkaListener` tries to connect on context startup; embedded broker satisfies that without a real Kafka |
-| `grpc.server.port=-1` in `src/test/resources` | Prevents the `@GrpcService` auto-configuration from binding port 9090 during tests that don't need the server |
-| `Awaitility.await()` for Kafka assertion | Kafka consumer runs asynchronously; `Thread.sleep` is fragile; Awaitility polls until the condition is met (included in `spring-boot-starter-test`) |
-| `AtomicInteger processedCount` in `NotificationListener` | Observable without coupling the test to Kafka internals (no raw consumer / `KafkaTestUtils`) |
-| `spring.threads.virtual.enabled=true` | Every Tomcat request thread is virtual; gRPC and Kafka I/O blocks unmount the carrier thread — higher throughput with the same resource footprint |
+| Decision                                                 | Reason                                                                                                                                              |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@MockBean InventoryClient` in flow tests                | Decouples gRPC correctness test from orchestration test; avoids starting a gRPC server in the Spring context                                        |
+| `@EmbeddedKafka` on every Spring test class              | `@KafkaListener` tries to connect on context startup; embedded broker satisfies that without a real Kafka                                           |
+| `grpc.server.port=-1` in `src/test/resources`            | Prevents the `@GrpcService` auto-configuration from binding port 9090 during tests that don't need the server                                       |
+| `Awaitility.await()` for Kafka assertion                 | Kafka consumer runs asynchronously; `Thread.sleep` is fragile; Awaitility polls until the condition is met (included in `spring-boot-starter-test`) |
+| `AtomicInteger processedCount` in `NotificationListener` | Observable without coupling the test to Kafka internals (no raw consumer / `KafkaTestUtils`)                                                        |
+| `spring.threads.virtual.enabled=true`                    | Every Tomcat request thread is virtual; gRPC and Kafka I/O blocks unmount the carrier thread - higher throughput with the same resource footprint   |
+
 {% endraw %}

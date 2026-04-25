@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
         return p;
     }
 
-    // POST /api/auth/login with wrong password — AuthenticationManager throws this
+    // POST /api/auth/login with wrong password - AuthenticationManager throws this
     @ExceptionHandler(BadCredentialsException.class)
     public ProblemDetail handleBadCredentials(HttpServletRequest req) {
         ProblemDetail p = ProblemDetail.forStatusAndDetail(

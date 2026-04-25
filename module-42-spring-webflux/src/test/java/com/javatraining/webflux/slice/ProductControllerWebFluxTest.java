@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 /**
- * @WebFluxTest — WebFlux web layer slice.
+ * @WebFluxTest - WebFlux web layer slice.
  *
  * Loads: controllers, @ControllerAdvice, Jackson, WebFlux configuration.
  * Does NOT load: services, repositories, R2DBC, Netty server.

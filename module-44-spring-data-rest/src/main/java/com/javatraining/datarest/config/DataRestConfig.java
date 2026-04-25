@@ -8,7 +8,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 /**
- * RepositoryRestConfigurer — programmatic configuration for Spring Data REST.
+ * RepositoryRestConfigurer - programmatic configuration for Spring Data REST.
  *
  * Use this for settings that cannot be expressed in application.properties:
  *
@@ -33,7 +33,7 @@ public class DataRestConfig implements RepositoryRestConfigurer {
                                                       CorsRegistry cors) {
         config.exposeIdsFor(Product.class);
 
-        // Register projection explicitly — it lives in the projection package, not the
+        // Register projection explicitly - it lives in the projection package, not the
         // entity package, so Spring Data REST won't auto-discover it via package scan.
         config.getProjectionConfiguration().addProjection(ProductSummary.class);
     }

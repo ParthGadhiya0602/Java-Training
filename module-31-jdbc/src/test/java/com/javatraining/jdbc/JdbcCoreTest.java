@@ -165,7 +165,7 @@ class JdbcCoreTest {
 
     @Test
     void bigdecimal_price_survives_round_trip_with_exact_precision() throws Exception {
-        // floating-point 0.1 + 0.2 = 0.30000000000000004 — BigDecimal avoids this
+        // floating-point 0.1 + 0.2 = 0.30000000000000004 - BigDecimal avoids this
         Product p = new Product("Precision Item", new BigDecimal("19.99"), 1);
         int id = repo.insert(p);
         BigDecimal retrieved = repo.findById(id).orElseThrow().price();

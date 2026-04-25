@@ -6,21 +6,21 @@ import java.util.List;
 /**
  * Refactoring: Extract Method to eliminate Duplicate Code.
  *
- * <p><strong>Smell — duplicated code:</strong>
+ * <p><strong>Smell - duplicated code:</strong>
  * <pre>
  *   String generatePdf() {
- *       String header = "=== Report — " + LocalDate.now() + " ===";  // duplicated
+ *       String header = "=== Report - " + LocalDate.now() + " ===";  // duplicated
  *       String footer = "=== END ===";                                 // duplicated
  *       ...
  *   }
  *   String generateCsv() {
- *       String header = "=== Report — " + LocalDate.now() + " ===";  // same header
+ *       String header = "=== Report - " + LocalDate.now() + " ===";  // same header
  *       String footer = "=== END ===";                                 // same footer
  *       ...
  *   }
  * </pre>
  *
- * <p><strong>Fix — Extract Method:</strong>
+ * <p><strong>Fix - Extract Method:</strong>
  * Private helper methods {@code buildHeader()} and {@code buildFooter()} are
  * defined once.  Changing the format requires editing one place only.
  *
@@ -65,10 +65,10 @@ public class ReportBuilder {
                + buildFooter(items.size());
     }
 
-    // ── private helpers — extracted once, shared by all generators ────────────
+    // ── private helpers - extracted once, shared by all generators ────────────
 
     private String buildHeader() {
-        return "=== " + title + " — " + LocalDate.now() + " ===";
+        return "=== " + title + " - " + LocalDate.now() + " ===";
     }
 
     private String buildFooter(int itemCount) {

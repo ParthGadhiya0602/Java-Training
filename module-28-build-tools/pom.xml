@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Parent POM — module-28-build-tools
+  Parent POM - module-28-build-tools
   ════════════════════════════════════════════════════════════════════
   packaging = pom  →  this POM is a container, not a JAR artifact.
   It owns:
-    • <modules>             — declares the child modules in build order
-    • <properties>          — shared version constants
-    • <dependencyManagement>— pin versions once; children omit <version>
-    • <build><pluginManagement> — configure plugins once for all children
-    • <profiles>            — optional build variants (fast, strict)
+    • <modules>             - declares the child modules in build order
+    • <properties>          - shared version constants
+    • <dependencyManagement>- pin versions once; children omit <version>
+    • <build><pluginManagement> - configure plugins once for all children
+    • <profiles>            - optional build variants (fast, strict)
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -20,7 +20,7 @@
     <artifactId>module-28-build-tools</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>                 <!-- ← key: this is a reactor POM -->
-    <name>Module 28 — Build Tools</name>
+    <name>Module 28 - Build Tools</name>
 
     <!-- ── Child modules (built in dependency order) ─────────────────────── -->
     <modules>
@@ -41,7 +41,7 @@
     <!--
       dependencyManagement does NOT add dependencies to child modules.
       It only pins versions.  Children still declare the dependency but
-      can omit <version> — they inherit it from here.
+      can omit <version> - they inherit it from here.
     -->
     <dependencyManagement>
         <dependencies>

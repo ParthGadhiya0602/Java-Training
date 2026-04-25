@@ -1,7 +1,7 @@
 package com.javatraining.cleancode.solid.srp;
 
 /**
- * SRP — single responsibility: generate invoice text.
+ * SRP - single responsibility: generate invoice text.
  * Only changes when invoice format or legal requirements change.
  */
 public class InvoiceGenerator {

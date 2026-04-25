@@ -1,7 +1,7 @@
 package com.javatraining.controlflow;
 
 /**
- * TOPIC: if/else — branching based on boolean conditions.
+ * TOPIC: if/else - branching based on boolean conditions.
  *
  * Covers:
  * - Basic if/else/else-if chains
@@ -34,12 +34,12 @@ public class ConditionalDemo {
     }
 
     // -------------------------------------------------------------------------
-    // Dangling else — the brace pitfall
+    // Dangling else - the brace pitfall
     // -------------------------------------------------------------------------
     static void danglingElseDemo() {
         int x = 10, y = 5;
 
-        // This looks like the else belongs to if(x > 0) — it does NOT.
+        // This looks like the else belongs to if(x > 0) - it does NOT.
         // Java attaches else to the NEAREST if: if(y > 10)
         if (x > 0)
             if (y > 10)
@@ -50,7 +50,7 @@ public class ConditionalDemo {
 
         System.out.println("With x=10, y=5 → prints the else despite x being positive");
 
-        // Correct version — always use braces
+        // Correct version - always use braces
         if (x > 0) {
             if (y > 10) {
                 System.out.println("y > 10");
@@ -77,10 +77,10 @@ public class ConditionalDemo {
 
         // TRAP 2: Redundant boolean comparison
         boolean isValid = status.length() > 0;
-        if (isValid == true) {                   // redundant — works but verbose
+        if (isValid == true) {                   // redundant - works but verbose
             System.out.println("isValid == true");
         }
-        if (isValid) {                            // preferred — isValid IS boolean
+        if (isValid) {                            // preferred - isValid IS boolean
             System.out.println("isValid (clean)");
         }
 
@@ -109,11 +109,11 @@ public class ConditionalDemo {
     static void ternaryDemo() {
         int temperature = 38;
 
-        // Single value from a condition — ternary is clean here
+        // Single value from a condition - ternary is clean here
         String feeling = temperature > 35 ? "hot" : "comfortable";
         System.out.println("Feeling: " + feeling);
 
-        // Nested ternary — readable only up to 3 levels
+        // Nested ternary - readable only up to 3 levels
         String category = temperature > 40 ? "extreme heat"
                         : temperature > 35 ? "very hot"
                         : temperature > 25 ? "warm"

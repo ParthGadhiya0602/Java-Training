@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * @WebMvcTest — web layer slice.
+ * @WebMvcTest - web layer slice.
  *
  * Loads: ProductController, GlobalExceptionHandler, Jackson, Spring MVC config.
  * Does NOT load: ProductService, ProductRepository, DataSource, PricingClient.

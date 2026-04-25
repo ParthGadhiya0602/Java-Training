@@ -72,7 +72,7 @@ class CircuitBreakerTest {
 
         Thread.sleep(150); // wait > wait-duration-in-open-state (100ms)
 
-        inventoryService.checkAvailability(1L, 1); // probe — transitions OPEN → HALF_OPEN → CLOSED
+        inventoryService.checkAvailability(1L, 1); // probe - transitions OPEN → HALF_OPEN → CLOSED
 
         assertThat(circuitBreakerRegistry.circuitBreaker("inventory").getState())
                 .isEqualTo(CircuitBreaker.State.CLOSED);

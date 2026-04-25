@@ -7,11 +7,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Strings — immutability, pool, API, StringBuilder")
+@DisplayName("Strings - immutability, pool, API, StringBuilder")
 class StringsTest {
 
     @Test
-    @DisplayName("Modifying operation returns new String — original unchanged")
+    @DisplayName("Modifying operation returns new String - original unchanged")
     void immutability() {
         String original = "hello";
         original.toUpperCase(); // result discarded
@@ -27,7 +27,7 @@ class StringsTest {
     }
 
     @Test
-    @DisplayName("new String() bypasses pool — different reference, same content")
+    @DisplayName("new String() bypasses pool - different reference, same content")
     void newStringBypassesPool() {
         String s1 = "java";
         String s2 = new String("java");

@@ -27,10 +27,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration test for Spring Data REST auto-generated endpoints.
  *
- * @SpringBootTest(MOCK) + @AutoConfigureMockMvc — full Spring context, no real TCP.
+ * @SpringBootTest(MOCK) + @AutoConfigureMockMvc - full Spring context, no real TCP.
  * Spring Data REST registers its endpoints in the DispatcherServlet, so MockMvc works.
  *
- * No @WebMvcTest — Spring Data REST is not a @Controller; it's auto-configured at startup.
+ * No @WebMvcTest - Spring Data REST is not a @Controller; it's auto-configured at startup.
  * @WebMvcTest only loads annotated controllers and would miss the SDR endpoints entirely.
  *
  * Base path /api is configured in application.properties.
@@ -204,7 +204,7 @@ class ProductRestTest {
         mockMvc.perform(get("/api/products/search"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$._links.findByCategory.href", notNullValue()))
-                // findByActiveTrue has @RestResource(exported=false) — must NOT be listed
+                // findByActiveTrue has @RestResource(exported=false) - must NOT be listed
                 .andExpect(jsonPath("$._links.findByActiveTrue").doesNotExist());
     }
 

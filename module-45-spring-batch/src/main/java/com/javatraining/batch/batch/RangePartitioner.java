@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * RangePartitioner — divides a dataset into N non-overlapping ID ranges.
+ * RangePartitioner - divides a dataset into N non-overlapping ID ranges.
  *
  * Used with partitioned steps to process large tables in parallel:
  *

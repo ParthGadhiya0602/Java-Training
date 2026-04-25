@@ -4,19 +4,19 @@ import java.util.*;
 import java.util.function.Function;
 
 /**
- * Module 25 — Structural Patterns
+ * Module 25 - Structural Patterns
  *
  * Structural patterns compose objects and classes into larger structures
  * while keeping those structures flexible and efficient.
  *
  * Patterns covered:
- *   Adapter    — convert incompatible interfaces
- *   Decorator  — add behaviour without subclassing
- *   Facade     — simple interface over a complex subsystem
- *   Composite  — tree structure of uniform leaf/branch nodes
- *   Proxy      — controlled access / lazy loading / caching
- *   Bridge     — decouple abstraction from implementation
- *   Flyweight  — share state to reduce memory for many fine-grained objects
+ *   Adapter    - convert incompatible interfaces
+ *   Decorator  - add behaviour without subclassing
+ *   Facade     - simple interface over a complex subsystem
+ *   Composite  - tree structure of uniform leaf/branch nodes
+ *   Proxy      - controlled access / lazy loading / caching
+ *   Bridge     - decouple abstraction from implementation
+ *   Flyweight  - share state to reduce memory for many fine-grained objects
  */
 public class StructuralPatterns {
 
@@ -30,7 +30,7 @@ public class StructuralPatterns {
         double getCelsius();
     }
 
-    /** Legacy library — returns Fahrenheit, can't be changed. */
+    /** Legacy library - returns Fahrenheit, can't be changed. */
     public static class LegacyThermometer {
         private final double fahrenheit;
         public LegacyThermometer(double fahrenheit) { this.fahrenheit = fahrenheit; }
@@ -46,7 +46,7 @@ public class StructuralPatterns {
         }
     }
 
-    /** Object adapter using a lambda — the functional version. */
+    /** Object adapter using a lambda - the functional version. */
     public static TemperatureSource adapt(LegacyThermometer t) {
         return () -> (t.getFahrenheit() - 32) * 5.0 / 9.0;
     }
@@ -55,7 +55,7 @@ public class StructuralPatterns {
 
     /**
      * Decorator adds behaviour by wrapping the original object.
-     * Prefers composition over inheritance — each decorator adds one concern.
+     * Prefers composition over inheritance - each decorator adds one concern.
      * Java I/O streams are the classic example: FileInputStream → BufferedInputStream → GZIPInputStream.
      */
     public interface TextProcessor {
@@ -183,10 +183,10 @@ public class StructuralPatterns {
     /**
      * Proxy controls access to the real subject.
      * Types:
-     *   Virtual proxy  — lazy initialisation (create the heavy object on first use)
-     *   Caching proxy  — memoize results
-     *   Protection proxy — access control
-     *   Remote proxy   — represents an object in another JVM/network
+     *   Virtual proxy  - lazy initialisation (create the heavy object on first use)
+     *   Caching proxy  - memoize results
+     *   Protection proxy - access control
+     *   Remote proxy   - represents an object in another JVM/network
      */
     public interface ImageLoader {
         byte[] load(String path);
@@ -277,7 +277,7 @@ public class StructuralPatterns {
         public static int poolSize() { return pool.size(); }
     }
 
-    /** Extrinsic state — unique per rendered glyph instance. */
+    /** Extrinsic state - unique per rendered glyph instance. */
     public record RenderedGlyph(GlyphType type, int x, int y, String colour) {
         public String render() {
             return String.format("%c@(%d,%d) [%s/%d, %s]",

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Department — parent side of the one-to-many relationship with Employee.
+ * Department - parent side of the one-to-many relationship with Employee.
  *
  * <p>Kept intentionally simple so tests focus on Spring Data JPA concepts
  * rather than domain complexity.

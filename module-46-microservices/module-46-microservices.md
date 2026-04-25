@@ -1,20 +1,21 @@
 ---
-title: "Module 46 — Microservices Architecture"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 46 - Microservices Architecture"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 46
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-46-microservices/src){: .btn .btn-outline }
 
-# Module 46 — Microservices Architecture
+# Module 46 - Microservices Architecture
 
 ## Overview
 
 A microservices architecture decomposes a system into independently deployable services,
-each owning its own data. The benefits — independent scaling, isolated failures, small
-deployment units — come with a fundamental cost: there is no longer a single shared
+each owning its own data. The benefits - independent scaling, isolated failures, small
+deployment units - come with a fundamental cost: there is no longer a single shared
 database, so distributed consistency requires careful design.
 
 This module covers the two most important patterns for handling that cost:
@@ -30,13 +31,14 @@ the domain and its data store. No service reads another's database directly.
 
 Common decomposition strategies:
 
-| Strategy | Split by | Example |
-|---|---|---|
-| Business capability | What the business does | Orders, Inventory, Payments |
-| Subdomain (DDD) | Domain expert's mental model | Catalogue, Fulfilment, Finance |
-| Strangler fig | Incrementally replace a monolith | Route /orders to new service first |
+| Strategy            | Split by                         | Example                            |
+| ------------------- | -------------------------------- | ---------------------------------- |
+| Business capability | What the business does           | Orders, Inventory, Payments        |
+| Subdomain (DDD)     | Domain expert's mental model     | Catalogue, Fulfilment, Finance     |
+| Strangler fig       | Incrementally replace a monolith | Route /orders to new service first |
 
 **Rules of thumb:**
+
 - A service should be changeable and deployable without coordinating with other teams
 - If two pieces of data must be updated in the same transaction, they belong in the same service
 - Start with fewer, larger services; split when team or deployment friction demands it
@@ -77,7 +79,7 @@ public class InventoryClient {
 }
 ```
 
-`RestClient.Builder` is auto-configured as a **prototype** bean — each client gets
+`RestClient.Builder` is auto-configured as a **prototype** bean - each client gets
 its own instance with its own `baseUrl`, independent of others.
 
 ### Asynchronous: messaging
@@ -99,12 +101,12 @@ that undo the effects of earlier steps on failure.
 
 ### Choreography vs orchestration
 
-| | Choreography | Orchestration |
-|---|---|---|
-| Control | Each service reacts to events | A central orchestrator drives the flow |
-| Coupling | Services know about events, not each other | Orchestrator knows all participants |
-| Observability | Harder — flow is implicit | Easier — flow is explicit in one place |
-| Best for | Simple, few steps | Complex flows, clear rollback logic |
+|               | Choreography                               | Orchestration                          |
+| ------------- | ------------------------------------------ | -------------------------------------- |
+| Control       | Each service reacts to events              | A central orchestrator drives the flow |
+| Coupling      | Services know about events, not each other | Orchestrator knows all participants    |
+| Observability | Harder - flow is implicit                  | Easier - flow is explicit in one place |
+| Best for      | Simple, few steps                          | Complex flows, clear rollback logic    |
 
 ### Orchestration-based saga
 
@@ -162,7 +164,7 @@ Writer (saga)                         Outbox publisher (scheduled)
 ─────────────────────────────────     ──────────────────────────────────
 BEGIN TX                              SELECT * FROM outbox_events
   INSERT INTO orders (status=PENDING)   WHERE published = false;
-  INSERT INTO outbox_events (...)     
+  INSERT INTO outbox_events (...)
 COMMIT                                for each event:
                                         publish to broker
                                         UPDATE outbox_events
@@ -227,16 +229,17 @@ public class OutboxEventPublisher {
 ```
 
 **Guarantees and trade-offs:**
-- At-least-once delivery — if the publisher crashes after sending but before marking
+
+- At-least-once delivery - if the publisher crashes after sending but before marking
   `published = true`, the event is re-sent on the next poll. Consumers must be idempotent.
-- No event loss — an event only disappears after it has been successfully forwarded.
-- Simple to implement with only a relational database — no distributed transaction coordinator.
+- No event loss - an event only disappears after it has been successfully forwarded.
+- Simple to implement with only a relational database - no distributed transaction coordinator.
 
 ---
 
 ## 5. Testing
 
-### Saga — pure unit test
+### Saga - pure unit test
 
 The saga's logic can be tested with Mockito alone: mock `OrderService` and `InventoryClient`,
 verify the correct service methods are called in the correct order.
@@ -284,7 +287,7 @@ class OrderCreationSagaTest {
 }
 ```
 
-### Outbox pattern — `@DataJpaTest`
+### Outbox pattern - `@DataJpaTest`
 
 Verify the two writes happen in the same transaction and the query for unpublished
 events works correctly.
@@ -310,16 +313,16 @@ class OutboxPatternTest {
 
 ## Key takeaways
 
-- Decompose by bounded context — each service owns its data; no shared databases
+- Decompose by bounded context - each service owns its data; no shared databases
 - Synchronous communication uses `RestClient` (Spring Boot 3.2+); asynchronous uses
-  messaging — prefer async to avoid availability coupling between services
+  messaging - prefer async to avoid availability coupling between services
 - Saga replaces cross-service distributed transactions with a sequence of local
   transactions and compensating transactions on failure
 - Orchestration-based sagas keep the flow in one place (easier to reason about);
   choreography-based sagas have no central coordinator (looser coupling, harder to trace)
-- The outbox pattern makes event publishing atomic with database writes — the event is
+- The outbox pattern makes event publishing atomic with database writes - the event is
   written to an `outbox_events` table in the same transaction, then a poller forwards it
   to the broker. This gives at-least-once delivery without a distributed transaction coordinator
 - Consumers of outbox-published events must be **idempotent**: the same event may arrive
   more than once if the publisher crashes between sending and marking the event as published
-{% endraw %}
+  {% endraw %}

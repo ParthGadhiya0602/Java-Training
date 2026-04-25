@@ -42,7 +42,7 @@ class TaskControllerTest {
                 .readTree(result.getResponse().getContentAsString())
                 .get("taskId").asText();
 
-        // The task sleeps 100 ms on a virtual thread — wait 3× longer for CI headroom
+        // The task sleeps 100 ms on a virtual thread - wait 3× longer for CI headroom
         Thread.sleep(400);
 
         mockMvc.perform(get("/tasks/{id}", taskId))

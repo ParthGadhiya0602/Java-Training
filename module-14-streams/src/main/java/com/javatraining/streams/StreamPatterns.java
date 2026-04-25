@@ -5,20 +5,20 @@ import java.util.function.*;
 import java.util.stream.*;
 
 /**
- * TOPIC: Stream patterns — flatMap, lazy evaluation, generate/iterate, pipelines
+ * TOPIC: Stream patterns - flatMap, lazy evaluation, generate/iterate, pipelines
  *
- * Pattern 1 — flatMap
+ * Pattern 1 - flatMap
  *   Turns a Stream<List<T>> into a Stream<T> (one level of nesting removed).
  *   General rule: use flatMap when each element maps to ZERO OR MORE results.
  *
- * Pattern 2 — Lazy evaluation / short-circuit
+ * Pattern 2 - Lazy evaluation / short-circuit
  *   filter/map do no work until a terminal op fires.
  *   findFirst / anyMatch / allMatch / noneMatch stop as soon as the answer is known.
  *
- * Pattern 3 — Infinite streams via generate() and iterate()
+ * Pattern 3 - Infinite streams via generate() and iterate()
  *   Always pair with limit() or a short-circuit terminal.
  *
- * Pattern 4 — Real-world pipelines
+ * Pattern 4 - Real-world pipelines
  *   Compose multiple operations to replace imperative nested loops.
  */
 public class StreamPatterns {
@@ -34,7 +34,7 @@ public class StreamPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 1 — flatMap
+    // Pattern 1 - flatMap
     // -------------------------------------------------------------------------
 
     /** Returns all employees from every department as a flat list. */
@@ -73,10 +73,10 @@ public class StreamPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 2 — peek (debugging without disrupting the pipeline)
+    // Pattern 2 - peek (debugging without disrupting the pipeline)
     //   peek() is an intermediate op that consumes each element but passes it through.
     //   Use it to log intermediate state.  Never put side effects you depend on
-    //   in peek() — the stream may skip elements via short-circuit.
+    //   in peek() - the stream may skip elements via short-circuit.
     // -------------------------------------------------------------------------
 
     static List<String> filteredAndLogged(List<String> words, String prefix) {
@@ -91,7 +91,7 @@ public class StreamPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 3 — Infinite streams
+    // Pattern 3 - Infinite streams
     // -------------------------------------------------------------------------
 
     /** Returns the first n prime numbers. */
@@ -124,7 +124,7 @@ public class StreamPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 4 — Real-world pipelines
+    // Pattern 4 - Real-world pipelines
     // -------------------------------------------------------------------------
 
     /**

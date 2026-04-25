@@ -17,11 +17,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * @SpringBatchTest — adds to the application context:
- *   JobLauncherTestUtils  — launch full jobs or individual steps programmatically
- *   JobRepositoryTestUtils — clean up BATCH_* metadata tables between tests
- *   StepScopeTestExecutionListener — activates step scope for @StepScope bean injection in tests
- *   JobScopeTestExecutionListener  — activates job scope for @JobScope bean injection in tests
+ * @SpringBatchTest - adds to the application context:
+ *   JobLauncherTestUtils  - launch full jobs or individual steps programmatically
+ *   JobRepositoryTestUtils - clean up BATCH_* metadata tables between tests
+ *   StepScopeTestExecutionListener - activates step scope for @StepScope bean injection in tests
+ *   JobScopeTestExecutionListener  - activates job scope for @JobScope bean injection in tests
  *
  * Must be combined with @SpringBootTest (or @ContextConfiguration) to provide the
  * actual Spring context. @SpringBatchTest alone does not load the application context.
@@ -32,10 +32,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  *   bean; use setJob() if there are multiple).
  *
  * JobLauncherTestUtils.launchStep(stepName):
- *   Runs a single step in isolation — useful for testing step metrics independently.
+ *   Runs a single step in isolation - useful for testing step metrics independently.
  *   Creates its own JobExecution with empty JobParameters.
  *
- * No @Transactional on the test class — Spring Batch manages its own transactions per chunk.
+ * No @Transactional on the test class - Spring Batch manages its own transactions per chunk.
  * Rolling back the test transaction would conflict with Batch's commit-per-chunk model.
  */
 @SpringBatchTest

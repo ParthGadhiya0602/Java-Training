@@ -12,16 +12,16 @@ import java.sql.SQLException;
  *
  * <p><strong>Why pooling?</strong>  Opening a raw TCP connection + authenticating
  * to a database takes 5–50 ms.  Under load that overhead dominates.  A pool
- * creates connections once at startup, then lends and recycles them — your app
+ * creates connections once at startup, then lends and recycles them - your app
  * pays microseconds per borrow instead.
  *
  * <p><strong>Key HikariCP configuration knobs:</strong>
  * <pre>
- *   maximumPoolSize  — hard cap on physical connections (match DB max_connections)
- *   minimumIdle      — warm connections kept ready at all times
- *   connectionTimeout — how long to wait for a free connection before throwing
- *   idleTimeout      — time before an idle connection is closed
- *   maxLifetime      — absolute cap on a connection's age (prevents server-side drops)
+ *   maximumPoolSize  - hard cap on physical connections (match DB max_connections)
+ *   minimumIdle      - warm connections kept ready at all times
+ *   connectionTimeout - how long to wait for a free connection before throwing
+ *   idleTimeout      - time before an idle connection is closed
+ *   maxLifetime      - absolute cap on a connection's age (prevents server-side drops)
  * </pre>
  *
  * <p>Implements {@link AutoCloseable} so it can be used in try-with-resources
@@ -38,7 +38,7 @@ public class HikariConnectionPool implements AutoCloseable {
         config.setPassword(password);
         config.setMaximumPoolSize(10);
         config.setMinimumIdle(2);
-        config.setConnectionTimeout(3_000);   // 3 s — throw if no connection available
+        config.setConnectionTimeout(3_000);   // 3 s - throw if no connection available
         config.setIdleTimeout(600_000);        // 10 min idle before closing
         config.setMaxLifetime(1_800_000);      // 30 min max lifetime
         this.dataSource = new HikariDataSource(config);

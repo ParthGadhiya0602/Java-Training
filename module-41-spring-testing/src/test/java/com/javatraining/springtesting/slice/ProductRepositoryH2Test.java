@@ -13,17 +13,17 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * @DataJpaTest — JPA slice.
+ * @DataJpaTest - JPA slice.
  *
  * Loads: JPA repositories, entity classes, TestEntityManager.
  * Does NOT load: @Service, @Controller, @Component (only JPA-related beans).
  * Database: H2 in-memory (auto-configured by @DataJpaTest, replaces the H2 in application.properties).
- * Transaction: each test runs in a transaction that is rolled back after — DB is always clean.
+ * Transaction: each test runs in a transaction that is rolled back after - DB is always clean.
  *
  * TestEntityManager wraps EntityManager for test use:
- *   persist()  — saves and flushes to SQL (without going through the repository interface)
- *   flush()    — writes pending SQL to DB (stays in transaction, not committed yet)
- *   clear()    — evicts the first-level cache so findById() hits the DB instead of returning the cached object
+ *   persist()  - saves and flushes to SQL (without going through the repository interface)
+ *   flush()    - writes pending SQL to DB (stays in transaction, not committed yet)
+ *   clear()    - evicts the first-level cache so findById() hits the DB instead of returning the cached object
  */
 @DataJpaTest
 class ProductRepositoryH2Test {

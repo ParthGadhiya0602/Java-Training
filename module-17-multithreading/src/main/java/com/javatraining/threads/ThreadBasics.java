@@ -7,22 +7,22 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Module 17 — Thread creation, lifecycle, coordination
+ * Module 17 - Thread creation, lifecycle, coordination
  *
  * Thread lifecycle states:
- *   NEW          — created, not yet started
- *   RUNNABLE     — executing or ready to execute on CPU
- *   BLOCKED      — waiting to acquire a monitor lock
- *   WAITING      — waiting indefinitely (join, wait, park)
- *   TIMED_WAITING— waiting with timeout (sleep, join(ms), wait(ms))
- *   TERMINATED   — run() method has returned
+ *   NEW          - created, not yet started
+ *   RUNNABLE     - executing or ready to execute on CPU
+ *   BLOCKED      - waiting to acquire a monitor lock
+ *   WAITING      - waiting indefinitely (join, wait, park)
+ *   TIMED_WAITING- waiting with timeout (sleep, join(ms), wait(ms))
+ *   TERMINATED   - run() method has returned
  *
  * Three ways to create a thread:
- *   1. Extend Thread — avoid; couples task logic to thread management
- *   2. Implement Runnable — preferred for fire-and-forget tasks
- *   3. Implement Callable — when you need a return value or checked exception
+ *   1. Extend Thread - avoid; couples task logic to thread management
+ *   2. Implement Runnable - preferred for fire-and-forget tasks
+ *   3. Implement Callable - when you need a return value or checked exception
  *
- * Java 21 adds virtual threads (Thread.ofVirtual()) — see VirtualThreadsDemo.
+ * Java 21 adds virtual threads (Thread.ofVirtual()) - see VirtualThreadsDemo.
  */
 public class ThreadBasics {
 
@@ -37,7 +37,7 @@ public class ThreadBasics {
 
     /**
      * Named, daemon thread.
-     * Daemon threads are killed automatically when all non-daemon threads finish —
+     * Daemon threads are killed automatically when all non-daemon threads finish -
      * useful for background housekeeping but never for work that must complete.
      */
     public static Thread startDaemonThread(String name, Runnable task) {
@@ -48,7 +48,7 @@ public class ThreadBasics {
     }
 
     /**
-     * Thread.Builder API (Java 19+) — cleaner than the constructor soup.
+     * Thread.Builder API (Java 19+) - cleaner than the constructor soup.
      */
     public static Thread buildAndStart(String name, boolean daemon, Runnable task) {
         return Thread.ofPlatform()
@@ -57,11 +57,11 @@ public class ThreadBasics {
                      .start(task);
     }
 
-    // ── join — wait for completion ────────────────────────────────────────────
+    // ── join - wait for completion ────────────────────────────────────────────
 
     /**
      * Fan out N tasks across N threads, then join all of them.
-     * Returns the total number of increments — proves all threads completed.
+     * Returns the total number of increments - proves all threads completed.
      */
     public static int fanOutAndJoin(int threadCount) throws InterruptedException {
         AtomicInteger counter = new AtomicInteger();
@@ -77,7 +77,7 @@ public class ThreadBasics {
         return counter.get();
     }
 
-    /** join with timeout — don't wait forever for misbehaving threads. */
+    /** join with timeout - don't wait forever for misbehaving threads. */
     public static boolean joinWithTimeout(Thread t, long timeoutMs) throws InterruptedException {
         t.join(timeoutMs);
         return !t.isAlive();  // true = thread finished within timeout
@@ -102,7 +102,7 @@ public class ThreadBasics {
                     Thread.sleep(10);
                 }
             } catch (InterruptedException e) {
-                // InterruptedException clears the flag — restore it so callers can see it
+                // InterruptedException clears the flag - restore it so callers can see it
                 Thread.currentThread().interrupt();
                 log.add("interrupted");
             }
@@ -111,11 +111,11 @@ public class ThreadBasics {
         return t;
     }
 
-    // ── CountDownLatch — one-shot barrier ────────────────────────────────────
+    // ── CountDownLatch - one-shot barrier ────────────────────────────────────
 
     /**
      * CountDownLatch lets one or more threads wait until a set of operations
-     * completes.  The count can only go down — it cannot be reset.
+     * completes.  The count can only go down - it cannot be reset.
      *
      * Common patterns:
      *   count=N, N workers count down → coordinator waits for all N
@@ -176,7 +176,7 @@ public class ThreadBasics {
      * Classic use cases: per-request security context, per-thread formatters,
      * per-thread DB connections.
      *
-     * WARNING: always call remove() when done — especially in thread pools
+     * WARNING: always call remove() when done - especially in thread pools
      * where threads are reused, stale values from a previous task can leak.
      */
     public static class RequestContext {

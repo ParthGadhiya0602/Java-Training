@@ -61,7 +61,7 @@ class LocalAndAnonymousTest {
         void each_row_is_surrounded_by_separators() {
             List<String[]> rows = List.<String[]>of(new String[]{"A", "B"});
             List<String> lines = LocalAndAnonymous.formatTable(rows, 4);
-            // separator, row, separator — at minimum 3 lines
+            // separator, row, separator - at minimum 3 lines
             assertTrue(lines.size() >= 3);
             assertTrue(lines.get(0).startsWith("+"));
             assertTrue(lines.get(lines.size() - 1).startsWith("+"));
@@ -95,7 +95,7 @@ class LocalAndAnonymousTest {
         }
     }
 
-    // ── Describable (anonymous class — multi-method interface) ────────────────
+    // ── Describable (anonymous class - multi-method interface) ────────────────
 
     @Nested
     class DescribableTests {
@@ -129,7 +129,7 @@ class LocalAndAnonymousTest {
 
         @Test
         void runnable_counts_down_correctly() {
-            // We test by capturing stdout indirectly — instead verify by
+            // We test by capturing stdout indirectly - instead verify by
             // running n times and confirming no exception is thrown.
             Runnable cd = LocalAndAnonymous.countdownRunnable(3);
             assertDoesNotThrow(() -> { cd.run(); cd.run(); cd.run(); cd.run(); });

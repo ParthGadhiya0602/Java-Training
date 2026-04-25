@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.*;
 import java.util.*;
 
 /**
- * Module 17 — Synchronization, Locks, and Visibility
+ * Module 17 - Synchronization, Locks, and Visibility
  *
  * Memory visibility problems:
  *   Without synchronization, a thread may read a stale cached value.
@@ -19,16 +19,16 @@ import java.util.*;
  *   thread termination → Thread.join() in the joining thread
  *
  * Tools in order of overhead and flexibility:
- *   volatile       — visibility only; no atomicity for compound ops
- *   synchronized   — mutual exclusion + visibility; intrinsic lock
- *   AtomicXxx      — lock-free CAS; fast for single-variable updates
- *   ReentrantLock  — explicit lock; supports tryLock, fairness, Condition
- *   ReadWriteLock  — multiple concurrent readers OR one exclusive writer
- *   StampedLock    — optimistic reads; highest throughput for read-heavy
+ *   volatile       - visibility only; no atomicity for compound ops
+ *   synchronized   - mutual exclusion + visibility; intrinsic lock
+ *   AtomicXxx      - lock-free CAS; fast for single-variable updates
+ *   ReentrantLock  - explicit lock; supports tryLock, fairness, Condition
+ *   ReadWriteLock  - multiple concurrent readers OR one exclusive writer
+ *   StampedLock    - optimistic reads; highest throughput for read-heavy
  */
 public class SynchronizationDemo {
 
-    // ── volatile — visibility without atomicity ───────────────────────────────
+    // ── volatile - visibility without atomicity ───────────────────────────────
 
     /**
      * volatile guarantees:
@@ -55,7 +55,7 @@ public class SynchronizationDemo {
         }
     }
 
-    // ── synchronized — intrinsic lock ────────────────────────────────────────
+    // ── synchronized - intrinsic lock ────────────────────────────────────────
 
     /**
      * synchronized(lock) acquires the intrinsic monitor.
@@ -70,7 +70,7 @@ public class SynchronizationDemo {
         public synchronized void add(int n)  { count += n; }
         public synchronized int  get()       { return count; }
 
-        /** synchronized on 'this' — same as the method-level keyword */
+        /** synchronized on 'this' - same as the method-level keyword */
         public void reset() {
             synchronized (this) { count = 0; }
         }
@@ -92,11 +92,11 @@ public class SynchronizationDemo {
         return count[0];  // likely < threadCount * incrementsPerThread
     }
 
-    // ── AtomicInteger — lock-free CAS ─────────────────────────────────────────
+    // ── AtomicInteger - lock-free CAS ─────────────────────────────────────────
 
     /**
      * AtomicInteger uses CPU compare-and-swap (CAS) instructions.
-     * No blocking, no context switches — fastest for single-variable counters.
+     * No blocking, no context switches - fastest for single-variable counters.
      */
     public static int atomicIncrement(int threadCount, int incrementsPerThread)
             throws InterruptedException {
@@ -113,7 +113,7 @@ public class SynchronizationDemo {
         return count.get();  // always == threadCount * incrementsPerThread
     }
 
-    /** compareAndSet: atomic conditional update — the basis of all lock-free algorithms. */
+    /** compareAndSet: atomic conditional update - the basis of all lock-free algorithms. */
     public static boolean trySetMax(AtomicInteger ref, int candidate) {
         int current;
         do {
@@ -127,12 +127,12 @@ public class SynchronizationDemo {
 
     /**
      * ReentrantLock mirrors synchronized but adds:
-     *   tryLock()           — non-blocking attempt; avoid deadlocks
-     *   tryLock(time, unit) — timed attempt
-     *   lockInterruptibly() — can be interrupted while waiting
-     *   fair=true           — FIFO ordering (lower throughput, no starvation)
+     *   tryLock()           - non-blocking attempt; avoid deadlocks
+     *   tryLock(time, unit) - timed attempt
+     *   lockInterruptibly() - can be interrupted while waiting
+     *   fair=true           - FIFO ordering (lower throughput, no starvation)
      *
-     * Always unlock in finally — never rely on GC to release a lock.
+     * Always unlock in finally - never rely on GC to release a lock.
      */
     public static class BoundedBuffer<T> {
         private final Lock lock = new ReentrantLock();
@@ -216,17 +216,17 @@ public class SynchronizationDemo {
         }
     }
 
-    // ── StampedLock — optimistic reads ────────────────────────────────────────
+    // ── StampedLock - optimistic reads ────────────────────────────────────────
 
     /**
      * StampedLock adds an optimistic read mode:
      *   1. Take optimistic read stamp (no actual lock acquired)
      *   2. Read data
-     *   3. validate(stamp) — if true, no writer intervened; data is safe
+     *   3. validate(stamp) - if true, no writer intervened; data is safe
      *   4. If false, fall back to a real read lock
      *
      * Fastest for read-heavy workloads with rare writes.
-     * NOT reentrant — do not call from code that already holds the stamp.
+     * NOT reentrant - do not call from code that already holds the stamp.
      */
     public static class Point {
         private final StampedLock sl = new StampedLock();

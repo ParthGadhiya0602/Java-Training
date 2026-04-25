@@ -12,7 +12,7 @@ public class TypesAndVariables {
 
     // -------------------------------------------------------------------------
     // PRIMITIVE TYPES
-    // Java guarantees exact sizes regardless of the host CPU — unlike C/C++.
+    // Java guarantees exact sizes regardless of the host CPU - unlike C/C++.
     // -------------------------------------------------------------------------
 
     // Integer types
@@ -21,16 +21,16 @@ public class TypesAndVariables {
     int   normalInt  = 2_147_483_647; // 32-bit signed: ~2.1 billion
     long  bigLong    = 9_223_372_036_854_775_807L; // 64-bit; note the L suffix
 
-    // Floating point — IEEE 754
+    // Floating point - IEEE 754
     float  singlePrecision = 3.14f;   // 32-bit; note the f suffix
     double doublePrecision = 3.141592653589793; // 64-bit; default for decimals
 
     // Other primitives
     char  letter    = 'A';            // 16-bit Unicode character (0–65535)
-    boolean flag    = true;           // true or false — NOT 0/1 like C
+    boolean flag    = true;           // true or false - NOT 0/1 like C
 
     // -------------------------------------------------------------------------
-    // LITERALS — the different ways to write values in source code
+    // LITERALS - the different ways to write values in source code
     // -------------------------------------------------------------------------
     static void demonstrateLiterals() {
         // Numeric literals can use underscores for readability (Java 7+)
@@ -48,19 +48,19 @@ public class TypesAndVariables {
         System.out.println(decimal == octal);  // true
         System.out.println(decimal == binary); // true
 
-        // String literals — stored in the String Pool (heap, but cached)
+        // String literals - stored in the String Pool (heap, but cached)
         String s1 = "hello";
         String s2 = "hello";
         String s3 = new String("hello"); // explicitly creates a new object
 
-        System.out.println(s1 == s2);           // true  — same pool reference
-        System.out.println(s1 == s3);           // false — different object
-        System.out.println(s1.equals(s3));      // true  — same content
+        System.out.println(s1 == s2);           // true  - same pool reference
+        System.out.println(s1 == s3);           // false - different object
+        System.out.println(s1.equals(s3));      // true  - same content
         // RULE: ALWAYS use .equals() to compare String content, never ==
     }
 
     // -------------------------------------------------------------------------
-    // TYPE CASTING — widening (safe, automatic) vs narrowing (explicit, lossy)
+    // TYPE CASTING - widening (safe, automatic) vs narrowing (explicit, lossy)
     // -------------------------------------------------------------------------
     static void demonstrateCasting() {
         // WIDENING: smaller type → larger type. Automatic, no data loss.
@@ -72,9 +72,9 @@ public class TypesAndVariables {
         System.out.println("int: " + i + ", long: " + l + ", double: " + d);
 
         // NARROWING: larger type → smaller type. Requires explicit cast.
-        // May silently truncate or change the value — this is a common bug.
+        // May silently truncate or change the value - this is a common bug.
         double pi     = 3.99999;
-        int truncated = (int) pi;   // explicit cast — drops the decimal part
+        int truncated = (int) pi;   // explicit cast - drops the decimal part
         System.out.println("Narrowed " + pi + " → " + truncated); // prints 3, not 4
 
         // Integer overflow: what happens when you exceed max value
@@ -91,7 +91,7 @@ public class TypesAndVariables {
     }
 
     // -------------------------------------------------------------------------
-    // AUTOBOXING & UNBOXING — automatic conversion between primitives and wrappers
+    // AUTOBOXING & UNBOXING - automatic conversion between primitives and wrappers
     // -------------------------------------------------------------------------
     static void demonstrateBoxing() {
         // Autoboxing: int → Integer (wrapper class)
@@ -104,26 +104,26 @@ public class TypesAndVariables {
         Integer c = 128;
         Integer d = 128;
 
-        System.out.println(a == b); // true  — both point to cached object
-        System.out.println(c == d); // false — outside cache range, new objects
+        System.out.println(a == b); // true  - both point to cached object
+        System.out.println(c == d); // false - outside cache range, new objects
         // This is a notorious interview gotcha and a real production bug source.
         // Always use .equals() for Integer comparisons.
 
         // Unboxing a null wrapper throws NullPointerException
         Integer nullableInt = null;
         try {
-            int value = nullableInt; // NPE here — silent unboxing of null
+            int value = nullableInt; // NPE here - silent unboxing of null
         } catch (NullPointerException e) {
             System.out.println("Null unboxing NPE caught");
         }
     }
 
     // -------------------------------------------------------------------------
-    // var — local variable type inference (Java 10+)
+    // var - local variable type inference (Java 10+)
     // -------------------------------------------------------------------------
     static void demonstrateVar() {
         // var infers the type from the right-hand side at compile time.
-        // It is NOT dynamic typing — the type is fixed at compile time.
+        // It is NOT dynamic typing - the type is fixed at compile time.
         var count  = 0;          // inferred as int
         var name   = "Alice";    // inferred as String
         var list   = new java.util.ArrayList<String>(); // inferred as ArrayList<String>
@@ -136,21 +136,21 @@ public class TypesAndVariables {
         // Good use: when the type is obvious from the right-hand side
         var userMap = new java.util.HashMap<String, Integer>();
         // Bad use: when it obscures what the variable actually is
-        // var result = processData(x); // — what type is result?
+        // var result = processData(x); // - what type is result?
     }
 
     // -------------------------------------------------------------------------
-    // CONSTANTS — static final
+    // CONSTANTS - static final
     // -------------------------------------------------------------------------
     // By convention: UPPER_SNAKE_CASE for compile-time constants
     static final int    MAX_RETRIES      = 3;
     static final double TAX_RATE         = 0.18;
     static final String DEFAULT_CURRENCY = "USD";
-    // These are replaced by the compiler with their values — no runtime lookup.
+    // These are replaced by the compiler with their values - no runtime lookup.
     // Changing a public constant in a library requires recompiling all users.
 
     // -------------------------------------------------------------------------
-    // SCOPE — where a variable is visible
+    // SCOPE - where a variable is visible
     // -------------------------------------------------------------------------
     static void demonstrateScope() {
         int outer = 10;
@@ -158,7 +158,7 @@ public class TypesAndVariables {
         {
             // Block scope: 'inner' exists only inside these braces
             int inner = 20;
-            System.out.println(outer + inner); // 30 — can see outer
+            System.out.println(outer + inner); // 30 - can see outer
         }
         // System.out.println(inner); // COMPILE ERROR: inner out of scope
 

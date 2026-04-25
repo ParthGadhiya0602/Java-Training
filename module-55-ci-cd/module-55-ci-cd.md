@@ -1,14 +1,15 @@
 ---
-title: "Module 55 — CI/CD"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 55 - CI/CD"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 55
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-55-ci-cd/src){: .btn .btn-outline }
 
-# Module 55 — CI/CD
+# Module 55 - CI/CD
 
 ## What this module covers
 
@@ -44,7 +45,7 @@ module-55-ci-cd/
 
 ---
 
-## CI workflow — `ci.yml`
+## CI workflow - `ci.yml`
 
 ```yaml
 on:
@@ -58,18 +59,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0              # full history for SonarQube blame
+          fetch-depth: 0 # full history for SonarQube blame
 
       - uses: actions/setup-java@v4
         with:
           java-version: "21"
           distribution: temurin
-          cache: maven                # caches ~/.m2/repository between runs
+          cache: maven # caches ~/.m2/repository between runs
 
-      - run: mvn --batch-mode verify  # compile → test → JaCoCo report
+      - run: mvn --batch-mode verify # compile → test → JaCoCo report
 
       - name: SonarQube scan
-        if: github.event_name == 'push'   # skip on PRs from forks (no secrets)
+        if: github.event_name == 'push' # skip on PRs from forks (no secrets)
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
@@ -96,17 +97,17 @@ jobs:
 
 ### Design decisions
 
-| Decision | Reason |
-|---|---|
-| `fetch-depth: 0` on checkout | SonarQube needs full git history for blame annotations (which commit introduced each line) |
-| `sonar:sonar` guarded by `event_name == 'push'` | Pull requests from forks cannot access repo secrets — running the step on PRs would silently fail or expose the token |
-| `cache: maven` on `setup-java` | Restores `~/.m2/repository` from a GitHub Actions cache key; typically saves 1-3 minutes per run |
-| `docker` job depends on `build-test-scan` | Ensures broken builds never produce a Docker image |
-| Docker layer cache with `type=gha` | Reuses unchanged image layers across runs via GitHub Actions cache, not a registry push |
+| Decision                                        | Reason                                                                                                                |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `fetch-depth: 0` on checkout                    | SonarQube needs full git history for blame annotations (which commit introduced each line)                            |
+| `sonar:sonar` guarded by `event_name == 'push'` | Pull requests from forks cannot access repo secrets - running the step on PRs would silently fail or expose the token |
+| `cache: maven` on `setup-java`                  | Restores `~/.m2/repository` from a GitHub Actions cache key; typically saves 1-3 minutes per run                      |
+| `docker` job depends on `build-test-scan`       | Ensures broken builds never produce a Docker image                                                                    |
+| Docker layer cache with `type=gha`              | Reuses unchanged image layers across runs via GitHub Actions cache, not a registry push                               |
 
 ---
 
-## Release workflow — `release.yml`
+## Release workflow - `release.yml`
 
 Triggered when a semantic version tag (`v1.2.3` or `v1.2.3-rc.1`) is pushed:
 
@@ -158,7 +159,7 @@ marked accordingly.
 </plugin>
 ```
 
-Enforcer runs at `validate` phase — the very first thing Maven does. A developer on Java 17
+Enforcer runs at `validate` phase - the very first thing Maven does. A developer on Java 17
 or a CI runner with an old Maven will fail immediately with a clear message, not halfway
 through compilation.
 
@@ -188,7 +189,7 @@ coverage in the SonarQube dashboard.
 <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 ```
 
-`mvn sonar:sonar` is NOT bound to a lifecycle phase — it runs only when explicitly invoked.
+`mvn sonar:sonar` is NOT bound to a lifecycle phase - it runs only when explicitly invoked.
 This prevents accidental scans on `mvn package` and keeps local builds fast.
 
 ---
@@ -216,7 +217,7 @@ public Release create(Release release) {
 
 ## Tests
 
-### Parameterized unit tests — `ReleaseServiceTest`
+### Parameterized unit tests - `ReleaseServiceTest`
 
 ```java
 @ParameterizedTest
@@ -228,11 +229,11 @@ void create_accepts_valid_semantic_versions(String version) { ... }
 void create_rejects_invalid_semantic_versions(String version) { ... }
 ```
 
-`@ParameterizedTest` with `@ValueSource` expands to one test per value — boundary cases
+`@ParameterizedTest` with `@ValueSource` expands to one test per value - boundary cases
 are checked exhaustively without writing a separate `@Test` method per case. The test
 method name appears in the report as `create_accepts_valid_semantic_versions(1.0.0)` etc.
 
-### Integration tests — `ReleaseControllerTest`
+### Integration tests - `ReleaseControllerTest`
 
 ```java
 @Test
@@ -242,11 +243,11 @@ void post_with_valid_semver_returns_201_with_location()
 void post_with_invalid_semver_returns_400()
 ```
 
-| Class | Type | Tests |
-|---|---|---|
-| `ReleaseServiceTest` | Unit, `@ParameterizedTest` | 12 |
-| `ReleaseControllerTest` | `@SpringBootTest` + MockMvc | 2 |
-| **Total** | | **14** |
+| Class                   | Type                        | Tests  |
+| ----------------------- | --------------------------- | ------ |
+| `ReleaseServiceTest`    | Unit, `@ParameterizedTest`  | 12     |
+| `ReleaseControllerTest` | `@SpringBootTest` + MockMvc | 2      |
+| **Total**               |                             | **14** |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **14/14 pass**
@@ -255,11 +256,12 @@ Result: **14/14 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `@ParameterizedTest` + `@ValueSource` over individual `@Test` methods | Covers more boundary cases with less code; each value appears as a separate test in CI reports |
-| `sonar:sonar` not bound to a lifecycle phase | Prevents scans on every local `mvn verify`; CI runs it explicitly after `verify` |
-| `fetch-depth: 0` in CI checkout | SonarQube blame requires full git history; shallow clones break the annotation feature |
-| Semver regex in service, not controller | Business rule belongs in the service layer; controller stays thin and delegates validation |
-| `prerelease: ${{ contains(github.ref_name, '-') }}` | Tags with `-` (e.g., `-rc.1`, `-beta`) are pre-releases by convention; the expression detects this automatically |
+| Decision                                                              | Reason                                                                                                           |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `@ParameterizedTest` + `@ValueSource` over individual `@Test` methods | Covers more boundary cases with less code; each value appears as a separate test in CI reports                   |
+| `sonar:sonar` not bound to a lifecycle phase                          | Prevents scans on every local `mvn verify`; CI runs it explicitly after `verify`                                 |
+| `fetch-depth: 0` in CI checkout                                       | SonarQube blame requires full git history; shallow clones break the annotation feature                           |
+| Semver regex in service, not controller                               | Business rule belongs in the service layer; controller stays thin and delegates validation                       |
+| `prerelease: ${{ contains(github.ref_name, '-') }}`                   | Tags with `-` (e.g., `-rc.1`, `-beta`) are pre-releases by convention; the expression detects this automatically |
+
 {% endraw %}

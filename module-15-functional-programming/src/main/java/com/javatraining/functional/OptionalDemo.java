@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Module 15 — Optional<T>
+ * Module 15 - Optional<T>
  *
  * Optional is a container that may or may not hold a non-null value.
  * It forces callers to handle the absent case explicitly, eliminating
@@ -24,7 +24,7 @@ public class OptionalDemo {
         return Optional.ofNullable(value);
     }
 
-    /** Safe division — returns empty when divisor is zero. */
+    /** Safe division - returns empty when divisor is zero. */
     public static Optional<Integer> safeDivide(int a, int b) {
         if (b == 0) return Optional.empty();
         return Optional.of(a / b);
@@ -76,7 +76,7 @@ public class OptionalDemo {
     // ── Terminal: orElse / orElseGet / orElseThrow / ifPresent ───────────────
 
     /**
-     * orElse — eager: the argument is always evaluated even when value is present.
+     * orElse - eager: the argument is always evaluated even when value is present.
      * Use for cheap defaults (constants, literals).
      */
     public static String orElseDemo(Optional<String> opt, String defaultValue) {
@@ -84,19 +84,19 @@ public class OptionalDemo {
     }
 
     /**
-     * orElseGet — lazy: supplier called only when empty.
+     * orElseGet - lazy: supplier called only when empty.
      * Prefer over orElse when default construction is expensive.
      */
     public static String orElseGetDemo(Optional<String> opt) {
         return opt.orElseGet(() -> "generated-default");
     }
 
-    /** orElseThrow — throws when empty; no argument = NoSuchElementException. */
+    /** orElseThrow - throws when empty; no argument = NoSuchElementException. */
     public static String orElseThrowDemo(Optional<String> opt) {
         return opt.orElseThrow(() -> new IllegalStateException("value required but absent"));
     }
 
-    /** ifPresentOrElse (Java 9+) — one branch for each case. */
+    /** ifPresentOrElse (Java 9+) - one branch for each case. */
     public static String describeOptional(Optional<String> opt) {
         StringBuilder sb = new StringBuilder();
         opt.ifPresentOrElse(
@@ -109,7 +109,7 @@ public class OptionalDemo {
     // ── or (Java 9+) ─────────────────────────────────────────────────────────
 
     /**
-     * or — fallback to another Optional when this one is empty.
+     * or - fallback to another Optional when this one is empty.
      * Unlike orElse, the result stays wrapped in Optional.
      */
     public static Optional<String> firstNonEmpty(Optional<String> primary,
@@ -126,7 +126,7 @@ public class OptionalDemo {
     public static List<Integer> parseAll(List<String> inputs) {
         return inputs.stream()
                      .map(OptionalDemo::parseIntSafe)   // Stream<Optional<Integer>>
-                     .flatMap(Optional::stream)          // Stream<Integer> — skips empties
+                     .flatMap(Optional::stream)          // Stream<Integer> - skips empties
                      .collect(Collectors.toList());
     }
 

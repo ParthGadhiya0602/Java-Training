@@ -4,16 +4,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * TOPIC: Records (Java 16+) — immutable data carriers
+ * TOPIC: Records (Java 16+) - immutable data carriers
  *
  * A record auto-generates:
  *   • private final fields for every component
  *   • canonical constructor (all components)
  *   • accessor methods (same name as field, no "get" prefix)
- *   • equals(), hashCode(), toString() — all derived from components
+ *   • equals(), hashCode(), toString() - all derived from components
  *
  * What you CAN add to a record:
- *   • compact constructor (validation / normalisation — NO parameter list)
+ *   • compact constructor (validation / normalisation - NO parameter list)
  *   • additional constructors (must delegate to canonical via this(...))
  *   • additional methods (pure functions on the data)
  *   • static fields and static methods
@@ -27,25 +27,25 @@ import java.util.stream.Collectors;
 public class RecordsDemo {
 
     // -------------------------------------------------------------------------
-    // 1. Minimal record — the compiler writes everything
+    // 1. Minimal record - the compiler writes everything
     // -------------------------------------------------------------------------
     record Point(int x, int y) {
-        // Nothing needed — equals, hashCode, toString, accessors all generated.
+        // Nothing needed - equals, hashCode, toString, accessors all generated.
         // Accessor syntax: p.x(), p.y()  (NOT p.getX())
 
-        // Additional method — records can have behaviour
+        // Additional method - records can have behaviour
         double distanceTo(Point other) {
             int dx = this.x - other.x;
             int dy = this.y - other.y;
             return Math.sqrt(dx * dx + dy * dy);
         }
 
-        // Static factory — expressive named constructor
+        // Static factory - expressive named constructor
         static Point origin() { return new Point(0, 0); }
     }
 
     // -------------------------------------------------------------------------
-    // 2. Record with compact constructor — validation + normalisation
+    // 2. Record with compact constructor - validation + normalisation
     //    Note: no parameter list on compact constructor
     // -------------------------------------------------------------------------
     record Range(int min, int max) {
@@ -66,7 +66,7 @@ public class RecordsDemo {
             return this.min <= other.max && other.min <= this.max;
         }
 
-        // "with" pattern — records are immutable; create a modified copy
+        // "with" pattern - records are immutable; create a modified copy
         Range withMin(int newMin) { return new Range(newMin, this.max); }
         Range withMax(int newMax) { return new Range(this.min, newMax); }
     }
@@ -100,7 +100,7 @@ public class RecordsDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Nested / composed records — records referencing other records
+    // 4. Nested / composed records - records referencing other records
     // -------------------------------------------------------------------------
     record Address(String street, String city, String pincode) {
         Address {
@@ -119,7 +119,7 @@ public class RecordsDemo {
             Objects.requireNonNull(address, "address");
         }
 
-        // Additional constructor — convenience, delegates to canonical
+        // Additional constructor - convenience, delegates to canonical
         Person(String name, int age) {
             this(name, age, new Address("Unknown", "Unknown", "000000"));
         }
@@ -162,16 +162,16 @@ public class RecordsDemo {
 
         System.out.println("p1:           " + p1);               // Point[x=3, y=4]
         System.out.println("p1.x():       " + p1.x());           // 3
-        System.out.println("p1.equals(p2):" + p1.equals(p2));    // true — generated
-        System.out.println("p1 == p2:     " + (p1 == p2));       // false — different objects
+        System.out.println("p1.equals(p2):" + p1.equals(p2));    // true - generated
+        System.out.println("p1 == p2:     " + (p1 == p2));       // false - different objects
         System.out.println("distance:     " + p1.distanceTo(p3)); // 5.0
         System.out.println("origin:       " + p3);
     }
 
     static void rangeDemo() {
-        System.out.println("\n=== Range (compact constructor — normalises order) ===");
+        System.out.println("\n=== Range (compact constructor - normalises order) ===");
         Range r1 = new Range(1, 10);
-        Range r2 = new Range(10, 1);  // swapped — compact constructor normalises
+        Range r2 = new Range(10, 1);  // swapped - compact constructor normalises
         System.out.println("r1: " + r1 + " length=" + r1.length());
         System.out.println("r2: " + r2 + " (normalised from 10,1)");
         System.out.println("r1.contains(5):    " + r1.contains(5));

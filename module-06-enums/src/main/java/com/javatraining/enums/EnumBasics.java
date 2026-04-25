@@ -3,13 +3,13 @@ package com.javatraining.enums;
 import java.util.Arrays;
 
 /**
- * TOPIC: Enum fundamentals — declaration, built-in methods, fields,
+ * TOPIC: Enum fundamentals - declaration, built-in methods, fields,
  * constructors, method overriding, and reverse lookup.
  */
 public class EnumBasics {
 
     // -------------------------------------------------------------------------
-    // 1. Simple enum — no fields, no methods
+    // 1. Simple enum - no fields, no methods
     // -------------------------------------------------------------------------
     enum Direction { NORTH, SOUTH, EAST, WEST }
 
@@ -48,7 +48,7 @@ public class EnumBasics {
         @Override
         public String toString() { return code + " " + reason; }
 
-        // Reverse lookup by numeric code — common production pattern
+        // Reverse lookup by numeric code - common production pattern
         public static HttpStatus fromCode(int code) {
             for (HttpStatus s : values()) {
                 if (s.code == code) return s;
@@ -58,7 +58,7 @@ public class EnumBasics {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Planet enum — computed properties based on fields
+    // 3. Planet enum - computed properties based on fields
     // -------------------------------------------------------------------------
     enum Planet {
         MERCURY (3.303e+23, 2.4397e6),
@@ -102,10 +102,10 @@ public class EnumBasics {
         // == is safe and correct for enums (each constant is a singleton)
         System.out.println("== check:  " + (dir == Direction.NORTH)); // true
 
-        // values() — returns a new array of all constants in declaration order
+        // values() - returns a new array of all constants in declaration order
         System.out.println("All directions: " + Arrays.toString(Direction.values()));
 
-        // valueOf() — get constant by name string (case-sensitive)
+        // valueOf() - get constant by name string (case-sensitive)
         Direction east = Direction.valueOf("EAST");
         System.out.println("valueOf EAST: " + east);
 
@@ -113,7 +113,7 @@ public class EnumBasics {
         System.out.println("NORTH.compareTo(SOUTH): "
             + Direction.NORTH.compareTo(Direction.SOUTH)); // negative (0 < 1)
 
-        // Ordinal warning: fragile — changes if you insert a new constant
+        // Ordinal warning: fragile - changes if you insert a new constant
         System.out.println("SOUTH ordinal: " + Direction.SOUTH.ordinal()); // 1
     }
 

@@ -4,10 +4,10 @@ package com.javatraining.encapsulation;
  * TOPIC: Access modifiers and encapsulation fundamentals
  *
  * The four levels, most to least restrictive:
- *   private          — only within the same class
- *   (package-private)— within the same package (no keyword)
- *   protected        — same package + subclasses
- *   public           — everywhere
+ *   private          - only within the same class
+ *   (package-private)- within the same package (no keyword)
+ *   protected        - same package + subclasses
+ *   public           - everywhere
  *
  * Design rule: use the MOST restrictive modifier that still lets
  * the class do its job.  Private first; open up only when needed.
@@ -18,19 +18,19 @@ package com.javatraining.encapsulation;
 public class AccessModifiers {
 
     // -------------------------------------------------------------------------
-    // 1. BankAccount — textbook private fields + public accessors
+    // 1. BankAccount - textbook private fields + public accessors
     //    Invariants: balance >= 0, limit > 0, withdrawals respect limit
     // -------------------------------------------------------------------------
     static class BankAccount {
 
-        // private — not even subclasses should touch these directly
+        // private - not even subclasses should touch these directly
         private final String accountId;
         private final String owner;
         private       double balance;
         private       double dailyWithdrawalLimit;
         private       double withdrawnToday;
 
-        // package-private constructor — only this package can instantiate
+        // package-private constructor - only this package can instantiate
         BankAccount(String accountId, String owner,
                     double initialBalance, double dailyLimit) {
             requireNonBlank(accountId, "accountId");
@@ -45,7 +45,7 @@ public class AccessModifiers {
             this.withdrawnToday       = 0;
         }
 
-        // public read-only accessors — callers can SEE state but not set it
+        // public read-only accessors - callers can SEE state but not set it
         public String accountId()          { return accountId; }
         public String owner()              { return owner; }
         public double balance()            { return balance; }
@@ -53,7 +53,7 @@ public class AccessModifiers {
         public double withdrawnToday()     { return withdrawnToday; }
         public double remainingLimit()     { return dailyWithdrawalLimit - withdrawnToday; }
 
-        // public mutation methods — each enforces invariants before changing state
+        // public mutation methods - each enforces invariants before changing state
         public void deposit(double amount) {
             requirePositive(amount, "deposit amount");
             balance += amount;
@@ -75,10 +75,10 @@ public class AccessModifiers {
             this.dailyWithdrawalLimit = newLimit;
         }
 
-        // package-private — only tests/same-package can reset daily counter
+        // package-private - only tests/same-package can reset daily counter
         void resetDailyWithdrawals() { withdrawnToday = 0; }
 
-        // private helpers — internal to this class only
+        // private helpers - internal to this class only
         private static void requirePositive(double v, String name) {
             if (v <= 0) throw new IllegalArgumentException(name + " must be > 0, got: " + v);
         }
@@ -96,14 +96,14 @@ public class AccessModifiers {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Temperature hierarchy — protected for subclass extension
+    // 2. Temperature hierarchy - protected for subclass extension
     //    Invariant: kelvin representation is always >= 0
     // -------------------------------------------------------------------------
     static class Temperature {
-        // protected — subclasses read it; package sees it; outside cannot
+        // protected - subclasses read it; package sees it; outside cannot
         protected final double kelvin;
 
-        // public factory — named constructor
+        // public factory - named constructor
         public static Temperature ofCelsius(double c) {
             if (c < -273.15)
                 throw new IllegalArgumentException(
@@ -118,14 +118,14 @@ public class AccessModifiers {
             return new Temperature(k);
         }
 
-        // private constructor — forces use of factories
+        // private constructor - forces use of factories
         private Temperature(double kelvin) { this.kelvin = kelvin; }
 
         public double toCelsius()    { return kelvin - 273.15; }
         public double toFahrenheit() { return toCelsius() * 9.0 / 5.0 + 32; }
         public double toKelvin()     { return kelvin; }
 
-        // protected — subclasses may use in overrides
+        // protected - subclasses may use in overrides
         protected String unitSymbol() { return "K"; }
 
         @Override
@@ -165,13 +165,13 @@ public class AccessModifiers {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Counter — package-private class (no modifier on class itself)
-    //    Only accessible within this package — not part of the public API.
+    // 3. Counter - package-private class (no modifier on class itself)
+    //    Only accessible within this package - not part of the public API.
     // -------------------------------------------------------------------------
     static class PackageCounter {
         private int count = 0;
 
-        // package-private — internal use only
+        // package-private - internal use only
         void increment()       { count++;           }
         void increment(int by) { count += by;       }
         void reset()           { count  = 0;        }

@@ -1,20 +1,21 @@
 ---
-title: "Module 38 — Lombok & MapStruct"
-parent: "Phase 5 — Spring Ecosystem"
+title: "Module 38 - Lombok & MapStruct"
+parent: "Phase 5 - Spring Ecosystem"
 nav_order: 38
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-38-lombok-mapstruct/src){: .btn .btn-outline }
 
-# Module 38 — Lombok & MapStruct
+# Module 38 - Lombok & MapStruct
 
 Two annotation-processing tools that eliminate boilerplate without runtime cost:
-**Lombok** — generates getters, setters, constructors, builders, and loggers at compile time;
-**MapStruct** — generates type-safe DTO ↔ entity mapping code at compile time.
+**Lombok** - generates getters, setters, constructors, builders, and loggers at compile time;
+**MapStruct** - generates type-safe DTO ↔ entity mapping code at compile time.
 
-Both tools produce plain Java source files in `target/generated-sources/` — no reflection, no proxies, no startup overhead.
+Both tools produce plain Java source files in `target/generated-sources/` - no reflection, no proxies, no startup overhead.
 
 ---
 
@@ -68,7 +69,7 @@ public class Address {
 //   getStreet(), setStreet(), ... for every field
 //   toString() → "Address(street=..., city=..., country=...)"
 //   equals() + hashCode() using ALL fields
-//   Address() — no-args constructor (no final/required fields → empty constructor)
+//   Address() - no-args constructor (no final/required fields → empty constructor)
 ```
 
 ### @Builder
@@ -91,7 +92,7 @@ User user = User.builder()
 // Generated: UserBuilder inner class with method chaining + build()
 ```
 
-### @Builder.Default — Required for Field Initializers
+### @Builder.Default - Required for Field Initializers
 
 ```java
 // PITFALL: without @Builder.Default, field initializers are IGNORED by the builder
@@ -121,7 +122,7 @@ Task.builder().build().getTags();  // → [] (empty list, as expected)
 @Data
 @Builder
 @NoArgsConstructor   // restores no-args constructor
-@AllArgsConstructor  // required by @Builder — provides the all-args constructor
+@AllArgsConstructor  // required by @Builder - provides the all-args constructor
 public class CreateUserRequest {
     private String firstName;
     private String lastName;
@@ -133,7 +134,7 @@ new CreateUserRequest()                            // Jackson/JPA
 CreateUserRequest.builder().email("x").build()    // fluent construction
 ```
 
-### @Value — Immutable Value Object
+### @Value - Immutable Value Object
 
 ```java
 @Value  // all fields: private final, no setters, all-args constructor, equals, hashCode, toString
@@ -145,7 +146,7 @@ public class Product {
     String category;
 }
 
-// setName() does not exist — compile error if called
+// setName() does not exist - compile error if called
 // equals/hashCode: based on all fields (structural equality)
 Product p1 = Product.builder().id(1L).name("Laptop").price(new BigDecimal("999")).build();
 Product p2 = Product.builder().id(1L).name("Laptop").price(new BigDecimal("999")).build();
@@ -209,9 +210,9 @@ public class User {
   Object added to HashSet → stored in bucket based on hashCode() at that moment.
   If any field used in hashCode() is mutated → new hash → different bucket.
   HashSet.contains(object) → looks in WRONG bucket → returns false.
-  The object is "lost" — still in the set but unreachable.
+  The object is "lost" - still in the set but unreachable.
 
-  Fix: @EqualsAndHashCode(of = "id") — use only the stable identity field.
+  Fix: @EqualsAndHashCode(of = "id") - use only the stable identity field.
   For JPA entities: use only @Id in equals/hashCode.
 ```
 
@@ -271,7 +272,7 @@ public interface UserMapper {
 }
 
 // Generated: UserMapperImpl.java in target/generated-sources/annotations/
-// Inspect it — it's plain Java code, fully readable
+// Inspect it - it's plain Java code, fully readable
 ```
 
 ### Mapping Patterns
@@ -304,7 +305,7 @@ public interface UserMapper {
 }
 ```
 
-### Partial Update — PATCH Semantics
+### Partial Update - PATCH Semantics
 
 ```
   Traditional PUT: send all fields, overwrite everything.
@@ -341,7 +342,7 @@ public interface UserMapper {
 
 ---
 
-## Module 38 — What Was Built
+## Module 38 - What Was Built
 
 ```
   module-38-lombok-mapstruct/
@@ -351,24 +352,24 @@ public interface UserMapper {
       ├── main/java/com/javatraining/lombokstruct/
       │   ├── LombokStructApplication.java
       │   ├── entity/
-      │   │   ├── User.java        — fine-grained: @Getter @Setter @Builder @ToString(exclude)
+      │   │   ├── User.java        - fine-grained: @Getter @Setter @Builder @ToString(exclude)
       │   │   │                      @EqualsAndHashCode(of=...) @NoArgsConstructor @AllArgsConstructor
-      │   │   ├── Address.java     — @Data @Builder @NoArgsConstructor @AllArgsConstructor
-      │   │   └── Product.java     — @Value @Builder (immutable)
+      │   │   ├── Address.java     - @Data @Builder @NoArgsConstructor @AllArgsConstructor
+      │   │   └── Product.java     - @Value @Builder (immutable)
       │   ├── service/
-      │   │   ├── NotificationService.java  — @Slf4j @RequiredArgsConstructor
-      │   │   └── EmailGateway.java         — @Slf4j @Component
+      │   │   ├── NotificationService.java  - @Slf4j @RequiredArgsConstructor
+      │   │   └── EmailGateway.java         - @Slf4j @Component
       │   ├── dto/
-      │   │   ├── UserDto.java              — @Data @Builder (fullName, city flattened)
-      │   │   └── CreateUserRequest.java    — @Data @Builder @NoArgsConstructor @AllArgsConstructor
+      │   │   ├── UserDto.java              - @Data @Builder (fullName, city flattened)
+      │   │   └── CreateUserRequest.java    - @Data @Builder @NoArgsConstructor @AllArgsConstructor
       │   └── mapper/
-      │       └── UserMapper.java           — @Mapper(componentModel="spring"),
+      │       └── UserMapper.java           - @Mapper(componentModel="spring"),
       │                                       ignore, expression, nested source, list, partial update
       └── test/java/com/javatraining/lombokstruct/
-          ├── LombokAnnotationsTest.java  9 tests — @Builder, @Data, @Value, @Slf4j, @RequiredArgsConstructor
-          ├── LombokPitfallsTest.java     5 tests — mutable HashSet, @Builder.Default, no-args constructor,
+          ├── LombokAnnotationsTest.java  9 tests - @Builder, @Data, @Value, @Slf4j, @RequiredArgsConstructor
+          ├── LombokPitfallsTest.java     5 tests - mutable HashSet, @Builder.Default, no-args constructor,
           │                                         circular @ToString
-          └── MapStructMappingTest.java   9 tests — requestToUser (ignore fields), userToDto (expression,
+          └── MapStructMappingTest.java   9 tests - requestToUser (ignore fields), userToDto (expression,
                                                     nested source, null-safe), list mapping, partial update
 ```
 
@@ -379,12 +380,12 @@ All tests: **23 passing** (requires Java 21; MapStruct processor is incompatible
 ## Key Takeaways
 
 ```
-  Processor order  Lombok before mapstruct-processor — MapStruct calls Lombok getters
+  Processor order  Lombok before mapstruct-processor - MapStruct calls Lombok getters
 
   @Data            All-in-one for simple POJOs; avoid on JPA entities
   @Builder         Fluent construction; requires @NoArgsConstructor + @AllArgsConstructor
                    if a no-args constructor is also needed (Jackson, JPA)
-  @Builder.Default Required for field initializers — without it, builder sets null
+  @Builder.Default Required for field initializers - without it, builder sets null
   @Value           Immutable value object: all final, no setters, structural equals
   @Slf4j           Injects private static final Logger log = LoggerFactory.getLogger(...)
   @RequiredArgsConstructor  Constructor for final/@NonNull fields; non-final fields excluded
@@ -395,7 +396,8 @@ All tests: **23 passing** (requires Java 21; MapStruct processor is incompatible
   expression       Java code inline in the annotation; combine fields, call methods
   source = "a.b"   Null-safe nested path: MapStruct generates null checks
   List<DTO>        Auto-generated from single-item mapper method
-  IGNORE strategy  Null source fields skip the target field — PATCH semantics
+  IGNORE strategy  Null source fields skip the target field - PATCH semantics
   @MappingTarget   Write into existing object instead of creating a new one
 ```
+
 {% endraw %}

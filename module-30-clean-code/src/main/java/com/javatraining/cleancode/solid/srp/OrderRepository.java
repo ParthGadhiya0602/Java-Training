@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * SRP — single responsibility: store and retrieve orders.
+ * SRP - single responsibility: store and retrieve orders.
  * Only changes when the storage mechanism changes.
  */
 public class OrderRepository {

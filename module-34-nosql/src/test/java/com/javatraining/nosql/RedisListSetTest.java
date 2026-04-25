@@ -25,20 +25,20 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * <h2>Redis data types covered here</h2>
  * <pre>
- *   List — ordered sequence; supports head/tail push and pop.
+ *   List - ordered sequence; supports head/tail push and pop.
  *          Used for queues (LPUSH + RPOP), recent-activity feeds,
  *          job queues.
  *
- *   Set  — unordered collection of unique strings.
+ *   Set  - unordered collection of unique strings.
  *          Used for unique visitor tracking, tags, mutual-friend calculation,
  *          "user has seen this" deduplication.
  *
- *   TTL  — time-to-live on any key; Redis deletes the key automatically
+ *   TTL  - time-to-live on any key; Redis deletes the key automatically
  *          when it expires.  Used for session tokens, caches, rate-limit
  *          windows, OTP codes.
  * </pre>
  *
- * <p>Same container as {@link RedisStringHashTest} — Docker must be running.
+ * <p>Same container as {@link RedisStringHashTest} - Docker must be running.
  */
 @SpringBootTest
 @Testcontainers(disabledWithoutDocker = true)

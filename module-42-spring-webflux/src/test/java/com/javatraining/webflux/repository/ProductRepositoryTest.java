@@ -12,16 +12,16 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * @DataR2dbcTest — R2DBC repository slice.
+ * @DataR2dbcTest - R2DBC repository slice.
  *
  * Loads: R2DBC repositories, ConnectionFactory, R2dbcEntityTemplate.
  * Does NOT load: web layer, services, or any @Component beans.
  * Schema: schema.sql from the classpath is applied by R2dbcInitializationAutoConfiguration.
  *
- * No automatic transaction rollback (unlike @DataJpaTest) — R2DBC does not support
+ * No automatic transaction rollback (unlike @DataJpaTest) - R2DBC does not support
  * the same transactional test isolation. Use @BeforeEach deleteAll() for clean state.
  *
- * .block() is used only in @BeforeEach setup — never in production code.
+ * .block() is used only in @BeforeEach setup - never in production code.
  * In tests, .block() is acceptable for setup/teardown where you need to wait for completion
  * before the test body runs. The actual assertions use StepVerifier.
  */
@@ -32,7 +32,7 @@ class ProductRepositoryTest {
 
     @BeforeEach
     void cleanup() {
-        // block() acceptable in @BeforeEach — ensures cleanup completes before test starts
+        // block() acceptable in @BeforeEach - ensures cleanup completes before test starts
         repository.deleteAll().block();
     }
 

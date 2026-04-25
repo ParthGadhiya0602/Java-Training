@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BuilderPatternTest {
 
     // -----------------------------------------------------------------------
-    // Pizza — classic builder
+    // Pizza - classic builder
     // -----------------------------------------------------------------------
     @Test
     void required_fields_set_correctly() {
@@ -72,7 +72,7 @@ class BuilderPatternTest {
     }
 
     // -----------------------------------------------------------------------
-    // Employee — step builder
+    // Employee - step builder
     // -----------------------------------------------------------------------
     @Test
     void required_fields_enforced_by_chain() {
@@ -130,7 +130,7 @@ class BuilderPatternTest {
     }
 
     // -----------------------------------------------------------------------
-    // HttpRequest — builder with validation + copy builder
+    // HttpRequest - builder with validation + copy builder
     // -----------------------------------------------------------------------
     @Test
     void get_request_defaults() {

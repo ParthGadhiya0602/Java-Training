@@ -54,7 +54,7 @@ class SealedHierarchyTest {
     }
 
     // -----------------------------------------------------------------------
-    // PaymentEvent — describeEvent exhaustive switch
+    // PaymentEvent - describeEvent exhaustive switch
     // -----------------------------------------------------------------------
     @Test
     void describe_initiated_contains_amount() {
@@ -100,7 +100,7 @@ class SealedHierarchyTest {
     }
 
     // -----------------------------------------------------------------------
-    // Expr tree — eval and prettyPrint
+    // Expr tree - eval and prettyPrint
     // -----------------------------------------------------------------------
     @ParameterizedTest
     @CsvSource({

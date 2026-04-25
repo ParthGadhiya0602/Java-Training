@@ -3,7 +3,7 @@ package com.javatraining.lombokstruct.dto;
 import lombok.*;
 
 /**
- * Response DTO — fields differ from the User entity:
+ * Response DTO - fields differ from the User entity:
  * <ul>
  *   <li>{@code fullName} combines firstName + lastName (MapStruct expression)</li>
  *   <li>{@code city} is flattened from the nested Address object</li>

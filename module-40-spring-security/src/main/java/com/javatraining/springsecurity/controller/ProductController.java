@@ -27,19 +27,19 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // Public — permitAll() in SecurityFilterChain; no @PreAuthorize needed
+    // Public - permitAll() in SecurityFilterChain; no @PreAuthorize needed
     @GetMapping
     public ResponseEntity<List<Product>> getAll() {
         return ResponseEntity.ok(productService.findAll());
     }
 
-    // Requires authentication — enforced by "anyRequest().authenticated()" in filter chain
+    // Requires authentication - enforced by "anyRequest().authenticated()" in filter chain
     @GetMapping("/{id}")
     public ResponseEntity<Product> getById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findById(id));
     }
 
-    // Requires ADMIN role — method-level security via @PreAuthorize
+    // Requires ADMIN role - method-level security via @PreAuthorize
     // @PreAuthorize is evaluated AFTER authentication; a non-ADMIN authenticated user gets 403.
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -47,7 +47,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(request));
     }
 
-    // Requires ADMIN role — same pattern as create
+    // Requires ADMIN role - same pattern as create
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

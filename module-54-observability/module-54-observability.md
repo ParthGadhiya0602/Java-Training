@@ -1,14 +1,15 @@
 ---
-title: "Module 54 — Observability"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 54 - Observability"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 54
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-54-observability/src){: .btn .btn-outline }
 
-# Module 54 — Observability
+# Module 54 - Observability
 
 ## What this module covers
 
@@ -60,11 +61,11 @@ public ProductService(ProductRepository productRepository, MeterRegistry meterRe
 }
 ```
 
-| Instrument | When to use | Prometheus suffix |
-|------------|-------------|-------------------|
-| `Counter`  | Monotonically increasing value — requests, errors, events | `_total` |
-| `Timer`    | Latency and throughput — method duration, request time | `_seconds_{count,sum,max}` |
-| `Gauge`    | Point-in-time snapshot — queue depth, active connections | none |
+| Instrument | When to use                                               | Prometheus suffix          |
+| ---------- | --------------------------------------------------------- | -------------------------- |
+| `Counter`  | Monotonically increasing value - requests, errors, events | `_total`                   |
+| `Timer`    | Latency and throughput - method duration, request time    | `_seconds_{count,sum,max}` |
+| `Gauge`    | Point-in-time snapshot - queue depth, active connections  | none                       |
 
 Micrometer converts `.` to `_` and adds instrument-specific suffixes when scraping.
 `products.lookups` → `products_lookups_total`;
@@ -82,11 +83,11 @@ public Optional<Product> findById(Long id) {
 ```
 
 `Timer.record(Supplier<T>)` wraps the block and records its duration. Both the counter
-and timer capture the same call, which is typical — you need count AND latency.
+and timer capture the same call, which is typical - you need count AND latency.
 
 ---
 
-## @Observed — automatic metrics + trace per method
+## @Observed - automatic metrics + trace per method
 
 For methods where you want both a Timer and a trace span without writing boilerplate,
 annotate with `@Observed` (requires `spring-boot-starter-aop`):
@@ -155,7 +156,7 @@ Every instrumented HTTP request automatically gets a trace ID and span ID:
 ### Sampling
 
 ```properties
-management.tracing.sampling.probability=1.0   # 100% — every request traced (dev/test)
+management.tracing.sampling.probability=1.0   # 100% - every request traced (dev/test)
 # In production, use 0.1 (10%) or lower to reduce overhead
 ```
 
@@ -163,11 +164,11 @@ management.tracing.sampling.probability=1.0   # 100% — every request traced (d
 
 With no exporter configured, spans are created but discarded. Add a dependency to export:
 
-| Exporter | Dependency | Target |
-|----------|-----------|--------|
-| OTLP/gRPC | `io.opentelemetry:opentelemetry-exporter-otlp` | Jaeger, Grafana Tempo |
-| Zipkin    | `io.opentelemetry:opentelemetry-exporter-zipkin` | Zipkin |
-| Logging   | `io.opentelemetry:opentelemetry-exporter-logging` | Console (dev) |
+| Exporter  | Dependency                                        | Target                |
+| --------- | ------------------------------------------------- | --------------------- |
+| OTLP/gRPC | `io.opentelemetry:opentelemetry-exporter-otlp`    | Jaeger, Grafana Tempo |
+| Zipkin    | `io.opentelemetry:opentelemetry-exporter-zipkin`  | Zipkin                |
+| Logging   | `io.opentelemetry:opentelemetry-exporter-logging` | Console (dev)         |
 
 Configure the endpoint: `management.otlp.tracing.endpoint=http://jaeger:4317`
 
@@ -190,7 +191,7 @@ aggregator (Loki, Elasticsearch, Splunk).
 
 ## Testing
 
-### Unit tests — `SimpleMeterRegistry`
+### Unit tests - `SimpleMeterRegistry`
 
 ```java
 private final SimpleMeterRegistry meterRegistry = new SimpleMeterRegistry();
@@ -219,9 +220,9 @@ void active_gauge_reflects_number_of_products_saved() {
 
 `SimpleMeterRegistry` keeps all meter state in memory synchronously.
 `meterRegistry.counter(name)` returns the same `Counter` instance that was registered
-with the same name — no Spring context needed.
+with the same name - no Spring context needed.
 
-### Integration tests — Prometheus endpoint
+### Integration tests - Prometheus endpoint
 
 ```java
 @SpringBootTest
@@ -248,10 +249,10 @@ meters that have been touched.
 
 ## Tests
 
-| Class | Type | Count |
-|---|---|---|
-| `ProductServiceTest` | Unit (`SimpleMeterRegistry`) | 3 |
-| `ActuatorObservabilityTest` | `@SpringBootTest` | 2 |
+| Class                       | Type                         | Count |
+| --------------------------- | ---------------------------- | ----- |
+| `ProductServiceTest`        | Unit (`SimpleMeterRegistry`) | 3     |
+| `ActuatorObservabilityTest` | `@SpringBootTest`            | 2     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **5/5 pass**
@@ -260,12 +261,13 @@ Result: **5/5 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `SimpleMeterRegistry` in unit tests | No Spring context — fast, deterministic; same interface as production `MeterRegistry` |
-| `management.prometheus.metrics.export.enabled=true` required | Spring Boot 3.3's `@ConditionalOnEnabledMetricsExport` defaults the Prometheus exporter to off; the property must be explicit |
-| `Timer.record(Supplier<T>)` over `Timer.wrap()` | Captures both counter increment and timing in one closure, keeping them co-located |
-| `AtomicInteger` for Gauge vs `productRepository::count` | Avoids a DB call per scrape; appropriate for an instance-level count. Use `productRepository::count` when the gauge must reflect real DB state |
-| `management.tracing.sampling.probability=1.0` | 100% sampling for dev/test; reduce to 0.1–0.01 in production to limit overhead and storage |
-| MDC with `%X{traceId:-}` in Logback | `-` fallback makes the pattern safe when no trace context exists (unit tests, startup) |
+| Decision                                                     | Reason                                                                                                                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SimpleMeterRegistry` in unit tests                          | No Spring context - fast, deterministic; same interface as production `MeterRegistry`                                                          |
+| `management.prometheus.metrics.export.enabled=true` required | Spring Boot 3.3's `@ConditionalOnEnabledMetricsExport` defaults the Prometheus exporter to off; the property must be explicit                  |
+| `Timer.record(Supplier<T>)` over `Timer.wrap()`              | Captures both counter increment and timing in one closure, keeping them co-located                                                             |
+| `AtomicInteger` for Gauge vs `productRepository::count`      | Avoids a DB call per scrape; appropriate for an instance-level count. Use `productRepository::count` when the gauge must reflect real DB state |
+| `management.tracing.sampling.probability=1.0`                | 100% sampling for dev/test; reduce to 0.1–0.01 in production to limit overhead and storage                                                     |
+| MDC with `%X{traceId:-}` in Logback                          | `-` fallback makes the pattern safe when no trace context exists (unit tests, startup)                                                         |
+
 {% endraw %}

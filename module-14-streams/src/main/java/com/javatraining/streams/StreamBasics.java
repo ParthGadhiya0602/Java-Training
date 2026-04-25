@@ -4,14 +4,14 @@ import java.util.*;
 import java.util.stream.*;
 
 /**
- * TOPIC: Stream basics — creation, intermediate ops, terminal ops
+ * TOPIC: Stream basics - creation, intermediate ops, terminal ops
  *
  * A Stream<T> is a lazy sequence of elements that supports declarative
  * bulk operations.  It does NOT store data; it wraps a source (Collection,
  * array, generator, …) and defines a pipeline of operations.
  *
  * Key rules:
- *   • Intermediate ops are LAZY — no work happens until a terminal op is called.
+ *   • Intermediate ops are LAZY - no work happens until a terminal op is called.
  *   • A stream can be consumed only ONCE.  Reuse requires creating a new stream.
  *   • Streams do not modify their source.
  *   • Order matters: filter early to avoid unnecessary work downstream.
@@ -33,7 +33,7 @@ public class StreamBasics {
         return Stream.of(values);
     }
 
-    /** Infinite stream of even numbers: 0, 2, 4, 6, … — must be limited downstream. */
+    /** Infinite stream of even numbers: 0, 2, 4, 6, … - must be limited downstream. */
     static Stream<Integer> evenNumbers() {
         return Stream.iterate(0, n -> n + 2);
     }
@@ -50,7 +50,7 @@ public class StreamBasics {
     }
 
     // -------------------------------------------------------------------------
-    // 2. filter — keep elements that satisfy a predicate
+    // 2. filter - keep elements that satisfy a predicate
     // -------------------------------------------------------------------------
 
     static List<Product> inStock(List<Product> products) {
@@ -72,7 +72,7 @@ public class StreamBasics {
     }
 
     // -------------------------------------------------------------------------
-    // 3. map — transform each element
+    // 3. map - transform each element
     // -------------------------------------------------------------------------
 
     static List<String> names(List<Product> products) {

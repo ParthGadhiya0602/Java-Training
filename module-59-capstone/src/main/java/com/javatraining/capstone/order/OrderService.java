@@ -40,7 +40,7 @@ public class OrderService {
         return orderCreationTimer.record(() -> {
             boolean available = inventoryClient.checkStock(productId, quantity);
             if (!available) {
-                log.warn("Rejected order for {} qty={} — insufficient stock", productId, quantity);
+                log.warn("Rejected order for {} qty={} - insufficient stock", productId, quantity);
                 throw new InsufficientStockException(productId);
             }
             Order order = orderRepository.save(new Order(productId, quantity, OrderStatus.CONFIRMED));

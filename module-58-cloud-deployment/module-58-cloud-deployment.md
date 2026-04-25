@@ -1,14 +1,15 @@
 ---
-title: "Module 58 — Cloud Deployment"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 58 - Cloud Deployment"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 58
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-58-cloud-deployment/src){: .btn .btn-outline }
 
-# Module 58 — Cloud Deployment
+# Module 58 - Cloud Deployment
 
 ## What this module covers
 
@@ -25,7 +26,7 @@ overrides, health indicators, and shutdown mode.
 src/main/java/com/javatraining/cloud/
 ├── CloudDeploymentApplication.java
 ├── config/
-│   └── AppProperties.java          # @ConfigurationProperties — 12-factor Factor III
+│   └── AppProperties.java          # @ConfigurationProperties - 12-factor Factor III
 ├── health/
 │   └── AppHealthIndicator.java     # custom HealthIndicator for /actuator/health
 └── api/
@@ -56,26 +57,26 @@ src/test/java/com/javatraining/cloud/
 
 ---
 
-## 12-factor app — all 12 factors
+## 12-factor app - all 12 factors
 
-| # | Factor | How this module applies it |
-|---|--------|---------------------------|
-| I | Codebase | One repo, one artifact; environment is a variable, not a branch |
-| II | Dependencies | All deps explicit in `pom.xml`; no system-wide installs |
-| III | Config | `AppProperties` loads from `app.*`; any property overridable via `APP_*` env var |
-| IV | Backing services | DB URL, passwords come from env vars / secrets manager — swappable without code change |
-| V | Build, release, run | `mvn package` (build) → image tag (release) → container start (run); strictly separate |
-| VI | Processes | Stateless: no session data in memory; any pod can handle any request |
-| VII | Port binding | `server.port=8080`; the app IS the server — no external web server needed |
-| VIII | Concurrency | Scale out by adding pods; Java 21 virtual threads for within-process concurrency |
-| IX | Disposability | `server.shutdown=graceful` + 30s drain timeout + Kubernetes `preStop` sleep |
-| X | Dev/prod parity | Same Docker image in every environment; only env vars change |
-| XI | Logs | Spring Boot logs to stdout by default; CloudWatch / Cloud Logging aggregates |
-| XII | Admin processes | `mvn flyway:migrate`, `mvn versions:set` run as one-off jobs, not app startup |
+| #    | Factor              | How this module applies it                                                             |
+| ---- | ------------------- | -------------------------------------------------------------------------------------- |
+| I    | Codebase            | One repo, one artifact; environment is a variable, not a branch                        |
+| II   | Dependencies        | All deps explicit in `pom.xml`; no system-wide installs                                |
+| III  | Config              | `AppProperties` loads from `app.*`; any property overridable via `APP_*` env var       |
+| IV   | Backing services    | DB URL, passwords come from env vars / secrets manager - swappable without code change |
+| V    | Build, release, run | `mvn package` (build) → image tag (release) → container start (run); strictly separate |
+| VI   | Processes           | Stateless: no session data in memory; any pod can handle any request                   |
+| VII  | Port binding        | `server.port=8080`; the app IS the server - no external web server needed              |
+| VIII | Concurrency         | Scale out by adding pods; Java 21 virtual threads for within-process concurrency       |
+| IX   | Disposability       | `server.shutdown=graceful` + 30s drain timeout + Kubernetes `preStop` sleep            |
+| X    | Dev/prod parity     | Same Docker image in every environment; only env vars change                           |
+| XI   | Logs                | Spring Boot logs to stdout by default; CloudWatch / Cloud Logging aggregates           |
+| XII  | Admin processes     | `mvn flyway:migrate`, `mvn versions:set` run as one-off jobs, not app startup          |
 
 ---
 
-## Factor III — Config in detail
+## Factor III - Config in detail
 
 ### @ConfigurationProperties record
 
@@ -92,11 +93,11 @@ public record AppProperties(
 
 Spring Boot's relaxed binding maps environment variables to properties automatically:
 
-| Environment variable | Property |
-|---|---|
-| `APP_ENVIRONMENT` | `app.environment` |
-| `APP_REGION` | `app.region` |
-| `APP_VERSION` | `app.version` |
+| Environment variable | Property          |
+| -------------------- | ----------------- |
+| `APP_ENVIRONMENT`    | `app.environment` |
+| `APP_REGION`         | `app.region`      |
+| `APP_VERSION`        | `app.version`     |
 
 Priority (highest wins): env vars > system properties > `@TestPropertySource` > profile properties > `application.properties`.
 
@@ -109,6 +110,7 @@ application-prod.properties     ← loaded when SPRING_PROFILES_ACTIVE=prod
 ```
 
 Activate at startup:
+
 ```bash
 # Docker / Kubernetes
 APP_ENVIRONMENT=prod SPRING_PROFILES_ACTIVE=prod java -jar app.jar
@@ -132,12 +134,12 @@ SPRING_PROFILES_ACTIVE=staging ./mvnw spring-boot:run
 ]
 ```
 
-`environment` for non-sensitive values, `secrets` for passwords/keys — ECS fetches
+`environment` for non-sensitive values, `secrets` for passwords/keys - ECS fetches
 secrets from Secrets Manager at task startup; the app sees them as plain env vars.
 
 ---
 
-## Factor IX — Disposability: graceful shutdown
+## Factor IX - Disposability: graceful shutdown
 
 ```properties
 server.shutdown=graceful
@@ -145,7 +147,8 @@ spring.lifecycle.timeout-per-shutdown-phase=30s
 ```
 
 On SIGTERM, Spring Boot:
-1. Marks the readiness probe as DOWN — Kubernetes stops routing new traffic immediately
+
+1. Marks the readiness probe as DOWN - Kubernetes stops routing new traffic immediately
 2. Lets in-flight requests complete (up to 30 s)
 3. Closes the Tomcat acceptor and then shuts down the JVM
 
@@ -155,9 +158,9 @@ On SIGTERM, Spring Boot:
 lifecycle:
   preStop:
     exec:
-      command: ["/bin/sh", "-c", "sleep 5"]   # wait for load balancer to deregister
+      command: ["/bin/sh", "-c", "sleep 5"] # wait for load balancer to deregister
 
-terminationGracePeriodSeconds: 60             # > 30s drain + 5s preStop
+terminationGracePeriodSeconds: 60 # > 30s drain + 5s preStop
 ```
 
 Timeline when Kubernetes terminates a pod:
@@ -180,11 +183,11 @@ management.health.livenessState.enabled=true
 management.health.readinessState.enabled=true
 ```
 
-| Endpoint | Probe type | Fails when | Kubernetes action |
-|---|---|---|---|
-| `/actuator/health/liveness` | Liveness | JVM is deadlocked / unrecoverable | Restart the pod |
-| `/actuator/health/readiness` | Readiness | App is starting or shutting down | Remove pod from LB |
-| `/actuator/health` | Aggregate | Any component is DOWN | Informational |
+| Endpoint                     | Probe type | Fails when                        | Kubernetes action  |
+| ---------------------------- | ---------- | --------------------------------- | ------------------ |
+| `/actuator/health/liveness`  | Liveness   | JVM is deadlocked / unrecoverable | Restart the pod    |
+| `/actuator/health/readiness` | Readiness  | App is starting or shutting down  | Remove pod from LB |
+| `/actuator/health`           | Aggregate  | Any component is DOWN             | Informational      |
 
 Custom `AppHealthIndicator` contributes deployment metadata to the aggregate:
 
@@ -194,7 +197,11 @@ Custom `AppHealthIndicator` contributes deployment metadata to the aggregate:
   "components": {
     "app": {
       "status": "UP",
-      "details": { "environment": "prod", "version": "1.0.0", "region": "us-east-1" }
+      "details": {
+        "environment": "prod",
+        "version": "1.0.0",
+        "region": "us-east-1"
+      }
     }
   }
 }
@@ -212,7 +219,7 @@ Fargate runs containers without managing EC2 instances. Key config:
 - **Secrets**: fetched from Secrets Manager at task start via the `secrets` block
 - **Health check**: `wget` calls `/actuator/health`; task is replaced if it fails 3× at 30s intervals
 - **Logs**: `awslogs` driver streams stdout to CloudWatch Logs
-- **stopTimeout: 35** — Fargate waits 35 s after SIGTERM before force-killing (must exceed drain timeout)
+- **stopTimeout: 35** - Fargate waits 35 s after SIGTERM before force-killing (must exceed drain timeout)
 
 ```bash
 # Deploy a new image
@@ -226,10 +233,10 @@ aws ecs update-service \
 
 App Engine manages the VM fleet. Key config in `app.yaml`:
 
-- `readiness_check.path: /actuator/health/readiness` — traffic only routes to healthy instances
-- `liveness_check.path: /actuator/health/liveness` — unhealthy instances are replaced
-- `automatic_scaling.min_num_instances: 1` — no cold starts
-- `target_utilization: 0.65` — scale out when CPU > 65%
+- `readiness_check.path: /actuator/health/readiness` - traffic only routes to healthy instances
+- `liveness_check.path: /actuator/health/liveness` - unhealthy instances are replaced
+- `automatic_scaling.min_num_instances: 1` - no cold starts
+- `target_utilization: 0.65` - scale out when CPU > 65%
 
 ```bash
 gcloud app deploy deployment/gcp/app.yaml --project=MY_PROJECT
@@ -242,18 +249,18 @@ The `deployment/k8s/deployment.yaml` covers:
 - `readinessProbe` + `livenessProbe` pointing at actuator endpoints
 - Resource `requests` and `limits` (prevent noisy-neighbour problems)
 - `preStop` hook for graceful shutdown coordination
-- `terminationGracePeriodSeconds: 60` — buffer over the drain timeout
+- `terminationGracePeriodSeconds: 60` - buffer over the drain timeout
 
 ---
 
 ## Tests
 
-| Class | Factor | Tests |
-|---|---|---|
-| `DeploymentInfoTest` | III, X | 2 |
-| `EnvironmentOverrideTest` | III | 1 |
-| `HealthIndicatorTest` | — | 2 |
-| `GracefulShutdownTest` | IX | 1 |
+| Class                     | Factor | Tests |
+| ------------------------- | ------ | ----- |
+| `DeploymentInfoTest`      | III, X | 2     |
+| `EnvironmentOverrideTest` | III    | 1     |
+| `HealthIndicatorTest`     | -      | 2     |
+| `GracefulShutdownTest`    | IX     | 1     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **6/6 pass**
@@ -262,12 +269,13 @@ Result: **6/6 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `@ConfigurationProperties` record over `@Value` fields | Record makes all config visible as a single type; `@Validated` catches missing props at startup, not at first call |
-| `server.shutdown=graceful` default-on | Zero-downtime rolling deploys depend on it; forgetting it causes 5xx during pod restarts |
-| Separate `application-staging.properties` and `application-prod.properties` | Environment differences are explicit and reviewable in git; no runtime logic branches on env name |
-| `terminationGracePeriodSeconds` > drain timeout + preStop sleep | If grace period ≤ drain timeout, Kubernetes force-kills the pod before requests finish — silent data loss |
-| Liveness vs readiness as separate probes | Mixing them causes a restart loop during normal startup; readiness DOWN during shutdown is correct, liveness DOWN means the pod is broken |
-| `APP_DB_PASSWORD` via ECS secrets / K8s secretKeyRef, not environment block | Plaintext env vars appear in `docker inspect`, ECS describe-tasks, and process listings; secrets-manager references do not |
+| Decision                                                                    | Reason                                                                                                                                    |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `@ConfigurationProperties` record over `@Value` fields                      | Record makes all config visible as a single type; `@Validated` catches missing props at startup, not at first call                        |
+| `server.shutdown=graceful` default-on                                       | Zero-downtime rolling deploys depend on it; forgetting it causes 5xx during pod restarts                                                  |
+| Separate `application-staging.properties` and `application-prod.properties` | Environment differences are explicit and reviewable in git; no runtime logic branches on env name                                         |
+| `terminationGracePeriodSeconds` > drain timeout + preStop sleep             | If grace period ≤ drain timeout, Kubernetes force-kills the pod before requests finish - silent data loss                                 |
+| Liveness vs readiness as separate probes                                    | Mixing them causes a restart loop during normal startup; readiness DOWN during shutdown is correct, liveness DOWN means the pod is broken |
+| `APP_DB_PASSWORD` via ECS secrets / K8s secretKeyRef, not environment block | Plaintext env vars appear in `docker inspect`, ECS describe-tasks, and process listings; secrets-manager references do not                |
+
 {% endraw %}

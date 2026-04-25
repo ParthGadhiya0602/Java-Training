@@ -29,12 +29,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Authorization tests using a full application context in a mock web environment.
  *
  * @SpringBootTest(MOCK) + @AutoConfigureMockMvc:
- *   - Full Spring context loads — our SecurityConfig, JwtUtil, JwtAuthenticationFilter all present
+ *   - Full Spring context loads - our SecurityConfig, JwtUtil, JwtAuthenticationFilter all present
  *   - MockMvc is auto-configured (no real HTTP server)
  *   - Our SecurityFilterChain with CSRF disabled and custom AuthorizationManager is active
- *   - @EnableMethodSecurity is active — @PreAuthorize on controller methods is enforced
+ *   - @EnableMethodSecurity is active - @PreAuthorize on controller methods is enforced
  *
- * @MockBean ProductService — the service is replaced with a Mockito mock;
+ * @MockBean ProductService - the service is replaced with a Mockito mock;
  *   we only care about the security layer, not the business logic.
  *
  * @WithMockUser injects a synthetic Authentication into the SecurityContext,
@@ -81,12 +81,12 @@ class AuthorizationTest {
                 .andExpect(jsonPath("$.name").value("Laptop"));
     }
 
-    // ── @PreAuthorize("hasRole('ADMIN')") — POST ──────────────────────────────
+    // ── @PreAuthorize("hasRole('ADMIN')") - POST ──────────────────────────────
 
     @Test
     @WithMockUser(roles = "USER")
     void user_role_cannot_create_product() throws Exception {
-        // @PreAuthorize("hasRole('ADMIN')") — ROLE_USER is not ROLE_ADMIN → 403
+        // @PreAuthorize("hasRole('ADMIN')") - ROLE_USER is not ROLE_ADMIN → 403
         ProductRequest req = new ProductRequest("Laptop", BigDecimal.TEN, "Electronics");
 
         mockMvc.perform(post("/api/products")
@@ -110,7 +110,7 @@ class AuthorizationTest {
                 .andExpect(jsonPath("$.id").value(1));
     }
 
-    // ── @PreAuthorize("hasRole('ADMIN')") — DELETE ────────────────────────────
+    // ── @PreAuthorize("hasRole('ADMIN')") - DELETE ────────────────────────────
 
     @Test
     @WithMockUser(roles = "USER")

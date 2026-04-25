@@ -41,7 +41,7 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- JWT — compile-time API, runtime impl + Jackson parser -->
+        <!-- JWT - compile-time API, runtime impl + Jackson parser -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>

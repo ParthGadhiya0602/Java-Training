@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
  * Typed config for {@code app.database.*} properties.
  *
  * <p>This is completely independent of Spring Boot's own {@code spring.datasource.*}
- * auto-configuration — it is our custom properties namespace.
+ * auto-configuration - it is our custom properties namespace.
  * No database connection is ever made; this class is purely a typed value holder.
  *
  * <p>Profile-specific overrides (e.g. {@code application-dev.properties}) are

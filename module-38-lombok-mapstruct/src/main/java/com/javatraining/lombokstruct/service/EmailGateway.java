@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
- * Stub email gateway — injected into NotificationService to demonstrate
+ * Stub email gateway - injected into NotificationService to demonstrate
  * @RequiredArgsConstructor wiring.
  */
 @Component

@@ -1,14 +1,15 @@
 ---
-title: "Module 40 — Spring Security"
-parent: "Phase 5 — Spring Ecosystem"
+title: "Module 40 - Spring Security"
+parent: "Phase 5 - Spring Ecosystem"
 nav_order: 40
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-40-spring-security/src){: .btn .btn-outline }
 
-# Module 40 — Spring Security
+# Module 40 - Spring Security
 
 Securing a Spring Boot REST API layer by layer:
 **SecurityFilterChain** for HTTP-level access control,
@@ -34,11 +35,11 @@ public class SecurityConfig {
             // CSRF protection is session-based; stateless JWT APIs don't use cookies
             .csrf(AbstractHttpConfigurer::disable)
 
-            // No HttpSession — each request must prove identity via JWT
+            // No HttpSession - each request must prove identity via JWT
             .sessionManagement(sm ->
                     sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-            // Authorization rules — evaluated top-to-bottom, first match wins
+            // Authorization rules - evaluated top-to-bottom, first match wins
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/products").permitAll()
@@ -62,9 +63,9 @@ public class SecurityConfig {
 
 ```
   Authorization rule evaluation:
-    /api/auth/**           → permitAll  — login endpoint, no token required
-    GET /api/products      → permitAll  — public product list
-    any other request      → authenticated  — must have valid JWT
+    /api/auth/**           → permitAll  - login endpoint, no token required
+    GET /api/products      → permitAll  - public product list
+    any other request      → authenticated  - must have valid JWT
 
   First match wins: more specific rules must come before broader ones.
 ```
@@ -90,15 +91,15 @@ public UserDetailsService userDetailsService(PasswordEncoder encoder) {
 @Bean
 public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
-    // BCrypt: adaptive one-way hash — deliberately slow to resist brute-force.
-    // Cost factor (default 10) means ~100ms per hash — fine for login, brutal for attackers.
+    // BCrypt: adaptive one-way hash - deliberately slow to resist brute-force.
+    // Cost factor (default 10) means ~100ms per hash - fine for login, brutal for attackers.
     // Never store plain or MD5/SHA-1 passwords.
 }
 ```
 
 ---
 
-## JWT — Stateless Authentication
+## JWT - Stateless Authentication
 
 ### Why Stateless?
 
@@ -108,7 +109,7 @@ public PasswordEncoder passwordEncoder() {
   Server stores session data  No server state; token is self-contained
   Single server or sticky     Works across multiple servers / pods
   Session invalidation easy   Token revocation requires extra infrastructure
-  Cookie-based CSRF risk      Bearer token in Authorization header — CSRF-safe
+  Cookie-based CSRF risk      Bearer token in Authorization header - CSRF-safe
 ```
 
 ### JwtUtil
@@ -117,7 +118,7 @@ public PasswordEncoder passwordEncoder() {
 @Component
 public class JwtUtil {
 
-    private final String secret;     // from application.properties — at least 32 bytes
+    private final String secret;     // from application.properties - at least 32 bytes
     private final long expirationMs;
 
     public JwtUtil(@Value("${jwt.secret}") String secret,
@@ -185,7 +186,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     }
                 }
             } catch (Exception ignored) {
-                // Invalid/expired/malformed token — no auth set → downstream returns 401
+                // Invalid/expired/malformed token - no auth set → downstream returns 401
             }
         }
 
@@ -194,7 +195,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 }
 ```
 
-### AuthController — Login Endpoint
+### AuthController - Login Endpoint
 
 ```java
 @RestController
@@ -220,7 +221,7 @@ public class AuthController {
 
 ---
 
-## @PreAuthorize — Method-Level Security
+## @PreAuthorize - Method-Level Security
 
 ```java
 // @EnableMethodSecurity on SecurityConfig activates method security.
@@ -231,10 +232,10 @@ public class AuthController {
 @RequestMapping("/api/products")
 public class ProductController {
 
-    @GetMapping         // no @PreAuthorize — public (permitAll in filter chain)
+    @GetMapping         // no @PreAuthorize - public (permitAll in filter chain)
     public ResponseEntity<List<Product>> getAll() { ... }
 
-    @GetMapping("/{id}") // no @PreAuthorize — protected by filter chain (anyRequest().authenticated())
+    @GetMapping("/{id}") // no @PreAuthorize - protected by filter chain (anyRequest().authenticated())
     public ResponseEntity<Product> getById(@PathVariable Long id) { ... }
 
     @PostMapping
@@ -248,18 +249,18 @@ public class ProductController {
 ```
 
 ```
-  hasRole('ADMIN')        — true if SecurityContext has ROLE_ADMIN GrantedAuthority
-  hasAnyRole('A','B')     — true if either role is present
-  isAuthenticated()       — true if user is authenticated (not anonymous)
-  #id == principal.id     — SpEL: compare method arg to authenticated user's ID
-  @beanName.method(#arg)  — delegate to a Spring bean for complex logic
+  hasRole('ADMIN')        - true if SecurityContext has ROLE_ADMIN GrantedAuthority
+  hasAnyRole('A','B')     - true if either role is present
+  isAuthenticated()       - true if user is authenticated (not anonymous)
+  #id == principal.id     - SpEL: compare method arg to authenticated user's ID
+  @beanName.method(#arg)  - delegate to a Spring bean for complex logic
 ```
 
 ---
 
 ## Spring Security Test
 
-### @WithMockUser — Bypassing JWT in Tests
+### @WithMockUser - Bypassing JWT in Tests
 
 ```java
 // @WithMockUser injects a synthetic UsernamePasswordAuthenticationToken into the
@@ -284,7 +285,7 @@ class AuthorizationTest {
     @Test
     @WithMockUser(roles = "USER")
     void user_role_cannot_create_product() throws Exception {
-        // @PreAuthorize("hasRole('ADMIN')") — USER has no ADMIN role → 403
+        // @PreAuthorize("hasRole('ADMIN')") - USER has no ADMIN role → 403
         mockMvc.perform(post("/api/products")
                         .contentType(APPLICATION_JSON)
                         .content("{\"name\":\"x\",\"price\":1,\"category\":\"c\"}"))
@@ -360,7 +361,7 @@ class JwtFlowTest {
 
 ---
 
-## Module 40 — What Was Built
+## Module 40 - What Was Built
 
 ```
   module-40-spring-security/
@@ -369,29 +370,29 @@ class JwtFlowTest {
   └── src/
       ├── main/java/com/javatraining/springsecurity/
       │   ├── SpringSecurityApplication.java
-      │   ├── model/Product.java            — @Data @Builder
-      │   ├── dto/LoginRequest.java         — record(username, password)
-      │   ├── dto/LoginResponse.java        — record(token)
-      │   ├── dto/ProductRequest.java       — record + @NotBlank @DecimalMin
+      │   ├── model/Product.java            - @Data @Builder
+      │   ├── dto/LoginRequest.java         - record(username, password)
+      │   ├── dto/LoginResponse.java        - record(token)
+      │   ├── dto/ProductRequest.java       - record + @NotBlank @DecimalMin
       │   ├── exception/
       │   │   ├── ProductNotFoundException.java
-      │   │   └── GlobalExceptionHandler.java  — BadCredentialsException → 401,
+      │   │   └── GlobalExceptionHandler.java  - BadCredentialsException → 401,
       │   │                                      ProductNotFoundException → 404
       │   ├── security/
-      │   │   ├── JwtUtil.java              — generate/validate JWT, @Value injection
-      │   │   └── JwtAuthenticationFilter.java — OncePerRequestFilter, Bearer token
+      │   │   ├── JwtUtil.java              - generate/validate JWT, @Value injection
+      │   │   └── JwtAuthenticationFilter.java - OncePerRequestFilter, Bearer token
       │   ├── config/
-      │   │   └── SecurityConfig.java       — SecurityFilterChain, UserDetailsService,
+      │   │   └── SecurityConfig.java       - SecurityFilterChain, UserDetailsService,
       │   │                                   BCryptPasswordEncoder, @EnableMethodSecurity
-      │   ├── service/ProductService.java   — ConcurrentHashMap in-memory store
+      │   ├── service/ProductService.java   - ConcurrentHashMap in-memory store
       │   └── controller/
-      │       ├── ProductController.java    — @PreAuthorize on POST and DELETE
-      │       └── AuthController.java       — POST /api/auth/login → JWT
+      │       ├── ProductController.java    - @PreAuthorize on POST and DELETE
+      │       └── AuthController.java       - POST /api/auth/login → JWT
       ├── main/resources/application.properties
       └── test/java/com/javatraining/springsecurity/
-          ├── AuthorizationTest.java   — 7 tests: @SpringBootTest(MOCK) + @AutoConfigureMockMvc
+          ├── AuthorizationTest.java   - 7 tests: @SpringBootTest(MOCK) + @AutoConfigureMockMvc
           │                              @WithMockUser, anonymous 401, user 403, admin OK
-          └── JwtFlowTest.java         — 7 tests: @SpringBootTest(MOCK) + @AutoConfigureMockMvc
+          └── JwtFlowTest.java         - 7 tests: @SpringBootTest(MOCK) + @AutoConfigureMockMvc
                                          valid login (token), wrong password (401),
                                          no token (401), invalid token (401),
                                          valid user JWT (accesses protected endpoint),
@@ -407,20 +408,20 @@ All tests: **14 passing**.
 
 ```
   SecurityFilterChain     Replaces the auto-configured default; define access rules top-to-bottom
-  permitAll()             No authentication required — public endpoints
+  permitAll()             No authentication required - public endpoints
   anyRequest().authenticated()  All other endpoints need a valid principal
-  SessionCreationPolicy.STATELESS  No HttpSession — each request carries its own token
+  SessionCreationPolicy.STATELESS  No HttpSession - each request carries its own token
   csrf(disable)           CSRF attacks rely on cookies; Bearer tokens are CSRF-safe
   httpBasic(disable)      Removes "WWW-Authenticate: Basic" from 401 responses;
                           prevents HTTP client auth-retry on POST requests
   HttpStatusEntryPoint    Returns plain 401 for unauthenticated access (no redirect)
 
-  BCryptPasswordEncoder   Adaptive hash — deliberately slow; always encode passwords
+  BCryptPasswordEncoder   Adaptive hash - deliberately slow; always encode passwords
   InMemoryUserDetailsManager  Development/test only; production uses JdbcUserDetailsManager
                               or a custom UserDetailsService backed by a database
 
   JwtUtil                 Stateless token utility: generate (sign) + validate (verify + expiry)
-  Keys.hmacShaKeyFor()    Rejects keys shorter than 256 bits — enforced at construction time
+  Keys.hmacShaKeyFor()    Rejects keys shorter than 256 bits - enforced at construction time
   OncePerRequestFilter    Guaranteed single execution per request; base class for JWT filter
   SecurityContextHolder   Thread-local holder; set authentication here to mark request as authed
 
@@ -431,6 +432,7 @@ All tests: **14 passing**.
   @WithMockUser           Test annotation: injects synthetic auth into SecurityContext;
                           JWT filter skips processing when context is already populated
   @AutoConfigureMockMvc   Combines with @SpringBootTest to provide MockMvc without real server
-  MockMvc vs TestRestTemplate  Use MockMvc for security tests — no HTTP client auth-retry issues
+  MockMvc vs TestRestTemplate  Use MockMvc for security tests - no HTTP client auth-retry issues
 ```
+
 {% endraw %}

@@ -20,14 +20,14 @@ import reactor.core.publisher.Mono;
  * WebFlux annotated controller.
  *
  * Handler methods return Mono<T> or Flux<T> instead of T or List<T>.
- * WebFlux subscribes to the returned publisher automatically — no blocking occurs.
+ * WebFlux subscribes to the returned publisher automatically - no blocking occurs.
  *
  * SSE (Server-Sent Events):
- *   produces = TEXT_EVENT_STREAM_VALUE — WebFlux serializes each Flux element as
+ *   produces = TEXT_EVENT_STREAM_VALUE - WebFlux serializes each Flux element as
  *   "data: <json>\n\n" on the wire. The connection stays open until the Flux completes
  *   or the client disconnects. Useful for real-time dashboards, live feeds, etc.
  *
- *   For infinite streams (e.g. tailing a Kafka topic), the Flux never completes —
+ *   For infinite streams (e.g. tailing a Kafka topic), the Flux never completes -
  *   the connection stays alive until the client closes it.
  */
 @RestController
@@ -40,13 +40,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // Regular JSON list — WebFlux buffers the Flux and returns a JSON array
+    // Regular JSON list - WebFlux buffers the Flux and returns a JSON array
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<ProductResponse> getAll() {
         return productService.findAll();
     }
 
-    // SSE stream — each element is pushed as a separate "data:" event
+    // SSE stream - each element is pushed as a separate "data:" event
     @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<ProductResponse> streamAll() {
         return productService.findAll();

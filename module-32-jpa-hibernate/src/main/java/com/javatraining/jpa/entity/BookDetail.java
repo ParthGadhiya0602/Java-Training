@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * Extra metadata for a book — models the {@code OneToOne} relationship.
+ * Extra metadata for a book - models the {@code OneToOne} relationship.
  *
  * <p>{@link Book#detail} owns the FK column ({@code detail_id}) and is declared
  * {@code EAGER}, so {@code BookDetail} is loaded in the same query as {@code Book}

@@ -3,7 +3,7 @@ package com.javatraining.cleancode.solid.dip;
 import java.util.List;
 
 /**
- * High-level module — depends on the {@link MessageSender} abstraction only.
+ * High-level module - depends on the {@link MessageSender} abstraction only.
  * Switching from email to SMS (or adding push notifications) requires zero
  * changes to this class; just inject a different sender at construction time.
  */

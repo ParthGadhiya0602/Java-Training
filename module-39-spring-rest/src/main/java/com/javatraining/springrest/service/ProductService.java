@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-// In-memory store — ConcurrentHashMap is thread-safe for concurrent reads/writes.
+// In-memory store - ConcurrentHashMap is thread-safe for concurrent reads/writes.
 // AtomicLong gives lock-free, monotonically increasing IDs.
 @Service
 public class ProductService {

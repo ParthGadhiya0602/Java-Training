@@ -5,7 +5,7 @@ import java.util.function.*;
 import java.util.stream.Collectors;
 
 /**
- * Module 15 — Functional Interfaces and Composition
+ * Module 15 - Functional Interfaces and Composition
  *
  * java.util.function provides four core families:
  *
@@ -50,9 +50,9 @@ public class FunctionalInterfaces {
     // ── Predicate<T> composition ──────────────────────────────────────────────
 
     /**
-     * and  — short-circuit &&
-     * or   — short-circuit ||
-     * negate — !
+     * and  - short-circuit &&
+     * or   - short-circuit ||
+     * negate - !
      */
     public static Predicate<String> nonBlankAndLong(int minLen) {
         Predicate<String> nonBlank    = Predicate.not(String::isBlank);
@@ -114,7 +114,7 @@ public class FunctionalInterfaces {
 
     // ── Primitive specialisations ────────────────────────────────────────────
 
-    /** IntUnaryOperator — avoids boxing overhead for int -> int. */
+    /** IntUnaryOperator - avoids boxing overhead for int -> int. */
     public static IntUnaryOperator clamp(int min, int max) {
         return n -> Math.max(min, Math.min(max, n));
     }

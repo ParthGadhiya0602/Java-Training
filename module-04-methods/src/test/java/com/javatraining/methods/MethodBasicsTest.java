@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("MethodBasics — static, instance, guard clauses")
+@DisplayName("MethodBasics - static, instance, guard clauses")
 class MethodBasicsTest {
 
     @ParameterizedTest(name = "{0}°C = {1}°F")

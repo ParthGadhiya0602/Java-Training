@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.net.URI;
 import java.util.List;
 
-// RFC 9457 — Problem Details for HTTP APIs
+// RFC 9457 - Problem Details for HTTP APIs
 // ProblemDetail is built into Spring 6 / Spring Boot 3.
 // Fields: type, title, status, detail, instance + any custom extension properties.
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 404 — resource not found
+    // 404 - resource not found
     @ExceptionHandler(ProductNotFoundException.class)
     public ProblemDetail handleProductNotFound(ProductNotFoundException ex,
                                                HttpServletRequest request) {
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
         return problem;
     }
 
-    // 400 — @Valid constraint violations
+    // 400 - @Valid constraint violations
     // Spring binds field-level errors in BindingResult; we surface them as a list
     // under the custom "errors" extension property.
     @ExceptionHandler(MethodArgumentNotValidException.class)

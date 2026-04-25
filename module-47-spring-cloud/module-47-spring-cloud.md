@@ -1,14 +1,15 @@
 ---
-title: "Module 47 — Spring Cloud"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 47 - Spring Cloud"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 47
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-47-spring-cloud/src){: .btn .btn-outline }
 
-# Module 47 — Spring Cloud
+# Module 47 - Spring Cloud
 
 ## Overview
 
@@ -43,7 +44,7 @@ Spring Cloud releases are independent of Spring Boot and are managed through the
 ```
 
 Spring Cloud `2023.0.x` is compatible with Spring Boot `3.3.x`. Individual starters
-are then added without an explicit version — the BOM manages them.
+are then added without an explicit version - the BOM manages them.
 
 ---
 
@@ -91,12 +92,12 @@ spring.application.name=order-service
 spring.config.import=optional:configserver:http://localhost:8888
 ```
 
-The Config Server serves `{application-name}/{profile}` — so `order-service/production`
+The Config Server serves `{application-name}/{profile}` - so `order-service/production`
 maps to `order-service-production.properties` in the git repo.
 
 ---
 
-## 3. Eureka — Service Discovery
+## 3. Eureka - Service Discovery
 
 Eureka lets services find each other by name instead of hard-coded URLs.
 
@@ -164,7 +165,7 @@ spring:
     gateway:
       routes:
         - id: order-service
-          uri: lb://order-service          # lb:// means resolve via Eureka
+          uri: lb://order-service # lb:// means resolve via Eureka
           predicates:
             - Path=/orders/**
           filters:
@@ -180,16 +181,17 @@ spring:
 ```
 
 **Key concepts:**
-- `Predicate` — matches an incoming request (path, method, header, query param)
-- `Filter` — mutates the request or response (add header, rate limit, circuit break)
-- `lb://` prefix — routes through the load balancer (requires Eureka or similar)
-- `StripPrefix=N` — removes N path segments before forwarding
+
+- `Predicate` - matches an incoming request (path, method, header, query param)
+- `Filter` - mutates the request or response (add header, rate limit, circuit break)
+- `lb://` prefix - routes through the load balancer (requires Eureka or similar)
+- `StripPrefix=N` - removes N path segments before forwarding
 
 Gateway runs on Spring WebFlux and requires a separate application (cannot share a JVM with a Spring MVC service).
 
 ---
 
-## 5. Circuit Breaker — Resilience4j
+## 5. Circuit Breaker - Resilience4j
 
 A circuit breaker wraps a call to a remote service and tracks failures.
 When the failure rate exceeds a threshold the circuit **opens**: subsequent calls
@@ -295,7 +297,7 @@ resilience4j.retry.instances.inventory.enable-exponential-backoff=true
 resilience4j.retry.instances.inventory.exponential-backoff-multiplier=2
 ```
 
-With exponential backoff and `max-attempts=3`, waits are: 500ms, 1000ms — then fallback.
+With exponential backoff and `max-attempts=3`, waits are: 500ms, 1000ms - then fallback.
 
 **Stacking Retry inside Circuit Breaker:**
 
@@ -335,10 +337,10 @@ management.tracing.sampling.probability=1.0     # 100% in dev; 0.1 (10%) in prod
 management.zipkin.tracing.endpoint=http://localhost:9411/api/v2/spans
 ```
 
-Spring Boot auto-configures Brave and injects `traceId`/`spanId` into MDC —
+Spring Boot auto-configures Brave and injects `traceId`/`spanId` into MDC -
 every `log.info(...)` call automatically includes them.
 
-### `@Observed` — custom spans
+### `@Observed` - custom spans
 
 ```java
 @Service
@@ -444,7 +446,7 @@ resilience4j.retry.instances.inventory.enable-exponential-backoff=false
 ## Key takeaways
 
 - Spring Cloud BOM `2023.0.x` manages all Spring Cloud artifact versions alongside
-  Spring Boot `3.3.x` — import it in `<dependencyManagement>` and add starters without versions
+  Spring Boot `3.3.x` - import it in `<dependencyManagement>` and add starters without versions
 - Config Server externalises configuration into a git repo (or local filesystem);
   clients fetch properties at startup via `spring.config.import=configserver:`
 - Eureka enables service discovery: services register by name and clients resolve
@@ -458,4 +460,4 @@ resilience4j.retry.instances.inventory.enable-exponential-backoff=false
   each retry batch counts as a single failure observation for the CB
 - Test with tight thresholds in `src/test/resources/application.properties` and reset
   `CircuitBreakerRegistry` in `@BeforeEach` to keep tests independent
-{% endraw %}
+  {% endraw %}

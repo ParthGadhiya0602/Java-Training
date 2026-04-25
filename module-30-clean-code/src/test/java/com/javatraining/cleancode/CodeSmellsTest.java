@@ -163,7 +163,7 @@ class CodeSmellsTest {
 
         @Test
         void all_formats_share_same_header_title() {
-            // Extracted buildHeader() is called by all generators — one source of truth
+            // Extracted buildHeader() is called by all generators - one source of truth
             String text    = builder.generateTextReport(items);
             String csv     = builder.generateCsvReport(items);
             String summary = builder.generateSummary(items);
@@ -188,7 +188,7 @@ class CodeSmellsTest {
 
         @Test
         void text_report_shows_overflow_notice_beyond_max_items() {
-            // MAX_ITEMS_PER_PAGE = 100 — named constant, not a magic number
+            // MAX_ITEMS_PER_PAGE = 100 - named constant, not a magic number
             List<String> bigList = java.util.stream.IntStream.rangeClosed(1, 110)
                     .mapToObj(i -> "Item " + i).toList();
             String report = builder.generateTextReport(bigList);

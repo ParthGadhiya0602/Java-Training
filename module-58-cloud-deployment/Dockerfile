@@ -11,7 +11,7 @@ RUN mvn package -DskipTests -q
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Non-root user — principle of least privilege
+# Non-root user - principle of least privilege
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring
 

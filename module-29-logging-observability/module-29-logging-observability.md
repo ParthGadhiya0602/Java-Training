@@ -1,14 +1,15 @@
 ---
-title: "Module 29 — Logging & Observability"
-parent: "Phase 3 — Intermediate Engineering"
+title: "Module 29 - Logging & Observability"
+parent: "Phase 3 - Intermediate Engineering"
 nav_order: 29
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-29-logging-observability/src){: .btn .btn-outline }
 
-# Module 29 — Logging & Observability
+# Module 29 - Logging & Observability
 
 SLF4J provides a vendor-neutral logging API; Logback is the reference implementation.
 Micrometer provides a vendor-neutral metrics API for counters, timers, and gauges.
@@ -17,9 +18,9 @@ Micrometer provides a vendor-neutral metrics API for counters, timers, and gauge
 
 ## SLF4J Architecture
 
-SLF4J (Simple Logging Facade for Java) is a **facade** — your application code calls
+SLF4J (Simple Logging Facade for Java) is a **facade** - your application code calls
 the SLF4J API, and a binding wired on the classpath routes calls to the real
-implementation.  Swapping implementations (e.g. Logback → Log4j2) requires no
+implementation. Swapping implementations (e.g. Logback → Log4j2) requires no
 source changes.
 
 ```
@@ -36,7 +37,7 @@ source changes.
                        ▼
 ┌──────────────────────────────────────────────────────────────────┐
 │  SLF4J API   (org.slf4j:slf4j-api)                               │
-│  Interface layer — Logger, LoggerFactory, MDC, Marker            │
+│  Interface layer - Logger, LoggerFactory, MDC, Marker            │
 └──────────────────────┬───────────────────────────────────────────┘
                        │  binding (chosen at runtime via classpath)
           ┌────────────┼────────────────────┐
@@ -54,7 +55,7 @@ source changes.
 
 ## Log Level Hierarchy
 
-Levels form a strict hierarchy.  Setting a logger to a level **silences everything
+Levels form a strict hierarchy. Setting a logger to a level **silences everything
 below it**.
 
 ```
@@ -95,23 +96,23 @@ below it**.
 
 ## Parameterised Logging
 
-Always use `{}` placeholders — **never string concatenation**.
+Always use `{}` placeholders - **never string concatenation**.
 
 ```java
-// GOOD — toString() is NOT called when DEBUG is disabled
+// GOOD - toString() is NOT called when DEBUG is disabled
 log.debug("Processing {} items for order {}", items.size(), order.id());
 
-// BAD — String concatenation always happens, even when DEBUG is off
+// BAD - String concatenation always happens, even when DEBUG is off
 log.debug("Processing " + items.size() + " items for order " + order.id());
 ```
 
-Pass a `Throwable` as the **last argument** with no placeholder — SLF4J appends
+Pass a `Throwable` as the **last argument** with no placeholder - SLF4J appends
 the full stack trace automatically:
 
 ```java
 log.error("Failed to process order {}: {}", order.id(), e.getMessage(), e);
 //                                                                        ↑
-//                                         Throwable — no {} needed here
+//                                         Throwable - no {} needed here
 ```
 
 ---
@@ -154,7 +155,7 @@ log.error("Failed to process order {}: {}", order.id(), e.getMessage(), e);
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-### logback.xml — Key Elements
+### logback.xml - Key Elements
 
 ```xml
 <configuration>
@@ -192,10 +193,10 @@ log.error("Failed to process order {}: {}", order.id(), e.getMessage(), e);
 
 ---
 
-## MDC — Mapped Diagnostic Context
+## MDC - Mapped Diagnostic Context
 
-MDC is a **thread-local key/value store**.  Values placed in MDC appear automatically
-in every log line on that thread — no need to pass them to every method.
+MDC is a **thread-local key/value store**. Values placed in MDC appear automatically
+in every log line on that thread - no need to pass them to every method.
 
 ```
   HTTP Request Thread
@@ -227,13 +228,14 @@ try {
 ```
 
 Logback pattern to print MDC values:
+
 ```
 %d{HH:mm:ss} [%X{requestId}] [%X{userId}] %-5level %logger - %msg%n
 ```
 
 ---
 
-## Micrometer — Metrics Facade
+## Micrometer - Metrics Facade
 
 Micrometer is to metrics what SLF4J is to logging: a vendor-neutral facade.
 Your application code uses Micrometer's API; at runtime you plug in a registry
@@ -278,7 +280,7 @@ that ships data to Prometheus, Datadog, CloudWatch, Graphite, etc.
 └─────────────────────┴──────────────────────────────┴──────────────────────────────┘
 ```
 
-### Tags — Partitioning Metrics
+### Tags - Partitioning Metrics
 
 Tags turn one metric name into a family of time series:
 
@@ -296,27 +298,27 @@ Tags turn one metric name into a family of time series:
 ### Meter Recipes
 
 ```java
-// Counter — increment on each event
+// Counter - increment on each event
 Counter.builder("app.requests.total")
        .tag("service", "order")
        .description("Total HTTP requests")
        .register(registry)
        .increment();
 
-// Timer — wrap a block; records count + total time + histogram
+// Timer - wrap a block; records count + total time + histogram
 Timer timer = Timer.builder("app.operation.duration")
                    .tag("operation", "save")
                    .register(registry);
 
 Result r = timer.record(() -> repo.save(entity));   // captures duration
 
-// Gauge — register once; reads live value on each scrape
+// Gauge - register once; reads live value on each scrape
 AtomicInteger active = new AtomicInteger();
 Gauge.builder("app.connections.active", active, AtomicInteger::get)
      .description("Active connections")
      .register(registry);
 
-// DistributionSummary — track value distribution
+// DistributionSummary - track value distribution
 DistributionSummary.builder("app.payload.bytes")
                    .baseUnit("bytes")
                    .register(registry)
@@ -375,7 +377,7 @@ logger.detachAppender(listAppender);
 
 ---
 
-## Module 29 — What Was Built
+## Module 29 - What Was Built
 
 ```
   module-29-logging-observability/
@@ -386,14 +388,14 @@ logger.detachAppender(listAppender);
   │   │   ├── OrderResult.java         result record
   │   │   ├── OrderStatus.java         enum
   │   │   ├── OrderProcessor.java      demonstrates all 5 log levels + {} placeholders
-  │   │   ├── UserService.java         MDC pattern — set/use/clear in finally
+  │   │   ├── UserService.java         MDC pattern - set/use/clear in finally
   │   │   └── MetricsService.java      Counter, Timer, Gauge, DistributionSummary
   │   └── resources/
   │       └── logback.xml              ConsoleAppender; RollingFileAppender commented out
   └── src/test/
       ├── java/com/javatraining/logging/
-      │   ├── LoggingFeaturesTest.java  13 tests — log levels, MDC lifecycle
-      │   └── MicrometerMetricsTest.java 15 tests — Counter, Timer, Gauge, Summary
+      │   ├── LoggingFeaturesTest.java  13 tests - log levels, MDC lifecycle
+      │   └── MicrometerMetricsTest.java 15 tests - Counter, Timer, Gauge, Summary
       └── resources/
           └── logback-test.xml         TRACE level; compact pattern for test output
 ```

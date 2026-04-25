@@ -9,6 +9,6 @@ package com.javatraining.springdata.projection;
  *   FROM Employee e WHERE ...
  * </pre>
  *
- * Records are immutable and work perfectly as DTO projections — no proxy overhead.
+ * Records are immutable and work perfectly as DTO projections - no proxy overhead.
  */
 public record EmployeeNameDto(String name, java.math.BigDecimal salary) {}

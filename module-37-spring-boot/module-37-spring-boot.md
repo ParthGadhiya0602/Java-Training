@@ -1,21 +1,22 @@
 ---
-title: "Module 37 — Spring Boot"
-parent: "Phase 5 — Spring Ecosystem"
+title: "Module 37 - Spring Boot"
+parent: "Phase 5 - Spring Ecosystem"
 nav_order: 37
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-37-spring-boot/src){: .btn .btn-outline }
 
-# Module 37 — Spring Boot
+# Module 37 - Spring Boot
 
 Spring Boot makes Spring-based applications runnable with minimal configuration:
-**Auto-configuration** — infers and wires beans based on classpath and properties;
-**Starters** — curated dependency groups that pull in everything a feature needs;
-**Profiles** — swap configuration between environments without code changes;
-**@ConfigurationProperties** — type-safe, validated binding from property files to Java classes;
-**Actuator** — production-ready observability endpoints out of the box.
+**Auto-configuration** - infers and wires beans based on classpath and properties;
+**Starters** - curated dependency groups that pull in everything a feature needs;
+**Profiles** - swap configuration between environments without code changes;
+**@ConfigurationProperties** - type-safe, validated binding from property files to Java classes;
+**Actuator** - production-ready observability endpoints out of the box.
 
 ---
 
@@ -65,7 +66,7 @@ Spring Boot makes Spring-based applications runnable with minimal configuration:
 @ConditionalOnBean(SomeService.class)
 ```
 
-### @ConditionalOnMissingBean — The Override Pattern
+### @ConditionalOnMissingBean - The Override Pattern
 
 ```
   Spring Boot ships: DataSourceAutoConfiguration creates a DataSource bean.
@@ -77,7 +78,7 @@ Spring Boot makes Spring-based applications runnable with minimal configuration:
 ```
 
 ```java
-// In your @Configuration — overrides Spring Boot's default:
+// In your @Configuration - overrides Spring Boot's default:
 @Bean
 public DataSource myDataSource() {
     return new HikariDataSource(customConfig());
@@ -126,8 +127,8 @@ public DataSource myDataSource() {
                                       }
 
   @Value problems:
-    Scattered across the codebase — no single place to see all config
-    No type validation — wrong value → runtime crash
+    Scattered across the codebase - no single place to see all config
+    No type validation - wrong value → runtime crash
     No IDE autocompletion
     Repeated prefix everywhere
 
@@ -208,7 +209,7 @@ public class AppProperties {
   If app.max-connections=0 (violates @Min(1)):
   → Application refuses to start
   → Error: "Field error in object 'app' on field 'maxConnections': rejected value [0]"
-  → Explicit, actionable error — not a NullPointerException 3 layers deep
+  → Explicit, actionable error - not a NullPointerException 3 layers deep
 ```
 
 ---
@@ -381,7 +382,7 @@ public class BuildInfoContributor implements InfoContributor {
 
   Rule: test classpath (target/test-classes) has higher priority than main
   classpath (target/classes). A same-named file in test resources shadows the
-  main one entirely — it does not merge.
+  main one entirely - it does not merge.
 
   Fix: mvn clean test clears target/ before compiling. When in doubt after
   deleting or renaming resources, always clean first.
@@ -392,7 +393,7 @@ public class BuildInfoContributor implements InfoContributor {
 
 ---
 
-## Module 37 — What Was Built
+## Module 37 - What Was Built
 
 ```
   module-37-spring-boot/
@@ -402,29 +403,29 @@ public class BuildInfoContributor implements InfoContributor {
   └── src/
       ├── main/
       │   ├── java/com/javatraining/springboot/
-      │   │   ├── SpringBootDemoApplication.java   — @ConfigurationPropertiesScan
+      │   │   ├── SpringBootDemoApplication.java   - @ConfigurationPropertiesScan
       │   │   ├── config/
-      │   │   │   ├── AppProperties.java            — @ConfigurationProperties(prefix="app")
+      │   │   │   ├── AppProperties.java            - @ConfigurationProperties(prefix="app")
       │   │   │   │                                   nested FeatureFlags, @Validated
-      │   │   │   ├── DatabaseProperties.java        — @ConfigurationProperties(prefix="app.database")
-      │   │   │   └── ConditionalConfig.java         — @ConditionalOnProperty, @ConditionalOnMissingBean
+      │   │   │   ├── DatabaseProperties.java        - @ConfigurationProperties(prefix="app.database")
+      │   │   │   └── ConditionalConfig.java         - @ConditionalOnProperty, @ConditionalOnMissingBean
       │   │   ├── profile/
-      │   │   │   ├── EnvironmentInfo.java            — interface
-      │   │   │   ├── DevEnvironmentInfo.java         — @Profile("dev")
-      │   │   │   └── ProdEnvironmentInfo.java        — @Profile("prod")
+      │   │   │   ├── EnvironmentInfo.java            - interface
+      │   │   │   ├── DevEnvironmentInfo.java         - @Profile("dev")
+      │   │   │   └── ProdEnvironmentInfo.java        - @Profile("prod")
       │   │   └── actuator/
-      │   │       ├── AppHealthIndicator.java         — custom HealthIndicator
-      │   │       └── BuildInfoContributor.java       — custom InfoContributor
+      │   │       ├── AppHealthIndicator.java         - custom HealthIndicator
+      │   │       └── BuildInfoContributor.java       - custom InfoContributor
       │   └── resources/
-      │       ├── application.properties             — base config
-      │       ├── application-dev.properties         — dev overrides
-      │       └── application-prod.properties        — prod overrides
+      │       ├── application.properties             - base config
+      │       ├── application-dev.properties         - dev overrides
+      │       └── application-prod.properties        - prod overrides
       └── test/java/com/javatraining/springboot/
-          ├── ConfigurationPropertiesTest.java  10 tests — binding, nested,
+          ├── ConfigurationPropertiesTest.java  10 tests - binding, nested,
           │                                              @ConditionalOnProperty, @ConditionalOnMissingBean
-          ├── ProfileDevTest.java               6 tests — dev bean, debug, URL override
-          ├── ProfileProdTest.java              5 tests — prod bean, no debug, URL override
-          └── ActuatorTest.java                 6 tests — /health UP, custom indicator,
+          ├── ProfileDevTest.java               6 tests - dev bean, debug, URL override
+          ├── ProfileProdTest.java              5 tests - prod bean, no debug, URL override
+          └── ActuatorTest.java                 6 tests - /health UP, custom indicator,
                                                           /info env + custom contributor
 ```
 
@@ -455,4 +456,5 @@ All tests: **27 passing**.
   Stale test resources  target/test-classes/application.properties shadows main properties.
                         Always mvn clean test after deleting resource files.
 ```
+
 {% endraw %}

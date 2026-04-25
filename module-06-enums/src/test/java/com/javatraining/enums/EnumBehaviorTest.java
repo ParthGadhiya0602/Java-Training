@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EnumBehaviorTest {
 
     // -----------------------------------------------------------------------
-    // Operation — abstract apply()
+    // Operation - abstract apply()
     // -----------------------------------------------------------------------
     @ParameterizedTest
     @CsvSource({
@@ -45,7 +45,7 @@ class EnumBehaviorTest {
     }
 
     // -----------------------------------------------------------------------
-    // ProductCategory — implements Taxable
+    // ProductCategory - implements Taxable
     // -----------------------------------------------------------------------
     @ParameterizedTest
     @CsvSource({
@@ -69,7 +69,7 @@ class EnumBehaviorTest {
     }
 
     // -----------------------------------------------------------------------
-    // DiscountStrategy — abstract apply(), savings()
+    // DiscountStrategy - abstract apply(), savings()
     // -----------------------------------------------------------------------
     @ParameterizedTest
     @CsvSource({
@@ -90,7 +90,7 @@ class EnumBehaviorTest {
     }
 
     // -----------------------------------------------------------------------
-    // Season — abstract avgTempCelsius(), default avgTempFahrenheit()
+    // Season - abstract avgTempCelsius(), default avgTempFahrenheit()
     // -----------------------------------------------------------------------
     @ParameterizedTest
     @CsvSource({

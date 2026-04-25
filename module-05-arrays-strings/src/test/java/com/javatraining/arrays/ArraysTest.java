@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Arrays — operations, sorting, copying, gotchas")
+@DisplayName("Arrays - operations, sorting, copying, gotchas")
 class ArraysTest {
 
     @Test
@@ -55,7 +55,7 @@ class ArraysTest {
         StringBuilder[] orig = {new StringBuilder("hello"), new StringBuilder("world")};
         StringBuilder[] copy = orig.clone();
 
-        // Same objects — mutation via copy is visible through orig
+        // Same objects - mutation via copy is visible through orig
         copy[0].append("!");
         assertEquals("hello!", orig[0].toString());
 
@@ -65,7 +65,7 @@ class ArraysTest {
     }
 
     @Test
-    @DisplayName("Arrays.asList returns fixed-size list — add() throws")
+    @DisplayName("Arrays.asList returns fixed-size list - add() throws")
     void asListIsFixedSize() {
         String[] arr = {"a", "b", "c"};
         List<String> fixedList = Arrays.asList(arr);
@@ -83,7 +83,7 @@ class ArraysTest {
     void deepEquals() {
         int[][] a = {{1, 2}, {3, 4}};
         int[][] b = {{1, 2}, {3, 4}};
-        assertFalse(Arrays.equals(a, b),    "equals() is shallow — compares references");
+        assertFalse(Arrays.equals(a, b),    "equals() is shallow - compares references");
         assertTrue(Arrays.deepEquals(a, b), "deepEquals() compares content recursively");
     }
 

@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <p>RANDOM_PORT starts a real embedded Tomcat on a random port so the
  * Actuator HTTP endpoints are accessible via {@link TestRestTemplate}.
  *
- * <p>No active profile — base application.properties + test/application.properties
+ * <p>No active profile - base application.properties + test/application.properties
  * (which exposes all endpoints with management.endpoints.web.exposure.include=*)
  */
 @SpringBootTest(

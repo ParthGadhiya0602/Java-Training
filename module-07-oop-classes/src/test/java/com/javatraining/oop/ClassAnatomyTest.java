@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClassAnatomyTest {
 
     // -----------------------------------------------------------------------
-    // Counter — constructor chaining + static/instance state
+    // Counter - constructor chaining + static/instance state
     // -----------------------------------------------------------------------
     @Test
     void canonical_constructor_sets_label_and_value() {
@@ -71,7 +71,7 @@ class ClassAnatomyTest {
     }
 
     // -----------------------------------------------------------------------
-    // Temperature — static factories
+    // Temperature - static factories
     // -----------------------------------------------------------------------
     @Test
     void celsius_roundtrip() {

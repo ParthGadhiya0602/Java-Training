@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Employee entity — demonstrates:
+ * Employee entity - demonstrates:
  * <ul>
  *   <li>Bean Validation constraints on fields</li>
  *   <li>ManyToOne relationship to Department (LAZY)</li>

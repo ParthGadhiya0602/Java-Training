@@ -38,7 +38,7 @@ public class SecurityConfig {
                 // CSRF disabled for this stateless demo API.
                 // Session-based apps (Thymeleaf, MVC forms) must keep CSRF enabled.
                 .csrf(AbstractHttpConfigurer::disable)
-                // Security headers — all defaults enabled:
+                // Security headers - all defaults enabled:
                 //   X-Content-Type-Options: nosniff      (prevents MIME-type sniffing)
                 //   X-Frame-Options: DENY                (clickjacking protection)
                 //   X-XSS-Protection: 0                  (disabled; rely on CSP instead)
@@ -50,7 +50,7 @@ public class SecurityConfig {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        // BCrypt with strength 12 — ~300ms per hash, making brute-force expensive.
+        // BCrypt with strength 12 - ~300ms per hash, making brute-force expensive.
         // Use PasswordEncoderFactories.createDelegatingPasswordEncoder() if you need
         // to migrate from an older scheme (MD5, SHA-1) without forcing a password reset.
         return new BCryptPasswordEncoder(12);

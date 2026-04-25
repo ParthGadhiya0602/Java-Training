@@ -16,7 +16,7 @@
     <artifactId>module-37-spring-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>module-37-spring-boot</name>
-    <description>Spring Boot — auto-configuration, starters, profiles, @ConfigurationProperties, Actuator</description>
+    <description>Spring Boot - auto-configuration, starters, profiles, @ConfigurationProperties, Actuator</description>
 
     <properties>
         <java.version>21</java.version>

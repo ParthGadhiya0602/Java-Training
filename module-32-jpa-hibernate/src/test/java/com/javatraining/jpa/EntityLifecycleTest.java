@@ -16,15 +16,15 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * <p>Entity states:
  * <pre>
- *   NEW/TRANSIENT  — created with {@code new}, unknown to any EntityManager
- *   MANAGED        — tracked by an open EntityManager; changes auto-synced on flush
- *   DETACHED       — was managed; EntityManager closed or {@code em.detach()} called
- *   REMOVED        — {@code em.remove()} called; will be DELETE'd on next flush
+ *   NEW/TRANSIENT  - created with {@code new}, unknown to any EntityManager
+ *   MANAGED        - tracked by an open EntityManager; changes auto-synced on flush
+ *   DETACHED       - was managed; EntityManager closed or {@code em.detach()} called
+ *   REMOVED        - {@code em.remove()} called; will be DELETE'd on next flush
  * </pre>
  *
  * <p>L1 cache (persistence context):
  * Within a single EntityManager, {@code em.find()} for the same id always returns
- * the identical Java object — the second call hits the in-memory cache, not the DB.
+ * the identical Java object - the second call hits the in-memory cache, not the DB.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EntityLifecycleTest {
@@ -120,7 +120,7 @@ class EntityLifecycleTest {
         em.find(Author.class, id); // L1 hit: 0 additional statements
 
         assertEquals(1L, stats.getPrepareStatementCount(),
-                "Second find() served from L1 cache — only 1 DB query total");
+                "Second find() served from L1 cache - only 1 DB query total");
     }
 
     // ── Dirty checking ───────────────────────────────────────────────────────
@@ -128,7 +128,7 @@ class EntityLifecycleTest {
     /**
      * Dirty checking is automatic: Hibernate compares the entity's current
      * field values against the snapshot taken when it was loaded/persisted.
-     * At commit/flush, changed fields produce an UPDATE — no explicit merge needed.
+     * At commit/flush, changed fields produce an UPDATE - no explicit merge needed.
      */
     @Test
     void dirty_checking_generates_update_without_explicit_persist_or_merge() {
@@ -138,10 +138,10 @@ class EntityLifecycleTest {
             return a.getId();
         });
 
-        // Transaction 2: load, modify — no em.persist() / em.merge() called
+        // Transaction 2: load, modify - no em.persist() / em.merge() called
         JpaUtil.inTransaction(em, e -> {
             Author a = e.find(Author.class, id); // MANAGED
-            a.setName("Eve Updated");            // dirty — Hibernate will flush an UPDATE
+            a.setName("Eve Updated");            // dirty - Hibernate will flush an UPDATE
             // commit automatically flushes changes
         });
 
@@ -164,7 +164,7 @@ class EntityLifecycleTest {
         em.detach(author);                          // MANAGED → DETACHED
 
         author.setName("Frank Modified");           // change on detached object
-        // No em.merge() — change is NOT propagated
+        // No em.merge() - change is NOT propagated
 
         em.clear();
         Author inDb = em.find(Author.class, id);

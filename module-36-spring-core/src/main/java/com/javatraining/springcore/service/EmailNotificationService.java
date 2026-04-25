@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
- * @Primary — when multiple beans implement the same interface, Spring
+ * @Primary - when multiple beans implement the same interface, Spring
  * injects this one by default unless a @Qualifier overrides the choice.
  */
 @Service

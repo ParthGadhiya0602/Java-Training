@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Tests that verify the non-obvious behaviours discussed in Operators.java.
  * Run with: mvn test
  */
-@DisplayName("Operators — non-obvious behaviour verification")
+@DisplayName("Operators - non-obvious behaviour verification")
 class OperatorsTest {
 
     @Test
@@ -29,10 +29,10 @@ class OperatorsTest {
     }
 
     @Test
-    @DisplayName("Floating-point addition is not exact — 0.1 + 0.2 != 0.3")
+    @DisplayName("Floating-point addition is not exact - 0.1 + 0.2 != 0.3")
     void floatingPointImprecision() {
         double result = 0.1 + 0.2;
-        assertNotEquals(0.3, result); // This PASSES — they are NOT equal
+        assertNotEquals(0.3, result); // This PASSES - they are NOT equal
         // Correct way: compare with a tolerance
         assertEquals(0.3, result, 1e-9);
     }

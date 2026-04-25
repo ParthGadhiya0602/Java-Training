@@ -1,24 +1,25 @@
 ---
-title: "13 — Collections Framework"
-parent: "Phase 2 — Core APIs"
+title: "13 - Collections Framework"
+parent: "Phase 2 - Core APIs"
 nav_order: 13
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-13-collections/src){: .btn .btn-outline }
 
-# Module 13 — Collections Framework
+# Module 13 - Collections Framework
 
 ## What You Will Learn
 
-| Interface | Common Implementations | Use When |
-|---|---|---|
-| `List<E>` | `ArrayList`, `LinkedList` | Ordered, index-accessible, duplicates allowed |
-| `Set<E>` | `HashSet`, `LinkedHashSet`, `TreeSet` | No duplicates; hash / insertion / sorted order |
-| `Map<K,V>` | `HashMap`, `LinkedHashMap`, `TreeMap` | Key→value; hash / insertion / sorted order |
-| `Queue<E>` | `LinkedList`, `ArrayDeque`, `PriorityQueue` | FIFO; or priority-based retrieval |
-| `Deque<E>` | `ArrayDeque`, `LinkedList` | Double-ended: stack + queue operations |
+| Interface  | Common Implementations                      | Use When                                       |
+| ---------- | ------------------------------------------- | ---------------------------------------------- |
+| `List<E>`  | `ArrayList`, `LinkedList`                   | Ordered, index-accessible, duplicates allowed  |
+| `Set<E>`   | `HashSet`, `LinkedHashSet`, `TreeSet`       | No duplicates; hash / insertion / sorted order |
+| `Map<K,V>` | `HashMap`, `LinkedHashMap`, `TreeMap`       | Key→value; hash / insertion / sorted order     |
+| `Queue<E>` | `LinkedList`, `ArrayDeque`, `PriorityQueue` | FIFO; or priority-based retrieval              |
+| `Deque<E>` | `ArrayDeque`, `LinkedList`                  | Double-ended: stack + queue operations         |
 
 ---
 
@@ -28,14 +29,14 @@ render_with_liquid: false
                  add/offer   remove/poll  get(i)   contains
 ArrayList          O(1)*       O(n)        O(1)      O(n)
 LinkedList         O(1)        O(1)        O(n)      O(n)
-ArrayDeque         O(1)*       O(1)         —         O(n)
-PriorityQueue      O(log n)    O(log n)     —         O(n)
-HashSet            O(1)*       O(1)*        —         O(1)*
-LinkedHashSet      O(1)*       O(1)*        —         O(1)*
-TreeSet            O(log n)    O(log n)     —         O(log n)
-HashMap            O(1)*       O(1)*        —        key O(1)*
-LinkedHashMap      O(1)*       O(1)*        —        key O(1)*
-TreeMap            O(log n)    O(log n)     —        key O(log n)
+ArrayDeque         O(1)*       O(1)         -         O(n)
+PriorityQueue      O(log n)    O(log n)     -         O(n)
+HashSet            O(1)*       O(1)*        -         O(1)*
+LinkedHashSet      O(1)*       O(1)*        -         O(1)*
+TreeSet            O(log n)    O(log n)     -         O(log n)
+HashMap            O(1)*       O(1)*        -        key O(1)*
+LinkedHashMap      O(1)*       O(1)*        -        key O(1)*
+TreeMap            O(log n)    O(log n)     -        key O(log n)
 
 * amortised
 ```
@@ -72,12 +73,12 @@ Map<String,Integer> big  = Map.ofEntries(                 // immutable, any size
 
 ## Source Files
 
-| File | What it Demonstrates |
-|---|---|
-| `ListsAndQueues.java` | ArrayList vs LinkedList, ArrayDeque as stack/queue, PriorityQueue |
-| `SetsAndMaps.java` | HashSet/LinkedHashSet/TreeSet, HashMap/LinkedHashMap/TreeMap, NavigableMap |
+| File                        | What it Demonstrates                                                                                     |
+| --------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ListsAndQueues.java`       | ArrayList vs LinkedList, ArrayDeque as stack/queue, PriorityQueue                                        |
+| `SetsAndMaps.java`          | HashSet/LinkedHashSet/TreeSet, HashMap/LinkedHashMap/TreeMap, NavigableMap                               |
 | `CollectionAlgorithms.java` | `Collections` utility: sort, binarySearch, shuffle, frequency, disjoint, unmodifiable/synchronized views |
-| `CollectionPatterns.java` | Frequency map, groupBy, multimap, index inversion, sliding window, top-K |
+| `CollectionPatterns.java`   | Frequency map, groupBy, multimap, index inversion, sliding window, top-K                                 |
 
 ---
 
@@ -87,4 +88,5 @@ Map<String,Integer> big  = Map.ofEntries(                 // immutable, any size
 cd module-13-collections
 mvn test
 ```
+
 {% endraw %}

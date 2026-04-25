@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
  * Service layer with reactive return types.
  *
  * Rules:
- *   - NEVER call .block() — that would pin a Netty thread and defeats the purpose of WebFlux
+ *   - NEVER call .block() - that would pin a Netty thread and defeats the purpose of WebFlux
  *   - Compose operators (map, flatMap, switchIfEmpty) instead of imperative if/else
  *   - switchIfEmpty(Mono.error(...)) is the reactive pattern for "throw if not found"
  *   - flatMap is needed when the inner function itself returns Mono/Flux
@@ -45,7 +45,7 @@ public class ProductService {
                 .category(request.category())
                 .price(request.price())
                 .build();
-        // save() returns Mono<Product> — flatMap would be needed if we had inner reactive calls
+        // save() returns Mono<Product> - flatMap would be needed if we had inner reactive calls
         return repository.save(product).map(this::toResponse);
     }
 

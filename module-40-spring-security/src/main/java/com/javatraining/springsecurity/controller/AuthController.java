@@ -25,7 +25,7 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    // POST /api/auth/login — permitted to all (no JWT required)
+    // POST /api/auth/login - permitted to all (no JWT required)
     // Returns a signed JWT on success; BadCredentialsException (→ 401) on failure.
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {

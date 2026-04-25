@@ -16,17 +16,17 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Repository for {@link Employee} — showcases all major Spring Data JPA features:
+ * Repository for {@link Employee} - showcases all major Spring Data JPA features:
  *
  * <ol>
- *   <li><b>Derived queries</b> — method name parsed into JPQL at startup</li>
- *   <li><b>{@code @Query} JPQL</b> — explicit JPQL when derived names become unwieldy</li>
- *   <li><b>{@code @Query} native</b> — raw SQL; useful for DB-specific syntax</li>
- *   <li><b>{@code @Modifying}</b> — bulk UPDATE/DELETE via JPQL</li>
- *   <li><b>Interface projections</b> — Spring proxy returns only selected columns</li>
- *   <li><b>DTO projections</b> — constructor expression in JPQL</li>
- *   <li><b>Pagination</b> — {@link Page} + {@link Pageable}</li>
- *   <li><b>Sorting</b> — {@link org.springframework.data.domain.Sort} parameter</li>
+ *   <li><b>Derived queries</b> - method name parsed into JPQL at startup</li>
+ *   <li><b>{@code @Query} JPQL</b> - explicit JPQL when derived names become unwieldy</li>
+ *   <li><b>{@code @Query} native</b> - raw SQL; useful for DB-specific syntax</li>
+ *   <li><b>{@code @Modifying}</b> - bulk UPDATE/DELETE via JPQL</li>
+ *   <li><b>Interface projections</b> - Spring proxy returns only selected columns</li>
+ *   <li><b>DTO projections</b> - constructor expression in JPQL</li>
+ *   <li><b>Pagination</b> - {@link Page} + {@link Pageable}</li>
+ *   <li><b>Sorting</b> - {@link org.springframework.data.domain.Sort} parameter</li>
  * </ol>
  */
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
@@ -54,7 +54,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     /** SELECT COUNT(e) FROM Employee e WHERE e.active = ?1 */
     long countByActive(boolean active);
 
-    // ── @Query — JPQL ─────────────────────────────────────────────────────────
+    // ── @Query - JPQL ─────────────────────────────────────────────────────────
 
     /**
      * Employees earning above a threshold, ordered by salary descending.
@@ -70,17 +70,17 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("SELECT e FROM Employee e JOIN FETCH e.department d WHERE d.name = :deptName")
     List<Employee> findByDepartmentNameFetched(@Param("deptName") String deptName);
 
-    // ── @Query — native SQL ───────────────────────────────────────────────────
+    // ── @Query - native SQL ───────────────────────────────────────────────────
 
     /**
-     * Same threshold query expressed in native SQL — demonstrates
+     * Same threshold query expressed in native SQL - demonstrates
      * {@code nativeQuery = true}.
      */
     @Query(value = "SELECT * FROM employees WHERE salary > :threshold ORDER BY salary DESC",
            nativeQuery = true)
     List<Employee> findHighEarnersNative(@Param("threshold") BigDecimal threshold);
 
-    // ── @Modifying — bulk UPDATE / DELETE ────────────────────────────────────
+    // ── @Modifying - bulk UPDATE / DELETE ────────────────────────────────────
 
     /**
      * Deactivates all employees in a given department without loading entities.
@@ -111,7 +111,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     /**
      * {@code new} expression in JPQL constructs the record directly.
-     * Only {@code name} and {@code salary} columns are fetched — no SELECT *.
+     * Only {@code name} and {@code salary} columns are fetched - no SELECT *.
      */
     @Query("SELECT new com.javatraining.springdata.projection.EmployeeNameDto(e.name, e.salary) " +
            "FROM Employee e WHERE e.active = true ORDER BY e.salary DESC")
@@ -125,8 +125,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
      *
      * <p>The returned {@link Page} contains:
      * <ul>
-     *   <li>{@code getContent()} — entities on this page</li>
-     *   <li>{@code getTotalElements()} — total count across all pages</li>
+     *   <li>{@code getContent()} - entities on this page</li>
+     *   <li>{@code getTotalElements()} - total count across all pages</li>
      *   <li>{@code getTotalPages()}</li>
      *   <li>{@code hasNext()} / {@code hasPrevious()}</li>
      * </ul>

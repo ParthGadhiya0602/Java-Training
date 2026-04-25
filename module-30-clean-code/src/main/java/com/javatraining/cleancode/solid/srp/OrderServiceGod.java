@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SRP VIOLATION — "God class" that does too many things.
+ * SRP VIOLATION - "God class" that does too many things.
  *
  * <p>This class has at least four reasons to change:
  * <ol>
@@ -40,7 +40,7 @@ public class OrderServiceGod {
         String email = "Dear " + order.customerName() + ", your order #" + order.id() + " is confirmed.";
 
         // 4. Generate invoice (financial concern)
-        String invoice = "INVOICE #" + order.id() + " — Total: $" + order.total();
+        String invoice = "INVOICE #" + order.id() + " - Total: $" + order.total();
 
         return email + "\n" + invoice;
     }

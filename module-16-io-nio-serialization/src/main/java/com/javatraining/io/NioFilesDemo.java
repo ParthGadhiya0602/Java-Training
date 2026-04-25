@@ -10,14 +10,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Module 16 — NIO.2 (java.nio.file)
+ * Module 16 - NIO.2 (java.nio.file)
  *
  * NIO.2 (Java 7+) replaces most java.io.File usage.  Key types:
  *
- *   Path      — immutable representation of a file-system path
- *   Files     — static utility methods for file operations
- *   Paths     — factory for Path instances (or use Path.of() in Java 11+)
- *   FileSystem / FileSystems — access to zip, in-memory, remote FSes
+ *   Path      - immutable representation of a file-system path
+ *   Files     - static utility methods for file operations
+ *   Paths     - factory for Path instances (or use Path.of() in Java 11+)
+ *   FileSystem / FileSystems - access to zip, in-memory, remote FSes
  *
  * Advantages over java.io.File:
  *   - Checked exceptions (no silent failures)
@@ -45,7 +45,7 @@ public class NioFilesDemo {
 
     // ── Reading files ─────────────────────────────────────────────────────────
 
-    /** Read all lines — entire file loaded into memory. */
+    /** Read all lines - entire file loaded into memory. */
     public static List<String> readAllLines(Path path) throws IOException {
         return Files.readAllLines(path, StandardCharsets.UTF_8);
     }
@@ -55,7 +55,7 @@ public class NioFilesDemo {
         return Files.readString(path, StandardCharsets.UTF_8);
     }
 
-    /** Stream lines lazily — good for large files. Must close the stream. */
+    /** Stream lines lazily - good for large files. Must close the stream. */
     public static long countMatchingLines(Path path, String keyword) throws IOException {
         try (Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8)) {
             return lines.filter(l -> l.contains(keyword)).count();
@@ -74,7 +74,7 @@ public class NioFilesDemo {
 
     // ── Writing files ─────────────────────────────────────────────────────────
 
-    /** Write lines — creates or overwrites. */
+    /** Write lines - creates or overwrites. */
     public static void writeLines(Path path, List<String> lines) throws IOException {
         Files.write(path, lines, StandardCharsets.UTF_8);
     }
@@ -111,7 +111,7 @@ public class NioFilesDemo {
     }
 
     /**
-     * Move is atomic on the same filesystem — guaranteed no partial state.
+     * Move is atomic on the same filesystem - guaranteed no partial state.
      */
     public static void move(Path source, Path target) throws IOException {
         Files.move(source, target, StandardCopyOption.REPLACE_EXISTING);
@@ -124,7 +124,7 @@ public class NioFilesDemo {
     // ── Directory walking ─────────────────────────────────────────────────────
 
     /**
-     * Files.walk returns a lazy Stream<Path> — depth-first.
+     * Files.walk returns a lazy Stream<Path> - depth-first.
      * Always use try-with-resources to close the stream and free OS handles.
      */
     public static List<Path> findByExtension(Path root, String ext) throws IOException {
@@ -170,7 +170,7 @@ public class NioFilesDemo {
      */
     public static Path createTempDir() throws IOException {
         Path dir = Files.createTempDirectory("javatraining-");
-        // Register JVM shutdown hook — fine for tests, not for production
+        // Register JVM shutdown hook - fine for tests, not for production
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try (Stream<Path> walk = Files.walk(dir)) {
                 walk.sorted(java.util.Comparator.reverseOrder())

@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 /**
  * Submits work to a virtual-thread-per-task executor.
  *
- * Each submitted task gets its own virtual thread. Virtual threads are cheap —
+ * Each submitted task gets its own virtual thread. Virtual threads are cheap -
  * the JVM can schedule millions of them on a small set of carrier (OS) threads.
  * When a virtual thread blocks (sleep, I/O, lock) it is unmounted from its carrier
  * immediately, freeing the carrier to run another virtual thread.
@@ -36,7 +36,7 @@ public class TaskService {
                     taskId, Thread.currentThread().getName(),
                     Thread.currentThread().isVirtual());
 
-            // Simulate I/O-bound work — a virtual thread unmounts here
+            // Simulate I/O-bound work - a virtual thread unmounts here
             Thread.sleep(100);
 
             tasks.put(taskId, TaskStatus.DONE);

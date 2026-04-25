@@ -1,14 +1,15 @@
 ---
-title: "Module 49 — Caching"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 49 - Caching"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 49
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-49-caching/src){: .btn .btn-outline }
 
-# Module 49 — Caching
+# Module 49 - Caching
 
 ## What this module covers
 
@@ -36,7 +37,7 @@ src/main/java/com/javatraining/caching/
 
 ## Spring Cache annotations
 
-### `@Cacheable` — cache-aside read
+### `@Cacheable` - cache-aside read
 
 The method body runs only on a cache miss. On a hit, Spring returns the
 cached value without calling the method.
@@ -53,7 +54,7 @@ public List<Product> findAll() {
 }
 ```
 
-### `@CachePut` — write-through on save
+### `@CachePut` - write-through on save
 
 The method **always executes**, and the result is written to the cache.
 A subsequent `@Cacheable` call for the same key skips the database entirely.
@@ -64,7 +65,7 @@ A subsequent `@Cacheable` call for the same key skips the database entirely.
 
 `#result` is a SpEL expression referring to the method's return value.
 
-### `@CacheEvict` — invalidation on write/delete
+### `@CacheEvict` - invalidation on write/delete
 
 ```java
 @CacheEvict(value = "products", key = "#id")
@@ -73,7 +74,7 @@ A subsequent `@Cacheable` call for the same key skips the database entirely.
 `allEntries = true` removes every entry in the named cache (used for list caches
 that are wholesale stale after any mutation).
 
-### `@Caching` — combine multiple cache operations on one method
+### `@Caching` - combine multiple cache operations on one method
 
 ```java
 @Caching(
@@ -99,7 +100,7 @@ public void deleteById(Long id) {
 
 `RedisCacheManagerBuilderCustomizer` customizes per-cache TTL and serializer
 when Spring Boot autoconfigures `RedisCacheManager`. The customizer is a plain
-bean — it does not open a Redis connection on creation.
+bean - it does not open a Redis connection on creation.
 
 ```java
 @Configuration
@@ -219,9 +220,9 @@ class ProductServiceCacheTest {
 
 ## Tests
 
-| Class                    | Type              | Count |
-|--------------------------|-------------------|-------|
-| `ProductServiceCacheTest`| `@SpringBootTest` | 4     |
+| Class                     | Type              | Count |
+| ------------------------- | ----------------- | ----- |
+| `ProductServiceCacheTest` | `@SpringBootTest` | 4     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **4/4 pass**
@@ -230,11 +231,12 @@ Result: **4/4 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `RedisCacheManagerBuilderCustomizer` instead of a direct `RedisCacheManager` bean | Customizer plugs into Spring Boot's autoconfiguration without breaking test context; no `@ConditionalOnBean` ordering issues |
-| `spring.cache.type=simple` in tests | Switches autoconfiguration to `ConcurrentMapCacheManager` with identical annotation semantics — no Docker, no embedded server |
-| `@CachePut` with `#result.id` key | Result-based key means the ID is set by the database (auto-increment) and known only after the insert |
-| `@Caching` on `save` and `deleteById` | Single annotation site that keeps both the per-item cache and the list cache in sync |
-| `disableCachingNullValues()` | Prevents a deleted entity from occupying cache space and masking a later re-insert |
+| Decision                                                                          | Reason                                                                                                                        |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `RedisCacheManagerBuilderCustomizer` instead of a direct `RedisCacheManager` bean | Customizer plugs into Spring Boot's autoconfiguration without breaking test context; no `@ConditionalOnBean` ordering issues  |
+| `spring.cache.type=simple` in tests                                               | Switches autoconfiguration to `ConcurrentMapCacheManager` with identical annotation semantics - no Docker, no embedded server |
+| `@CachePut` with `#result.id` key                                                 | Result-based key means the ID is set by the database (auto-increment) and known only after the insert                         |
+| `@Caching` on `save` and `deleteById`                                             | Single annotation site that keeps both the per-item cache and the list cache in sync                                          |
+| `disableCachingNullValues()`                                                      | Prevents a deleted entity from occupying cache space and masking a later re-insert                                            |
+
 {% endraw %}

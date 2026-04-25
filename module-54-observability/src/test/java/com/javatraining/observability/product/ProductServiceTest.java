@@ -13,7 +13,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Pure unit tests — no Spring context.
+ * Pure unit tests - no Spring context.
  * SimpleMeterRegistry keeps all meter state in memory, making it ideal for
  * verifying metric instrumentation without starting a full application.
  */

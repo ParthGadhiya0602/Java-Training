@@ -1,7 +1,7 @@
 package com.javatraining.testing;
 
 /**
- * Simple arithmetic utility — used as the subject-under-test for JUnit 5 feature demos.
+ * Simple arithmetic utility - used as the subject-under-test for JUnit 5 feature demos.
  * Provides enough variation (primitives, exception paths, iterative algorithms)
  * to exercise a wide range of assertion and parameterization techniques.
  */

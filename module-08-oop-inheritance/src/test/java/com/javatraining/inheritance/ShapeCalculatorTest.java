@@ -80,7 +80,7 @@ class ShapeCalculatorTest {
     }
 
     // -----------------------------------------------------------------------
-    // Scale — template method
+    // Scale - template method
     // -----------------------------------------------------------------------
     @Test
     void scale_zero_throws() {

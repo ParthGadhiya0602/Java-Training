@@ -3,7 +3,7 @@ package com.javatraining.methods;
 import java.util.Arrays;
 
 /**
- * TOPIC: Varargs — variable-length argument lists.
+ * TOPIC: Varargs - variable-length argument lists.
  *
  * Covers:
  * - Basic varargs syntax and internal array representation
@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class VarargsDemo {
 
     // -------------------------------------------------------------------------
-    // Basic varargs — int... is just a syntactic sugar for int[]
+    // Basic varargs - int... is just a syntactic sugar for int[]
     // -------------------------------------------------------------------------
     static int sum(int... numbers) {
         // Inside the method body, 'numbers' is an int[]
@@ -47,7 +47,7 @@ public class VarargsDemo {
     }
 
     // -------------------------------------------------------------------------
-    // Null safety — caller can pass null explicitly as the array
+    // Null safety - caller can pass null explicitly as the array
     // -------------------------------------------------------------------------
     static void printAll(String... messages) {
         if (messages == null) {
@@ -60,7 +60,7 @@ public class VarargsDemo {
     }
 
     // -------------------------------------------------------------------------
-    // Varargs + overloading — exact match wins over varargs
+    // Varargs + overloading - exact match wins over varargs
     // -------------------------------------------------------------------------
     static String detect(String s)       { return "exact String";  }
     static String detect(String... ss)   { return "varargs String[" + ss.length + "]"; }
@@ -117,12 +117,12 @@ public class VarargsDemo {
 
     public static void main(String[] args) {
         System.out.println("=== sum() with varargs ===");
-        System.out.println(sum());              // 0  — empty vararg is legal
+        System.out.println(sum());              // 0  - empty vararg is legal
         System.out.println(sum(5));             // 5
         System.out.println(sum(1, 2, 3));       // 6
         System.out.println(sum(10, 20, 30, 40, 50)); // 150
 
-        // Can pass an explicit array — varargs and array are interchangeable
+        // Can pass an explicit array - varargs and array are interchangeable
         int[] data = {3, 6, 9};
         System.out.println(sum(data));          // 18
 
@@ -150,7 +150,7 @@ public class VarargsDemo {
             System.out.println("Caught: " + e.getMessage());
         }
 
-        System.out.println("\n=== stats() — at-least-one pattern ===");
+        System.out.println("\n=== stats() - at-least-one pattern ===");
         System.out.println(stats(5.0));
         System.out.println(stats(3.0, 1.5, 7.2, 4.8, 9.1));
         System.out.println(stats(100.0, 200.0, 300.0));

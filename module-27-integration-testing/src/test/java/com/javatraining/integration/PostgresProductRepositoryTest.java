@@ -16,16 +16,16 @@ import static org.junit.jupiter.api.Assertions.*;
  * instance managed by Testcontainers.
  *
  * What Testcontainers demonstrates:
- *   @Testcontainers            — activates the JUnit 5 lifecycle extension
- *   @Container (static)        — one container shared across all tests; started
+ *   @Testcontainers            - activates the JUnit 5 lifecycle extension
+ *   @Container (static)        - one container shared across all tests; started
  *                                before the first test, stopped after the last
- *   disabledWithoutDocker=true — skips the entire class gracefully when Docker
+ *   disabledWithoutDocker=true - skips the entire class gracefully when Docker
  *                                is not available (no red X, just "skipped")
- *   PostgreSQLContainer        — typed container: exposes getJdbcUrl(),
+ *   PostgreSQLContainer        - typed container: exposes getJdbcUrl(),
  *                                getUsername(), getPassword()
- *   @BeforeEach                — creates a fresh connection and recreates the
+ *   @BeforeEach                - creates a fresh connection and recreates the
  *                                schema for every test (isolation)
- *   @AfterEach                 — closes the connection after every test
+ *   @AfterEach                 - closes the connection after every test
  *
  * Integration-testing principles shown:
  *   - Real database: no H2 compatibility surprises (BIGSERIAL, RETURNING, etc.)

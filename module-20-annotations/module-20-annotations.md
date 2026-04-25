@@ -1,14 +1,16 @@
 ---
-title: "20 — Annotations"
-parent: "Phase 2 — Core APIs"
+title: "20 - Annotations"
+parent: "Phase 2 - Core APIs"
 nav_order: 20
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-20-annotations/src){: .btn .btn-outline }
 
-# Module 20 — Annotations
+# Module 20 - Annotations
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -45,21 +47,22 @@ public @interface Author {
 ```
 
 Usage:
+
 ```java
-@Author("Alice")              // short form — element named "value" can be omitted
+@Author("Alice")              // short form - element named "value" can be omitted
 @Author(value = "Bob", date = "2024-01-01")  // explicit form
 ```
 
 ### Element types
 
-| Type | Example default |
-|---|---|
-| `String` | `""` |
-| `int` / `long` / `boolean` | `0`, `0L`, `false` |
-| `Class<?>` | `Void.class` (sentinel for "not specified") |
-| `enum` | `MyEnum.DEFAULT` |
-| `Annotation` | another annotation literal |
-| `T[]` (array) | `{}` |
+| Type                       | Example default                             |
+| -------------------------- | ------------------------------------------- |
+| `String`                   | `""`                                        |
+| `int` / `long` / `boolean` | `0`, `0L`, `false`                          |
+| `Class<?>`                 | `Void.class` (sentinel for "not specified") |
+| `enum`                     | `MyEnum.DEFAULT`                            |
+| `Annotation`               | another annotation literal                  |
+| `T[]` (array)              | `{}`                                        |
 
 ---
 
@@ -115,13 +118,13 @@ Object obj = (@NonNull Object) rawRef;
 
 ## Meta-Annotations
 
-| Meta-annotation | Effect |
-|---|---|
-| `@Retention` | How long the annotation is kept |
-| `@Target` | Where it can be placed |
-| `@Documented` | Include in Javadoc |
-| `@Inherited` | Subclasses inherit superclass annotation |
-| `@Repeatable` | Same annotation may appear more than once |
+| Meta-annotation | Effect                                    |
+| --------------- | ----------------------------------------- |
+| `@Retention`    | How long the annotation is kept           |
+| `@Target`       | Where it can be placed                    |
+| `@Documented`   | Include in Javadoc                        |
+| `@Inherited`    | Subclasses inherit superclass annotation  |
+| `@Repeatable`   | Same annotation may appear more than once |
 
 ---
 
@@ -130,7 +133,7 @@ Object obj = (@NonNull Object) rawRef;
 To allow multiple occurrences of the same annotation, declare a container:
 
 ```java
-// Step 1 — the repeatable annotation
+// Step 1 - the repeatable annotation
 @Repeatable(Tags.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
@@ -138,7 +141,7 @@ public @interface Tag {
     String value();
 }
 
-// Step 2 — the container annotation
+// Step 2 - the container annotation
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface Tags {
@@ -199,8 +202,8 @@ Without `@Override`, a typo in the method name silently creates a new method.
 public String legacyFormat(int v) { ... }
 ```
 
-- `since` — version when deprecated
-- `forRemoval = true` — stronger signal; tools warn more aggressively
+- `since` - version when deprecated
+- `forRemoval = true` - stronger signal; tools warn more aggressively
 
 ### @SuppressWarnings
 
@@ -217,7 +220,7 @@ Common names: `"unchecked"`, `"deprecation"`, `"rawtypes"`, `"unused"`, `"serial
 ```java
 @FunctionalInterface
 public interface Transformer<T, R> {
-    R transform(T input);   // exactly one abstract method — compiler enforces this
+    R transform(T input);   // exactly one abstract method - compiler enforces this
 }
 ```
 
@@ -261,26 +264,27 @@ for (Field f : clazz.getDeclaredFields()) {
 
 ### Typical framework patterns
 
-| Pattern | How annotations help |
-|---|---|
-| Dependency injection | `@Inject` on fields → framework sets values via reflection |
-| Access control | `@RequiresRoles` on methods → interceptor checks before call |
-| Validation | `@NonNull`, `@Min` on fields → validator reads and checks |
-| ORM | `@Table`, `@Column` on classes/fields → maps to DB schema |
-| Test runners | `@Test`, `@BeforeEach` on methods → JUnit discovers and calls |
+| Pattern              | How annotations help                                          |
+| -------------------- | ------------------------------------------------------------- |
+| Dependency injection | `@Inject` on fields → framework sets values via reflection    |
+| Access control       | `@RequiresRoles` on methods → interceptor checks before call  |
+| Validation           | `@NonNull`, `@Min` on fields → validator reads and checks     |
+| ORM                  | `@Table`, `@Column` on classes/fields → maps to DB schema     |
+| Test runners         | `@Test`, `@BeforeEach` on methods → JUnit discovers and calls |
 
 ---
 
 ## Summary
 
-| Concept | Annotation / API |
-|---|---|
-| Define annotation | `@interface` with `@Retention` + `@Target` |
-| Available at runtime | `RetentionPolicy.RUNTIME` |
-| Multiple occurrences | `@Repeatable` + container annotation |
-| Subclass inheritance | `@Inherited` (class-level only) |
-| Compiler check | `@Override`, `@FunctionalInterface` |
-| Suppress warnings | `@SuppressWarnings("unchecked")` |
-| Read at runtime | `getAnnotation()`, `getAnnotationsByType()`, `getDeclaredAnnotations()` |
-| Field injection | `field.setAccessible(true); field.set(obj, value)` |
+| Concept              | Annotation / API                                                        |
+| -------------------- | ----------------------------------------------------------------------- |
+| Define annotation    | `@interface` with `@Retention` + `@Target`                              |
+| Available at runtime | `RetentionPolicy.RUNTIME`                                               |
+| Multiple occurrences | `@Repeatable` + container annotation                                    |
+| Subclass inheritance | `@Inherited` (class-level only)                                         |
+| Compiler check       | `@Override`, `@FunctionalInterface`                                     |
+| Suppress warnings    | `@SuppressWarnings("unchecked")`                                        |
+| Read at runtime      | `getAnnotation()`, `getAnnotationsByType()`, `getDeclaredAnnotations()` |
+| Field injection      | `field.setAccessible(true); field.set(obj, value)`                      |
+
 {% endraw %}

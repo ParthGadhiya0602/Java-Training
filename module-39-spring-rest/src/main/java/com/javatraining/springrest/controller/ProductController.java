@@ -24,7 +24,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 // produces = APPLICATION_JSON_VALUE: this controller only serves application/json.
-// Clients sending Accept: text/html get 406 Not Acceptable — content negotiation.
+// Clients sending Accept: text/html get 406 Not Acceptable - content negotiation.
 @RestController
 @RequestMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductController {
@@ -49,7 +49,7 @@ public class ProductController {
                         linkTo(methodOn(ProductController.class).getById(p.id())).withSelfRel()))
                 .toList();
 
-        // Self link points back to the collection (category ignored in link — always lists all)
+        // Self link points back to the collection (category ignored in link - always lists all)
         CollectionModel<EntityModel<ProductResponse>> collection = CollectionModel.of(items,
                 linkTo(methodOn(ProductController.class).getAll(null)).withSelfRel());
 
@@ -69,7 +69,7 @@ public class ProductController {
         return ResponseEntity.ok(model);
     }
 
-    // POST /products  — 201 Created + Location header pointing to the new resource
+    // POST /products  - 201 Created + Location header pointing to the new resource
     @PostMapping
     public ResponseEntity<EntityModel<ProductResponse>> create(
             @Valid @RequestBody ProductRequest request) {
@@ -85,7 +85,7 @@ public class ProductController {
                 .body(model);
     }
 
-    // PUT /products/{id}  — full replacement
+    // PUT /products/{id}  - full replacement
     @PutMapping("/{id}")
     public ResponseEntity<EntityModel<ProductResponse>> update(
             @PathVariable Long id,
@@ -100,7 +100,7 @@ public class ProductController {
         return ResponseEntity.ok(model);
     }
 
-    // DELETE /products/{id}  — 204 No Content
+    // DELETE /products/{id}  - 204 No Content
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);

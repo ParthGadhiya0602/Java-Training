@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AbstractVsInterfaceTest {
 
     // -----------------------------------------------------------------------
-    // ReportGenerator — Template Method
+    // ReportGenerator - Template Method
     // -----------------------------------------------------------------------
     @Test
     void table_report_generate_contains_header_and_footer() {
@@ -51,7 +51,7 @@ class AbstractVsInterfaceTest {
     }
 
     // -----------------------------------------------------------------------
-    // Employee — Exportable + Cacheable
+    // Employee - Exportable + Cacheable
     // -----------------------------------------------------------------------
     @Test
     void employee_to_csv_format() {
@@ -87,7 +87,7 @@ class AbstractVsInterfaceTest {
     }
 
     // -----------------------------------------------------------------------
-    // EmployeeRepository — Abstract + Interface
+    // EmployeeRepository - Abstract + Interface
     // -----------------------------------------------------------------------
     @Test
     void repository_save_and_find_by_id() {

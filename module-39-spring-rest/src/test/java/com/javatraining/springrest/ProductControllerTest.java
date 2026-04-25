@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Slice test — @WebMvcTest loads only the web layer:
+ * Slice test - @WebMvcTest loads only the web layer:
  *   ProductController, GlobalExceptionHandler, Jackson, HATEOAS converters.
  *   ProductService is excluded (only the web layer is loaded) and must be mocked.
  *
@@ -45,7 +45,7 @@ class ProductControllerTest {
 
     @MockBean ProductService productService;
 
-    // ── GET /products — returns HAL collection ────────────────────────────────
+    // ── GET /products - returns HAL collection ────────────────────────────────
 
     @Test
     void getAll_returns_hal_collection_with_links() throws Exception {

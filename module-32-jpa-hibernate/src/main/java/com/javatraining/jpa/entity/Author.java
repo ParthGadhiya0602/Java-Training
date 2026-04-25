@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * Demonstrates:
  * <ul>
- *   <li>{@code @Entity} / {@code @Table} — class is mapped to a DB table</li>
- *   <li>{@code @Id} + {@code @GeneratedValue(IDENTITY)} — surrogate primary key</li>
- *   <li>{@code @OneToMany(mappedBy, cascade=ALL, orphanRemoval=true)} — parent side
+ *   <li>{@code @Entity} / {@code @Table} - class is mapped to a DB table</li>
+ *   <li>{@code @Id} + {@code @GeneratedValue(IDENTITY)} - surrogate primary key</li>
+ *   <li>{@code @OneToMany(mappedBy, cascade=ALL, orphanRemoval=true)} - parent side
  *       of a bidirectional relationship; cascades persist/remove to books</li>
- *   <li>{@code @NotBlank} / {@code @Email} — Bean Validation 3.0 constraints</li>
+ *   <li>{@code @NotBlank} / {@code @Email} - Bean Validation 3.0 constraints</li>
  * </ul>
  *
  * <p><strong>Bidirectional relationship rule:</strong> always keep both sides in sync.
@@ -40,9 +40,9 @@ public class Author {
     /**
      * Inverse side of Author ↔ Book.
      * <ul>
-     *   <li>{@code mappedBy="author"} — the OWNING side is {@link Book#author}</li>
-     *   <li>{@code CascadeType.ALL} — persist/merge/remove on Author cascades to Books</li>
-     *   <li>{@code orphanRemoval=true} — a Book removed from this collection is DELETE'd</li>
+     *   <li>{@code mappedBy="author"} - the OWNING side is {@link Book#author}</li>
+     *   <li>{@code CascadeType.ALL} - persist/merge/remove on Author cascades to Books</li>
+     *   <li>{@code orphanRemoval=true} - a Book removed from this collection is DELETE'd</li>
      *   <li>{@code FetchType.LAZY} (explicit, same as default for @OneToMany)</li>
      * </ul>
      */

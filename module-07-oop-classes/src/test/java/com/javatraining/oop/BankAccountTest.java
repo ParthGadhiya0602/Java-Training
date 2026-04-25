@@ -154,7 +154,7 @@ class BankAccountTest {
 
         @Test
         void transfer_that_violates_min_balance_throws() {
-            // sender has 10000, minimum 500 — can transfer at most 9500
+            // sender has 10000, minimum 500 - can transfer at most 9500
             assertThrows(IllegalStateException.class,
                 () -> BankAccount.transfer(sender, receiver, 9_600));
         }

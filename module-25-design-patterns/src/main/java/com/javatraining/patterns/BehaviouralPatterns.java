@@ -4,21 +4,21 @@ import java.util.*;
 import java.util.function.*;
 
 /**
- * Module 25 — Behavioural Patterns
+ * Module 25 - Behavioural Patterns
  *
  * Behavioural patterns deal with algorithms and the assignment of
  * responsibilities between objects.
  *
  * Patterns covered:
- *   Observer          — event pub/sub without tight coupling
- *   Strategy          — swap algorithms at runtime
- *   Command           — encapsulate a request as an object (undo/redo)
- *   Chain of Responsibility — pass request along a handler chain
- *   Template Method   — skeleton algorithm; subclasses fill in steps
- *   Iterator          — sequential access without exposing internals
- *   State             — behaviour changes with internal state
- *   Visitor           — add operations to a hierarchy without modifying it
- *   Mediator          — centralise complex communications
+ *   Observer          - event pub/sub without tight coupling
+ *   Strategy          - swap algorithms at runtime
+ *   Command           - encapsulate a request as an object (undo/redo)
+ *   Chain of Responsibility - pass request along a handler chain
+ *   Template Method   - skeleton algorithm; subclasses fill in steps
+ *   Iterator          - sequential access without exposing internals
+ *   State             - behaviour changes with internal state
+ *   Visitor           - add operations to a hierarchy without modifying it
+ *   Mediator          - centralise complex communications
  */
 public class BehaviouralPatterns {
 
@@ -258,7 +258,7 @@ public class BehaviouralPatterns {
      * The classic GoF pattern expressed through abstract methods.
      */
     public abstract static class ReportGenerator {
-        /** Template method — defines the invariant sequence. */
+        /** Template method - defines the invariant sequence. */
         public final String generate(String title, List<String> rows) {
             StringBuilder sb = new StringBuilder();
             sb.append(formatHeader(title));
@@ -343,7 +343,7 @@ public class BehaviouralPatterns {
             int cmp = value.compareTo(node.value());
             if (cmp < 0) return new Node<>(node.value(), insert(node.left(), value), node.right());
             if (cmp > 0) return new Node<>(node.value(), node.left(), insert(node.right(), value));
-            return node; // duplicate — ignored
+            return node; // duplicate - ignored
         }
 
         @Override

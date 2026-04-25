@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Central entity in the module — participates in all three relationship types:
+ * Central entity in the module - participates in all three relationship types:
  *
  * <pre>
  *   @ManyToOne  → Author     (owning side, FK = author_id,  LAZY)
@@ -19,9 +19,9 @@ import java.util.Set;
  *
  * <p><strong>Fetch type summary:</strong>
  * <ul>
- *   <li>{@code author}  — {@code LAZY} (explicit override of JPA default EAGER for @ManyToOne)</li>
- *   <li>{@code detail}  — {@code EAGER} (JPA default for @OneToOne)</li>
- *   <li>{@code tags}    — {@code LAZY}  (JPA default for @ManyToMany)</li>
+ *   <li>{@code author}  - {@code LAZY} (explicit override of JPA default EAGER for @ManyToOne)</li>
+ *   <li>{@code detail}  - {@code EAGER} (JPA default for @OneToOne)</li>
+ *   <li>{@code tags}    - {@code LAZY}  (JPA default for @ManyToMany)</li>
  * </ul>
  *
  * <p>{@code @DecimalMin("0.01")} on {@code price} is enforced by Bean Validation 3.0
@@ -44,7 +44,7 @@ public class Book {
     private BigDecimal price;
 
     /**
-     * Owning side of Author ↔ Book (LAZY — must be accessed within a transaction).
+     * Owning side of Author ↔ Book (LAZY - must be accessed within a transaction).
      * Overrides JPA's default EAGER for @ManyToOne to demonstrate lazy-load behaviour.
      */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -53,7 +53,7 @@ public class Book {
 
     /**
      * Owning side of Book ↔ BookDetail.
-     * EAGER (JPA default for @OneToOne) — loaded via JOIN in the same SELECT as Book.
+     * EAGER (JPA default for @OneToOne) - loaded via JOIN in the same SELECT as Book.
      * cascade=ALL means persisting/removing a Book also persists/removes its detail.
      */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

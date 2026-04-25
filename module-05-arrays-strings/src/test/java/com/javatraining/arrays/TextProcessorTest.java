@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("TextProcessor — CSV parsing and validation")
+@DisplayName("TextProcessor - CSV parsing and validation")
 class TextProcessorTest {
 
     private static final String VALID_CSV = """
@@ -20,7 +20,7 @@ class TextProcessorTest {
             """;
 
     @Nested
-    @DisplayName("parseRow — individual row parsing")
+    @DisplayName("parseRow - individual row parsing")
     class ParseRowTests {
 
         @Test
@@ -97,7 +97,7 @@ class TextProcessorTest {
     }
 
     @Nested
-    @DisplayName("parseCsv — full CSV block")
+    @DisplayName("parseCsv - full CSV block")
     class ParseCsvTests {
 
         @Test
@@ -116,7 +116,7 @@ class TextProcessorTest {
     }
 
     @Nested
-    @DisplayName("getPage — pagination of valid records")
+    @DisplayName("getPage - pagination of valid records")
     class PaginationTests {
 
         @Test
@@ -140,13 +140,13 @@ class TextProcessorTest {
     }
 
     @Nested
-    @DisplayName("extractEmails — regex-based extraction")
+    @DisplayName("extractEmails - regex-based extraction")
     class ExtractEmailTests {
 
         @Test
         @DisplayName("Extracts all valid emails from free text")
         void extractFromText() {
-            String text = "Contact support@help.com or sales@company.org — both are monitored.";
+            String text = "Contact support@help.com or sales@company.org - both are monitored.";
             List<String> emails = TextProcessor.extractEmails(text);
             assertEquals(2, emails.size());
             assertTrue(emails.contains("support@help.com"));

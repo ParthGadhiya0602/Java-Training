@@ -16,7 +16,7 @@
     <artifactId>module-36-spring-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>module-36-spring-core</name>
-    <description>Spring Core — IoC, DI, bean lifecycle, scopes, AOP</description>
+    <description>Spring Core - IoC, DI, bean lifecycle, scopes, AOP</description>
 
     <properties>
         <java.version>21</java.version>

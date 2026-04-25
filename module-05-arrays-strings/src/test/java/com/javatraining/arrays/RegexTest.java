@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Regex — validation, extraction, transformation")
+@DisplayName("Regex - validation, extraction, transformation")
 class RegexTest {
 
     @ParameterizedTest(name = "{0} is a valid email")

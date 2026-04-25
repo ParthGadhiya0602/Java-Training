@@ -29,20 +29,20 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
  * <pre>
  *   input documents
  *       │
- *       ▼  $match  — filter (like WHERE)
+ *       ▼  $match  - filter (like WHERE)
  *       │
- *       ▼  $group  — group by field, compute accumulators (COUNT, SUM, AVG, MAX)
+ *       ▼  $group  - group by field, compute accumulators (COUNT, SUM, AVG, MAX)
  *       │
- *       ▼  $sort   — order results
+ *       ▼  $sort   - order results
  *       │
- *       ▼  $limit  — take first N
+ *       ▼  $limit  - take first N
  *       │
- *       ▼  $project — reshape / add computed fields
+ *       ▼  $project - reshape / add computed fields
  *       │
  *     output documents
  * </pre>
  *
- * <p>Result types are plain Java records or classes — Spring Data maps the
+ * <p>Result types are plain Java records or classes - Spring Data maps the
  * MongoDB output fields by name.
  */
 @DataMongoTest
@@ -79,7 +79,7 @@ class MongoAggregationTest {
         ));
     }
 
-    // ── $group — count ────────────────────────────────────────────────────────
+    // ── $group - count ────────────────────────────────────────────────────────
 
     @Test
     void group_by_category_counts_documents_per_category() {
@@ -99,7 +99,7 @@ class MongoAggregationTest {
         assertThat(electronics.count()).isEqualTo(3L);
     }
 
-    // ── $group — sum + avg ────────────────────────────────────────────────────
+    // ── $group - sum + avg ────────────────────────────────────────────────────
 
     @Test
     void group_computes_total_and_average_price_per_category() {
@@ -139,7 +139,7 @@ class MongoAggregationTest {
         assertThat(electronics.count()).isEqualTo(2L);
     }
 
-    // ── $project — computed fields ────────────────────────────────────────────
+    // ── $project - computed fields ────────────────────────────────────────────
 
     @Test
     void project_adds_computed_price_with_tax_field() {
@@ -160,7 +160,7 @@ class MongoAggregationTest {
         assertThat(books.get(0).priceWithTax()).isCloseTo(47.988, org.assertj.core.data.Offset.offset(0.01));
     }
 
-    // ── $sort + $limit — top N ────────────────────────────────────────────────
+    // ── $sort + $limit - top N ────────────────────────────────────────────────
 
     @Test
     void sort_and_limit_returns_top_two_most_expensive_products() {

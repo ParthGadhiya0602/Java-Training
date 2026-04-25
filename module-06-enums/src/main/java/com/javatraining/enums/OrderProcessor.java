@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * TOPIC: Practical integration — Order Processing Pipeline
+ * TOPIC: Practical integration - Order Processing Pipeline
  *
  * Combines every enum technique from this module:
- *   • OrderStatus  — state machine with validated transitions
- *   • PaymentMethod — abstract method (fee calculation per method)
- *   • Priority      — EnumSet filtering for high-priority orders
- *   • Category      — EnumMap revenue aggregation
+ *   • OrderStatus  - state machine with validated transitions
+ *   • PaymentMethod - abstract method (fee calculation per method)
+ *   • Priority      - EnumSet filtering for high-priority orders
+ *   • Category      - EnumMap revenue aggregation
  *   • Switch expressions for exhaustive enum dispatch
  *
  * Design principle: enums replace class hierarchies when the set of
@@ -20,7 +20,7 @@ import java.util.*;
 public class OrderProcessor {
 
     // -------------------------------------------------------------------------
-    // 1. State machine — only allowed transitions are hardcoded
+    // 1. State machine - only allowed transitions are hardcoded
     // -------------------------------------------------------------------------
     enum OrderStatus {
         PENDING {
@@ -84,7 +84,7 @@ public class OrderProcessor {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Payment method — abstract fee calculation
+    // 2. Payment method - abstract fee calculation
     // -------------------------------------------------------------------------
     enum PaymentMethod {
         CREDIT_CARD("Credit Card") {
@@ -138,7 +138,7 @@ public class OrderProcessor {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Priority — used with EnumSet for filtering
+    // 3. Priority - used with EnumSet for filtering
     // -------------------------------------------------------------------------
     enum Priority {
         LOW(1), NORMAL(2), HIGH(3), URGENT(4), CRITICAL(5);
@@ -164,7 +164,7 @@ public class OrderProcessor {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Product category — EnumMap revenue aggregation
+    // 4. Product category - EnumMap revenue aggregation
     // -------------------------------------------------------------------------
     enum Category {
         ELECTRONICS, CLOTHING, BOOKS, FOOD, HEALTH, HOME, SPORTS, TOYS
@@ -215,7 +215,7 @@ public class OrderProcessor {
     }
 
     // -------------------------------------------------------------------------
-    // 6. Processor — switch expressions for exhaustive dispatch
+    // 6. Processor - switch expressions for exhaustive dispatch
     // -------------------------------------------------------------------------
     static class Processor {
 
@@ -301,7 +301,7 @@ public class OrderProcessor {
         order.advance(OrderStatus.PROCESSING);
         order.advance(OrderStatus.SHIPPED);
 
-        // invalid transition — try to go back
+        // invalid transition - try to go back
         System.out.print("Attempt SHIPPED → CONFIRMED: ");
         order.advance(OrderStatus.CONFIRMED);  // blocked
 

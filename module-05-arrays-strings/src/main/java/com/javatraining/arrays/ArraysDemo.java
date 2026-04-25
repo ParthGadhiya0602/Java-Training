@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * TOPIC: Arrays — declaration, initialization, copying, sorting, and the
+ * TOPIC: Arrays - declaration, initialization, copying, sorting, and the
  * Arrays utility class. Includes object arrays and shallow-copy gotcha.
  */
 public class ArraysDemo {
@@ -138,7 +138,7 @@ public class ArraysDemo {
     // Shallow copy gotcha with object arrays
     // -------------------------------------------------------------------------
     static void shallowCopyGotcha() {
-        // StringBuilder is mutable — copying the array does NOT copy the objects
+        // StringBuilder is mutable - copying the array does NOT copy the objects
         StringBuilder[] originals = {
             new StringBuilder("alpha"),
             new StringBuilder("beta"),
@@ -148,25 +148,25 @@ public class ArraysDemo {
 
         copy[0].append("_modified");  // modifies the SHARED object
         System.out.println("\nShallow copy gotcha:");
-        System.out.println("originals[0] = " + originals[0]); // "alpha_modified" — affected!
+        System.out.println("originals[0] = " + originals[0]); // "alpha_modified" - affected!
         System.out.println("copy[0]      = " + copy[0]);      // "alpha_modified"
 
         // But reassigning an element in the copy does NOT affect the original array
         copy[1] = new StringBuilder("replaced");
-        System.out.println("originals[1] = " + originals[1]); // "beta"    — unaffected
+        System.out.println("originals[1] = " + originals[1]); // "beta"    - unaffected
         System.out.println("copy[1]      = " + copy[1]);      // "replaced"
     }
 
     // -------------------------------------------------------------------------
-    // Arrays.asList() trap — fixed-size list
+    // Arrays.asList() trap - fixed-size list
     // -------------------------------------------------------------------------
     static void asListTrap() {
         String[] arr = {"a", "b", "c"};
         List<String> fixedList = Arrays.asList(arr);  // backed by the array
 
-        fixedList.set(0, "A");              // OK — set() is supported
+        fixedList.set(0, "A");              // OK - set() is supported
         System.out.println("\nAfter set(0, A): " + fixedList);  // [A, b, c]
-        System.out.println("arr[0] also changed: " + arr[0]);   // "A" — backed by same array!
+        System.out.println("arr[0] also changed: " + arr[0]);   // "A" - backed by same array!
 
         try {
             fixedList.add("d");             // THROWS UnsupportedOperationException
@@ -176,7 +176,7 @@ public class ArraysDemo {
 
         // Correct way to get a mutable list from an array
         List<String> mutable = new java.util.ArrayList<>(Arrays.asList(arr));
-        mutable.add("d");                   // OK — independent copy
+        mutable.add("d");                   // OK - independent copy
         System.out.println("Mutable list: " + mutable);
     }
 

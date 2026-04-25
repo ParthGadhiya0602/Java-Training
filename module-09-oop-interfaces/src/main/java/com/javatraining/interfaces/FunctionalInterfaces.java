@@ -5,7 +5,7 @@ import java.util.function.*;
 import java.util.stream.Collectors;
 
 /**
- * TOPIC: Functional interfaces — @FunctionalInterface, all built-in types,
+ * TOPIC: Functional interfaces - @FunctionalInterface, all built-in types,
  *        lambda syntax, method references, and composition operators.
  *
  * A functional interface has exactly ONE abstract method (SAM).
@@ -35,7 +35,7 @@ public class FunctionalInterfaces {
     interface Transformer<T> {
         T transform(T input);
 
-        // default methods are allowed — still functional (one abstract)
+        // default methods are allowed - still functional (one abstract)
         default Transformer<T> andThen(Transformer<T> after) {
             return input -> after.transform(this.transform(input));
         }
@@ -50,7 +50,7 @@ public class FunctionalInterfaces {
     interface ThrowingSupplier<T> {
         T get() throws Exception;
 
-        // Wrap to a regular Supplier — swallow checked exceptions (with care)
+        // Wrap to a regular Supplier - swallow checked exceptions (with care)
         static <T> Supplier<T> wrap(ThrowingSupplier<T> supplier) {
             return () -> {
                 try {
@@ -63,10 +63,10 @@ public class FunctionalInterfaces {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Built-in functional types — all forms
+    // 2. Built-in functional types - all forms
     // -------------------------------------------------------------------------
     static void supplierDemo() {
-        System.out.println("=== Supplier<T> — () → T ===");
+        System.out.println("=== Supplier<T> - () → T ===");
 
         // Lambda
         Supplier<String> greeting = () -> "Hello, World!";
@@ -79,7 +79,7 @@ public class FunctionalInterfaces {
         System.out.printf("Random: %.4f%n", random.get());
         System.out.println("Empty list: " + listFactory.get());
 
-        // Lazy evaluation — supplier defers computation until needed
+        // Lazy evaluation - supplier defers computation until needed
         Supplier<String> expensive = () -> {
             // imagine heavy computation here
             return "computed";
@@ -89,12 +89,12 @@ public class FunctionalInterfaces {
     }
 
     static void consumerDemo() {
-        System.out.println("\n=== Consumer<T> — T → void ===");
+        System.out.println("\n=== Consumer<T> - T → void ===");
 
         Consumer<String> printer  = System.out::println;
         Consumer<String> upper    = s -> System.out.println(s.toUpperCase());
 
-        // andThen — chain consumers (both run)
+        // andThen - chain consumers (both run)
         Consumer<String> printAndUpper = printer.andThen(upper);
 
         List<String> names = List.of("alice", "bob", "carol");
@@ -108,22 +108,22 @@ public class FunctionalInterfaces {
     }
 
     static void functionDemo() {
-        System.out.println("\n=== Function<T,R> — T → R ===");
+        System.out.println("\n=== Function<T,R> - T → R ===");
 
         Function<String, Integer> length  = String::length;
         Function<Integer, String> asHex   = Integer::toHexString;
         Function<String, Boolean> isLong  = s -> s.length() > 5;
 
-        // compose: g.compose(f) = g(f(x)) — right to left
+        // compose: g.compose(f) = g(f(x)) - right to left
         Function<String, String> lengthToHex = asHex.compose(length);
-        // andThen: f.andThen(g) = g(f(x)) — left to right
+        // andThen: f.andThen(g) = g(f(x)) - left to right
         Function<String, String> lengthToHex2 = length.andThen(asHex);
 
         System.out.println("length(\"Hello\"):       " + length.apply("Hello"));
         System.out.println("lengthToHex(\"Hello\"):  " + lengthToHex.apply("Hello"));  // 5 → "5"
         System.out.println("Same via andThen:       " + lengthToHex2.apply("Hello"));
 
-        // UnaryOperator — Function<T,T>
+        // UnaryOperator - Function<T,T>
         UnaryOperator<String> trim    = String::trim;
         UnaryOperator<String> toLower = String::toLowerCase;
         // andThen on UnaryOperator returns Function<T,T>; cast back to UnaryOperator via lambda
@@ -136,13 +136,13 @@ public class FunctionalInterfaces {
             (a, b) -> a + " " + b;
         System.out.println("concat: " + concat.apply("Hello", "World"));
 
-        // BinaryOperator — BiFunction<T,T,T>
+        // BinaryOperator - BiFunction<T,T,T>
         BinaryOperator<Integer> sum = Integer::sum;
         System.out.println("sum(3,4): " + sum.apply(3, 4));
     }
 
     static void predicateDemo() {
-        System.out.println("\n=== Predicate<T> — T → boolean ===");
+        System.out.println("\n=== Predicate<T> - T → boolean ===");
 
         Predicate<String> nonEmpty  = s -> !s.isEmpty();
         Predicate<String> hasAt     = s -> s.contains("@");
@@ -200,7 +200,7 @@ public class FunctionalInterfaces {
     }
 
     static void compositionDemo() {
-        System.out.println("\n=== Composition — building pipelines ===");
+        System.out.println("\n=== Composition - building pipelines ===");
 
         // Pipeline: raw string → trimmed → validated → formatted
         Function<String, String>  trim        = String::trim;

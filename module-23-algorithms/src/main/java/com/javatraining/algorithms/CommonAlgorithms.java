@@ -3,7 +3,7 @@ package com.javatraining.algorithms;
 import java.util.*;
 
 /**
- * Module 23 — Common Algorithm Patterns
+ * Module 23 - Common Algorithm Patterns
  *
  * Patterns covered:
  *   - Two pointers (opposite ends, same direction / sliding window)
@@ -207,7 +207,7 @@ public class CommonAlgorithms {
         return amount == 0 ? count : -1;
     }
 
-    /** Coin change DP — works for any coin system. Returns -1 if impossible. */
+    /** Coin change DP - works for any coin system. Returns -1 if impossible. */
     public static int minCoinsDp(int[] coins, int amount) {
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);
@@ -279,7 +279,7 @@ public class CommonAlgorithms {
 
     // ── Graph traversal (adjacency list) ─────────────────────────────────────
 
-    /** BFS — returns nodes in visit order from start. */
+    /** BFS - returns nodes in visit order from start. */
     public static List<Integer> bfs(Map<Integer, List<Integer>> graph, int start) {
         List<Integer> order = new ArrayList<>();
         Set<Integer>  seen  = new HashSet<>();
@@ -297,7 +297,7 @@ public class CommonAlgorithms {
         return order;
     }
 
-    /** DFS — returns nodes in visit order from start. */
+    /** DFS - returns nodes in visit order from start. */
     public static List<Integer> dfs(Map<Integer, List<Integer>> graph, int start) {
         List<Integer> order = new ArrayList<>();
         Set<Integer>  seen  = new HashSet<>();

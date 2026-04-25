@@ -66,7 +66,7 @@ class DynamicProxyTest {
     class NullGuardProxy {
         @Test void throws_on_null_argument() {
             Calculator calc = DynamicProxy.nullGuardProxy(new SimpleCalculator());
-            // Calculator.add(int, int) — autoboxed; need an interface with Object args
+            // Calculator.add(int, int) - autoboxed; need an interface with Object args
             // Use Calculator.describe() which takes no args (should pass through)
             assertDoesNotThrow(() -> calc.describe());
         }

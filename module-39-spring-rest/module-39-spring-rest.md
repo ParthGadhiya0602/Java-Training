@@ -1,14 +1,15 @@
 ---
-title: "Module 39 — Spring REST APIs"
-parent: "Phase 5 — Spring Ecosystem"
+title: "Module 39 - Spring REST APIs"
+parent: "Phase 5 - Spring Ecosystem"
 nav_order: 39
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-39-spring-rest/src){: .btn .btn-outline }
 
-# Module 39 — Spring REST APIs
+# Module 39 - Spring REST APIs
 
 Building a fully-featured REST API with Spring MVC:
 **@RestController** for request handling,
@@ -16,7 +17,7 @@ Building a fully-featured REST API with Spring MVC:
 **@RestControllerAdvice** + **ProblemDetail** for standardized error responses (RFC 9457),
 **HATEOAS** for hypermedia links, and
 **content negotiation** to control acceptable response formats.
-Tests use the **@WebMvcTest** slice — no real HTTP server, no database.
+Tests use the **@WebMvcTest** slice - no real HTTP server, no database.
 
 ---
 
@@ -32,7 +33,7 @@ public class ProductController {
 
     private final ProductService productService;
 
-    // Constructor injection — no @Autowired needed (single constructor)
+    // Constructor injection - no @Autowired needed (single constructor)
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
@@ -56,11 +57,11 @@ public class ProductController {
 
 ```
   Key annotations:
-  @PathVariable   — bind URI template segment {id} to a method parameter
-  @RequestParam   — bind query string ?category=X (required=false → optional)
-  @RequestBody    — deserialize JSON body into a Java object (Jackson)
-  @Valid          — trigger Bean Validation before the method body runs
-  ResponseEntity  — control status code + headers + body explicitly
+  @PathVariable   - bind URI template segment {id} to a method parameter
+  @RequestParam   - bind query string ?category=X (required=false → optional)
+  @RequestBody    - deserialize JSON body into a Java object (Jackson)
+  @Valid          - trigger Bean Validation before the method body runs
+  ResponseEntity  - control status code + headers + body explicitly
 ```
 
 ---
@@ -113,13 +114,13 @@ public record ProductRequest(
 
 ```
   Common constraints:
-  @NotNull         — value must not be null
-  @NotBlank        — String must not be null, empty, or whitespace
-  @Size(min, max)  — String/Collection size range
-  @Min / @Max      — numeric lower/upper bound
-  @DecimalMin      — BigDecimal lower bound (string, to avoid floating-point issues)
-  @Email           — valid email format
-  @Pattern(regexp) — regex match
+  @NotNull         - value must not be null
+  @NotBlank        - String must not be null, empty, or whitespace
+  @Size(min, max)  - String/Collection size range
+  @Min / @Max      - numeric lower/upper bound
+  @DecimalMin      - BigDecimal lower bound (string, to avoid floating-point issues)
+  @Email           - valid email format
+  @Pattern(regexp) - regex match
 
   Validation happens BEFORE the controller method body runs.
   No need to check constraints manually inside the method.
@@ -137,7 +138,7 @@ public record ProductRequest(
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 404 — resource not found
+    // 404 - resource not found
     @ExceptionHandler(ProductNotFoundException.class)
     public ProblemDetail handleProductNotFound(ProductNotFoundException ex,
                                                HttpServletRequest request) {
@@ -148,7 +149,7 @@ public class GlobalExceptionHandler {
         return problem;
     }
 
-    // 400 — @Valid constraint violations
+    // 400 - @Valid constraint violations
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException ex,
                                                 HttpServletRequest request) {
@@ -188,7 +189,7 @@ public class GlobalExceptionHandler {
 ### Why HATEOAS?
 
 ```
-  REST Level 3 (Richardson Maturity Model) — clients follow links, not hard-coded URLs.
+  REST Level 3 (Richardson Maturity Model) - clients follow links, not hard-coded URLs.
   API can change URL structure without breaking clients that follow the links.
   Self-documenting: each response tells the client what it can do next.
 
@@ -206,8 +207,8 @@ public class GlobalExceptionHandler {
 ### EntityModel and CollectionModel
 
 ```java
-// EntityModel<T> — wraps a single item with links
-// CollectionModel<EntityModel<T>> — wraps a list with links
+// EntityModel<T> - wraps a single item with links
+// CollectionModel<EntityModel<T>> - wraps a list with links
 
 @GetMapping("/{id}")
 public ResponseEntity<EntityModel<ProductResponse>> getById(@PathVariable Long id) {
@@ -237,13 +238,13 @@ public ResponseEntity<CollectionModel<EntityModel<ProductResponse>>> getAll(
 ```
 
 ```
-  linkTo(methodOn(C.class).method(args))  — type-safe link generation (no string URLs)
-  .withSelfRel()                          — rel="self"
-  .withRel("products")                   — custom rel name
-  .toUri()                               — extract URI for Location header
+  linkTo(methodOn(C.class).method(args))  - type-safe link generation (no string URLs)
+  .withSelfRel()                          - rel="self"
+  .withRel("products")                   - custom rel name
+  .toUri()                               - extract URI for Location header
 ```
 
-### @Relation — Controlling the _embedded Key
+### @Relation - Controlling the \_embedded Key
 
 ```java
 // Without @Relation, HAL uses the class name → "productResponseList" (ugly)
@@ -264,7 +265,7 @@ public record ProductResponse(Long id, String name, BigDecimal price, String cat
 ### 201 Created with Location Header
 
 ```java
-// POST /products — return 201 + Location pointing to the new resource
+// POST /products - return 201 + Location pointing to the new resource
 @PostMapping
 public ResponseEntity<EntityModel<ProductResponse>> create(
         @Valid @RequestBody ProductRequest request) {
@@ -283,7 +284,7 @@ public ResponseEntity<EntityModel<ProductResponse>> create(
 
 ---
 
-## @WebMvcTest — Slice Testing
+## @WebMvcTest - Slice Testing
 
 ```java
 // @WebMvcTest loads only the web layer:
@@ -292,7 +293,7 @@ public ResponseEntity<EntityModel<ProductResponse>> create(
 //   - Jackson, HATEOAS converters, Spring MVC config
 //   - Does NOT load @Service, @Repository, @Component
 //
-// MockMvc performs mock HTTP requests — no real server, no real HTTP.
+// MockMvc performs mock HTTP requests - no real server, no real HTTP.
 // @MockBean creates a Mockito mock and registers it in the Spring context.
 
 @WebMvcTest
@@ -332,15 +333,15 @@ class ProductControllerTest {
 
 ```
   BDDMockito patterns for void methods:
-    given(service.findById(1L)).willReturn(response)     — stub return value
-    given(service.findById(99L)).willThrow(new Ex(99L))  — stub exception
-    willDoNothing().given(service).delete(1L)            — void method, no-op
-    willThrow(new Ex(99L)).given(service).delete(99L)    — void method, throw
+    given(service.findById(1L)).willReturn(response)     - stub return value
+    given(service.findById(99L)).willThrow(new Ex(99L))  - stub exception
+    willDoNothing().given(service).delete(1L)            - void method, no-op
+    willThrow(new Ex(99L)).given(service).delete(99L)    - void method, throw
 ```
 
 ---
 
-## Module 39 — What Was Built
+## Module 39 - What Was Built
 
 ```
   module-39-spring-rest/
@@ -350,20 +351,20 @@ class ProductControllerTest {
       ├── main/java/com/javatraining/springrest/
       │   ├── SpringRestApplication.java
       │   ├── model/
-      │   │   └── Product.java            — @Data @Builder (in-memory entity)
+      │   │   └── Product.java            - @Data @Builder (in-memory entity)
       │   ├── dto/
-      │   │   ├── ProductRequest.java     — record + Bean Validation constraints
-      │   │   └── ProductResponse.java    — record + @Relation(collectionRelation="products")
+      │   │   ├── ProductRequest.java     - record + Bean Validation constraints
+      │   │   └── ProductResponse.java    - record + @Relation(collectionRelation="products")
       │   ├── exception/
-      │   │   ├── ProductNotFoundException.java   — RuntimeException with id in message
-      │   │   └── GlobalExceptionHandler.java     — @RestControllerAdvice, ProblemDetail
+      │   │   ├── ProductNotFoundException.java   - RuntimeException with id in message
+      │   │   └── GlobalExceptionHandler.java     - @RestControllerAdvice, ProblemDetail
       │   ├── service/
-      │   │   └── ProductService.java     — ConcurrentHashMap store, AtomicLong IDs
+      │   │   └── ProductService.java     - ConcurrentHashMap store, AtomicLong IDs
       │   └── controller/
-      │       └── ProductController.java  — produces=APPLICATION_JSON_VALUE,
+      │       └── ProductController.java  - produces=APPLICATION_JSON_VALUE,
       │                                     EntityModel/CollectionModel, WebMvcLinkBuilder
       └── test/java/com/javatraining/springrest/
-          └── ProductControllerTest.java  — 12 tests:
+          └── ProductControllerTest.java  - 12 tests:
               GET all (HAL collection + links)
               GET by category (?category= filter)
               GET by id (entity + links)
@@ -385,7 +386,7 @@ All tests: **12 passing**.
 ## Key Takeaways
 
 ```
-  @RestController              @Controller + @ResponseBody — returns JSON by default
+  @RestController              @Controller + @ResponseBody - returns JSON by default
   produces = APPLICATION_JSON  declares acceptable response type; other Accept → 406
   @PathVariable                bind {id} segment to method parameter
   @RequestParam(required=false) optional query string; null when absent
@@ -398,7 +399,7 @@ All tests: **12 passing**.
 
   EntityModel.of(t, links)     wrap item with HATEOAS links
   CollectionModel.of(items, links) wrap list with HATEOAS links
-  linkTo(methodOn(C.class).m()) type-safe link — no string URLs
+  linkTo(methodOn(C.class).m()) type-safe link - no string URLs
   .withSelfRel()               rel="self" link
   .withRel("products")         custom named relation link
   .toUri()                     extract URI for Location header (POST 201)
@@ -409,4 +410,5 @@ All tests: **12 passing**.
   MockMvc                      mock HTTP requests without a real server
   BDDMockito                   given/willReturn, willThrow, willDoNothing patterns
 ```
+
 {% endraw %}

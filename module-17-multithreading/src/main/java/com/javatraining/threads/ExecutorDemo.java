@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
- * Module 17 — ExecutorService, Callable, Future, CompletableFuture
+ * Module 17 - ExecutorService, Callable, Future, CompletableFuture
  *
  * Raw Thread creation is rarely the right choice in production code.
  * ExecutorService decouples task submission from thread management:
@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
  *   - Return values and exceptions via Future/Callable
  *
  * Thread pool types (via Executors factory):
- *   newFixedThreadPool(n)       — n threads; unbounded queue
- *   newCachedThreadPool()       — grows/shrinks; 60s idle timeout
- *   newSingleThreadExecutor()   — guaranteed sequential execution
- *   newScheduledThreadPool(n)   — delays and periodic tasks
- *   newVirtualThreadPerTaskExecutor() — Java 21; one virtual thread per task
+ *   newFixedThreadPool(n)       - n threads; unbounded queue
+ *   newCachedThreadPool()       - grows/shrinks; 60s idle timeout
+ *   newSingleThreadExecutor()   - guaranteed sequential execution
+ *   newScheduledThreadPool(n)   - delays and periodic tasks
+ *   newVirtualThreadPerTaskExecutor() - Java 21; one virtual thread per task
  *
  * Prefer ThreadPoolExecutor directly in production for explicit queue bounds.
  */
@@ -43,7 +43,7 @@ public class ExecutorDemo {
     }
 
     /**
-     * submit(Runnable) returns Future<?> — get() returns null but lets
+     * submit(Runnable) returns Future<?> - get() returns null but lets
      * you detect completion and propagate exceptions.
      */
     public static void runAndWait(Runnable task) throws Exception {
@@ -166,16 +166,16 @@ public class ExecutorDemo {
 
     /**
      * CompletableFuture is a Future you can complete manually and chain with
-     * callbacks — no blocking needed for simple pipelines.
+     * callbacks - no blocking needed for simple pipelines.
      *
      * Key methods:
-     *   supplyAsync(Supplier)      — run async, produces a value
-     *   thenApply(Function)        — transform result when ready
-     *   thenAccept(Consumer)       — consume result, returns Void
-     *   thenCompose(Function)      — flatMap — chains another async stage
-     *   thenCombine(other, BiFunc) — combine two independent futures
-     *   exceptionally(Function)    — recover from exception
-     *   allOf / anyOf              — wait for N futures
+     *   supplyAsync(Supplier)      - run async, produces a value
+     *   thenApply(Function)        - transform result when ready
+     *   thenAccept(Consumer)       - consume result, returns Void
+     *   thenCompose(Function)      - flatMap - chains another async stage
+     *   thenCombine(other, BiFunc) - combine two independent futures
+     *   exceptionally(Function)    - recover from exception
+     *   allOf / anyOf              - wait for N futures
      */
     public static CompletableFuture<String> asyncPipeline(int input) {
         return CompletableFuture

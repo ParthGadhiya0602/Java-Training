@@ -20,7 +20,7 @@ spec:
           ports:
             - containerPort: 8080
 
-          # 12-factor Factor III — Config: injected as env vars, not baked into the image
+          # 12-factor Factor III - Config: injected as env vars, not baked into the image
           env:
             - name: APP_ENVIRONMENT
               value: "prod"

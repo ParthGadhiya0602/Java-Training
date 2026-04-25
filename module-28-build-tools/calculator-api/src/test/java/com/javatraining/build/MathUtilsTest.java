@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests for {@link MathUtils} — lives in the calculator-api module.
+ * Tests for {@link MathUtils} - lives in the calculator-api module.
  * Demonstrates that each Maven module can have its own test suite.
  */
 class MathUtilsTest {

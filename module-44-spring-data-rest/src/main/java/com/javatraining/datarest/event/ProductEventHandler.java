@@ -11,13 +11,13 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Component;
 
 /**
- * @RepositoryEventHandler — listens for Spring Data REST repository lifecycle events.
+ * @RepositoryEventHandler - listens for Spring Data REST repository lifecycle events.
  *
  * Event types (before/after variants for each):
- *   BeforeCreate / AfterCreate   — fired on POST
- *   BeforeSave   / AfterSave     — fired on PUT and PATCH
- *   BeforeDelete / AfterDelete   — fired on DELETE
- *   BeforeLinkSave / AfterLinkSave — fired when associations are changed via PUT on a link
+ *   BeforeCreate / AfterCreate   - fired on POST
+ *   BeforeSave   / AfterSave     - fired on PUT and PATCH
+ *   BeforeDelete / AfterDelete   - fired on DELETE
+ *   BeforeLinkSave / AfterLinkSave - fired when associations are changed via PUT on a link
  *
  * The class-level @RepositoryEventHandler(Product.class) scopes all handlers in this
  * class to Product entities only. Without it, the handlers receive events for all types.
@@ -37,7 +37,7 @@ public class ProductEventHandler {
      */
     @HandleBeforeCreate
     public void handleBeforeCreate(Product product) {
-        // Normalise category to uppercase — enforced at the persistence boundary
+        // Normalise category to uppercase - enforced at the persistence boundary
         if (product.getCategory() != null) {
             product.setCategory(product.getCategory().toUpperCase());
         }

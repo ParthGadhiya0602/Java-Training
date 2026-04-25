@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * Each method runs in its own transaction so the saga can call them independently.
  *
- * createPendingOrder writes the Order and its OutboxEvent in a single transaction —
+ * createPendingOrder writes the Order and its OutboxEvent in a single transaction -
  * the core guarantee of the outbox pattern: the event is never written without the
  * order, and the order is never written without its event.
  */

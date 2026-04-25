@@ -1,21 +1,22 @@
 ---
-title: "Module 50 — API Design"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 50 - API Design"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 50
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-50-api-design/src){: .btn .btn-outline }
 
-# Module 50 — API Design
+# Module 50 - API Design
 
 ## What this module covers
 
 OpenAPI 3 documentation via springdoc, URI-based REST versioning, and
 consumer-driven contract testing with Pact JVM. The Pact workflow demonstrates
 how a consumer defines its expectations, generates a pact file, and how the
-provider verifies against it — all within a single Maven build.
+provider verifies against it - all within a single Maven build.
 
 ---
 
@@ -41,7 +42,7 @@ src/main/java/com/javatraining/apidesign/
 ## REST versioning
 
 URI versioning embeds the version in the path. Two separate controllers own
-their response shape — V2 adds `category` and `inStock` without modifying V1.
+their response shape - V2 adds `category` and `inStock` without modifying V1.
 
 ```
 GET /v1/products/1  →  {"id":1,"name":"Widget","price":9.99}
@@ -61,7 +62,7 @@ Swagger UI at `/swagger-ui.html`.
 Annotations add human-readable metadata without changing runtime behaviour:
 
 ```java
-@Tag(name = "Products V1", description = "Basic product catalogue — id, name, price")
+@Tag(name = "Products V1", description = "Basic product catalogue - id, name, price")
 @RestController
 @RequestMapping("/v1/products")
 public class ProductControllerV1 {
@@ -100,9 +101,9 @@ consumer's expectations explicit and verifiable on the provider side.
 
 ### Workflow
 
-1. **Consumer test** — defines a contract (interactions), validates consumer
+1. **Consumer test** - defines a contract (interactions), validates consumer
    code against a mock server, and writes `target/pacts/<consumer>-<provider>.json`.
-2. **Provider test** — starts the real Spring Boot application, reads the pact
+2. **Provider test** - starts the real Spring Boot application, reads the pact
    file, and replays each interaction against the running server.
 
 Maven Surefire is configured with `runOrder=alphabetical`, which ensures
@@ -143,7 +144,7 @@ class ProductApiConsumerPactTest {
 ```
 
 `PactDslJsonBody` type matchers (`.numberType`, `.stringType`, `.decimalType`)
-record the expected types, not exact values — the contract survives changes to
+record the expected types, not exact values - the contract survives changes to
 the actual data as long as the field names and types stay the same.
 
 `pactVersion = PactSpecVersion.V3` keeps the `RequestResponsePact + PactDslWithProvider`
@@ -173,7 +174,7 @@ class ProductApiProviderPactTest {
 
     @State("product with id 1 exists")
     void productWithId1Exists() {
-        // ProductRepository pre-loads product 1 — no setup needed
+        // ProductRepository pre-loads product 1 - no setup needed
     }
 }
 ```
@@ -212,12 +213,12 @@ class ProductControllerV1Test {
 
 ## Tests
 
-| Class                        | Type              | Count |
-|------------------------------|-------------------|-------|
-| `ProductControllerV1Test`    | `@WebMvcTest`     | 2     |
-| `ProductControllerV2Test`    | `@WebMvcTest`     | 2     |
-| `ProductApiConsumerPactTest` | Pact consumer     | 1     |
-| `ProductApiProviderPactTest` | Pact provider     | 1     |
+| Class                        | Type          | Count |
+| ---------------------------- | ------------- | ----- |
+| `ProductControllerV1Test`    | `@WebMvcTest` | 2     |
+| `ProductControllerV2Test`    | `@WebMvcTest` | 2     |
+| `ProductApiConsumerPactTest` | Pact consumer | 1     |
+| `ProductApiProviderPactTest` | Pact provider | 1     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **6/6 pass**
@@ -226,12 +227,13 @@ Result: **6/6 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| URI versioning (`/v1/`, `/v2/`) over header versioning | Explicit in URLs, easy to bookmark, visible in logs and proxies |
-| Separate controller classes per version | Each version owns its mapping logic; no shared code to accidentally break |
-| `pactVersion = PactSpecVersion.V3` | Pact 4.6.x defaults to V4; V3 keeps the familiar `RequestResponsePact + PactDslWithProvider` API |
-| `runOrder=alphabetical` in Surefire | Guarantees consumer test (file generation) runs before provider test (file reading) in the same Maven build |
-| Type matchers in pact DSL (`numberType`, `stringType`) | Contract survives value changes — only field existence and type are enforced |
-| In-memory `ProductRepository` | Module focuses on API concerns; no JPA/H2 overhead |
+| Decision                                               | Reason                                                                                                      |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| URI versioning (`/v1/`, `/v2/`) over header versioning | Explicit in URLs, easy to bookmark, visible in logs and proxies                                             |
+| Separate controller classes per version                | Each version owns its mapping logic; no shared code to accidentally break                                   |
+| `pactVersion = PactSpecVersion.V3`                     | Pact 4.6.x defaults to V4; V3 keeps the familiar `RequestResponsePact + PactDslWithProvider` API            |
+| `runOrder=alphabetical` in Surefire                    | Guarantees consumer test (file generation) runs before provider test (file reading) in the same Maven build |
+| Type matchers in pact DSL (`numberType`, `stringType`) | Contract survives value changes - only field existence and type are enforced                                |
+| In-memory `ProductRepository`                          | Module focuses on API concerns; no JPA/H2 overhead                                                          |
+
 {% endraw %}

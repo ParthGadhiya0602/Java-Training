@@ -5,14 +5,14 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Module 18 — Advanced Synchronizers
+ * Module 18 - Advanced Synchronizers
  *
  * java.util.concurrent ships synchronizers for common coordination patterns:
  *
- *   Semaphore       — controls the number of concurrent accessors (permits)
- *   CyclicBarrier   — N threads wait at a barrier, then all proceed together (reusable)
- *   Phaser          — flexible multi-phase barrier; threads can register/deregister
- *   Exchanger       — two threads swap an object at a meeting point
+ *   Semaphore       - controls the number of concurrent accessors (permits)
+ *   CyclicBarrier   - N threads wait at a barrier, then all proceed together (reusable)
+ *   Phaser          - flexible multi-phase barrier; threads can register/deregister
+ *   Exchanger       - two threads swap an object at a meeting point
  */
 public class SynchronizersDemo {
 
@@ -20,8 +20,8 @@ public class SynchronizersDemo {
 
     /**
      * Semaphore(n): at most n threads may be inside the guarded region.
-     *   acquire() — take a permit (blocks if none available)
-     *   release() — return a permit
+     *   acquire() - take a permit (blocks if none available)
+     *   release() - return a permit
      *
      * Common uses:
      *   n=1   → binary semaphore (mutex, but not re-entrant)
@@ -125,9 +125,9 @@ public class SynchronizersDemo {
     /**
      * Phaser is a more flexible CyclicBarrier:
      *   - Parties can register/deregister dynamically
-     *   - arriveAndAwaitAdvance() — arrive and wait for all
-     *   - arriveAndDeregister()   — arrive then leave permanently
-     *   - onAdvance() hook        — override to stop or transform phases
+     *   - arriveAndAwaitAdvance() - arrive and wait for all
+     *   - arriveAndDeregister()   - arrive then leave permanently
+     *   - onAdvance() hook        - override to stop or transform phases
      */
     public static class PhasedPipeline {
         private final Phaser phaser;
@@ -195,7 +195,7 @@ public class SynchronizersDemo {
         return results;
     }
 
-    /** Double-buffer swap via Exchanger — classic pipeline pattern. */
+    /** Double-buffer swap via Exchanger - classic pipeline pattern. */
     public static List<String> doubleBufferPipeline(List<String> inputs)
             throws InterruptedException {
         Exchanger<List<String>> exchanger = new Exchanger<>();

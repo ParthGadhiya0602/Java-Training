@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Module 16 — NIO Channels and Buffers
+ * Module 16 - NIO Channels and Buffers
  *
  * NIO (java.nio) introduced a different I/O model built on:
  *
- *   Buffer   — fixed-capacity container for primitive data
- *   Channel  — bidirectional, interruptible connection to I/O resource
- *   Selector — single thread multiplexes many channels (non-blocking I/O)
+ *   Buffer   - fixed-capacity container for primitive data
+ *   Channel  - bidirectional, interruptible connection to I/O resource
+ *   Selector - single thread multiplexes many channels (non-blocking I/O)
  *
  * Buffer state machine:
  *   write into buffer → flip() → read from buffer → clear() / compact()
@@ -49,7 +49,7 @@ public class NioChannelsDemo {
     }
 
     /**
-     * Direct buffers are allocated outside the JVM heap — OS can DMA directly.
+     * Direct buffers are allocated outside the JVM heap - OS can DMA directly.
      * Faster for large I/O; slower to allocate; never garbage-collected promptly.
      * Use for long-lived, large-transfer buffers only.
      */
@@ -57,7 +57,7 @@ public class NioChannelsDemo {
         return ByteBuffer.allocateDirect(capacity);
     }
 
-    /** Demonstrate buffer slice — a view sharing the backing array. */
+    /** Demonstrate buffer slice - a view sharing the backing array. */
     public static ByteBuffer slice(ByteBuffer original, int offset, int length) {
         original.position(offset).limit(offset + length);
         return original.slice();
@@ -96,7 +96,7 @@ public class NioChannelsDemo {
     // ── Zero-copy transfer ────────────────────────────────────────────────────
 
     /**
-     * transferTo delegates to the OS sendfile(2) syscall on Linux — the data
+     * transferTo delegates to the OS sendfile(2) syscall on Linux - the data
      * never enters userspace, giving significant throughput gains for large files.
      */
     public static void copyWithTransfer(Path source, Path target) throws IOException {
@@ -116,7 +116,7 @@ public class NioChannelsDemo {
 
     /**
      * A memory-mapped file is mapped directly into the process address space.
-     * Reads/writes go through the OS page cache — no explicit read() calls needed.
+     * Reads/writes go through the OS page cache - no explicit read() calls needed.
      * Ideal for random access to large files.
      */
     public static String readMapped(Path path) throws IOException {

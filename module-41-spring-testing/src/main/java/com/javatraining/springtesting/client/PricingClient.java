@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 
-// External HTTP client — calls a separate pricing microservice.
+// External HTTP client - calls a separate pricing microservice.
 // Base URL is configurable so tests can point it at a WireMock stub server.
 @Component
 public class PricingClient {
@@ -28,7 +28,7 @@ public class PricingClient {
                     baseUrl + "/prices/" + productId, PriceResponse.class);
             return response != null ? response.price() : BigDecimal.ZERO;
         } catch (RestClientException e) {
-            // Pricing service unavailable — return zero as a safe fallback
+            // Pricing service unavailable - return zero as a safe fallback
             return BigDecimal.ZERO;
         }
     }

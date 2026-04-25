@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Business-logic layer — validates input and delegates to the repository.
+ * Business-logic layer - validates input and delegates to the repository.
  * All validation throws {@link IllegalArgumentException} so the HTTP layer
  * can return 400 Bad Request.
  */

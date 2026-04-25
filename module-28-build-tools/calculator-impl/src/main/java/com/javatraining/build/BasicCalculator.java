@@ -2,7 +2,7 @@ package com.javatraining.build;
 
 /**
  * Standard implementation of {@link Calculator}.
- * Lives in {@code calculator-impl} — depends on {@code calculator-api}
+ * Lives in {@code calculator-impl} - depends on {@code calculator-api}
  * as a compile-scope Maven dependency.
  */
 public class BasicCalculator implements Calculator {

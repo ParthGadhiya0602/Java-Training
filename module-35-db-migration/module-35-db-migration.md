@@ -1,18 +1,19 @@
 ---
-title: "Module 35 — Database Migration"
-parent: "Phase 4 — Databases & Persistence"
+title: "Module 35 - Database Migration"
+parent: "Phase 4 - Databases & Persistence"
 nav_order: 35
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-35-db-migration/src){: .btn .btn-outline }
 
-# Module 35 — Database Migration
+# Module 35 - Database Migration
 
 Two complementary migration tools:
-**Flyway** — SQL-first, versioned scripts with a strict `V{n}__description.sql` naming convention;
-**Liquibase** — database-agnostic changeSets in YAML/XML/JSON with built-in rollback blocks.
+**Flyway** - SQL-first, versioned scripts with a strict `V{n}__description.sql` naming convention;
+**Liquibase** - database-agnostic changeSets in YAML/XML/JSON with built-in rollback blocks.
 
 ---
 
@@ -44,7 +45,7 @@ Two complementary migration tools:
   └── V6__make_department_id_not_null.sql
 
   Rules:
-    Version must increase monotonically — gaps allowed (1, 2, 5, 10)
+    Version must increase monotonically - gaps allowed (1, 2, 5, 10)
     Description is free text (underscores become spaces in history)
     Once applied, a script MUST NOT change (Flyway checksums it)
 ```
@@ -71,7 +72,7 @@ Two complementary migration tools:
 ### Flyway Spring Boot Setup
 
 ```java
-// pom.xml — just add the dependency, Spring Boot auto-configures the rest:
+// pom.xml - just add the dependency, Spring Boot auto-configures the rest:
 <dependency>
     <groupId>org.flywaydb</groupId>
     <artifactId>flyway-core</artifactId>
@@ -85,7 +86,7 @@ spring.flyway.enabled=true            // default true when flyway-core is on cla
 ### Migration Scripts
 
 ```sql
--- V1__create_employees.sql — initial table
+-- V1__create_employees.sql - initial table
 CREATE TABLE employees (
     id         BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name       VARCHAR(100)  NOT NULL,
@@ -95,13 +96,13 @@ CREATE TABLE employees (
     created_at TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- V2__create_departments.sql — new table (no existing data affected)
+-- V2__create_departments.sql - new table (no existing data affected)
 CREATE TABLE departments (
     id   BIGINT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE
 );
 
--- V3__seed_data.sql — INSERT reference data
+-- V3__seed_data.sql - INSERT reference data
 INSERT INTO departments (name) VALUES ('Engineering'), ('Marketing'), ('Finance');
 INSERT INTO employees (name, email, salary, active) VALUES
     ('Alice', 'alice@example.com', 95000.00, TRUE), ...;
@@ -169,10 +170,10 @@ applied[0].getChecksum()                 // CRC32 of the SQL file
   └── 003-add-description.yaml
 
   Each changeSet has:
-    id      — unique string identifier
-    author  — who wrote it
-    changes — list of operations (createTable, addColumn, insert, ...)
-    rollback — how to undo this changeSet
+    id      - unique string identifier
+    author  - who wrote it
+    changes - list of operations (createTable, addColumn, insert, ...)
+    rollback - how to undo this changeSet
 ```
 
 ### Master Changelog
@@ -261,7 +262,7 @@ spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
   002-seed-products        training    2024-01-01      insert tableName=products (x3)
   003-add-description      training    2024-01-01      addColumn tableName=products
 
-  Table: DATABASECHANGELOGLOCK — prevents concurrent migrations
+  Table: DATABASECHANGELOGLOCK - prevents concurrent migrations
 ```
 
 ---
@@ -275,7 +276,7 @@ spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
   │  Script format       │  Plain SQL               │  YAML / XML / JSON / SQL   │
   │  Rollback            │  No built-in rollback    │  rollback block per changeSet│
   │  Versioning          │  V{n}__ prefix           │  id + author per changeSet │
-  │  Learning curve      │  Lower — it's just SQL   │  Higher — own DSL          │
+  │  Learning curve      │  Lower - it's just SQL   │  Higher - own DSL          │
   │  DB portability      │  Low (SQL is DB-specific)│  High (abstracted ops)     │
   │  History table       │  flyway_schema_history   │  DATABASECHANGELOG         │
   │  Best for            │  SQL-fluent teams        │  Multi-DB portability      │
@@ -290,7 +291,7 @@ spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
   Problem: FlywayMigrationTest and LiquibaseMigrationTest both start
   Spring, both load H2, and H2 is in-memory per URL.  If they share
   the same URL, Flyway's schema_history and Liquibase's DATABASECHANGELOG
-  table collide — and whichever context starts second sees an already-migrated
+  table collide - and whichever context starts second sees an already-migrated
   DB from the other tool.
 
   Fix: give each test class its own H2 URL.
@@ -300,13 +301,13 @@ spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
     spring.flyway.enabled=true
     spring.liquibase.enabled=false
 
-  LiquibaseMigrationTest — @TestPropertySource overrides:
+  LiquibaseMigrationTest - @TestPropertySource overrides:
     spring.datasource.url=jdbc:h2:mem:liquibasedb;DB_CLOSE_DELAY=-1
     spring.flyway.enabled=false
     spring.liquibase.enabled=true
     spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
 
-  Each test class gets a clean, isolated H2 instance — no interference.
+  Each test class gets a clean, isolated H2 instance - no interference.
 ```
 
 ```java
@@ -322,7 +323,7 @@ class LiquibaseMigrationTest { ... }
 
 ---
 
-## Module 35 — What Was Built
+## Module 35 - What Was Built
 
 ```
   module-35-db-migration/
@@ -348,9 +349,9 @@ class LiquibaseMigrationTest { ... }
       │           └── 003-add-description.yaml
       └── test/
           ├── java/com/javatraining/migration/
-          │   ├── FlywayMigrationTest.java    10 tests — schema structure, seed data,
+          │   ├── FlywayMigrationTest.java    10 tests - schema structure, seed data,
           │   │                                          zero-downtime steps, migration history
-          │   └── LiquibaseMigrationTest.java  6 tests — schema structure, seed data,
+          │   └── LiquibaseMigrationTest.java  6 tests - schema structure, seed data,
           │                                              changeSet history
           └── resources/
               └── logback-test.xml
@@ -365,17 +366,18 @@ Total: **16 passing**.
 ## Key Takeaways
 
 ```
-  Flyway naming     V{version}__{description}.sql — monotonically increasing version
-  Checksums         Applied scripts are locked — Flyway fails if you modify one
+  Flyway naming     V{version}__{description}.sql - monotonically increasing version
+  Checksums         Applied scripts are locked - Flyway fails if you modify one
   Zero-downtime     nullable → backfill → NOT NULL: three migrations, not one
-  Flyway bean       flyway.info().applied() — full history with state + checksum
+  Flyway bean       flyway.info().applied() - full history with state + checksum
 
   Liquibase id      changeSet identified by id + author (not filename or version)
-  rollback block    Explicit undo SQL/operation next to the change — not automatic
+  rollback block    Explicit undo SQL/operation next to the change - not automatic
   YAML DSL          createTable / addColumn / insert / dropTable / dropColumn
-  DATABASECHANGELOG — Liquibase's own history table (like flyway_schema_history)
+  DATABASECHANGELOG - Liquibase's own history table (like flyway_schema_history)
 
   Isolation trick   Give each test class its own H2 URL (mem:flywaydb vs mem:liquibasedb)
                     to prevent Flyway and Liquibase from interfering with each other
 ```
+
 {% endraw %}

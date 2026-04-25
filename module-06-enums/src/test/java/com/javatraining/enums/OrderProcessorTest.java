@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderProcessorTest {
 
     // -----------------------------------------------------------------------
-    // OrderStatus — state machine transitions
+    // OrderStatus - state machine transitions
     // -----------------------------------------------------------------------
     @Test
     void valid_happy_path_PENDING_to_DELIVERED() {
@@ -75,7 +75,7 @@ class OrderProcessorTest {
     }
 
     // -----------------------------------------------------------------------
-    // PaymentMethod — fee calculations
+    // PaymentMethod - fee calculations
     // -----------------------------------------------------------------------
     @ParameterizedTest
     @CsvSource({
@@ -98,7 +98,7 @@ class OrderProcessorTest {
 
     @Test
     void netBanking_fee_below_cap() {
-        // 0.5% of 5000 = 25 — below cap
+        // 0.5% of 5000 = 25 - below cap
         assertEquals(25.0,
             OrderProcessor.PaymentMethod.NET_BANKING.transactionFee(5_000), 1e-9);
     }
@@ -111,7 +111,7 @@ class OrderProcessorTest {
     }
 
     // -----------------------------------------------------------------------
-    // Priority — above() EnumSet helper
+    // Priority - above() EnumSet helper
     // -----------------------------------------------------------------------
     @Test
     void above_NORMAL_returns_HIGH_URGENT_CRITICAL() {
@@ -140,7 +140,7 @@ class OrderProcessorTest {
     }
 
     // -----------------------------------------------------------------------
-    // Processor — statusLabel and slaHours (switch expressions)
+    // Processor - statusLabel and slaHours (switch expressions)
     // -----------------------------------------------------------------------
     @ParameterizedTest
     @CsvSource({
@@ -172,7 +172,7 @@ class OrderProcessorTest {
     }
 
     // -----------------------------------------------------------------------
-    // Order — advance() tracks history; blocked transitions return false
+    // Order - advance() tracks history; blocked transitions return false
     // -----------------------------------------------------------------------
     @Test
     void order_advance_records_history() {

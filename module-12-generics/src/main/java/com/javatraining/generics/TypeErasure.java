@@ -19,11 +19,11 @@ import java.util.function.Supplier;
  *   <T extends A & B>     → A         (leftmost bound)
  *
  * Consequences:
- *   ILLEGAL:  new T()           — erased; no type token
- *   ILLEGAL:  new T[n]          — array creation requires reifiable type
- *   ILLEGAL:  x instanceof List<String>  — always true or always false after erasure
- *   LEGAL:    x instanceof List<?>      — raw/unbounded wildcard is reifiable
- *   LEGAL:    (T) value                 — compiles with unchecked warning
+ *   ILLEGAL:  new T()           - erased; no type token
+ *   ILLEGAL:  new T[n]          - array creation requires reifiable type
+ *   ILLEGAL:  x instanceof List<String>  - always true or always false after erasure
+ *   LEGAL:    x instanceof List<?>      - raw/unbounded wildcard is reifiable
+ *   LEGAL:    (T) value                 - compiles with unchecked warning
  *
  * Solutions:
  *   • Pass Class<T> (a type token) to construct or compare at runtime
@@ -34,7 +34,7 @@ import java.util.function.Supplier;
 public class TypeErasure {
 
     // -------------------------------------------------------------------------
-    // 1. Type token pattern — Class<T>
+    // 1. Type token pattern - Class<T>
     //    Passing Class<T> gives you a runtime reified handle to T.
     //    Used to instantiate T via reflection, and to check instanceof.
     // -------------------------------------------------------------------------
@@ -47,7 +47,7 @@ public class TypeErasure {
         }
 
         void set(Object raw) {
-            // Runtime type check using the class token — safe cast with clear intent
+            // Runtime type check using the class token - safe cast with clear intent
             value = type.cast(raw);      // throws ClassCastException if wrong type
         }
 
@@ -62,7 +62,7 @@ public class TypeErasure {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Factory with type token — creates T instances via Supplier
+    // 2. Factory with type token - creates T instances via Supplier
     //    (Reflection-based new T() is one approach; Supplier is cleaner)
     // -------------------------------------------------------------------------
     static final class Factory<T> {
@@ -84,8 +84,8 @@ public class TypeErasure {
     //    'instanceof List<String>' is illegal; 'instanceof List<?>' is fine.
     // -------------------------------------------------------------------------
     static boolean isAList(Object obj) {
-        return obj instanceof List<?>;   // OK — List<?> is reifiable
-        // return obj instanceof List<String>; // ILLEGAL — won't compile
+        return obj instanceof List<?>;   // OK - List<?> is reifiable
+        // return obj instanceof List<String>; // ILLEGAL - won't compile
     }
 
     static String describeType(Object obj) {
@@ -99,7 +99,7 @@ public class TypeErasure {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Heap pollution example — what unchecked warnings protect against
+    // 4. Heap pollution example - what unchecked warnings protect against
     //    We show the warning-suppressed version WITH a safety note explaining
     //    why the cast is guaranteed safe.
     // -------------------------------------------------------------------------
@@ -126,9 +126,9 @@ public class TypeErasure {
     }
 
     // -------------------------------------------------------------------------
-    // 5. Supertype token — preserves generic info in class hierarchy
+    // 5. Supertype token - preserves generic info in class hierarchy
     //    ParameterizedTypeRef<T> captures the full generic type in the
-    //    anonymous subclass's generic supertype — readable via reflection.
+    //    anonymous subclass's generic supertype - readable via reflection.
     // -------------------------------------------------------------------------
     abstract static class TypeRef<T> {
         private final Type capturedType;
@@ -158,7 +158,7 @@ public class TypeErasure {
     // Demonstrations
     // -------------------------------------------------------------------------
     static void typeTokenDemo() {
-        System.out.println("=== TypedContainer — Class<T> token ===");
+        System.out.println("=== TypedContainer - Class<T> token ===");
         TypedContainer<String> box = new TypedContainer<>(String.class);
         box.set("hello");
         System.out.println("value: " + box.get());
@@ -166,7 +166,7 @@ public class TypeErasure {
         System.out.println("isInstance(42):  " + box.isInstance(42));
 
         try {
-            box.set(42);   // wrong type — runtime ClassCastException
+            box.set(42);   // wrong type - runtime ClassCastException
         } catch (ClassCastException e) {
             System.out.println("Caught bad set: " + e.getMessage());
         }
@@ -177,7 +177,7 @@ public class TypeErasure {
         List<String>  strings  = List.of("a", "b");
         List<Integer> integers = List.of(1, 2, 3);
 
-        // Both are true — same erased type List at runtime
+        // Both are true - same erased type List at runtime
         System.out.println("strings  instanceof List<?>: " + isAList(strings));
         System.out.println("integers instanceof List<?>: " + isAList(integers));
 
@@ -190,7 +190,7 @@ public class TypeErasure {
     }
 
     static void safeCastListDemo() {
-        System.out.println("\n=== SafeCastList — @SuppressWarnings(\"unchecked\") ===");
+        System.out.println("\n=== SafeCastList - @SuppressWarnings(\"unchecked\") ===");
         SafeCastList<Integer> nums = new SafeCastList<>(Integer.class);
         nums.add(10); nums.add(20); nums.add(30);
         System.out.println("get(1): " + nums.get(1));
@@ -198,14 +198,14 @@ public class TypeErasure {
     }
 
     static void typeRefDemo() {
-        System.out.println("\n=== TypeRef — supertype token preserves generic info ===");
+        System.out.println("\n=== TypeRef - supertype token preserves generic info ===");
         // Anonymous subclass captures List<Map<String,Integer>> in its supertype
         TypeRef<List<Map<String, Integer>>> ref = new TypeRef<>() {};
         System.out.println("captured type: " + ref.capturedType());
     }
 
     static void reflectionDemo() {
-        System.out.println("\n=== Reflection — generic info in signatures ===");
+        System.out.println("\n=== Reflection - generic info in signatures ===");
         try {
             System.out.println("exampleField type: " + getFieldGenericType());
         } catch (Exception e) {

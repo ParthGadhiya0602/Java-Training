@@ -9,7 +9,7 @@ import java.math.RoundingMode;
  * <p>The {@code id} field is 0 for unsaved (transient) instances and positive
  * after a successful INSERT via {@link com.javatraining.jdbc.repository.ProductRepository}.
  *
- * <p>{@link BigDecimal} is used for {@code price} — never {@code double} —
+ * <p>{@link BigDecimal} is used for {@code price} - never {@code double} -
  * to guarantee exact decimal representation in DECIMAL(10,2) columns.
  */
 public record Product(int id, String name, BigDecimal price, int stockQty) {

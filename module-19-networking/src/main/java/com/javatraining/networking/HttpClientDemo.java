@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
- * Module 19 — HttpClient (Java 11+)
+ * Module 19 - HttpClient (Java 11+)
  *
  * java.net.http.HttpClient replaces the clunky HttpURLConnection.
  * Key design:
@@ -26,7 +26,7 @@ public class HttpClientDemo {
     // ── Build a shared client ─────────────────────────────────────────────────
 
     /**
-     * HttpClient instances should be reused — they manage connection pools.
+     * HttpClient instances should be reused - they manage connection pools.
      * Build once, share across requests.
      */
     public static HttpClient buildClient(Duration connectTimeout) {
@@ -141,8 +141,8 @@ public class HttpClientDemo {
 
     /**
      * URI vs URL:
-     *   URI — identifies a resource (may be abstract, relative, or opaque)
-     *   URL — a URI that also includes how to locate/retrieve it
+     *   URI - identifies a resource (may be abstract, relative, or opaque)
+     *   URL - a URI that also includes how to locate/retrieve it
      *
      * Prefer URI in APIs; use URL.toURI() when you must interop.
      */
@@ -175,7 +175,7 @@ public class HttpClientDemo {
 
     /**
      * HttpURLConnection predates HttpClient and requires more boilerplate.
-     * Kept here as a reference — prefer HttpClient for new code.
+     * Kept here as a reference - prefer HttpClient for new code.
      */
     public static String legacyGet(String urlString) throws IOException {
         URL url = URI.create(urlString).toURL();

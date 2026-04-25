@@ -1,14 +1,15 @@
 ---
-title: "03 — Control Flow"
-parent: "Phase 1 — Fundamentals"
+title: "03 - Control Flow"
+parent: "Phase 1 - Fundamentals"
 nav_order: 3
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-03-control-flow/src){: .btn .btn-outline }
 
-# Module 03 — Control Flow
+# Module 03 - Control Flow
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21
 
@@ -19,14 +20,14 @@ render_with_liquid: false
 1. [What is Control Flow?](#1-what-is-control-flow)
 2. [if / else](#2-if--else)
 3. [The Dangling Else Trap](#3-the-dangling-else-trap)
-4. [switch — Statement vs Expression](#4-switch--statement-vs-expression)
+4. [switch - Statement vs Expression](#4-switch--statement-vs-expression)
 5. [Switch with Patterns (Java 21)](#5-switch-with-patterns-java-21)
 6. [The for Loop](#6-the-for-loop)
 7. [The Enhanced for-each Loop](#7-the-enhanced-for-each-loop)
 8. [The while Loop](#8-the-while-loop)
 9. [The do-while Loop](#9-the-do-while-loop)
 10. [break and continue](#10-break-and-continue)
-11. [Labels — break and continue in Nested Loops](#11-labels--break-and-continue-in-nested-loops)
+11. [Labels - break and continue in Nested Loops](#11-labels--break-and-continue-in-nested-loops)
 12. [Choosing the Right Loop](#12-choosing-the-right-loop)
 13. [Practical Exercise](#13-practical-exercise)
 14. [Exercises](#14-exercises)
@@ -36,7 +37,7 @@ render_with_liquid: false
 ## 1. What is Control Flow?
 
 By default, Java executes statements top to bottom, one at a time.
-**Control flow** structures let you change that — branch based on conditions,
+**Control flow** structures let you change that - branch based on conditions,
 repeat blocks, or skip ahead.
 
 ```
@@ -102,7 +103,7 @@ if (condition) {
 }
 ```
 
-The `condition` must be a **boolean expression** — not an int, not an object.
+The `condition` must be a **boolean expression** - not an int, not an object.
 (Unlike C/C++, Java does not treat 0 as false or non-zero as true.)
 
 ```java
@@ -119,7 +120,7 @@ if (score >= 90) {
 }
 ```
 
-### One-liner (no braces) — Why to Avoid It
+### One-liner (no braces) - Why to Avoid It
 
 Java allows omitting braces for a single statement:
 
@@ -133,26 +134,26 @@ This looks fine, but consider what happens if you add a second line:
 ```java
 if (x > 0)
     System.out.println("positive");
-    System.out.println("non-zero");   // ALWAYS runs — NOT part of the if!
+    System.out.println("non-zero");   // ALWAYS runs - NOT part of the if!
 ```
 
 The second `println` is NOT inside the if. The lack of braces only covers the
-very next statement. **Always use braces — no exceptions.**
+very next statement. **Always use braces - no exceptions.**
 
 ### Common Boolean Mistakes
 
 ```java
 // WRONG: assignment instead of comparison
-if (x = 5) { }       // COMPILE ERROR in Java (unlike C) — boolean required
+if (x = 5) { }       // COMPILE ERROR in Java (unlike C) - boolean required
 
 // WRONG: comparing Strings with ==
 String s = "hello";
 if (s == "hello") { } // may work by accident (String pool) but is wrong
-if (s.equals("hello")) { } // CORRECT — always use .equals() for Strings
+if (s.equals("hello")) { } // CORRECT - always use .equals() for Strings
 
 // WRONG: redundant boolean comparison
 boolean flag = isValid();
-if (flag == true) { }   // redundant — flag IS the boolean
+if (flag == true) { }   // redundant - flag IS the boolean
 if (flag) { }           // CORRECT
 
 if (flag == false) { }  // redundant
@@ -189,14 +190,14 @@ if (x > 0) {
         System.out.println("x <= 0");   // runs when y <= 10, NOT when x <= 0
     }
 }
-// With x=10, y=5: prints "x <= 0" — which is wrong and confusing
+// With x=10, y=5: prints "x <= 0" - which is wrong and confusing
 ```
 
 **Rule: Always use braces. The dangling else is a class of real-world bugs.**
 
 ---
 
-## 4. switch — Statement vs Expression
+## 4. switch - Statement vs Expression
 
 `switch` selects a branch based on a value. Java has two forms:
 the old **switch statement** and the modern **switch expression**.
@@ -222,7 +223,7 @@ switch (day) {
 }
 ```
 
-**Fall-through behavior** — if you forget `break`, execution continues into the
+**Fall-through behavior** - if you forget `break`, execution continues into the
 next case:
 
 ```java
@@ -237,7 +238,7 @@ switch (day) {
     default:
         System.out.println("Other");     // ← this ALSO runs (fall-through!)
 }
-// Output: Tuesday, Wednesday, Other  — probably not what you wanted
+// Output: Tuesday, Wednesday, Other  - probably not what you wanted
 ```
 
 Fall-through is occasionally intentional (grouping cases), but it is a common
@@ -264,8 +265,9 @@ System.out.println(name); // Wednesday
 ```
 
 Key differences from the old switch:
-- No `break` — each arrow case is independent, no fall-through
-- It's an **expression** — produces a value that can be assigned
+
+- No `break` - each arrow case is independent, no fall-through
+- It's an **expression** - produces a value that can be assigned
 - `default` is required when the compiler cannot verify all cases are covered
 - Can `throw` in a case
 
@@ -303,7 +305,7 @@ System.out.println("Days in April: " + daysInMonth); // 30
 ### 4.5 switch on Strings and Enums
 
 `switch` works on: `byte`, `short`, `int`, `char`, their wrappers, `String`,
-and `enum` — not `long`, `float`, `double`, or arbitrary objects.
+and `enum` - not `long`, `float`, `double`, or arbitrary objects.
 
 ```java
 String command = "start";
@@ -317,7 +319,7 @@ String result = switch (command) {
 ```
 
 ```
-  switch vs if-else — when to use which:
+  switch vs if-else - when to use which:
 
   ┌─────────────────────────────────────────────────────────┐
   │  Use switch when:                                       │
@@ -336,11 +338,11 @@ String result = switch (command) {
 
 ## 5. Switch with Patterns (Java 21)
 
-Java 21 adds **pattern matching** in switch — you can match by type and
+Java 21 adds **pattern matching** in switch - you can match by type and
 extract the variable in one step. This is most powerful with sealed classes.
 
 ```java
-// A sealed hierarchy — all possible subtypes are known at compile time
+// A sealed hierarchy - all possible subtypes are known at compile time
 sealed interface Shape permits Circle, Rectangle, Triangle {}
 record Circle(double radius)            implements Shape {}
 record Rectangle(double width, double height) implements Shape {}
@@ -351,7 +353,7 @@ static double area(Shape shape) {
         case Circle    c  -> Math.PI * c.radius() * c.radius();
         case Rectangle r  -> r.width() * r.height();
         case Triangle  t  -> 0.5 * t.base() * t.height();
-        // No default needed — compiler knows all subtypes via sealed
+        // No default needed - compiler knows all subtypes via sealed
     };
 }
 ```
@@ -398,10 +400,10 @@ for (int i = 0; i < 5; i++) {
 // When i reaches 5, condition (i < 5) is false → loop ends
 ```
 
-### Execution Order — Exactly
+### Execution Order - Exactly
 
 ```
-  Step 1: int i = 0         (initializer — once only)
+  Step 1: int i = 0         (initializer - once only)
   Step 2: i < 5 ?  → true   (condition check)
   Step 3: body executes
   Step 4: i++               (update)
@@ -443,7 +445,7 @@ for (;;) {
 for (int i = 0; i < 5; i++) {
     System.out.println(i);
 }
-// System.out.println(i); // COMPILE ERROR — i is out of scope here
+// System.out.println(i); // COMPILE ERROR - i is out of scope here
 ```
 
 ---
@@ -456,7 +458,7 @@ The for-each loop iterates over **arrays** and anything that implements
 ```java
 int[] numbers = {10, 20, 30, 40, 50};
 
-// Enhanced for-each — no index variable
+// Enhanced for-each - no index variable
 for (int n : numbers) {
     System.out.println(n);
 }
@@ -479,7 +481,7 @@ int[] arr = {1, 2, 3, 4, 5};
 for (int n : arr) {
     n = n * 2;    // modifies the copy, NOT the array
 }
-// arr is unchanged — use a regular for loop to modify elements
+// arr is unchanged - use a regular for loop to modify elements
 
 // CANNOT access the index
 for (int n : arr) {
@@ -492,7 +494,7 @@ for (int n : arr) {
 ```
 
 ```
-  for-each vs for — decision:
+  for-each vs for - decision:
 
   ┌─────────────────────────────────────────────────────┐
   │  Use for-each when:                                 │
@@ -514,7 +516,7 @@ for (int n : arr) {
 ## 8. The while Loop
 
 The `while` loop is used when you **don't know in advance** how many iterations
-are needed — you loop until a condition becomes false.
+are needed - you loop until a condition becomes false.
 
 ```
   while (condition) {
@@ -548,7 +550,7 @@ System.out.println("You entered: " + input);
 ```
 
 ```java
-// Digit extraction — number of iterations unknown until runtime
+// Digit extraction - number of iterations unknown until runtime
 int number = 12345;
 while (number > 0) {
     int digit = number % 10;          // extract last digit
@@ -557,7 +559,7 @@ while (number > 0) {
 }
 ```
 
-**Infinite while loop** — common and idiomatic for servers and event loops:
+**Infinite while loop** - common and idiomatic for servers and event loops:
 
 ```java
 while (true) {
@@ -593,7 +595,7 @@ before the condition is checked.
 ```
 
 ```java
-// Menu loop — must show the menu at least once before checking the choice
+// Menu loop - must show the menu at least once before checking the choice
 int choice;
 do {
     System.out.println("1. Add  2. Remove  3. View  0. Exit");
@@ -623,7 +625,7 @@ do {
 
 ## 10. break and continue
 
-### break — Exit the Loop Immediately
+### break - Exit the Loop Immediately
 
 ```java
 // Find the first negative number and stop
@@ -633,7 +635,7 @@ int firstNegative = -1;
 for (int n : data) {
     if (n < 0) {
         firstNegative = n;
-        break;          // stop searching — no point continuing
+        break;          // stop searching - no point continuing
     }
 }
 System.out.println("First negative: " + firstNegative); // -2
@@ -642,13 +644,13 @@ System.out.println("First negative: " + firstNegative); // -2
 `break` only exits the **innermost** loop. In nested loops, it exits just
 the loop it's directly inside.
 
-### continue — Skip This Iteration, Go to Next
+### continue - Skip This Iteration, Go to Next
 
 ```java
 // Print only even numbers
 for (int i = 0; i < 10; i++) {
     if (i % 2 != 0) {
-        continue;       // skip odd numbers — jump to i++
+        continue;       // skip odd numbers - jump to i++
     }
     System.out.print(i + " ");
 }
@@ -679,7 +681,7 @@ for (int i = 0; i < 10; i++) {
 
 ---
 
-## 11. Labels — break and continue in Nested Loops
+## 11. Labels - break and continue in Nested Loops
 
 Plain `break` and `continue` only affect the **innermost** loop. Labels let
 you target an **outer** loop.
@@ -693,11 +695,11 @@ for (int i = 1; i <= 5; i++) {
     for (int j = 1; j <= 5; j++) {
         if (i * j > 20) {
             System.out.println("Found: i=" + i + " j=" + j);
-            break;        // only breaks inner loop — outer keeps running!
+            break;        // only breaks inner loop - outer keeps running!
         }
     }
 }
-// Keeps running for all values of i — not what we wanted
+// Keeps running for all values of i - not what we wanted
 ```
 
 ### Solution with a Label
@@ -727,7 +729,7 @@ for (int row = 0; row < 3; row++) {
         System.out.println("row=" + row + " col=" + col);
     }
 }
-// Only col=0 is printed for each row — col=1 and col=2 are never reached
+// Only col=0 is printed for each row - col=1 and col=2 are never reached
 ```
 
 ```
@@ -782,16 +784,17 @@ for (int row = 0; row < 3; row++) {
 
 ### Files in this module
 
-| File | What it demonstrates |
-|------|----------------------|
-| `ConditionalDemo.java` | if/else, dangling else, boolean mistakes, ternary |
-| `SwitchDemo.java` | Traditional switch, switch expression, yield, pattern matching |
-| `LoopDemo.java` | All loop types, break, continue, labels |
-| `NumberAnalyzer.java` | Practical exercise — ties all control flow together |
+| File                   | What it demonstrates                                           |
+| ---------------------- | -------------------------------------------------------------- |
+| `ConditionalDemo.java` | if/else, dangling else, boolean mistakes, ternary              |
+| `SwitchDemo.java`      | Traditional switch, switch expression, yield, pattern matching |
+| `LoopDemo.java`        | All loop types, break, continue, labels                        |
+| `NumberAnalyzer.java`  | Practical exercise - ties all control flow together            |
 
-### NumberAnalyzer — What it Does
+### NumberAnalyzer - What it Does
 
 A command-line number analysis tool that:
+
 - Uses `do-while` to keep the program running until the user quits
 - Uses `switch` expression to choose the analysis mode
 - Uses `for` loops to process ranges
@@ -826,6 +829,7 @@ Then find all primes up to 100 and print them.
 
 **3. Pyramid Pattern**
 Print this pattern for `n = 5` using nested `for` loops:
+
 ```
 *
 * *
@@ -840,15 +844,16 @@ a `while` loop. `digitSum(1234) = 10`, `digitSum(-987) = 24`.
 
 **5. Menu System**
 Build a `do-while` + `switch` expression menu that offers:
+
 - Option 1: check if a number is prime
 - Option 2: compute factorial
 - Option 3: reverse a number's digits
 - Option 0: exit
-It must not crash on invalid input.
+  It must not crash on invalid input.
 
 ---
 
 ## Next
 
-[Module 04 — Methods](../module-04-methods/)
+[Module 04 - Methods](../module-04-methods/)
 {% endraw %}

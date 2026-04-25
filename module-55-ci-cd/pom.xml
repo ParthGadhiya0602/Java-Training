@@ -18,7 +18,7 @@
 
     <properties>
         <java.version>21</java.version>
-        <!-- SonarQube project configuration — read by mvn sonar:sonar -->
+        <!-- SonarQube project configuration - read by mvn sonar:sonar -->
         <sonar.projectKey>java-training_module-55</sonar.projectKey>
         <sonar.organization>java-training</sonar.organization>
         <!-- Tell SonarQube where JaCoCo's XML report is -->
@@ -125,7 +125,7 @@
             </plugin>
 
             <!--
-                SonarQube scanner — invoked explicitly in CI via `mvn sonar:sonar`.
+                SonarQube scanner - invoked explicitly in CI via `mvn sonar:sonar`.
                 Requires SONAR_TOKEN and SONAR_HOST_URL env vars (or sonar.host.url property).
                 Not bound to a lifecycle phase to avoid running on every `mvn verify`.
             -->

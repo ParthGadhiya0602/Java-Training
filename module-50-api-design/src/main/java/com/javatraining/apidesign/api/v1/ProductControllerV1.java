@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/products")
 @RequiredArgsConstructor
-@Tag(name = "Products V1", description = "Basic product catalogue — id, name, price")
+@Tag(name = "Products V1", description = "Basic product catalogue - id, name, price")
 public class ProductControllerV1 {
 
     private final ProductRepository productRepository;

@@ -1,6 +1,6 @@
 version: 0.2
 
-# AWS CodeBuild specification — runs in CI to build, test, and push the image.
+# AWS CodeBuild specification - runs in CI to build, test, and push the image.
 
 phases:
   install:
@@ -11,8 +11,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION |
-          docker login --username AWS --password-stdin
-          $ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+        docker login --username AWS --password-stdin
+        $ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-8)
       - REPOSITORY_URI=$ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/cloud-deployment-demo
 

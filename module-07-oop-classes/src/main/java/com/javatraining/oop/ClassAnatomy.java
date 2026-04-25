@@ -1,20 +1,20 @@
 package com.javatraining.oop;
 
 /**
- * TOPIC: Class anatomy — fields, constructors, this, static members,
+ * TOPIC: Class anatomy - fields, constructors, this, static members,
  *        and the exact initialisation order the JVM follows.
  *
  * Key rules:
  *   • static fields/blocks run once when the class is loaded.
  *   • Instance fields/blocks run every time a constructor is called,
  *     BEFORE the constructor body.
- *   • this(...) must be the very first statement in a constructor —
+ *   • this(...) must be the very first statement in a constructor -
  *     it delegates to another constructor in the same class.
  */
 public class ClassAnatomy {
 
     // -------------------------------------------------------------------------
-    // 1. Counter — static vs instance state
+    // 1. Counter - static vs instance state
     // -------------------------------------------------------------------------
     static class Counter {
 
@@ -22,7 +22,7 @@ public class ClassAnatomy {
         private static int totalCreated = 0;
         private static final int MAX_VALUE = 1_000;
 
-        // static initialiser block — runs once at class load time
+        // static initialiser block - runs once at class load time
         static {
             System.out.println("[static block] Counter class loaded. MAX=" + MAX_VALUE);
         }
@@ -32,7 +32,7 @@ public class ClassAnatomy {
         private       int value;      // mutable instance state
         private final String label;
 
-        // instance initialiser block — runs before every constructor body
+        // instance initialiser block - runs before every constructor body
         {
             totalCreated++;
             id = totalCreated;
@@ -50,7 +50,7 @@ public class ClassAnatomy {
             this.value = initialValue;
         }
 
-        // delegating constructor — calls canonical via this(...)
+        // delegating constructor - calls canonical via this(...)
         Counter(String label) {
             this(label, 0);   // MUST be first statement
         }
@@ -80,14 +80,14 @@ public class ClassAnatomy {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Temperature — demonstrates constructor chaining + unit conversion
+    // 2. Temperature - demonstrates constructor chaining + unit conversion
     //    and static factory methods (named constructors)
     // -------------------------------------------------------------------------
     static class Temperature {
 
         private final double celsius; // canonical internal representation
 
-        // private constructor — all creation goes through factories
+        // private constructor - all creation goes through factories
         private Temperature(double celsius) {
             if (celsius < -273.15) {
                 throw new IllegalArgumentException(
@@ -96,7 +96,7 @@ public class ClassAnatomy {
             this.celsius = celsius;
         }
 
-        // static factory methods — named, self-documenting
+        // static factory methods - named, self-documenting
         static Temperature ofCelsius(double c)    { return new Temperature(c); }
         static Temperature ofFahrenheit(double f) { return new Temperature((f - 32) * 5 / 9); }
         static Temperature ofKelvin(double k)     { return new Temperature(k - 273.15); }

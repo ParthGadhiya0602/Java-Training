@@ -36,7 +36,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.findById(id));
     }
 
-    // Delegates to external pricing service — stubbed with WireMock in tests
+    // Delegates to external pricing service - stubbed with WireMock in tests
     @GetMapping("/{id}/price")
     public ResponseEntity<BigDecimal> getLivePrice(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getLivePrice(id));

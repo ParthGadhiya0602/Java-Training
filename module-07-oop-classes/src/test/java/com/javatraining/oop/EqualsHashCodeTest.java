@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EqualsHashCodeTest {
 
     // -----------------------------------------------------------------------
-    // Point — five contract rules
+    // Point - five contract rules
     // -----------------------------------------------------------------------
     @Test
     void reflexive() {
@@ -81,7 +81,7 @@ class EqualsHashCodeTest {
     }
 
     // -----------------------------------------------------------------------
-    // BrokenPoint — broken hashCode makes contains unreliable
+    // BrokenPoint - broken hashCode makes contains unreliable
     // -----------------------------------------------------------------------
     @Test
     void broken_hashcode_returns_zero_always() {

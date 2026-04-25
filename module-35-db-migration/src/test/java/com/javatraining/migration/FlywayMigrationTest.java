@@ -34,7 +34,7 @@ class FlywayMigrationTest {
 
     @Test
     void employees_table_has_expected_columns() {
-        // If the table doesn't exist this throws — a structural smoke test
+        // If the table doesn't exist this throws - a structural smoke test
         Integer count = jdbc.queryForObject("SELECT COUNT(*) FROM employees", Integer.class);
         assertThat(count).isNotNull().isGreaterThanOrEqualTo(0);
     }
@@ -47,7 +47,7 @@ class FlywayMigrationTest {
 
     @Test
     void employees_has_department_id_column_after_v4() {
-        // Query the column — throws if column does not exist
+        // Query the column - throws if column does not exist
         Integer count = jdbc.queryForObject(
                 "SELECT COUNT(*) FROM employees WHERE department_id IS NOT NULL", Integer.class);
         assertThat(count).isNotNull();

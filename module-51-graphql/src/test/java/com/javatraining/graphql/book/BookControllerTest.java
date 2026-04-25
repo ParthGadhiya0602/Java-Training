@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 /**
  * @GraphQlTest loads the GraphQL controller layer and a GraphQlTester backed by
- * ExecutionGraphQlService — no HTTP server, no Tomcat — making tests fast.
+ * ExecutionGraphQlService - no HTTP server, no Tomcat - making tests fast.
  *
  * @MockBean replaces the real repositories and event publisher so each test
  * controls exactly what data flows through the resolvers.
@@ -110,7 +110,7 @@ class BookControllerTest {
 
     /**
      * Proves that @BatchMapping calls authorRepository.findAllByIds exactly once
-     * for a books query that returns multiple books — not once per book (N+1).
+     * for a books query that returns multiple books - not once per book (N+1).
      */
     @Test
     void batch_mapping_loads_all_authors_in_one_call() {

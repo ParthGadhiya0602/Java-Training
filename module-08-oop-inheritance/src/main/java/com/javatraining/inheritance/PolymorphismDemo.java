@@ -5,13 +5,13 @@ import java.util.*;
 /**
  * TOPIC: Polymorphism, casting, instanceof pattern matching, and LSP
  *
- * Polymorphism means "many forms" — one reference type, many runtime behaviours.
+ * Polymorphism means "many forms" - one reference type, many runtime behaviours.
  * The reference type controls WHAT you can call at compile time.
  * The object type controls WHICH implementation runs at runtime.
  *
  * Casting rules:
- *   Widening  — subtype → supertype, always safe, implicit
- *   Narrowing — supertype → subtype, may throw ClassCastException, must be explicit
+ *   Widening  - subtype → supertype, always safe, implicit
+ *   Narrowing - supertype → subtype, may throw ClassCastException, must be explicit
  *
  * Liskov Substitution Principle (LSP):
  *   If S is a subtype of T, then objects of type T may be replaced with S
@@ -21,7 +21,7 @@ import java.util.*;
 public class PolymorphismDemo {
 
     // -------------------------------------------------------------------------
-    // 1. Animal hierarchy — classic polymorphism demo
+    // 1. Animal hierarchy - classic polymorphism demo
     // -------------------------------------------------------------------------
     static abstract class Animal {
         private final String name;
@@ -35,7 +35,7 @@ public class PolymorphismDemo {
         String name() { return name; }
         int    age()  { return age;  }
 
-        // Every animal makes a sound — each subtype decides what it is
+        // Every animal makes a sound - each subtype decides what it is
         abstract String sound();
 
         // Template method: uses the abstract hook
@@ -60,7 +60,7 @@ public class PolymorphismDemo {
 
         @Override public String sound() { return "Woof!"; }
 
-        // Subtype-specific method — only accessible via Dog reference
+        // Subtype-specific method - only accessible via Dog reference
         void fetch(String item) {
             System.out.println("  " + name() + " fetches the " + item + "!");
         }
@@ -100,11 +100,11 @@ public class PolymorphismDemo {
 
     // -------------------------------------------------------------------------
     // 2. LSP violation vs correct design
-    //    The classic Rectangle/Square LSP problem — we show both the WRONG
+    //    The classic Rectangle/Square LSP problem - we show both the WRONG
     //    approach and why it breaks, then the correct sealed-type solution.
     // -------------------------------------------------------------------------
 
-    // WRONG approach — Square inherits Rectangle and overrides setters
+    // WRONG approach - Square inherits Rectangle and overrides setters
     // This violates LSP: code that works with Rectangle breaks with Square.
     static class Rectangle {
         protected int width;
@@ -127,7 +127,7 @@ public class PolymorphismDemo {
     static class SquareLSPViolation extends Rectangle {
         SquareLSPViolation(int side) { super(side, side); }
 
-        // Keeps width == height — but breaks Rectangle's implicit contract
+        // Keeps width == height - but breaks Rectangle's implicit contract
         @Override public void setWidth(int w)  { super.setWidth(w);  super.setHeight(w); }
         @Override public void setHeight(int h) { super.setWidth(h);  super.setHeight(h); }
     }
@@ -150,7 +150,7 @@ public class PolymorphismDemo {
         // Pattern matching (Java 16+): bind + cast in one expression
 
         if (a instanceof Dog dog) {
-            // 'dog' is already typed as Dog — no explicit cast
+            // 'dog' is already typed as Dog - no explicit cast
             dog.fetch("stick");
             System.out.println("  breed: " + dog.breed());
 
@@ -172,7 +172,7 @@ public class PolymorphismDemo {
     static void processAll(List<Animal> animals) {
         System.out.println("\n--- Greetings ---");
         for (Animal a : animals) {
-            a.greet();  // runtime dispatch — right sound() for each type
+            a.greet();  // runtime dispatch - right sound() for each type
         }
 
         System.out.println("\n--- Special tricks ---");
@@ -195,11 +195,11 @@ public class PolymorphismDemo {
 
         Dog rex = new Dog("Rex", 3, "German Shepherd");
 
-        // Widening — safe, implicit
+        // Widening - safe, implicit
         Animal a = rex;
         System.out.println("Widened to Animal: " + a);
 
-        // Narrowing — explicit, risky
+        // Narrowing - explicit, risky
         if (a instanceof Dog dog) {
             System.out.println("Pattern-matched back to Dog: breed=" + dog.breed());
         }
@@ -212,7 +212,7 @@ public class PolymorphismDemo {
             System.out.println("ClassCastException caught: " + e.getMessage());
         }
 
-        // Safe check before cast (old style — still common in legacy code)
+        // Safe check before cast (old style - still common in legacy code)
         if (a2 instanceof Cat c) {
             System.out.println("Safe pattern match to Cat: indoor=" + c.isIndoor());
         }

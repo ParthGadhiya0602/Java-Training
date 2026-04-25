@@ -1,14 +1,16 @@
 ---
-title: "22 — Modern Java (9–21)"
-parent: "Phase 2 — Core APIs"
+title: "22 - Modern Java (9–21)"
+parent: "Phase 2 - Core APIs"
 nav_order: 22
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-22-modern-java/src){: .btn .btn-outline }
 
-# Module 22 — Modern Java (Java 9–21)
+# Module 22 - Modern Java (Java 9–21)
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -29,7 +31,7 @@ accessors, `equals`, `hashCode`, and `toString`.
 public record Point(double x, double y) { }
 
 Point p = new Point(3.0, 4.0);
-p.x();           // accessor — NOT getX()
+p.x();           // accessor - NOT getX()
 p.y();
 p.equals(...)    // value-based equality
 p.toString()     // "Point[x=3.0, y=4.0]"
@@ -39,7 +41,7 @@ p.toString()     // "Point[x=3.0, y=4.0]"
 
 ```java
 public record Range(int min, int max) {
-    // Compact constructor — validation / normalisation
+    // Compact constructor - validation / normalisation
     public Range {
         if (min > max) throw new IllegalArgumentException("min > max");
     }
@@ -101,19 +103,19 @@ if (obj instanceof String) {
     return s.length();
 }
 
-// After — pattern variable
+// After - pattern variable
 if (obj instanceof String s) {
     return s.length();        // s is in scope and already cast
 }
 
-// In compound condition — s is in scope for the whole &&-chain
+// In compound condition - s is in scope for the whole &&-chain
 if (obj instanceof String s && s.length() > 10) { ... }
 ```
 
 ### Switch expression (Java 14)
 
 ```java
-// Arrow-style — no fall-through, returns value
+// Arrow-style - no fall-through, returns value
 String result = switch (day) {
     case "SAT", "SUN" -> "weekend";
     case "MON"        -> "weekday";
@@ -190,14 +192,14 @@ switch (obj) {
 ## String API (Java 11–12)
 
 ```java
-"  ".isBlank()              // true — Unicode whitespace aware
-"  hello  ".strip()         // "hello" — Unicode whitespace aware
+"  ".isBlank()              // true - Unicode whitespace aware
+"  hello  ".strip()         // "hello" - Unicode whitespace aware
 "  hello  ".stripLeading()  // "hello  "
 "  hello  ".stripTrailing() // "  hello"
 "ab".repeat(3)              // "ababab"
 "a\nb\nc".lines()           // Stream<String>: a, b, c
 "hello".indent(4)           // "    hello\n" (normalises line endings)
-"  hi  ".transform(String::strip)  // "hi" — fluent, apply any Function<String,R>
+"  hi  ".transform(String::strip)  // "hi" - fluent, apply any Function<String,R>
 ```
 
 ---
@@ -238,16 +240,16 @@ Map.copyOf(existingMap)
 ## Optional Additions (Java 9–11)
 
 ```java
-// or() — fallback to another Optional
+// or() - fallback to another Optional
 opt.or(() -> fallback)
 
-// ifPresentOrElse() — handle both branches
+// ifPresentOrElse() - handle both branches
 opt.ifPresentOrElse(v -> use(v), () -> handleAbsent());
 
-// stream() — bridge into Stream pipelines
+// stream() - bridge into Stream pipelines
 opts.stream().flatMap(Optional::stream)  // filters and unwraps in one step
 
-// isEmpty() — explicit empty check (Java 11)
+// isEmpty() - explicit empty check (Java 11)
 opt.isEmpty()
 ```
 
@@ -256,25 +258,25 @@ opt.isEmpty()
 ## Stream Additions (Java 9 / 16)
 
 ```java
-// takeWhile — stops at first false (ordered streams)
+// takeWhile - stops at first false (ordered streams)
 stream.takeWhile(n -> n < 10)
 
-// dropWhile — skips while true (ordered streams)
+// dropWhile - skips while true (ordered streams)
 stream.dropWhile(n -> n < 10)
 
 // iterate with termination condition (replaces iterate + limit)
 Stream.iterate(0, n -> n < 100, n -> n + 1)
 
-// ofNullable — empty stream for null, one-element stream otherwise
+// ofNullable - empty stream for null, one-element stream otherwise
 Stream.ofNullable(possiblyNullValue)
 
-// toList() — Java 16, shorter than collect(Collectors.toList())
+// toList() - Java 16, shorter than collect(Collectors.toList())
 stream.toList()
 ```
 
 ---
 
-## var — Local Variable Type Inference (Java 10)
+## var - Local Variable Type Inference (Java 10)
 
 ```java
 var list   = new ArrayList<String>();    // inferred as ArrayList<String>
@@ -284,10 +286,10 @@ var entry  = map.entrySet().iterator().next();
 for (var item : list) { ... }  // also works in for-each
 ```
 
-`var` is a compile-time feature — the type is fixed. It does NOT make Java dynamic.
+`var` is a compile-time feature - the type is fixed. It does NOT make Java dynamic.
 
 **When to use:** complex generic types where the type is obvious from the RHS.  
-**Avoid:** when it harms readability (e.g. `var x = process(data)` — what is x?).
+**Avoid:** when it harms readability (e.g. `var x = process(data)` - what is x?).
 
 ---
 
@@ -312,15 +314,16 @@ map.reversed()       // reversed view
 
 ## Summary by Version
 
-| Version | Key addition |
-|---|---|
-| Java 9 | `List/Set/Map.of()`, `Optional.or/ifPresentOrElse/stream`, `Stream.takeWhile/dropWhile/iterate/ofNullable` |
-| Java 10 | `var`, `List/Map/Set.copyOf()` |
-| Java 11 | `String.isBlank/strip/lines/repeat`, `Optional.isEmpty` |
-| Java 12 | `String.indent/transform` |
-| Java 14 | Switch expressions (final) |
-| Java 15 | Text blocks (final) |
-| Java 16 | Records (final), `instanceof` patterns (final), `Stream.toList()` |
-| Java 17 | Sealed classes (final) |
+| Version | Key addition                                                                                                   |
+| ------- | -------------------------------------------------------------------------------------------------------------- |
+| Java 9  | `List/Set/Map.of()`, `Optional.or/ifPresentOrElse/stream`, `Stream.takeWhile/dropWhile/iterate/ofNullable`     |
+| Java 10 | `var`, `List/Map/Set.copyOf()`                                                                                 |
+| Java 11 | `String.isBlank/strip/lines/repeat`, `Optional.isEmpty`                                                        |
+| Java 12 | `String.indent/transform`                                                                                      |
+| Java 14 | Switch expressions (final)                                                                                     |
+| Java 15 | Text blocks (final)                                                                                            |
+| Java 16 | Records (final), `instanceof` patterns (final), `Stream.toList()`                                              |
+| Java 17 | Sealed classes (final)                                                                                         |
 | Java 21 | Pattern matching for switch (final), record patterns, guarded patterns, sequenced collections, virtual threads |
+
 {% endraw %}

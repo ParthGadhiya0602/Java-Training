@@ -1,18 +1,19 @@
 ---
-title: "Module 25 — Design Patterns"
-parent: "Phase 3 — Intermediate Engineering"
+title: "Module 25 - Design Patterns"
+parent: "Phase 3 - Intermediate Engineering"
 nav_order: 25
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-25-design-patterns/src){: .btn .btn-outline }
 
-# Module 25 — Design Patterns
+# Module 25 - Design Patterns
 
 Design patterns are reusable solutions to recurring software design problems.
-This module covers all three GoF categories — creational, structural, and
-behavioural — with idiomatic Java 21 implementations and practical commentary.
+This module covers all three GoF categories - creational, structural, and
+behavioural - with idiomatic Java 21 implementations and practical commentary.
 
 ---
 
@@ -21,7 +22,7 @@ behavioural — with idiomatic Java 21 implementations and practical commentary.
 Creational patterns abstract the object-creation process, decoupling callers
 from the concrete classes they need.
 
-### Singleton — init-on-demand holder
+### Singleton - init-on-demand holder
 
 ```java
 public static class AppConfig {
@@ -67,8 +68,8 @@ public interface UIFactory {
 List<String> rendered = renderUI(new DarkThemeFactory());
 ```
 
-Creates entire *families* of related objects without specifying concrete
-classes.  Swap one factory to swap the entire look & feel.
+Creates entire _families_ of related objects without specifying concrete
+classes. Swap one factory to swap the entire look & feel.
 
 ### Builder
 
@@ -83,7 +84,7 @@ HttpRequest req = HttpRequest.newBuilder("POST", "http://api.example.com")
 
 Solves the "telescoping constructor" anti-pattern.
 Required fields are constructor parameters of `Builder`; everything else is
-optional with sensible defaults.  The result (`HttpRequest`) is immutable.
+optional with sensible defaults. The result (`HttpRequest`) is immutable.
 
 ### Prototype
 
@@ -141,8 +142,8 @@ TextProcessor p = new UpperCaseDecorator(
 p.process("  hello  ");  // → "HELLO"
 ```
 
-Adds behaviour by wrapping the original object — each decorator adds one
-concern.  Decorators compose freely in any order.
+Adds behaviour by wrapping the original object - each decorator adds one
+concern. Decorators compose freely in any order.
 Java I/O streams (`FileInputStream → BufferedInputStream → GZIPInputStream`)
 are the canonical real-world example.
 
@@ -178,7 +179,7 @@ proxy.load("hero.png");  // served from cache
 proxy.diskLoads();       // 1
 ```
 
-Controls access to the real subject.  The caching proxy (`computeIfAbsent`)
+Controls access to the real subject. The caching proxy (`computeIfAbsent`)
 ensures disk I/O happens at most once per path.
 
 ### Bridge
@@ -188,7 +189,7 @@ Shape s1 = new BridgeCircle(new VectorRenderer(), 5.0);
 Shape s2 = new BridgeCircle(new RasterRenderer(), 5.0);
 ```
 
-Decouples the *abstraction* (`Shape`) from the *implementation*
+Decouples the _abstraction_ (`Shape`) from the _implementation_
 (`Renderer`) so both can vary independently.
 Avoids the combinatorial class explosion that inheritance would cause
 (2 shapes × 2 renderers = 4 subclasses; Bridge needs 2 + 2 = 4 classes total
@@ -201,8 +202,8 @@ GlyphType type = GlyphFactory.get('A', "Arial", 12);  // shared
 RenderedGlyph rg = new RenderedGlyph(type, x, y, "black");  // unique per position
 ```
 
-Shares *intrinsic* state (character, font, size) across thousands of
-rendered glyphs.  *Extrinsic* state (position, colour) is passed at use time.
+Shares _intrinsic_ state (character, font, size) across thousands of
+rendered glyphs. _Extrinsic_ state (position, colour) is passed at use time.
 Classic example: character glyphs in a text editor.
 
 ---
@@ -235,7 +236,7 @@ List<Integer> sorted = sorter.sort(items, Comparator.naturalOrder());
 
 Encapsulates a family of algorithms and makes them interchangeable.
 The `Sorter` context delegates to whichever `SortStrategy` is currently
-configured.  In modern Java, strategies are often plain lambdas.
+configured. In modern Java, strategies are often plain lambdas.
 
 ### Command
 
@@ -301,17 +302,17 @@ Order order = new Order();
 order.confirm();   // PENDING → CONFIRMED
 order.ship();      // CONFIRMED → SHIPPED
 order.deliver();   // SHIPPED → DELIVERED
-order.cancel();    // throws — cannot cancel a delivered order
+order.cancel();    // throws - cannot cancel a delivered order
 ```
 
 Object behaviour changes with its internal state.
 Illegal transitions throw `IllegalStateException` rather than silently
-succeeding.  The history list records every transition.
+succeeding. The history list records every transition.
 
 ### Visitor
 
 ```java
-// Same shapes, multiple operations — no modification to Shape classes needed
+// Same shapes, multiple operations - no modification to Shape classes needed
 double area  = visit(new Circle(5), new AreaVisitor());
 double perim = visit(new Circle(5), new PerimeterVisitor());
 String desc  = visit(new Circle(5), new DescribeVisitor());
@@ -340,28 +341,29 @@ Reduces N² direct connections to N connections (each user ↔ room only).
 
 ## Key Takeaways
 
-| Category    | Pattern                 | One-line summary                                       |
-|-------------|-------------------------|--------------------------------------------------------|
-| Creational  | Singleton               | One instance, thread-safe via init-on-demand holder    |
-| Creational  | Factory Method          | Subclass decides which object to create                |
-| Creational  | Abstract Factory        | Create families of related objects                     |
-| Creational  | Builder                 | Fluent construction of complex immutable objects       |
-| Creational  | Prototype               | Clone an existing object as a starting point           |
-| Creational  | Object Pool             | Reuse expensive-to-create objects                      |
-| Structural  | Adapter                 | Convert incompatible interfaces                        |
-| Structural  | Decorator               | Add behaviour by wrapping, not subclassing             |
-| Structural  | Facade                  | Simple interface over a complex subsystem              |
-| Structural  | Composite               | Uniform treatment of leaf and branch nodes             |
-| Structural  | Proxy                   | Controlled access, caching, or lazy loading            |
-| Structural  | Bridge                  | Decouple abstraction from implementation               |
-| Structural  | Flyweight               | Share intrinsic state to reduce memory footprint       |
-| Behavioural | Observer                | Event pub/sub without tight coupling                   |
-| Behavioural | Strategy                | Swap algorithms at runtime                             |
-| Behavioural | Command                 | Encapsulate requests; enable undo/redo                 |
-| Behavioural | Chain of Responsibility | Pass request along a handler chain                     |
-| Behavioural | Template Method         | Skeleton algorithm; subclasses fill in steps           |
-| Behavioural | Iterator                | Sequential access without exposing internals           |
-| Behavioural | State                   | Behaviour changes with internal state                  |
-| Behavioural | Visitor                 | Add operations to a hierarchy without modifying it     |
-| Behavioural | Mediator                | Centralise complex communications                      |
+| Category    | Pattern                 | One-line summary                                    |
+| ----------- | ----------------------- | --------------------------------------------------- |
+| Creational  | Singleton               | One instance, thread-safe via init-on-demand holder |
+| Creational  | Factory Method          | Subclass decides which object to create             |
+| Creational  | Abstract Factory        | Create families of related objects                  |
+| Creational  | Builder                 | Fluent construction of complex immutable objects    |
+| Creational  | Prototype               | Clone an existing object as a starting point        |
+| Creational  | Object Pool             | Reuse expensive-to-create objects                   |
+| Structural  | Adapter                 | Convert incompatible interfaces                     |
+| Structural  | Decorator               | Add behaviour by wrapping, not subclassing          |
+| Structural  | Facade                  | Simple interface over a complex subsystem           |
+| Structural  | Composite               | Uniform treatment of leaf and branch nodes          |
+| Structural  | Proxy                   | Controlled access, caching, or lazy loading         |
+| Structural  | Bridge                  | Decouple abstraction from implementation            |
+| Structural  | Flyweight               | Share intrinsic state to reduce memory footprint    |
+| Behavioural | Observer                | Event pub/sub without tight coupling                |
+| Behavioural | Strategy                | Swap algorithms at runtime                          |
+| Behavioural | Command                 | Encapsulate requests; enable undo/redo              |
+| Behavioural | Chain of Responsibility | Pass request along a handler chain                  |
+| Behavioural | Template Method         | Skeleton algorithm; subclasses fill in steps        |
+| Behavioural | Iterator                | Sequential access without exposing internals        |
+| Behavioural | State                   | Behaviour changes with internal state               |
+| Behavioural | Visitor                 | Add operations to a hierarchy without modifying it  |
+| Behavioural | Mediator                | Centralise complex communications                   |
+
 {% endraw %}

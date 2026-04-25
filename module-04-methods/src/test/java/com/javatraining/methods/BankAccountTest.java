@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("BankAccount — practical exercise covering all Module 04 concepts")
+@DisplayName("BankAccount - practical exercise covering all Module 04 concepts")
 class BankAccountTest {
 
     private BankAccount alice;
@@ -25,7 +25,7 @@ class BankAccountTest {
     // Static factory / guard clauses
     // -------------------------------------------------------------------------
     @Nested
-    @DisplayName("open() — static factory and validation")
+    @DisplayName("open() - static factory and validation")
     class OpenTests {
 
         @Test
@@ -60,7 +60,7 @@ class BankAccountTest {
     // Overloaded deposit / withdraw
     // -------------------------------------------------------------------------
     @Nested
-    @DisplayName("deposit() and withdraw() — overloaded methods")
+    @DisplayName("deposit() and withdraw() - overloaded methods")
     class DepositWithdrawTests {
 
         @Test
@@ -99,10 +99,10 @@ class BankAccountTest {
     }
 
     // -------------------------------------------------------------------------
-    // transfer() — pass-by-value with objects
+    // transfer() - pass-by-value with objects
     // -------------------------------------------------------------------------
     @Nested
-    @DisplayName("transfer() — pass-by-value demonstration")
+    @DisplayName("transfer() - pass-by-value demonstration")
     class TransferTests {
 
         @Test
@@ -136,7 +136,7 @@ class BankAccountTest {
     // Varargs
     // -------------------------------------------------------------------------
     @Nested
-    @DisplayName("Varargs — totalBalance and bulkDeposit")
+    @DisplayName("Varargs - totalBalance and bulkDeposit")
     class VarargsTests {
 
         @Test
@@ -170,7 +170,7 @@ class BankAccountTest {
     // Recursion: compoundInterest
     // -------------------------------------------------------------------------
     @Nested
-    @DisplayName("compoundInterest() — recursive calculation")
+    @DisplayName("compoundInterest() - recursive calculation")
     class CompoundInterestTests {
 
         @Test

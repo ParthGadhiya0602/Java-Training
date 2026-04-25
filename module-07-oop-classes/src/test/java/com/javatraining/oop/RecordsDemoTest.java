@@ -46,7 +46,7 @@ class RecordsDemoTest {
     }
 
     // -----------------------------------------------------------------------
-    // Range — compact constructor normalises order
+    // Range - compact constructor normalises order
     // -----------------------------------------------------------------------
     @Test
     void range_normal_order() {
@@ -90,7 +90,7 @@ class RecordsDemoTest {
     }
 
     // -----------------------------------------------------------------------
-    // Circle — validation in compact constructor
+    // Circle - validation in compact constructor
     // -----------------------------------------------------------------------
     @Test
     void circle_area_and_perimeter() {
@@ -126,7 +126,7 @@ class RecordsDemoTest {
     }
 
     // -----------------------------------------------------------------------
-    // Address — pincode validation
+    // Address - pincode validation
     // -----------------------------------------------------------------------
     @Test
     void address_valid() {

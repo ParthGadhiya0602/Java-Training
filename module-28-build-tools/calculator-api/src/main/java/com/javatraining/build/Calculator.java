@@ -2,7 +2,7 @@ package com.javatraining.build;
 
 /**
  * Public API contract for calculator operations.
- * Lives in {@code calculator-api} — other modules depend on this interface,
+ * Lives in {@code calculator-api} - other modules depend on this interface,
  * not on any concrete implementation.
  *
  * This separation is the Java equivalent of "program to an interface":

@@ -53,7 +53,7 @@ public class InMemoryProductRepository implements ProductRepository {
         return store.size();
     }
 
-    /** Resets all data and restarts the id sequence — used between tests. */
+    /** Resets all data and restarts the id sequence - used between tests. */
     public void clear() {
         store.clear();
         sequence.set(1);

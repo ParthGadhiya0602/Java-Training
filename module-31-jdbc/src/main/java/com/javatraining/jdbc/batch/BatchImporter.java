@@ -13,13 +13,13 @@ import java.util.Map;
  * Demonstrates JDBC batch processing: grouping multiple DML statements into a
  * single network round-trip instead of N separate calls.
  *
- * <p><strong>Without batch</strong> — N round trips:
+ * <p><strong>Without batch</strong> - N round trips:
  * <pre>
  *   for each row:
  *       ps.executeUpdate();   ← network + DB parse + DB execute
  * </pre>
  *
- * <p><strong>With batch</strong> — 1 round trip:
+ * <p><strong>With batch</strong> - 1 round trip:
  * <pre>
  *   for each row:
  *       ps.addBatch();        ← just queues parameters locally

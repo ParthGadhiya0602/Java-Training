@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.*;
 
 /**
- * TOPIC: Interface features — default, static, private methods;
+ * TOPIC: Interface features - default, static, private methods;
  *        multiple implementation; diamond default resolution.
  *
  * Evolution of interfaces:
@@ -13,29 +13,29 @@ import java.util.*;
  *   Java 9   : + private methods, + private static methods
  *
  * Key rules:
- *   • default method  — provides an implementation; subclass may override
- *   • static method   — belongs to the interface type; NOT inherited
- *   • private method  — only callable from within the interface; not part of API
- *   • Constants       — implicitly public static final
+ *   • default method  - provides an implementation; subclass may override
+ *   • static method   - belongs to the interface type; NOT inherited
+ *   • private method  - only callable from within the interface; not part of API
+ *   • Constants       - implicitly public static final
  */
 public class InterfaceFeatures {
 
     // -------------------------------------------------------------------------
-    // 1. Validator interface — default + static + private methods
+    // 1. Validator interface - default + static + private methods
     // -------------------------------------------------------------------------
     interface Validator<T> {
 
-        // Abstract method — every implementor must provide this
+        // Abstract method - every implementor must provide this
         boolean isValid(T value);
 
-        // default: passes through value or throws — avoids null boilerplate
+        // default: passes through value or throws - avoids null boilerplate
         default T validated(T value) {
             if (!isValid(value))
                 throw new IllegalArgumentException("Validation failed for: " + value);
             return value;
         }
 
-        // default: negate — flip the condition
+        // default: negate - flip the condition
         default Validator<T> negate() {
             return value -> !this.isValid(value);
         }
@@ -50,7 +50,7 @@ public class InterfaceFeatures {
             return value -> this.isValid(value) || other.isValid(value);
         }
 
-        // static factory — build common validators without boilerplate
+        // static factory - build common validators without boilerplate
         static Validator<String> nonBlank() {
             return s -> s != null && !s.isBlank();
         }
@@ -68,18 +68,18 @@ public class InterfaceFeatures {
         }
 
         static Validator<Integer> range(int lo, int hi) {
-            // private helper called from static — combines two validators
+            // private helper called from static - combines two validators
             return inRange(lo, hi);
         }
 
-        // private static helper — not visible outside the interface
+        // private static helper - not visible outside the interface
         private static Validator<Integer> inRange(int lo, int hi) {
             return n -> n != null && n >= lo && n <= hi;
         }
     }
 
     // -------------------------------------------------------------------------
-    // 2. Auditable + Loggable — demonstrates diamond default resolution
+    // 2. Auditable + Loggable - demonstrates diamond default resolution
     // -------------------------------------------------------------------------
     interface Auditable {
         default String auditInfo() {
@@ -89,7 +89,7 @@ public class InterfaceFeatures {
         // private helper shared by default methods in this interface
         private String actorName() { return "system"; }
 
-        static Auditable noOp() { return new Auditable() {}; }  // anonymous — Auditable has no SAM
+        static Auditable noOp() { return new Auditable() {}; }  // anonymous - Auditable has no SAM
     }
 
     interface Loggable {
@@ -101,7 +101,7 @@ public class InterfaceFeatures {
     }
 
     // Implements both; must resolve the diamond if both have same-signature defaults.
-    // Here they don't conflict (different signatures) — just showing multiple impl.
+    // Here they don't conflict (different signatures) - just showing multiple impl.
     static class AuditService implements Auditable, Loggable {
 
         private final String name;
@@ -120,7 +120,7 @@ public class InterfaceFeatures {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Diamond default conflict — forced resolution
+    // 3. Diamond default conflict - forced resolution
     // -------------------------------------------------------------------------
     interface Left {
         default String greet() { return "Hello from Left"; }
@@ -130,7 +130,7 @@ public class InterfaceFeatures {
         default String greet() { return "Hello from Right"; }
     }
 
-    // Both Left and Right declare greet() — MUST override to resolve
+    // Both Left and Right declare greet() - MUST override to resolve
     static class Middle implements Left, Right {
         @Override
         public String greet() {
@@ -140,7 +140,7 @@ public class InterfaceFeatures {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Comparable + Printable — multiple interface, real use
+    // 4. Comparable + Printable - multiple interface, real use
     // -------------------------------------------------------------------------
     interface Printable {
         String format();
@@ -179,7 +179,7 @@ public class InterfaceFeatures {
     }
 
     // -------------------------------------------------------------------------
-    // 5. Iterable custom implementation — interface with only one abstract method
+    // 5. Iterable custom implementation - interface with only one abstract method
     //    but built-in Java integration (for-each loop)
     // -------------------------------------------------------------------------
     static class NumberRange implements Iterable<Integer> {

@@ -1,7 +1,7 @@
 package com.javatraining.cleancode.solid.isp;
 
 /**
- * ISP — Interface Segregation Principle.
+ * ISP - Interface Segregation Principle.
  *
  * <p><strong>Violation (fat interface):</strong>
  * <pre>

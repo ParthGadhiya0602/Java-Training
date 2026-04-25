@@ -7,15 +7,15 @@ import java.lang.reflect.*;
 import java.util.*;
 
 /**
- * Module 20 — Runtime Annotation Processing via Reflection
+ * Module 20 - Runtime Annotation Processing via Reflection
  *
  * Annotations with RetentionPolicy.RUNTIME are available at runtime
  * through java.lang.reflect:
  *
- *   Class.getAnnotation(Ann.class)           — single annotation
- *   Class.getAnnotationsByType(Ann.class)    — repeatable annotations (unwrapped)
- *   Class.getDeclaredAnnotations()           — all annotations on the element
- *   Class.isAnnotationPresent(Ann.class)     — boolean presence check
+ *   Class.getAnnotation(Ann.class)           - single annotation
+ *   Class.getAnnotationsByType(Ann.class)    - repeatable annotations (unwrapped)
+ *   Class.getDeclaredAnnotations()           - all annotations on the element
+ *   Class.isAnnotationPresent(Ann.class)     - boolean presence check
  *
  * Same methods exist on Method, Field, Constructor, Parameter.
  *

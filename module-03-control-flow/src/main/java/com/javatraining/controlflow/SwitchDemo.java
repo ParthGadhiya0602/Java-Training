@@ -1,7 +1,7 @@
 package com.javatraining.controlflow;
 
 /**
- * TOPIC: switch — from the old fall-through statement to modern switch
+ * TOPIC: switch - from the old fall-through statement to modern switch
  * expressions and Java 21 pattern matching.
  *
  * Covers:
@@ -16,14 +16,14 @@ package com.javatraining.controlflow;
 public class SwitchDemo {
 
     // -------------------------------------------------------------------------
-    // 1. Traditional switch statement — requires break, has fall-through
+    // 1. Traditional switch statement - requires break, has fall-through
     // -------------------------------------------------------------------------
     static void traditionalSwitch(int quarter) {
         System.out.print("Quarter " + quarter + " months: ");
         switch (quarter) {
             case 1:
                 System.out.print("Jan ");
-                // fall-through to case 2 intentionally here? No — forgot break!
+                // fall-through to case 2 intentionally here? No - forgot break!
             case 2:
                 System.out.print("Feb ");
             case 3:
@@ -40,7 +40,7 @@ public class SwitchDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Intentional fall-through — grouping cases
+    // 2. Intentional fall-through - grouping cases
     // -------------------------------------------------------------------------
     static String seasonOf(int month) {
         String season;
@@ -72,10 +72,10 @@ public class SwitchDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Switch expression (Java 14+) — no fall-through, produces a value
+    // 3. Switch expression (Java 14+) - no fall-through, produces a value
     // -------------------------------------------------------------------------
     static String seasonOfModern(int month) {
-        // Much cleaner — no break, no fall-through, multiple labels per case
+        // Much cleaner - no break, no fall-through, multiple labels per case
         return switch (month) {
             case 12, 1, 2  -> "Winter";
             case 3,  4, 5  -> "Spring";
@@ -86,14 +86,14 @@ public class SwitchDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 4. yield — multi-statement case in a switch expression
+    // 4. yield - multi-statement case in a switch expression
     // -------------------------------------------------------------------------
     static int daysInMonth(int month, int year) {
         return switch (month) {
             case 1, 3, 5, 7, 8, 10, 12 -> 31;
             case 4, 6, 9, 11           -> 30;
             case 2 -> {
-                // Leap year needs logic — use a block with yield
+                // Leap year needs logic - use a block with yield
                 boolean leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
                 yield leap ? 29 : 28;
                 // yield is the switch-expression equivalent of return
@@ -105,7 +105,7 @@ public class SwitchDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 5. Switch on String — case-sensitive matching
+    // 5. Switch on String - case-sensitive matching
     // -------------------------------------------------------------------------
     static String httpStatus(String code) {
         return switch (code) {
@@ -133,7 +133,7 @@ public class SwitchDemo {
             case SOUTH -> "Moving down";
             case EAST  -> "Moving right";
             case WEST  -> "Moving left";
-            // No default needed — all enum constants are covered.
+            // No default needed - all enum constants are covered.
             // If you add a new constant to Direction and forget to add a case here,
             // the compiler (or switch exhaustiveness checker) will warn you.
         };
@@ -141,7 +141,7 @@ public class SwitchDemo {
 
     // -------------------------------------------------------------------------
     // 7. Pattern matching in switch (Java 21)
-    //    — match by TYPE, not just by value
+    //    - match by TYPE, not just by value
     // -------------------------------------------------------------------------
     static String describe(Object obj) {
         return switch (obj) {
@@ -161,7 +161,7 @@ public class SwitchDemo {
 
     // -------------------------------------------------------------------------
     // 8. Exhaustive switch with sealed classes
-    //    — compiler verifies ALL cases are covered, no default needed
+    //    - compiler verifies ALL cases are covered, no default needed
     // -------------------------------------------------------------------------
     sealed interface Notification permits EmailNotification, SmsNotification, PushNotification {}
     record EmailNotification(String to, String subject) implements Notification {}
@@ -176,7 +176,7 @@ public class SwitchDemo {
                 String.format("SMS to %s: %s", s.phone(), s.message());
             case PushNotification p ->
                 String.format("Push to device %s: %s", p.deviceId(), p.title());
-            // No default needed — sealed means compiler knows all subtypes.
+            // No default needed - sealed means compiler knows all subtypes.
             // Adding a 4th subtype to the sealed interface will cause a compile error here,
             // forcing you to handle the new case. This is exhaustiveness checking.
         };

@@ -22,13 +22,13 @@
     </properties>
 
     <dependencies>
-        <!-- MongoDB — Spring Data Mongo + Mongo Java Driver -->
+        <!-- MongoDB - Spring Data Mongo + Mongo Java Driver -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
-        <!-- Redis — Spring Data Redis + Lettuce client -->
+        <!-- Redis - Spring Data Redis + Lettuce client -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -42,7 +42,7 @@
         </dependency>
 
         <!--
-          Embedded MongoDB — auto-configured by @DataMongoTest and @SpringBootTest
+          Embedded MongoDB - auto-configured by @DataMongoTest and @SpringBootTest
           when on the test classpath.  No external MongoDB installation required.
           Spring Boot 3.x BOM manages the version.
         -->
@@ -53,7 +53,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Testcontainers — provides a real Redis in Docker for Redis tests -->
+        <!-- Testcontainers - provides a real Redis in Docker for Redis tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-testcontainers</artifactId>

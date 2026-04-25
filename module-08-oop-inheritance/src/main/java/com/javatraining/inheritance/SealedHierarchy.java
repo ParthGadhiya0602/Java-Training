@@ -7,17 +7,17 @@ import java.util.List;
  *
  * A sealed type restricts which classes may extend/implement it.
  * The compiler knows the COMPLETE set of subtypes at compile time.
- * This makes switch expressions on sealed types EXHAUSTIVE — no default needed.
+ * This makes switch expressions on sealed types EXHAUSTIVE - no default needed.
  *
  * Permitted subtypes must be:
- *   • final      — no further subclassing
- *   • sealed     — further restricted subhierarchy
- *   • non-sealed — re-opens for arbitrary subclassing
+ *   • final      - no further subclassing
+ *   • sealed     - further restricted subhierarchy
+ *   • non-sealed - re-opens for arbitrary subclassing
  *
  * Why sealed?
- *   1. Exhaustive pattern matching  — safer than instanceof chains
- *   2. Domain modelling             — express "there are exactly N variants"
- *   3. API design                   — prevent uncontrolled extension
+ *   1. Exhaustive pattern matching  - safer than instanceof chains
+ *   2. Domain modelling             - express "there are exactly N variants"
+ *   3. API design                   - prevent uncontrolled extension
  *
  * Java 17+: sealed classes/interfaces
  * Java 21:  pattern matching in switch (production-ready)
@@ -25,7 +25,7 @@ import java.util.List;
 public class SealedHierarchy {
 
     // -------------------------------------------------------------------------
-    // 1. Result type — sealed to express success-or-failure cleanly
+    // 1. Result type - sealed to express success-or-failure cleanly
     //    Replaces the checked-exception/null-return antipatterns.
     // -------------------------------------------------------------------------
     sealed interface Result<T> permits Result.Success, Result.Failure {
@@ -44,7 +44,7 @@ public class SealedHierarchy {
 
         default boolean isSuccess() { return this instanceof Success; }
 
-        /** Switch expression — exhaustive, no default branch */
+        /** Switch expression - exhaustive, no default branch */
         default String describe() {
             return switch (this) {
                 case Success<T> s -> "OK: " + s.value();
@@ -63,7 +63,7 @@ public class SealedHierarchy {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Payment event hierarchy — sealed interface with multiple permits
+    // 2. Payment event hierarchy - sealed interface with multiple permits
     // -------------------------------------------------------------------------
     sealed interface PaymentEvent
         permits PaymentEvent.Initiated, PaymentEvent.Authorised,
@@ -85,7 +85,7 @@ public class SealedHierarchy {
             implements PaymentEvent {}
     }
 
-    /** Process any payment event — switch is exhaustive, no default */
+    /** Process any payment event - switch is exhaustive, no default */
     static String describeEvent(PaymentEvent event) {
         return switch (event) {
             case PaymentEvent.Initiated  e -> String.format(
@@ -101,7 +101,7 @@ public class SealedHierarchy {
         };
     }
 
-    /** Compute total captured revenue — pattern matching extracts fields directly */
+    /** Compute total captured revenue - pattern matching extracts fields directly */
     static double totalCaptured(List<PaymentEvent> events) {
         double total = 0;
         for (PaymentEvent e : events) {
@@ -113,7 +113,7 @@ public class SealedHierarchy {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Expression tree — sealed for safe recursive evaluation
+    // 3. Expression tree - sealed for safe recursive evaluation
     //    Classic example from functional programming, now idiomatic in Java 21.
     // -------------------------------------------------------------------------
     sealed interface Expr
@@ -151,7 +151,7 @@ public class SealedHierarchy {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Guarded patterns (Java 21) — case Type t when t.field() > x
+    // 4. Guarded patterns (Java 21) - case Type t when t.field() > x
     // -------------------------------------------------------------------------
     static String classifyPayment(PaymentEvent event) {
         return switch (event) {

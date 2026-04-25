@@ -1,5 +1,5 @@
 /*
- * Root build.gradle.kts — shared configuration for all subprojects
+ * Root build.gradle.kts - shared configuration for all subprojects
  * ════════════════════════════════════════════════════════════════════
  * Maven equivalent: parent pom.xml with <dependencyManagement> and
  * <build><pluginManagement>.
@@ -8,7 +8,7 @@
  * packaging=pom).  It only configures the subprojects block.
  */
 
-// Version catalog — centralise dependency versions in one place
+// Version catalog - centralise dependency versions in one place
 // (Maven equivalent: <properties> or BOM import)
 val junitVersion = "5.10.2"
 
@@ -25,7 +25,7 @@ subprojects {
     group   = "com.javatraining"
     version = "1.0.0"
 
-    // Java toolchain — reproducible builds regardless of installed JDK
+    // Java toolchain - reproducible builds regardless of installed JDK
     // Maven equivalent: <maven.compiler.source> / <maven.compiler.target>
     configure<JavaPluginExtension> {
         toolchain {
@@ -38,7 +38,7 @@ subprojects {
         mavenCentral()
     }
 
-    // Shared test dependencies — inherited by all subprojects
+    // Shared test dependencies - inherited by all subprojects
     dependencies {
         // "testImplementation" is a configuration (Maven: test scope)
         "testImplementation"("org.junit.jupiter:junit-jupiter:$junitVersion")

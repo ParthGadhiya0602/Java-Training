@@ -6,23 +6,23 @@ import java.util.*;
  * TOPIC: equals() / hashCode() contract
  *
  * The five rules every equals() MUST satisfy:
- *   1. Reflexive  — x.equals(x) == true
- *   2. Symmetric  — x.equals(y) ↔ y.equals(x)
- *   3. Transitive — x.equals(y) && y.equals(z) → x.equals(z)
- *   4. Consistent — same result every call, no side-effects
- *   5. Null-safe  — x.equals(null) == false (never throws NPE)
+ *   1. Reflexive  - x.equals(x) == true
+ *   2. Symmetric  - x.equals(y) ↔ y.equals(x)
+ *   3. Transitive - x.equals(y) && y.equals(z) → x.equals(z)
+ *   4. Consistent - same result every call, no side-effects
+ *   5. Null-safe  - x.equals(null) == false (never throws NPE)
  *
  * The critical link:
  *   x.equals(y) → x.hashCode() == y.hashCode()
- *   (but equal hash does NOT imply equals — that's a hash collision)
+ *   (but equal hash does NOT imply equals - that's a hash collision)
  *
  * Violating this link silently breaks HashMap, HashSet, and any hash-based
- * collection — objects become "lost" even though they were inserted.
+ * collection - objects become "lost" even though they were inserted.
  */
 public class EqualsHashCode {
 
     // -------------------------------------------------------------------------
-    // 1. Correct implementation — field-by-field comparison
+    // 1. Correct implementation - field-by-field comparison
     // -------------------------------------------------------------------------
     static final class Point {
         private final int x;
@@ -42,7 +42,7 @@ public class EqualsHashCode {
 
         @Override
         public int hashCode() {
-            // Objects.hash() delegates to Arrays.hashCode — consistent, well-distributed
+            // Objects.hash() delegates to Arrays.hashCode - consistent, well-distributed
             return Objects.hash(x, y);
         }
 
@@ -51,7 +51,7 @@ public class EqualsHashCode {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Broken hashCode — demonstrates the HashSet/HashMap failure mode
+    // 2. Broken hashCode - demonstrates the HashSet/HashMap failure mode
     //    DO NOT use this in production; it is intentionally wrong.
     // -------------------------------------------------------------------------
     static final class BrokenPoint {
@@ -65,7 +65,7 @@ public class EqualsHashCode {
             return x == bp.x && y == bp.y;
         }
 
-        // INTENTIONALLY BROKEN: always returns 0 — all points collide in one bucket.
+        // INTENTIONALLY BROKEN: always returns 0 - all points collide in one bucket.
         // While technically "consistent" with equals (equal objects have equal hash),
         // it turns every HashSet/HashMap into a linked-list: O(n) instead of O(1).
         @Override
@@ -76,7 +76,7 @@ public class EqualsHashCode {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Symmetry trap — wrong equals when mixing subclasses
+    // 3. Symmetry trap - wrong equals when mixing subclasses
     //    This is why mixing class types in equals() is dangerous.
     // -------------------------------------------------------------------------
     static class ColorPoint {
@@ -102,7 +102,7 @@ public class EqualsHashCode {
                 return x == cp.x && y == cp.y && color.equals(cp.color);
             }
             if (o instanceof Point p) {
-                return x == p.x() && y == p.y();  // ignores color — asymmetric!
+                return x == p.x() && y == p.y();  // ignores color - asymmetric!
             }
             return false;
         }
@@ -115,7 +115,7 @@ public class EqualsHashCode {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Correct subclass strategy — use getClass() for strict type equality
+    // 4. Correct subclass strategy - use getClass() for strict type equality
     // -------------------------------------------------------------------------
     static class StrictPoint {
         final int x, y;
@@ -125,7 +125,7 @@ public class EqualsHashCode {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            // getClass() instead of instanceof — rejects subclasses
+            // getClass() instead of instanceof - rejects subclasses
             if (o == null || getClass() != o.getClass()) return false;
             StrictPoint sp = (StrictPoint) o;
             return x == sp.x && y == sp.y;
@@ -158,9 +158,9 @@ public class EqualsHashCode {
         Set<Point> set = new HashSet<>();
         set.add(p1);
         System.out.println("\nHashSet contains new Point(3,4): "
-            + set.contains(new Point(3, 4)));  // true — works correctly
+            + set.contains(new Point(3, 4)));  // true - works correctly
         System.out.println("Set size after adding p1 then p2: "
-            + (new HashSet<>(List.of(p1, p2))).size());  // 1 — deduplication works
+            + (new HashSet<>(List.of(p1, p2))).size());  // 1 - deduplication works
     }
 
     static void brokenHashCodeDemo() {
@@ -200,12 +200,12 @@ public class EqualsHashCode {
 
         System.out.println("p.equals(cp):  " + p.equals(cp));   // false (Point uses instanceof)
         System.out.println("cp.equals(p):  " + cp.equals(p));   // true  (ColorPoint accepts Point)
-        System.out.println("Symmetric?     " + (p.equals(cp) == cp.equals(p))); // FALSE — broken!
+        System.out.println("Symmetric?     " + (p.equals(cp) == cp.equals(p))); // FALSE - broken!
 
         // HashMap consequence
         Map<ColorPoint, String> map = new HashMap<>();
         map.put(cp, "value");
-        // Lookup using coordinates only — may not find it due to different hashCode
+        // Lookup using coordinates only - may not find it due to different hashCode
         System.out.println("map.get(cp) = " + map.get(cp));   // "value"
         System.out.println("map.get plain Point: hash mismatch → likely null");
     }
@@ -218,7 +218,7 @@ public class EqualsHashCode {
         capitals.put(new Point(1, 0), "east");
         capitals.put(new Point(0, 1), "north");
 
-        // Lookup with a NEW object that is equal — works because equals+hashCode is correct
+        // Lookup with a NEW object that is equal - works because equals+hashCode is correct
         System.out.println("Lookup (0,0): " + capitals.get(new Point(0, 0)));  // "origin"
         System.out.println("Lookup (1,0): " + capitals.get(new Point(1, 0)));  // "east"
         System.out.println("Lookup (9,9): " + capitals.get(new Point(9, 9)));  // null

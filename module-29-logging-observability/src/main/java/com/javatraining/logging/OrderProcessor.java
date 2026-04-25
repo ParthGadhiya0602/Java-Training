@@ -6,15 +6,15 @@ import org.slf4j.LoggerFactory;
 /**
  * Demonstrates all five SLF4J log levels and the {} parameterised placeholder.
  *
- * <p>Key rule: always use {} placeholders — never string concatenation.
+ * <p>Key rule: always use {} placeholders - never string concatenation.
  * SLF4J defers {@code toString()} until the message is actually going to be written,
  * so at levels that are disabled the argument is never converted to a String.
  *
  * <pre>
- *   // GOOD — no concatenation at runtime if DEBUG is off
+ *   // GOOD - no concatenation at runtime if DEBUG is off
  *   log.debug("Processing {} items for order {}", items.size(), order.id());
  *
- *   // BAD — String concat always happens even when DEBUG is disabled
+ *   // BAD - String concat always happens even when DEBUG is disabled
  *   log.debug("Processing " + items.size() + " items for order " + order.id());
  * </pre>
  */
@@ -25,7 +25,7 @@ public class OrderProcessor {
     public OrderResult processOrder(Order order) {
         if (order.id() == null) throw new IllegalArgumentException("order id must not be null");
 
-        // TRACE — very fine-grained, usually only in dev/debug mode
+        // TRACE - very fine-grained, usually only in dev/debug mode
         log.trace("Entering processOrder orderId={}", order.id());
 
         log.info("Processing order id={} item='{}' qty={}",
@@ -41,7 +41,7 @@ public class OrderProcessor {
             return new OrderResult(order.id(), OrderStatus.REJECTED, "Item name required");
         }
 
-        // DEBUG — developer information; off in production but helpful in staging
+        // DEBUG - developer information; off in production but helpful in staging
         log.debug("Inventory check passed for item='{}'", order.item());
         log.debug("Persisting order {} to repository", order.id());
 
@@ -50,7 +50,7 @@ public class OrderProcessor {
     }
 
     /**
-     * Demonstrates logging an exception — pass the Throwable as the <em>last</em>
+     * Demonstrates logging an exception - pass the Throwable as the <em>last</em>
      * argument with no placeholder; SLF4J will append the full stack trace.
      *
      * <pre>
@@ -63,7 +63,7 @@ public class OrderProcessor {
         try {
             return processOrder(order);
         } catch (Exception e) {
-            // ERROR — something went wrong and needs attention; always log the exception
+            // ERROR - something went wrong and needs attention; always log the exception
             log.error("Unexpected failure processing order {}: {}", order.id(), e.getMessage(), e);
             return new OrderResult(order.id(), OrderStatus.REJECTED, "Internal error");
         }

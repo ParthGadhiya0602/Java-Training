@@ -13,7 +13,7 @@ import java.util.function.Consumer;
  * Key facts:
  *   • Instantiation requires an outer instance:  outer.new Inner()
  *   • Inner class can read/write ALL outer fields (even private)
- *   • Serialising an inner class also drags in the outer — watch out
+ *   • Serialising an inner class also drags in the outer - watch out
  *   • Use inner class when behaviour is tightly coupled to one outer instance
  *
  * Common real-world uses:
@@ -24,7 +24,7 @@ import java.util.function.Consumer;
 public class InnerClassDemo {
 
     // -------------------------------------------------------------------------
-    // 1. NumberRange — inner Iterator
+    // 1. NumberRange - inner Iterator
     //    The iterator must remember which range it belongs to AND its cursor.
     //    Perfect fit for an inner class: iterator state + outer range access.
     // -------------------------------------------------------------------------
@@ -60,7 +60,7 @@ public class InnerClassDemo {
             return new RangeIterator();
         }
 
-        // Non-static inner class — has access to the enclosing NumberRange
+        // Non-static inner class - has access to the enclosing NumberRange
         private final class RangeIterator implements Iterator<Integer> {
             // cursor lives inside the inner class instance
             private int current = start;   // reads outer field directly
@@ -86,7 +86,7 @@ public class InnerClassDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 2. EventBus — inner Subscription
+    // 2. EventBus - inner Subscription
     //    Subscription is tied to the bus it was registered on (needs to remove
     //    itself from the bus's listener list when cancelled).
     //    Classic inner-class pattern: subscription carries a reference to its bus.
@@ -104,7 +104,7 @@ public class InnerClassDemo {
                 this.handler = handler;
             }
 
-            // Uses EventBus.this.subscriptions — outer class private field
+            // Uses EventBus.this.subscriptions - outer class private field
             void cancel() {
                 active = false;
                 EventBus.this.subscriptions.remove(this);
@@ -130,7 +130,7 @@ public class InnerClassDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 3. TextBuffer — inner Cursor
+    // 3. TextBuffer - inner Cursor
     //    Cursor holds a position inside the buffer and can read/modify it.
     //    Position is per-cursor; the text itself belongs to the outer buffer.
     // -------------------------------------------------------------------------
@@ -142,7 +142,7 @@ public class InnerClassDemo {
             this.text = new StringBuilder(initial);
         }
 
-        // Non-static inner class — accesses outer 'text' field
+        // Non-static inner class - accesses outer 'text' field
         final class Cursor {
             private int position;
 

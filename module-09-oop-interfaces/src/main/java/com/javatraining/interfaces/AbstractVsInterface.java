@@ -3,7 +3,7 @@ package com.javatraining.interfaces;
 import java.util.*;
 
 /**
- * TOPIC: Abstract class vs Interface — when to use each
+ * TOPIC: Abstract class vs Interface - when to use each
  *
  * Use an ABSTRACT CLASS when:
  *   • You need instance fields (shared state)
@@ -24,7 +24,7 @@ import java.util.*;
 public class AbstractVsInterface {
 
     // -------------------------------------------------------------------------
-    // 1. Abstract class — Report generator (Template Method pattern)
+    // 1. Abstract class - Report generator (Template Method pattern)
     //    Shared infrastructure: header/footer formatting, timing, error handling.
     //    Variable parts: gatherData() and formatBody() are deferred to subclasses.
     // -------------------------------------------------------------------------
@@ -36,7 +36,7 @@ public class AbstractVsInterface {
             this.reportName = reportName;
         }
 
-        // Template method — the algorithm skeleton; final to lock the order
+        // Template method - the algorithm skeleton; final to lock the order
         final String generate() {
             long start = System.nanoTime();
             StringBuilder sb = new StringBuilder();
@@ -51,7 +51,7 @@ public class AbstractVsInterface {
             return sb.toString();
         }
 
-        // Hooks — subclasses must implement
+        // Hooks - subclasses must implement
         protected abstract List<String> gatherData();
         protected abstract String formatBody(List<String> data);
 
@@ -67,7 +67,7 @@ public class AbstractVsInterface {
         String name() { return reportName; }
     }
 
-    // Concrete subclass — table report
+    // Concrete subclass - table report
     static class TableReport extends ReportGenerator {
         private final List<String[]> rows;
         private final String[]       headers;
@@ -102,7 +102,7 @@ public class AbstractVsInterface {
         }
     }
 
-    // Concrete subclass — summary report
+    // Concrete subclass - summary report
     static class SummaryReport extends ReportGenerator {
         private final Map<String, Double> metrics;
 
@@ -130,7 +130,7 @@ public class AbstractVsInterface {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Capability interfaces — unrelated classes sharing a role
+    // 2. Capability interfaces - unrelated classes sharing a role
     //    Serializable, Printable, Exportable are roles, not IS-A relationships.
     // -------------------------------------------------------------------------
     interface Exportable {
@@ -197,7 +197,7 @@ public class AbstractVsInterface {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Abstract class + interface — common in Java standard library
+    // 3. Abstract class + interface - common in Java standard library
     //    (e.g. AbstractList implements List; AbstractMap implements Map)
     // -------------------------------------------------------------------------
     interface Repository<T, ID> {
@@ -208,7 +208,7 @@ public class AbstractVsInterface {
         default int count() { return findAll().size(); }
     }
 
-    // Abstract partial implementation — handles the Map storage
+    // Abstract partial implementation - handles the Map storage
     static abstract class InMemoryRepository<T, ID> implements Repository<T, ID> {
         protected final Map<ID, T> store = new LinkedHashMap<>();
 
@@ -238,12 +238,12 @@ public class AbstractVsInterface {
         }
     }
 
-    // Concrete repository — one line of logic (idOf)
+    // Concrete repository - one line of logic (idOf)
     static class EmployeeRepository extends InMemoryRepository<Employee, Integer> {
         @Override
         protected Integer idOf(Employee e) { return e.id(); }
 
-        // Extra query — not in interface
+        // Extra query - not in interface
         List<Employee> findByDepartment(String dept) {
             return findAll().stream()
                 .filter(e -> e.department().equals(dept))
@@ -255,7 +255,7 @@ public class AbstractVsInterface {
     // Demonstrations
     // -------------------------------------------------------------------------
     static void templateMethodDemo() {
-        System.out.println("=== Abstract Class — Template Method ===");
+        System.out.println("=== Abstract Class - Template Method ===");
 
         TableReport table = new TableReport(
             "Employee Table",

@@ -29,10 +29,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * <h2>Redis data types covered here</h2>
  * <pre>
- *   String — the simplest type: one key → one value.
+ *   String - the simplest type: one key → one value.
  *            Used for counters, session tokens, rate-limiting, cached pages.
  *
- *   Hash   — one key → a map of fields → values.
+ *   Hash   - one key → a map of fields → values.
  *            Used for user profiles, session data, structured records.
  * </pre>
  */

@@ -1,18 +1,19 @@
 ---
-title: "Module 31 — JDBC"
-parent: "Phase 4 — Databases & Persistence"
+title: "Module 31 - JDBC"
+parent: "Phase 4 - Databases & Persistence"
 nav_order: 31
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-31-jdbc/src){: .btn .btn-outline }
 
-# Module 31 — JDBC
+# Module 31 - JDBC
 
 JDBC is the lowest-level bridge between Java and a relational database.
-Every higher abstraction — JPA, Spring Data, MyBatis — ultimately generates SQL
-and sends it through JDBC.  Understanding JDBC directly means you can read what
+Every higher abstraction - JPA, Spring Data, MyBatis - ultimately generates SQL
+and sends it through JDBC. Understanding JDBC directly means you can read what
 your ORM is doing, diagnose connection-pool exhaustion, and write fast bulk
 operations that no ORM can match.
 
@@ -31,13 +32,13 @@ operations that no ORM can match.
   │  rs.next() / rs.getString("col")      // navigate ResultSet           │
   └──────────────────────────────┬────────────────────────────────────────┘
                                  │
-                         java.sql  (JDBC API — stable interface)
+                         java.sql  (JDBC API - stable interface)
                                  │
   ┌──────────────────────────────▼────────────────────────────────────────┐
   │  JDBC Driver  (e.g. org.h2.Driver, org.postgresql.Driver)            │
   │  Translates JDBC calls into the database's wire protocol.            │
   │  Registered automatically via java.sql.Driver service-loader         │
-  │  (META-INF/services) — no Class.forName() needed since JDBC 4.0.     │
+  │  (META-INF/services) - no Class.forName() needed since JDBC 4.0.     │
   └──────────────────────────────┬────────────────────────────────────────┘
                                  │  TCP / unix socket / in-memory
   ┌──────────────────────────────▼────────────────────────────────────────┐
@@ -50,14 +51,14 @@ operations that no ORM can match.
 ## Core API Classes
 
 ```
-  java.sql.DriverManager     — opens raw physical connections
-  java.sql.Connection        — a session with the database; owns transactions
-  java.sql.Statement         — ad-hoc SQL (never use with user input — SQL injection risk)
-  java.sql.PreparedStatement — parameterised SQL; safe, faster for repeated execution
-  java.sql.CallableStatement — stored procedure calls
-  java.sql.ResultSet         — cursor over query results; one row at a time
-  java.sql.Savepoint         — named checkpoint within a transaction
-  java.sql.SQLException      — checked exception for all JDBC failures
+  java.sql.DriverManager     - opens raw physical connections
+  java.sql.Connection        - a session with the database; owns transactions
+  java.sql.Statement         - ad-hoc SQL (never use with user input - SQL injection risk)
+  java.sql.PreparedStatement - parameterised SQL; safe, faster for repeated execution
+  java.sql.CallableStatement - stored procedure calls
+  java.sql.ResultSet         - cursor over query results; one row at a time
+  java.sql.Savepoint         - named checkpoint within a transaction
+  java.sql.SQLException      - checked exception for all JDBC failures
 ```
 
 ---
@@ -65,7 +66,7 @@ operations that no ORM can match.
 ## Statement vs PreparedStatement
 
 ```
-  UNSAFE — Statement with string concatenation:
+  UNSAFE - Statement with string concatenation:
   ┌───────────────────────────────────────────────────────────────────────┐
   │  String input = "'; DROP TABLE products; --";                         │
   │  stmt.execute("SELECT * FROM products WHERE name = '" + input + "'");  │
@@ -76,7 +77,7 @@ operations that no ORM can match.
   │  Result: table destroyed.  This is SQL injection.                     │
   └───────────────────────────────────────────────────────────────────────┘
 
-  SAFE — PreparedStatement with parameter binding:
+  SAFE - PreparedStatement with parameter binding:
   ┌───────────────────────────────────────────────────────────────────────┐
   │  PreparedStatement ps = conn.prepareStatement(                        │
   │      "SELECT * FROM products WHERE name = ?");                        │
@@ -90,9 +91,9 @@ operations that no ORM can match.
   └───────────────────────────────────────────────────────────────────────┘
 
   Benefits of PreparedStatement beyond security:
-    ✓  Query plan cached by the DB after first execution — faster on repeat
-    ✓  Correct type handling — setInt()/setBigDecimal() avoid quoting bugs
-    ✓  Null safety — setNull() instead of injecting the literal "NULL"
+    ✓  Query plan cached by the DB after first execution - faster on repeat
+    ✓  Correct type handling - setInt()/setBigDecimal() avoid quoting bugs
+    ✓  Null safety - setNull() instead of injecting the literal "NULL"
 ```
 
 ---
@@ -102,16 +103,16 @@ operations that no ORM can match.
 ```
   ResultSet starts BEFORE the first row:
 
-  rs.next() ─► row 1 ─► row 2 ─► row 3 ─► (returns false — no more rows)
+  rs.next() ─► row 1 ─► row 2 ─► row 3 ─► (returns false - no more rows)
 
   Common access methods:
-    rs.getInt("id")           // by column name — resilient to column reordering
+    rs.getInt("id")           // by column name - resilient to column reordering
     rs.getString("name")
     rs.getBigDecimal("price")
     rs.getTimestamp("created_at")
 
   Null check:
-    rs.getInt("qty");           // returns 0 for SQL NULL — use wasNull()
+    rs.getInt("qty");           // returns 0 for SQL NULL - use wasNull()
     rs.wasNull()                // true if the last column read was NULL
 
   Always close ResultSet (try-with-resources handles this automatically).
@@ -143,8 +144,8 @@ try (ResultSet keys = ps.getGeneratedKeys()) {
 
 ## Transaction Management
 
-Every JDBC operation is in a transaction.  By default, `autoCommit = true`
-means each statement commits immediately.  For multi-statement atomicity,
+Every JDBC operation is in a transaction. By default, `autoCommit = true`
+means each statement commits immediately. For multi-statement atomicity,
 turn it off explicitly.
 
 ```
@@ -163,7 +164,7 @@ turn it off explicitly.
 
 ```
   ┌─────────────────────────────────────────────────────────────────────┐
-  │  Pattern: always save/restore autoCommit — safe with pooled conns   │
+  │  Pattern: always save/restore autoCommit - safe with pooled conns   │
   │                                                                     │
   │  boolean prev = conn.getAutoCommit();                               │
   │  conn.setAutoCommit(false);                                         │
@@ -179,7 +180,7 @@ turn it off explicitly.
   └─────────────────────────────────────────────────────────────────────┘
 ```
 
-### Savepoints — Partial Rollback
+### Savepoints - Partial Rollback
 
 ```
   Savepoint sp = conn.setSavepoint("afterStep1");
@@ -198,8 +199,8 @@ turn it off explicitly.
 ## HikariCP Connection Pool
 
 Opening a raw TCP connection to a database costs 5–50 ms: DNS lookup,
-TCP handshake, TLS, authentication.  Under 100 req/s that alone is 0.5–5 s
-of wasted latency.  A pool amortises that cost by keeping connections alive
+TCP handshake, TLS, authentication. Under 100 req/s that alone is 0.5–5 s
+of wasted latency. A pool amortises that cost by keeping connections alive
 and lending them out.
 
 ```
@@ -209,12 +210,12 @@ and lending them out.
   │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐  (idle)        │
   │  │ con │ │ con │ │ con │ │ con │ │ con │ │ con │                  │
   │  └─────┘ └─────┘ └──┬──┘ └─────┘ └─────┘ └─────┘                │
-  │                      │  getConnection() — borrow                  │
+  │                      │  getConnection() - borrow                  │
   │                      ▼                                            │
   │                Application  ←  uses connection (μs overhead)      │
-  │                      │  connection.close() — RETURNS to pool       │
+  │                      │  connection.close() - RETURNS to pool       │
   │                      ▼                                            │
-  │                 ┌──────┐  (idle again — NOT physically closed)    │
+  │                 ┌──────┐  (idle again - NOT physically closed)    │
   │                 │ con  │                                           │
   │                 └──────┘                                           │
   └────────────────────────────────────────────────────────────────────┘
@@ -227,25 +228,25 @@ and lending them out.
     maxLifetime       = 30 m replace connection after 30 minutes (avoids server-side drops)
 ```
 
-**Rule:** `connection.close()` returns the connection to the pool — it does NOT
-close the physical socket.  The pool recycles it for the next caller.
+**Rule:** `connection.close()` returns the connection to the pool - it does NOT
+close the physical socket. The pool recycles it for the next caller.
 
 ---
 
 ## Batch Processing
 
 When inserting or updating many rows, individual `executeUpdate()` calls make
-one network round-trip per statement.  `executeBatch()` sends all statements in
+one network round-trip per statement. `executeBatch()` sends all statements in
 a single round trip.
 
 ```
-  Without batch — N round trips:
+  Without batch - N round trips:
   ┌───────┐   SQL₁   ┌────┐          ┌───────┐   SQL₂   ┌────┐
   │  App  │ ────────► │ DB │    …     │  App  │ ────────► │ DB │   × N
   └───────┘ ◄──────── └────┘          └───────┘ ◄──────── └────┘
   Total: N × (network latency + DB parse + DB execute)
 
-  With executeBatch() — 1 round trip:
+  With executeBatch() - 1 round trip:
   ┌───────┐  SQL₁…SQLₙ  ┌────┐
   │  App  │ ────────────► │ DB │  × 1   (1 network + N executes)
   └───────┘ ◄──────────── └────┘
@@ -270,7 +271,7 @@ int[] counts = ps.executeBatch();   // ← ONE network call for all rows
 
 ## BigDecimal for Money
 
-Never store or calculate money with `double` — binary floating-point cannot
+Never store or calculate money with `double` - binary floating-point cannot
 represent most decimal fractions exactly:
 
 ```java
@@ -278,17 +279,18 @@ represent most decimal fractions exactly:
 double price = 0.10 + 0.20;
 System.out.println(price);  // 0.30000000000000004 ← not 0.30
 
-// RIGHT — BigDecimal uses arbitrary-precision decimal arithmetic
+// RIGHT - BigDecimal uses arbitrary-precision decimal arithmetic
 BigDecimal a = new BigDecimal("0.10");
 BigDecimal b = new BigDecimal("0.20");
 System.out.println(a.add(b));  // 0.30
 
-// Use BigDecimal.valueOf(double) when accepting a double — it uses
+// Use BigDecimal.valueOf(double) when accepting a double - it uses
 // Double.toString() which gives the shortest exact representation:
 BigDecimal price = BigDecimal.valueOf(9.99);  // "9.99" exactly
 ```
 
 DECIMAL(10,2) in SQL maps to `BigDecimal` in JDBC:
+
 ```java
 ps.setBigDecimal(1, product.price());      // INSERT / UPDATE
 BigDecimal price = rs.getBigDecimal("price");  // SELECT
@@ -296,7 +298,7 @@ BigDecimal price = rs.getBigDecimal("price");  // SELECT
 
 ---
 
-## Module 31 — What Was Built
+## Module 31 - What Was Built
 
 ```
   module-31-jdbc/
@@ -316,10 +318,10 @@ BigDecimal price = rs.getBigDecimal("price");  // SELECT
       │   └── batch/
       │       └── BatchImporter.java         ← insertBatch / updatePricesBatch
       └── test/java/com/javatraining/jdbc/
-          ├── JdbcCoreTest.java        15 tests — CRUD, SQL injection, BigDecimal
-          ├── TransactionTest.java      9 tests — commit, rollback, savepoints, autoCommit restore
-          ├── ConnectionPoolTest.java   9 tests — pool metrics, multi-borrow, data persistence
-          └── BatchTest.java            7 tests — batch insert/update, large volume, empty batch
+          ├── JdbcCoreTest.java        15 tests - CRUD, SQL injection, BigDecimal
+          ├── TransactionTest.java      9 tests - commit, rollback, savepoints, autoCommit restore
+          ├── ConnectionPoolTest.java   9 tests - pool metrics, multi-borrow, data persistence
+          └── BatchTest.java            7 tests - batch insert/update, large volume, empty batch
 ```
 
 Total: **40 tests**, all passing.
@@ -329,13 +331,14 @@ Total: **40 tests**, all passing.
 ## Key Takeaways
 
 ```
-  PreparedStatement        — always; never Statement with user input
-  try-with-resources       — always; prevents connection/statement/resultset leaks
-  BigDecimal               — always for money; never double
-  Connection.close()       — returns to pool; does not close socket
-  setAutoCommit(false)     — begin explicit transaction
-  rollback() in catch      — undo partial changes on failure
-  restore autoCommit       — in finally; pool safety
-  addBatch/executeBatch    — 10–100× faster for bulk DML
+  PreparedStatement        - always; never Statement with user input
+  try-with-resources       - always; prevents connection/statement/resultset leaks
+  BigDecimal               - always for money; never double
+  Connection.close()       - returns to pool; does not close socket
+  setAutoCommit(false)     - begin explicit transaction
+  rollback() in catch      - undo partial changes on failure
+  restore autoCommit       - in finally; pool safety
+  addBatch/executeBatch    - 10–100× faster for bulk DML
 ```
+
 {% endraw %}

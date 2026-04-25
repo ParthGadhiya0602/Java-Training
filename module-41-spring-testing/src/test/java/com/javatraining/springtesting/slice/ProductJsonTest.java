@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * @JsonTest — JSON slice.
+ * @JsonTest - JSON slice.
  *
- * Loads: Jackson ObjectMapper (with Spring Boot auto-configuration — dates, modules, etc.)
+ * Loads: Jackson ObjectMapper (with Spring Boot auto-configuration - dates, modules, etc.)
  * Does NOT load: Spring MVC, JPA, services, or any application beans.
  *
  * Use @JsonTest to verify:
@@ -79,7 +79,7 @@ class ProductJsonTest {
 
         String json = responseJson.write(product).getJson();
 
-        // Verify the exact field set — no extra fields sneak in
+        // Verify the exact field set - no extra fields sneak in
         assertThat(json)
                 .contains("\"id\"")
                 .contains("\"name\"")

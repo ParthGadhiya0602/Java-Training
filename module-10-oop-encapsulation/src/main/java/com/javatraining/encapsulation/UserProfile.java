@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 /**
- * TOPIC: Full design — integrating every encapsulation concept
+ * TOPIC: Full design - integrating every encapsulation concept
  *
  * UserProfile is:
  *   • Immutable core (all private final, no setters)
@@ -57,7 +57,7 @@ public class UserProfile {
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
     private final String        bio;            // optional
-    private final byte[]        avatarBytes;    // optional, mutable — must copy
+    private final byte[]        avatarBytes;    // optional, mutable - must copy
 
     private UserProfile(Builder b) {
         this.userId        = b.userId;
@@ -103,7 +103,7 @@ public class UserProfile {
     public boolean hasRole(String role) { return roles.contains(role); }
     public boolean isActive()           { return status == AccountStatus.ACTIVE; }
 
-    // ── "with" copy helpers — toBuilder() returns the concrete Builder class
+    // ── "with" copy helpers - toBuilder() returns the concrete Builder class
     //    so we can call any setter freely, bypassing the step-order constraint.
     public UserProfile withEmail(String newEmail) {
         Builder b = toBuilder(); b.email = Builder.validEmail(newEmail);

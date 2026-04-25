@@ -1,14 +1,16 @@
 ---
-title: "19 — Networking & Sockets"
-parent: "Phase 2 — Core APIs"
+title: "19 - Networking & Sockets"
+parent: "Phase 2 - Core APIs"
 nav_order: 19
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-19-networking/src){: .btn .btn-outline }
 
-# Module 19 — Networking & Sockets
+# Module 19 - Networking & Sockets
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -25,12 +27,12 @@ render_with_liquid: false
 Java's networking stack covers everything from raw TCP/UDP sockets to the modern
 `HttpClient` API and NIO non-blocking channels:
 
-| Layer | Class / API | Use when |
-|---|---|---|
-| TCP stream | `ServerSocket` / `Socket` | Reliable, ordered byte stream |
-| UDP datagram | `DatagramSocket` / `DatagramPacket` | Low-latency, fire-and-forget |
-| HTTP | `HttpClient` (Java 11+) | REST/HTTP calls |
-| Non-blocking | `SocketChannel` + `Selector` | Many idle connections |
+| Layer        | Class / API                         | Use when                      |
+| ------------ | ----------------------------------- | ----------------------------- |
+| TCP stream   | `ServerSocket` / `Socket`           | Reliable, ordered byte stream |
+| UDP datagram | `DatagramSocket` / `DatagramPacket` | Low-latency, fire-and-forget  |
+| HTTP         | `HttpClient` (Java 11+)             | REST/HTTP calls               |
+| Non-blocking | `SocketChannel` + `Selector`        | Many idle connections         |
 
 ---
 
@@ -50,7 +52,7 @@ InputStream  in  = client.getInputStream();
 OutputStream out = client.getOutputStream();
 ```
 
-Always use **try-with-resources** — sockets hold OS file descriptors.
+Always use **try-with-resources** - sockets hold OS file descriptors.
 
 ### Echo server (single-threaded)
 
@@ -129,7 +131,7 @@ public static String readFramed(InputStream in) throws IOException {
 ```java
 socket.setSoTimeout(2000);       // read timeout in ms (0 = block forever)
 socket.setKeepAlive(true);       // OS probes to detect dead connections
-socket.setTcpNoDelay(true);      // disable Nagle — send small packets immediately
+socket.setTcpNoDelay(true);      // disable Nagle - send small packets immediately
 socket.setReuseAddress(true);    // bind to port in TIME_WAIT state
 ```
 
@@ -137,8 +139,8 @@ socket.setReuseAddress(true);    // bind to port in TIME_WAIT state
 
 ## UDP Sockets
 
-UDP (User Datagram Protocol) is **connectionless and unreliable** — packets may be
-dropped, reordered, or duplicated.  Useful for real-time media, DNS, game state.
+UDP (User Datagram Protocol) is **connectionless and unreliable** - packets may be
+dropped, reordered, or duplicated. Useful for real-time media, DNS, game state.
 
 Max practical payload: **1,472 bytes** (Ethernet MTU 1500 − 20 IP − 8 UDP).
 
@@ -162,7 +164,7 @@ String msg = new String(recv.getData(), 0, recv.getLength(), UTF_8);
 
 ### Connected UDP
 
-`connect()` on a `DatagramSocket` records the remote address — subsequent `send()`
+`connect()` on a `DatagramSocket` records the remote address - subsequent `send()`
 calls don't need to specify a destination, and packets from other sources are
 silently discarded:
 
@@ -188,7 +190,7 @@ HttpClient client = HttpClient.newBuilder()
     .build();
 ```
 
-Reuse instances — they manage connection pools.
+Reuse instances - they manage connection pools.
 
 ### Synchronous GET
 
@@ -234,8 +236,8 @@ List<String> results = CompletableFuture.allOf(futures.toArray(new CompletableFu
 
 ### URI vs URL
 
-- **URI** — identifies a resource (may be abstract, relative, or opaque)
-- **URL** — a URI that also includes how to locate it (scheme + authority + path)
+- **URI** - identifies a resource (may be abstract, relative, or opaque)
+- **URL** - a URI that also includes how to locate it (scheme + authority + path)
 
 Prefer `URI` in APIs; use `url.toURI()` when interoperating with legacy code.
 
@@ -247,12 +249,12 @@ NIO non-blocking channels allow a **single thread** to multiplex many connection
 
 ### Core types
 
-| Type | Purpose |
-|---|---|
-| `ServerSocketChannel` | Non-blocking analogue of `ServerSocket` |
-| `SocketChannel` | Non-blocking analogue of `Socket` |
-| `Selector` | Monitors multiple channels for readiness events |
-| `SelectionKey` | Represents a channel registered with a `Selector` |
+| Type                  | Purpose                                           |
+| --------------------- | ------------------------------------------------- |
+| `ServerSocketChannel` | Non-blocking analogue of `ServerSocket`           |
+| `SocketChannel`       | Non-blocking analogue of `Socket`                 |
+| `Selector`            | Monitors multiple channels for readiness events   |
+| `SelectionKey`        | Represents a channel registered with a `Selector` |
 
 ### Interest ops
 
@@ -305,7 +307,7 @@ channel.configureBlocking(true);  // switch to blocking for read/write
 
 ### Pipe (in-process channel pair)
 
-`Pipe.open()` creates a connected pair of channels — useful for in-process
+`Pipe.open()` creates a connected pair of channels - useful for in-process
 producer/consumer without network overhead:
 
 ```java
@@ -319,7 +321,7 @@ pipe.source().read(buf);
 ### When to use NIO selectors
 
 - **Yes:** proxy servers, protocol gateways, tens of thousands of idle connections
-- **No:** typical server-side apps — virtual threads handle this more simply
+- **No:** typical server-side apps - virtual threads handle this more simply
 
 ---
 
@@ -335,13 +337,14 @@ InetAddress.getByName(host).isReachable(ms) // ICMP ping-like probe
 
 ## Summary
 
-| Concept | Class | Key detail |
-|---|---|---|
-| TCP server | `ServerSocket` | `accept()` blocks; use virtual threads |
-| TCP client | `Socket` | `setSoTimeout()` prevents blocking forever |
-| Framing | `DataOutputStream.writeInt` | 4-byte length prefix |
-| UDP | `DatagramSocket` | Connectionless; max 1472 bytes |
-| HTTP | `HttpClient` | Reuse instances; prefer `sendAsync` |
-| NIO | `Selector` + `SocketChannel` | Single thread, many connections |
-| In-process | `Pipe` | `sink()` write / `source()` read |
+| Concept    | Class                        | Key detail                                 |
+| ---------- | ---------------------------- | ------------------------------------------ |
+| TCP server | `ServerSocket`               | `accept()` blocks; use virtual threads     |
+| TCP client | `Socket`                     | `setSoTimeout()` prevents blocking forever |
+| Framing    | `DataOutputStream.writeInt`  | 4-byte length prefix                       |
+| UDP        | `DatagramSocket`             | Connectionless; max 1472 bytes             |
+| HTTP       | `HttpClient`                 | Reuse instances; prefer `sendAsync`        |
+| NIO        | `Selector` + `SocketChannel` | Single thread, many connections            |
+| In-process | `Pipe`                       | `sink()` write / `source()` read           |
+
 {% endraw %}

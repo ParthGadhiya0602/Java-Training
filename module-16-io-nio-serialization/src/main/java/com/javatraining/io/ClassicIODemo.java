@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Module 16 — Classic java.io
+ * Module 16 - Classic java.io
  *
  * The original Java I/O API is stream-based and byte-oriented at the bottom,
  * with character-based wrappers on top.  The key mental model:
  *
- *   InputStream / OutputStream  — raw bytes
- *   Reader / Writer              — characters (encode/decode automatically)
- *   Buffered* wrappers           — reduce system calls; always use them
+ *   InputStream / OutputStream  - raw bytes
+ *   Reader / Writer              - characters (encode/decode automatically)
+ *   Buffered* wrappers           - reduce system calls; always use them
  *
  * try-with-resources (Java 7+) guarantees close() even on exception.
  * Never use finally blocks to close I/O resources.
@@ -36,7 +36,7 @@ public class ClassicIODemo {
 
     /**
      * Append lines to an existing file.
-     * FileWriter(file, true) — the boolean flag enables append mode.
+     * FileWriter(file, true) - the boolean flag enables append mode.
      */
     public static void appendLines(File file, List<String> lines) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
@@ -96,7 +96,7 @@ public class ClassicIODemo {
 
     /**
      * ByteArrayOutputStream / ByteArrayInputStream allow treating a byte[]
-     * as a stream — useful for testing I/O code without touching the filesystem.
+     * as a stream - useful for testing I/O code without touching the filesystem.
      */
     public static byte[] gatherLines(List<String> lines) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

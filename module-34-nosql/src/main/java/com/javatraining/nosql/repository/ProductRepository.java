@@ -13,12 +13,12 @@ import java.util.Optional;
 /**
  * Spring Data MongoDB repository for {@link Product}.
  *
- * <p>Derived query methods work the same as with JPA — Spring parses the method
+ * <p>Derived query methods work the same as with JPA - Spring parses the method
  * name and generates a MongoDB query.  The difference:
  * <ul>
  *   <li>JPA generates JPQL/SQL; this generates a MongoDB JSON query document.</li>
  *   <li>{@code @Query} uses MongoDB's JSON filter syntax instead of JPQL.</li>
- *   <li>{@code findByTagsContaining} queries inside an embedded array — no join needed.</li>
+ *   <li>{@code findByTagsContaining} queries inside an embedded array - no join needed.</li>
  * </ul>
  */
 public interface ProductRepository extends MongoRepository<Product, String> {
@@ -37,10 +37,10 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     /** { "price": { "$gt": ?0 } } */
     List<Product> findByPriceGreaterThan(BigDecimal price);
 
-    /** { "in_stock": ?0 } — uses the @Field name */
+    /** { "in_stock": ?0 } - uses the @Field name */
     List<Product> findByInStock(boolean inStock);
 
-    /** { "tags": ?0 } — MongoDB's array contains operator */
+    /** { "tags": ?0 } - MongoDB's array contains operator */
     List<Product> findByTagsContaining(String tag);
 
     /** { } sorted by price ASC */
@@ -49,7 +49,7 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     /** { "category": ?0 } sorted by price ASC */
     List<Product> findByCategoryOrderByPriceAsc(String category);
 
-    // ── @Query — MongoDB JSON filter ──────────────────────────────────────────
+    // ── @Query - MongoDB JSON filter ──────────────────────────────────────────
 
     /**
      * Range query using MongoDB's {@code $gte} and {@code $lte} operators.
@@ -69,7 +69,7 @@ public interface ProductRepository extends MongoRepository<Product, String> {
     List<Product> findByPriceRange(Decimal128 min, Decimal128 max);
 
     /**
-     * Array query using {@code $all} — product must have ALL listed tags.
+     * Array query using {@code $all} - product must have ALL listed tags.
      */
     @Query("{ 'tags': { '$all': ?0 } }")
     List<Product> findByAllTags(List<String> tags);

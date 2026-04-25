@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * Prototype scope — a new instance is created every time the bean is requested
+ * Prototype scope - a new instance is created every time the bean is requested
  * from the context (via ApplicationContext.getBean() or ObjectProvider.getObject()).
  *
  * <p>Key difference from singleton:
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  *   <li>Prototype: fresh instance per request, isolated state</li>
  * </ul>
  *
- * <p>Spring does NOT call @PreDestroy on prototype beans — the caller is
+ * <p>Spring does NOT call @PreDestroy on prototype beans - the caller is
  * responsible for lifecycle management.
  */
 @Component

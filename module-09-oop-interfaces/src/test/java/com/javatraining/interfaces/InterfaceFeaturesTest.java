@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class InterfaceFeaturesTest {
 
     // -----------------------------------------------------------------------
-    // Validator — static factories
+    // Validator - static factories
     // -----------------------------------------------------------------------
     @Test
     void nonBlank_rejects_null_and_blank() {
@@ -54,7 +54,7 @@ class InterfaceFeaturesTest {
     }
 
     // -----------------------------------------------------------------------
-    // Validator — default composition
+    // Validator - default composition
     // -----------------------------------------------------------------------
     @Test
     void and_both_must_pass() {
@@ -107,7 +107,7 @@ class InterfaceFeaturesTest {
     }
 
     // -----------------------------------------------------------------------
-    // Product — Comparable + Printable
+    // Product - Comparable + Printable
     // -----------------------------------------------------------------------
     @Test
     void product_compareTo_by_price() {
@@ -126,7 +126,7 @@ class InterfaceFeaturesTest {
     }
 
     // -----------------------------------------------------------------------
-    // NumberRange — Iterable
+    // NumberRange - Iterable
     // -----------------------------------------------------------------------
     @Test
     void number_range_generates_correct_values() {

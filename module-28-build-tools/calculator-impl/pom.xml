@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  calculator-impl — implementation module
+  calculator-impl - implementation module
   ════════════════════════════════════════════════════════════════════
   • Inherits from parent POM
-  • Depends on calculator-api (compile scope) — inter-module dependency
+  • Depends on calculator-api (compile scope) - inter-module dependency
   • Contains all test code for the project
   • ${project.version} picks up 1.0.0 from the parent automatically
 -->

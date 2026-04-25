@@ -6,15 +6,15 @@ import java.util.function.Function;
 /**
  * TOPIC: Real-world patterns with nested classes
  *
- * Pattern 1 — Private static nested for encapsulation
+ * Pattern 1 - Private static nested for encapsulation
  *   Hide implementation details (Node, Bucket) inside the class that uses them.
  *   Clients never see or depend on the internals.
  *
- * Pattern 2 — Builder as static nested class
+ * Pattern 2 - Builder as static nested class
  *   The builder lives alongside the target type; both are in the same top-level
  *   class.  Static (not inner) because the builder doesn't need an outer instance.
  *
- * Pattern 3 — Composite pattern
+ * Pattern 3 - Composite pattern
  *   A tree of nodes where both leaf and branch implement the same interface.
  *   Branch holds a List<Component>; all children are Components.
  *   Perfect for: file systems, UI trees, expression trees, org charts.
@@ -22,13 +22,13 @@ import java.util.function.Function;
 public class NestedClassPatterns {
 
     // -------------------------------------------------------------------------
-    // Pattern 1 — Immutable singly-linked queue with hidden Node
-    //    Node is a private implementation detail — no external code ever
+    // Pattern 1 - Immutable singly-linked queue with hidden Node
+    //    Node is a private implementation detail - no external code ever
     //    references it.  Making it static avoids holding outer references.
     // -------------------------------------------------------------------------
     static final class ImmutableQueue<T> {
 
-        // Private static nested — purely internal
+        // Private static nested - purely internal
         // 'next' is mutable so enqueue() can link the old tail to the new node
         private static final class Node<T> {
             final T  value;
@@ -45,7 +45,7 @@ public class NestedClassPatterns {
         private final Node<T> tail;
         private final int     size;
 
-        // Private — use empty() or enqueue() to create
+        // Private - use empty() or enqueue() to create
         private ImmutableQueue(Node<T> head, Node<T> tail, int size) {
             this.head = head;
             this.tail = tail;
@@ -89,7 +89,7 @@ public class NestedClassPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 2 — Builder as static nested class
+    // Pattern 2 - Builder as static nested class
     //    QueryBuilder builds a SQL-like query string.  The builder is nested
     //    inside Query so both stay in the same conceptual unit.
     // -------------------------------------------------------------------------
@@ -131,7 +131,7 @@ public class NestedClassPatterns {
 
         @Override public String toString() { return toSql(); }
 
-        // Static nested builder — no outer instance needed
+        // Static nested builder - no outer instance needed
         static final class Builder {
             private String       table;
             private List<String> columns    = new ArrayList<>();
@@ -167,7 +167,7 @@ public class NestedClassPatterns {
     }
 
     // -------------------------------------------------------------------------
-    // Pattern 3 — Composite: file-system tree
+    // Pattern 3 - Composite: file-system tree
     //    FileSystemItem is the component interface.
     //    File is a leaf.  Directory is a composite holding child items.
     //    Both are static nested classes inside FileSystem.

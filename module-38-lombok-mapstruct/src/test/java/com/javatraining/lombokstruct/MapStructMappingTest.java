@@ -46,7 +46,7 @@ class MapStructMappingTest {
 
     @Test
     void request_to_user_id_is_null() {
-        // @Mapping(target = "id", ignore = true) — id is never set from the request
+        // @Mapping(target = "id", ignore = true) - id is never set from the request
         User user = userMapper.requestToUser(CreateUserRequest.builder()
                 .email("bob@example.com").build());
         assertThat(user.getId()).isNull();
@@ -54,7 +54,7 @@ class MapStructMappingTest {
 
     @Test
     void request_to_user_address_is_null() {
-        // @Mapping(target = "address", ignore = true) — address not in request
+        // @Mapping(target = "address", ignore = true) - address not in request
         User user = userMapper.requestToUser(CreateUserRequest.builder()
                 .email("carol@example.com").build());
         assertThat(user.getAddress()).isNull();
@@ -124,7 +124,7 @@ class MapStructMappingTest {
                 .id(1L).firstName("Alice").lastName("Smith")
                 .email("alice@example.com").role("USER").build();
 
-        // Only email is being updated — other fields are null in the request
+        // Only email is being updated - other fields are null in the request
         CreateUserRequest patch = CreateUserRequest.builder()
                 .email("alice.new@example.com")
                 .build();  // firstName, lastName, role are null

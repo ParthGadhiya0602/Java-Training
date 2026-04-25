@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Verifies singleton vs prototype scoping behaviour.
  *
  * <p>ObjectProvider is the correct way to retrieve prototype beans inside
- * a singleton bean — direct @Autowired in a singleton only injects once,
+ * a singleton bean - direct @Autowired in a singleton only injects once,
  * defeating the purpose of prototype scope.
  */
 @SpringBootTest
@@ -49,7 +49,7 @@ class BeanScopeTest {
     void singleton_state_is_shared() {
         int before = counterA.getCount();
         counterA.increment();
-        // counterB IS counterA — same object
+        // counterB IS counterA - same object
         assertThat(counterB.getCount()).isEqualTo(before + 1);
     }
 
@@ -68,7 +68,7 @@ class BeanScopeTest {
         PrototypeTask t1 = taskProvider.getObject();
         PrototypeTask t2 = taskProvider.getObject();
         t1.execute();
-        // t2 is a separate instance — its state is unaffected
+        // t2 is a separate instance - its state is unaffected
         assertThat(t1.getStatus()).isEqualTo("DONE");
         assertThat(t2.getStatus()).isEqualTo("NEW");
     }

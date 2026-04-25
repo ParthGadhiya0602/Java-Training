@@ -6,7 +6,7 @@ import java.util.function.*;
 import java.util.stream.Collectors;
 
 /**
- * Module 15 — Method References
+ * Module 15 - Method References
  *
  * A method reference is a compact lambda that delegates directly to an
  * existing method.  Four kinds:
@@ -74,7 +74,7 @@ public class MethodReferences {
     }
 
     /**
-     * Unbound BiFunction — receiver is first arg, method param is second.
+     * Unbound BiFunction - receiver is first arg, method param is second.
      * (s, sub) -> s.contains(sub)
      */
     public static BiFunction<String, String, Boolean> containsRef() {
@@ -83,17 +83,17 @@ public class MethodReferences {
 
     // ── Constructor reference ─────────────────────────────────────────────────
 
-    /** Supplier<StringBuilder> — zero-arg constructor reference. */
+    /** Supplier<StringBuilder> - zero-arg constructor reference. */
     public static Supplier<StringBuilder> sbSupplier() {
         return StringBuilder::new;                // () -> new StringBuilder()
     }
 
-    /** Function<String, StringBuilder> — one-arg constructor reference. */
+    /** Function<String, StringBuilder> - one-arg constructor reference. */
     public static Function<String, StringBuilder> sbFromString() {
         return StringBuilder::new;                // s -> new StringBuilder(s)
     }
 
-    /** IntFunction<int[]> — array constructor reference. */
+    /** IntFunction<int[]> - array constructor reference. */
     public static IntFunction<int[]> intArrayFactory() {
         return int[]::new;                        // n -> new int[n]
     }
@@ -102,7 +102,7 @@ public class MethodReferences {
 
     public record Person(String name, int age) {}
 
-    /** Sort by age ascending, then name — method refs throughout. */
+    /** Sort by age ascending, then name - method refs throughout. */
     public static List<Person> sortPeople(List<Person> people) {
         return people.stream()
                      .sorted(Comparator.comparingInt(Person::age)
@@ -125,7 +125,7 @@ public class MethodReferences {
         return raw.stream()
                   .filter(Predicate.not(String::isBlank))   // unbound
                   .map(String::trim)                         // unbound
-                  .filter(MethodReferences::isNumeric)       // static — skip non-numbers
+                  .filter(MethodReferences::isNumeric)       // static - skip non-numbers
                   .map(Integer::parseInt)                    // static
                   .map(MethodReferences::doubleIt)           // static (this class)
                   .sorted(Integer::compare)                  // static

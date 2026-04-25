@@ -1,14 +1,15 @@
 ---
-title: "Module 51 — GraphQL with Spring"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 51 - GraphQL with Spring"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 51
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-51-graphql/src){: .btn .btn-outline }
 
-# Module 51 — GraphQL with Spring
+# Module 51 - GraphQL with Spring
 
 ## What this module covers
 
@@ -46,30 +47,30 @@ Spring for GraphQL loads all files matching `classpath:graphql/**/*.graphqls`.
 
 ```graphql
 type Query {
-    books: [Book!]!
-    book(id: ID!): Book
-    authors: [Author!]!
+  books: [Book!]!
+  book(id: ID!): Book
+  authors: [Author!]!
 }
 
 type Mutation {
-    addBook(title: String!, genre: String!, authorId: ID!): Book!
-    deleteBook(id: ID!): Boolean!
+  addBook(title: String!, genre: String!, authorId: ID!): Book!
+  deleteBook(id: ID!): Boolean!
 }
 
 type Subscription {
-    bookAdded: Book!
+  bookAdded: Book!
 }
 
 type Book {
-    id: ID!
-    title: String!
-    genre: String!
-    author: Author!    # resolved by @BatchMapping to prevent N+1
+  id: ID!
+  title: String!
+  genre: String!
+  author: Author! # resolved by @BatchMapping to prevent N+1
 }
 
 type Author {
-    id: ID!
-    name: String!
+  id: ID!
+  name: String!
 }
 ```
 
@@ -77,13 +78,13 @@ type Author {
 
 ## Resolver annotations
 
-| Annotation            | Maps to                        |
-|-----------------------|-------------------------------|
-| `@QueryMapping`       | `type Query { ... }`          |
-| `@MutationMapping`    | `type Mutation { ... }`       |
-| `@SubscriptionMapping`| `type Subscription { ... }`   |
-| `@BatchMapping`       | sub-field of a parent type    |
-| `@Argument`           | inline argument conversion    |
+| Annotation             | Maps to                     |
+| ---------------------- | --------------------------- |
+| `@QueryMapping`        | `type Query { ... }`        |
+| `@MutationMapping`     | `type Mutation { ... }`     |
+| `@SubscriptionMapping` | `type Subscription { ... }` |
+| `@BatchMapping`        | sub-field of a parent type  |
+| `@Argument`            | inline argument conversion  |
 
 Method names are matched to field names by default; override with `value`.
 
@@ -121,7 +122,7 @@ public class BookController {
 }
 ```
 
-`@Argument` applies Spring's `ConversionService` — the GraphQL `ID` scalar
+`@Argument` applies Spring's `ConversionService` - the GraphQL `ID` scalar
 arrives as a `String`; `Long id` triggers automatic `String → Long` conversion.
 
 ---
@@ -156,7 +157,7 @@ public Flux<Book> bookAdded() {
 ### The problem
 
 Fetching `books { author { name } }` with a naive `@SchemaMapping` triggers one
-`findById(authorId)` per book — N books = N+1 database calls.
+`findById(authorId)` per book - N books = N+1 database calls.
 
 ### The fix
 
@@ -186,7 +187,7 @@ The method name `author` matches the `Book.author` field in the schema.
 
 ## Testing with `@GraphQlTest`
 
-`@GraphQlTest` loads only the GraphQL controller layer — no Tomcat, no HTTP —
+`@GraphQlTest` loads only the GraphQL controller layer - no Tomcat, no HTTP -
 backed by `ExecutionGraphQlService`. Queries, mutations, and subscriptions all
 run through the same tester.
 
@@ -257,9 +258,9 @@ not twice (which would indicate N+1 regression).
 
 ## Tests
 
-| Class               | Type           | Count |
-|---------------------|----------------|-------|
-| `BookControllerTest`| `@GraphQlTest` | 7     |
+| Class                | Type           | Count |
+| -------------------- | -------------- | ----- |
+| `BookControllerTest` | `@GraphQlTest` | 7     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **7/7 pass**
@@ -268,11 +269,12 @@ Result: **7/7 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `@BatchMapping` over `@SchemaMapping` with DataLoader | `@BatchMapping` is Spring for GraphQL's idiomatic N+1 fix — no manual DataLoader registration needed |
-| `BookEventPublisher` as a separate component | Decouples sink from controller, making mutation and subscription independently mockable in `@GraphQlTest` |
-| `Sinks.many().multicast().onBackpressureBuffer()` | Hot source that buffers for each slow subscriber; replaces the old `EmitterProcessor` (deprecated in Reactor 3.5) |
-| Subscription mock returns `Flux.just(...)` | Finite flux that completes immediately keeps `StepVerifier` tests synchronous and deterministic |
-| Schema-first over annotation-first | Schema file is language-agnostic documentation; implementation auto-validated against it at startup |
+| Decision                                              | Reason                                                                                                            |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `@BatchMapping` over `@SchemaMapping` with DataLoader | `@BatchMapping` is Spring for GraphQL's idiomatic N+1 fix - no manual DataLoader registration needed              |
+| `BookEventPublisher` as a separate component          | Decouples sink from controller, making mutation and subscription independently mockable in `@GraphQlTest`         |
+| `Sinks.many().multicast().onBackpressureBuffer()`     | Hot source that buffers for each slow subscriber; replaces the old `EmitterProcessor` (deprecated in Reactor 3.5) |
+| Subscription mock returns `Flux.just(...)`            | Finite flux that completes immediately keeps `StepVerifier` tests synchronous and deterministic                   |
+| Schema-first over annotation-first                    | Schema file is language-agnostic documentation; implementation auto-validated against it at startup               |
+
 {% endraw %}

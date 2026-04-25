@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("PassByValue — Java always passes by value")
+@DisplayName("PassByValue - Java always passes by value")
 class PassByValueTest {
 
     @Test
@@ -29,7 +29,7 @@ class PassByValueTest {
     void referenceReassignmentIsInvisible() {
         int[] arr = {1, 2, 3};
         PassByValueDemo.tryToReplace(arr);
-        // Original array untouched — the method only changed its local reference copy
+        // Original array untouched - the method only changed its local reference copy
         assertArrayEquals(new int[]{1, 2, 3}, arr);
     }
 

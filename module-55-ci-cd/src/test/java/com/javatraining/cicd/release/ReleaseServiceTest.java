@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Unit tests — no Spring context, no database.
+ * Unit tests - no Spring context, no database.
  * Only the semantic-versioning validation logic is exercised here.
  * These are the fastest tests in the CI pipeline.
  */

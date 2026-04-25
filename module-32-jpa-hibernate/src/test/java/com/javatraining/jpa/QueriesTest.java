@@ -21,16 +21,16 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * <pre>
  *   JPQL (Java Persistence Query Language)
- *     — object-oriented; refers to entity class names and field names, not table/column
- *     — "SELECT a FROM Author a WHERE a.name LIKE :pattern"
+ *     - object-oriented; refers to entity class names and field names, not table/column
+ *     - "SELECT a FROM Author a WHERE a.name LIKE :pattern"
  *
  *   Criteria API
- *     — programmatic, type-safe; useful when query structure is dynamic
- *     — CriteriaBuilder + CriteriaQuery + Root
+ *     - programmatic, type-safe; useful when query structure is dynamic
+ *     - CriteriaBuilder + CriteriaQuery + Root
  *
  *   Native SQL
- *     — escape hatch for DB-specific features; bypasses object mapping
- *     — used in @BeforeEach for bulk DELETE (cascades are not triggered)
+ *     - escape hatch for DB-specific features; bypasses object mapping
+ *     - used in @BeforeEach for bulk DELETE (cascades are not triggered)
  * </pre>
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -80,7 +80,7 @@ class QueriesTest {
         if (em.isOpen()) em.close();
     }
 
-    // ── JPQL — basic selects ─────────────────────────────────────────────────
+    // ── JPQL - basic selects ─────────────────────────────────────────────────
 
     @Test
     void jpql_select_all_returns_all_authors() {
@@ -124,7 +124,7 @@ class QueriesTest {
         assertEquals("Oliver Twist",       books.get(1).getTitle());
     }
 
-    // ── JPQL — aggregations ──────────────────────────────────────────────────
+    // ── JPQL - aggregations ──────────────────────────────────────────────────
 
     @Test
     void jpql_count_all_books() {

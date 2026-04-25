@@ -22,11 +22,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests for Spring Data derived query methods.
  *
  * <p>Spring Data parses the method name at startup and generates the JPQL.
- * No {@code @Query} annotation needed — the name IS the query.
+ * No {@code @Query} annotation needed - the name IS the query.
  *
  * <p>{@code @DataJpaTest} loads only JPA-related beans (entities, repositories,
  * Hibernate, H2), and wraps each test in a transaction that rolls back after
- * the test — no manual cleanup needed.
+ * the test - no manual cleanup needed.
  */
 @DataJpaTest
 @Import(JpaAuditingConfig.class)

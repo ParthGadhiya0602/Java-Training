@@ -3,24 +3,24 @@ package com.javatraining.annotations;
 import java.lang.annotation.*;
 
 /**
- * Module 20 — Defining Custom Annotations
+ * Module 20 - Defining Custom Annotations
  *
  * An annotation type is declared with @interface.
  * Elements look like methods with optional defaults.
  *
  * Retention policies:
- *   SOURCE  — stripped by javac; visible only in source (e.g. @Override)
- *   CLASS   — stored in .class but not loaded by JVM (default)
- *   RUNTIME — loaded by JVM and readable via reflection
+ *   SOURCE  - stripped by javac; visible only in source (e.g. @Override)
+ *   CLASS   - stored in .class but not loaded by JVM (default)
+ *   RUNTIME - loaded by JVM and readable via reflection
  *
  * Target controls where an annotation may be placed:
  *   TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR,
  *   LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE,
  *   TYPE_PARAMETER, TYPE_USE, MODULE, RECORD_COMPONENT
  *
- * @Documented — annotation appears in Javadoc
- * @Inherited  — subclasses inherit the annotation from their superclass
- * @Repeatable — same annotation may appear more than once on one element
+ * @Documented - annotation appears in Javadoc
+ * @Inherited  - subclasses inherit the annotation from their superclass
+ * @Repeatable - same annotation may appear more than once on one element
  */
 public class AnnotationDefinitions {
 

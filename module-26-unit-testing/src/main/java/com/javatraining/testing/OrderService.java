@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Order management service — used as the subject-under-test for Mockito demos.
+ * Order management service - used as the subject-under-test for Mockito demos.
  * Depends on three collaborators (repository, payment gateway, notifications),
  * none of which have real implementations; they are replaced by mocks in tests.
  */

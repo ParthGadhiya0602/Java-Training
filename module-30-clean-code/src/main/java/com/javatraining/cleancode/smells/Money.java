@@ -6,12 +6,12 @@ import java.math.RoundingMode;
 /**
  * Refactoring: Replace Data Clump with a Value Object.
  *
- * <p><strong>Smell — data clump:</strong> amount and currency always travel together
+ * <p><strong>Smell - data clump:</strong> amount and currency always travel together
  * as separate parameters, easy to mix up or pass mismatched values.
  * <pre>
  *   double amount = 99.99;
  *   String currency = "USD";
- *   // Both must always be passed together — they're a clump
+ *   // Both must always be passed together - they're a clump
  *   void charge(double amount, String currency) { ... }
  *   void refund(double amount, String currency) { ... }
  * </pre>

@@ -6,7 +6,7 @@ package com.javatraining.methods;
 public class MethodBasics {
 
     // -------------------------------------------------------------------------
-    // STATIC METHODS — no object needed, pure computation on inputs
+    // STATIC METHODS - no object needed, pure computation on inputs
     // -------------------------------------------------------------------------
 
     /** Converts Celsius to Fahrenheit. */
@@ -60,7 +60,7 @@ public class MethodBasics {
     }
 
     // -------------------------------------------------------------------------
-    // INSTANCE METHODS — operate on object's own state via 'this'
+    // INSTANCE METHODS - operate on object's own state via 'this'
     // -------------------------------------------------------------------------
     private final String name;
     private int score;
@@ -70,7 +70,7 @@ public class MethodBasics {
         this.score = initialScore;
     }
 
-    /** Instance method — reads and modifies THIS object's state. */
+    /** Instance method - reads and modifies THIS object's state. */
     public void addPoints(int points) {
         if (points < 0)
             throw new IllegalArgumentException("Points must be non-negative");
@@ -93,7 +93,7 @@ public class MethodBasics {
     }
 
     // -------------------------------------------------------------------------
-    // void methods with early return — useful for skipping invalid work
+    // void methods with early return - useful for skipping invalid work
     // -------------------------------------------------------------------------
     public static void printIfPositive(int n) {
         if (n <= 0) return;   // early return: nothing to do
@@ -107,9 +107,9 @@ public class MethodBasics {
         System.out.printf("-40°C = %.1f°F%n", celsiusToFahrenheit(-40)); // same in both scales
 
         System.out.println("\n=== Clamp ===");
-        System.out.println(clamp(50, 0, 100));   // 50 — within range
-        System.out.println(clamp(-5, 0, 100));   // 0  — below min
-        System.out.println(clamp(150, 0, 100));  // 100 — above max
+        System.out.println(clamp(50, 0, 100));   // 50 - within range
+        System.out.println(clamp(-5, 0, 100));   // 0  - below min
+        System.out.println(clamp(150, 0, 100));  // 100 - above max
 
         System.out.println("\n=== BMI ===");
         double b = bmi(70, 1.75);

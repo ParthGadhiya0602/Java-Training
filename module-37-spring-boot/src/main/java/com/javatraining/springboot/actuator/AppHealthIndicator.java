@@ -6,7 +6,7 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
 
 /**
- * Custom {@link HealthIndicator} — contributes an "app" component to the
+ * Custom {@link HealthIndicator} - contributes an "app" component to the
  * /actuator/health response.
  *
  * <p>Spring Boot's Actuator auto-discovers all {@link HealthIndicator} beans

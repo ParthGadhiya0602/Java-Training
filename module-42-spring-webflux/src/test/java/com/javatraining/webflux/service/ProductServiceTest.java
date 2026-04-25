@@ -18,14 +18,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Pure unit test — no Spring context, no Netty, no database.
+ * Pure unit test - no Spring context, no Netty, no database.
  *
- * StepVerifier — Reactor's test utility for asserting publisher behaviour:
- *   .create(publisher)    — subscribes to the publisher and starts the verification
- *   .assertNext(consumer) — asserts the next emitted element satisfies the consumer
- *   .verifyComplete()     — asserts no more elements and the stream terminates normally
- *   .expectError(Class)   — asserts the stream terminates with the specified exception type
- *   .verify()             — blocks until the expected terminal signal arrives
+ * StepVerifier - Reactor's test utility for asserting publisher behaviour:
+ *   .create(publisher)    - subscribes to the publisher and starts the verification
+ *   .assertNext(consumer) - asserts the next emitted element satisfies the consumer
+ *   .verifyComplete()     - asserts no more elements and the stream terminates normally
+ *   .expectError(Class)   - asserts the stream terminates with the specified exception type
+ *   .verify()             - blocks until the expected terminal signal arrives
  *
  * Why StepVerifier instead of .block()?
  *   .block() throws away error signals as unchecked exceptions, cannot assert intermediate
@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
  */
 class ProductServiceTest {
 
-    // Plain Mockito — no @MockBean, no Spring context startup
+    // Plain Mockito - no @MockBean, no Spring context startup
     ProductRepository repository = mock(ProductRepository.class);
     ProductService service = new ProductService(repository);
 

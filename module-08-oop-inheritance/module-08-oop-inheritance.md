@@ -1,29 +1,30 @@
 ---
-title: "08 — OOP: Inheritance"
-parent: "Phase 1 — Fundamentals"
+title: "08 - OOP: Inheritance"
+parent: "Phase 1 - Fundamentals"
 nav_order: 8
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-08-oop-inheritance/src){: .btn .btn-outline }
 
-# Module 08 — OOP: Inheritance & Polymorphism
+# Module 08 - OOP: Inheritance & Polymorphism
 
 ## What You Will Learn
 
-| Topic | Key Insight |
-|---|---|
-| `extends` & constructor chaining | `super(...)` must be first in child constructor; JVM walks the chain upward |
-| Method overriding | `@Override` is compile-time proof; return type may be covariant |
-| `super` method calls | Call the parent version explicitly when you want to augment, not replace |
-| `final` | `final class` → no subclassing; `final method` → no overriding; `final field` → assign once |
-| Abstract classes | Template Method pattern — skeleton in parent, steps deferred to children |
-| Polymorphism | Reference type determines which methods you can *call*; object type determines which runs |
-| Casting | Widening (safe, implicit); narrowing (risky, needs explicit cast + `instanceof` check) |
-| `instanceof` pattern matching | Java 16+ — eliminates the cast-after-check boilerplate |
-| Sealed classes (Java 17+) | Closed hierarchy — compiler knows every subtype; exhaustive `switch` without `default` |
-| Liskov Substitution Principle | Every subtype must be substitutable for its parent without breaking correctness |
+| Topic                            | Key Insight                                                                                 |
+| -------------------------------- | ------------------------------------------------------------------------------------------- |
+| `extends` & constructor chaining | `super(...)` must be first in child constructor; JVM walks the chain upward                 |
+| Method overriding                | `@Override` is compile-time proof; return type may be covariant                             |
+| `super` method calls             | Call the parent version explicitly when you want to augment, not replace                    |
+| `final`                          | `final class` → no subclassing; `final method` → no overriding; `final field` → assign once |
+| Abstract classes                 | Template Method pattern - skeleton in parent, steps deferred to children                    |
+| Polymorphism                     | Reference type determines which methods you can _call_; object type determines which runs   |
+| Casting                          | Widening (safe, implicit); narrowing (risky, needs explicit cast + `instanceof` check)      |
+| `instanceof` pattern matching    | Java 16+ - eliminates the cast-after-check boilerplate                                      |
+| Sealed classes (Java 17+)        | Closed hierarchy - compiler knows every subtype; exhaustive `switch` without `default`      |
+| Liskov Substitution Principle    | Every subtype must be substitutable for its parent without breaking correctness             |
 
 ---
 
@@ -77,7 +78,7 @@ Narrowing (risky):         Animal a = new Dog();
                            Dog d = (Dog) a;        // explicit, ClassCastException if wrong
 
 Pattern match (Java 16+):  if (a instanceof Dog dog) {
-                               dog.fetch();        // no cast needed — dog is Dog
+                               dog.fetch();        // no cast needed - dog is Dog
                            }
 
 Switch pattern (Java 21):  switch (shape) {
@@ -100,7 +101,7 @@ String area = switch (shape) {
     case Circle    c -> "π·r²";
     case Rectangle r -> "w·h";
     case Triangle  t -> "½·b·h";
-    // no default needed — sealed guarantees exhaustiveness
+    // no default needed - sealed guarantees exhaustiveness
 };
 ```
 
@@ -120,19 +121,19 @@ VIOLATION example:
   // Code that expects Rectangle:
   Rectangle r = new Square();
   r.setWidth(5); r.setHeight(3);
-  assert r.area() == 15;  // FAILS — Square made it 9
+  assert r.area() == 15;  // FAILS - Square made it 9
 ```
 
 ---
 
 ## Source Files
 
-| File | What it Demonstrates |
-|---|---|
-| `InheritanceBasics.java` | `extends`, `super`, constructor chaining, `@Override`, `final`, covariant return |
-| `PolymorphismDemo.java` | Dynamic dispatch, casting, `instanceof` pattern matching, LSP |
-| `SealedHierarchy.java` | Sealed classes/interfaces, exhaustive switch, pattern matching |
-| `ShapeCalculator.java` | Full design: abstract class (Template Method), sealed subtypes, polymorphic processing |
+| File                     | What it Demonstrates                                                                   |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `InheritanceBasics.java` | `extends`, `super`, constructor chaining, `@Override`, `final`, covariant return       |
+| `PolymorphismDemo.java`  | Dynamic dispatch, casting, `instanceof` pattern matching, LSP                          |
+| `SealedHierarchy.java`   | Sealed classes/interfaces, exhaustive switch, pattern matching                         |
+| `ShapeCalculator.java`   | Full design: abstract class (Template Method), sealed subtypes, polymorphic processing |
 
 ---
 
@@ -143,4 +144,5 @@ cd module-08-oop-inheritance
 mvn test
 mvn compile exec:java -Dexec.mainClass=com.javatraining.inheritance.ShapeCalculator
 ```
+
 {% endraw %}

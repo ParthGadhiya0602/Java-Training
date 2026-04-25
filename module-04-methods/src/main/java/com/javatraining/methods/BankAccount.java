@@ -19,16 +19,16 @@ import java.math.RoundingMode;
  *     - withdraw(double amount, String description)
  *
  *   VARARGS:
- *     - totalBalance(BankAccount... accounts) — sum multiple accounts
- *     - bulkDeposit(double amount, BankAccount... targets) — distribute evenly
+ *     - totalBalance(BankAccount... accounts) - sum multiple accounts
+ *     - bulkDeposit(double amount, BankAccount... targets) - distribute evenly
  *
  *   RECURSION:
  *     - compoundInterest(BigDecimal principal, double rate, int periods)
- *       — uses recursion to apply interest period by period
+ *       - uses recursion to apply interest period by period
  *
  *   PASS-BY-VALUE:
  *     - transfer(double amount, BankAccount target) shows that Java passes
- *       a copy of the reference — the objects ARE mutated (visible to caller),
+ *       a copy of the reference - the objects ARE mutated (visible to caller),
  *       but reassigning 'target' inside the method would NOT affect the caller.
  *
  *   GUARD CLAUSES:
@@ -37,14 +37,14 @@ import java.math.RoundingMode;
 public class BankAccount {
 
     // -------------------------------------------------------------------------
-    // Class-level (static) state — shared by ALL BankAccount instances
+    // Class-level (static) state - shared by ALL BankAccount instances
     // -------------------------------------------------------------------------
     private static int nextAccountNumber = 1000;
     private static final BigDecimal DEFAULT_INTEREST_RATE = new BigDecimal("0.06"); // 6% p.a.
     private static final BigDecimal MINIMUM_BALANCE = new BigDecimal("500.00");
 
     // -------------------------------------------------------------------------
-    // Instance state — each account has its own
+    // Instance state - each account has its own
     // -------------------------------------------------------------------------
     private final int    accountNumber;
     private final String holderName;
@@ -52,7 +52,7 @@ public class BankAccount {
     private final StringBuilder transactionLog = new StringBuilder();
 
     // -------------------------------------------------------------------------
-    // Private constructor — creation is through the static factory method
+    // Private constructor - creation is through the static factory method
     // -------------------------------------------------------------------------
     private BankAccount(String holderName, BigDecimal openingBalance) {
         this.accountNumber = nextAccountNumber++;
@@ -62,7 +62,7 @@ public class BankAccount {
     }
 
     // =========================================================================
-    // STATIC FACTORY METHOD — named constructor, communicates intent clearly
+    // STATIC FACTORY METHOD - named constructor, communicates intent clearly
     // =========================================================================
     public static BankAccount open(String holderName, double openingBalance) {
         // Guard clauses first
@@ -80,7 +80,7 @@ public class BankAccount {
     }
 
     // =========================================================================
-    // OVERLOADED deposit() — convenience versions
+    // OVERLOADED deposit() - convenience versions
     // =========================================================================
     public void deposit(double amount) {
         deposit(amount, "Deposit");
@@ -122,13 +122,13 @@ public class BankAccount {
     // =========================================================================
     // PASS-BY-VALUE demonstration inside transfer()
     //
-    // Both 'this' and 'target' are object references — when passed to a method,
+    // Both 'this' and 'target' are object references - when passed to a method,
     // Java passes copies of those references. Both copies still point to the
     // same BankAccount objects on the heap, so mutations (withdraw/deposit)
     // ARE visible to the caller.
     //
     // If you did: target = new BankAccount(...) inside this method, the caller's
-    // reference would NOT change — that's the pass-by-value guarantee.
+    // reference would NOT change - that's the pass-by-value guarantee.
     // =========================================================================
     public void transfer(double amount, BankAccount target) {
         if (target == null)
@@ -136,7 +136,7 @@ public class BankAccount {
         if (target == this)
             throw new IllegalArgumentException("Cannot transfer to the same account");
 
-        // These mutate the heap objects — visible to caller
+        // These mutate the heap objects - visible to caller
         this.withdraw(amount, "Transfer to #" + target.accountNumber);
         target.deposit(amount, "Transfer from #" + this.accountNumber);
     }
@@ -197,7 +197,7 @@ public class BankAccount {
     }
 
     // =========================================================================
-    // STATIC UTILITY — validate account number format
+    // STATIC UTILITY - validate account number format
     // =========================================================================
     public static boolean isValidAccountNumber(int accountNumber) {
         return accountNumber >= 1000 && accountNumber < nextAccountNumber;
@@ -221,12 +221,12 @@ public class BankAccount {
 
     public String statement() {
         return String.format(
-            "Account #%d — %s%nBalance: ₹%s%nTransactions:%n%s",
+            "Account #%d - %s%nBalance: ₹%s%nTransactions:%n%s",
             accountNumber, holderName, balance.toPlainString(), transactionLog);
     }
 
     // =========================================================================
-    // Main — exercise every concept
+    // Main - exercise every concept
     // =========================================================================
     public static void main(String[] args) {
         System.out.println("=== Static Factory: open() ===");
@@ -252,11 +252,11 @@ public class BankAccount {
             System.out.println("Caught: " + e.getMessage());
         }
 
-        System.out.println("\n=== transfer() — pass-by-value with objects ===");
-        System.out.println("Before — Alice: ₹" + alice.getBalance()
+        System.out.println("\n=== transfer() - pass-by-value with objects ===");
+        System.out.println("Before - Alice: ₹" + alice.getBalance()
             + "  Bob: ₹" + bob.getBalance());
         alice.transfer(3_000, bob);
-        System.out.println("After  — Alice: ₹" + alice.getBalance()
+        System.out.println("After  - Alice: ₹" + alice.getBalance()
             + "  Bob: ₹" + bob.getBalance());
 
         System.out.println("\n=== Varargs: totalBalance() ===");
@@ -266,7 +266,7 @@ public class BankAccount {
 
         System.out.println("\n=== Varargs: bulkDeposit() ===");
         BankAccount.bulkDeposit(1_500, "Annual bonus", alice, bob, carol);
-        System.out.println("After bonus — Alice: ₹" + alice.getBalance()
+        System.out.println("After bonus - Alice: ₹" + alice.getBalance()
             + "  Bob: ₹" + bob.getBalance()
             + "  Carol: ₹" + carol.getBalance());
 

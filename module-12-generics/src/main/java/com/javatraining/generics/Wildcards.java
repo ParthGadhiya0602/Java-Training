@@ -7,11 +7,11 @@ import java.util.*;
  *
  * A wildcard '?' stands for "some unknown type".
  *
- *   ? (unbounded)     — any type; you can read as Object, cannot write
- *   ? extends T       — some subtype of T (upper-bounded); safe to READ as T
- *   ? super T         — some supertype of T (lower-bounded); safe to WRITE T
+ *   ? (unbounded)     - any type; you can read as Object, cannot write
+ *   ? extends T       - some subtype of T (upper-bounded); safe to READ as T
+ *   ? super T         - some supertype of T (lower-bounded); safe to WRITE T
  *
- * PECS — Producer Extends, Consumer Super
+ * PECS - Producer Extends, Consumer Super
  * ────────────────────────────────────────
  *   If a parameter PRODUCES values you will read   → ? extends T
  *   If a parameter CONSUMES values you will write  → ? super T
@@ -24,7 +24,7 @@ import java.util.*;
 public class Wildcards {
 
     // -------------------------------------------------------------------------
-    // 1. Unbounded wildcard — List<?>
+    // 1. Unbounded wildcard - List<?>
     //    Use when you only need operations that work on any List regardless
     //    of element type (e.g., size, isEmpty, printing).
     //    You CANNOT add anything except null.
@@ -49,7 +49,7 @@ public class Wildcards {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Upper-bounded wildcard — List<? extends Number>
+    // 2. Upper-bounded wildcard - List<? extends Number>
     //    The list PRODUCES numbers; we can safely READ each element as Number.
     //    We CANNOT add (except null) because we don't know the exact subtype.
     // -------------------------------------------------------------------------
@@ -75,7 +75,7 @@ public class Wildcards {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Lower-bounded wildcard — List<? super Integer>
+    // 3. Lower-bounded wildcard - List<? super Integer>
     //    The list CONSUMES integers; we can safely WRITE Integer values.
     //    We can only read elements as Object (unknown exact supertype).
     // -------------------------------------------------------------------------
@@ -91,7 +91,7 @@ public class Wildcards {
     }
 
     // -------------------------------------------------------------------------
-    // 4. PECS in action — a Stack that uses both wildcards
+    // 4. PECS in action - a Stack that uses both wildcards
     // -------------------------------------------------------------------------
     static final class Stack<T> {
         private final Deque<T> data = new ArrayDeque<>();
@@ -117,7 +117,7 @@ public class Wildcards {
     }
 
     // -------------------------------------------------------------------------
-    // 5. Wildcard capture — helper method pattern
+    // 5. Wildcard capture - helper method pattern
     //    Swap two elements inside a List<?>; the compiler needs a named type
     //    to allow the assignment, so we delegate to a private <T> helper.
     // -------------------------------------------------------------------------
@@ -176,7 +176,7 @@ public class Wildcards {
     }
 
     static void pecsDemo() {
-        System.out.println("\n=== PECS — Stack.pushAll / drainTo ===");
+        System.out.println("\n=== PECS - Stack.pushAll / drainTo ===");
         Stack<Number> stack = new Stack<>();
 
         List<Integer> ints    = List.of(1, 2, 3);
@@ -192,7 +192,7 @@ public class Wildcards {
     }
 
     static void swapDemo() {
-        System.out.println("\n=== Wildcard capture — swap ===");
+        System.out.println("\n=== Wildcard capture - swap ===");
         List<String> words = new ArrayList<>(List.of("apple", "banana", "cherry"));
         swap(words, 0, 2);
         System.out.println("after swap(0,2): " + words);

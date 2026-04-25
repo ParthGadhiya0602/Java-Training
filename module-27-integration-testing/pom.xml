@@ -64,7 +64,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- PostgreSQL JDBC driver — needed to connect to the containerised database -->
+        <!-- PostgreSQL JDBC driver - needed to connect to the containerised database -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * TOPIC: Full class design — integrating every concept from the module
+ * TOPIC: Full class design - integrating every concept from the module
  *
  * Demonstrates:
  *   • Static factory instead of public constructor
@@ -20,7 +20,7 @@ import java.util.*;
 public class BankAccount {
 
     // -------------------------------------------------------------------------
-    // Transaction — immutable value object (record)
+    // Transaction - immutable value object (record)
     // -------------------------------------------------------------------------
     enum TxType { DEPOSIT, WITHDRAWAL, TRANSFER_IN, TRANSFER_OUT }
 
@@ -37,7 +37,7 @@ public class BankAccount {
 
         @Override
         public String toString() {
-            return String.format("  [%s] %-14s ₹%9.2f  balance: ₹%9.2f  — %s",
+            return String.format("  [%s] %-14s ₹%9.2f  balance: ₹%9.2f  - %s",
                 at.toLocalTime(), type, amount, balanceAfter, description);
         }
     }
@@ -59,7 +59,7 @@ public class BankAccount {
     private       double       balance;
     private final List<Transaction> history = new ArrayList<>();
 
-    // private constructor — creation goes through static factories
+    // private constructor - creation goes through static factories
     private BankAccount(String holderName, AccountType type, double initialDeposit) {
         if (holderName == null || holderName.isBlank())
             throw new IllegalArgumentException("holder name is required");
@@ -75,7 +75,7 @@ public class BankAccount {
     }
 
     // -------------------------------------------------------------------------
-    // Static factories — named, self-documenting
+    // Static factories - named, self-documenting
     // -------------------------------------------------------------------------
     public static BankAccount openSavings(String holder, double initialDeposit) {
         return new BankAccount(holder, AccountType.SAVINGS, initialDeposit);
@@ -115,7 +115,7 @@ public class BankAccount {
     }
 
     /**
-     * Transfer — shows pass-by-value with objects: we mutate the objects, not
+     * Transfer - shows pass-by-value with objects: we mutate the objects, not
      * the references, so both accounts are modified correctly.
      */
     public static void transfer(BankAccount from, BankAccount to, double amount) {
@@ -140,7 +140,7 @@ public class BankAccount {
     public String holderName()        { return holderName; }
     public AccountType type()         { return type; }
 
-    /** Defensive copy — caller cannot modify internal history */
+    /** Defensive copy - caller cannot modify internal history */
     public List<Transaction> history() {
         return Collections.unmodifiableList(history);
     }
@@ -152,7 +152,7 @@ public class BankAccount {
     }
 
     // -------------------------------------------------------------------------
-    // equals / hashCode — identity is the account number (natural key)
+    // equals / hashCode - identity is the account number (natural key)
     // Two accounts opened for the same person are still different accounts.
     // -------------------------------------------------------------------------
     @Override
@@ -239,7 +239,7 @@ public class BankAccount {
 
         System.out.println("a1: " + a1.accountNumber());
         System.out.println("a2: " + a2.accountNumber());
-        System.out.println("a1.equals(a2): " + a1.equals(a2));   // false — different account numbers
+        System.out.println("a1.equals(a2): " + a1.equals(a2));   // false - different account numbers
         System.out.println("a1.equals(a1): " + a1.equals(a1));   // true
 
         Set<BankAccount> accounts = new HashSet<>();
@@ -250,9 +250,9 @@ public class BankAccount {
         // Defensive copy test
         List<Transaction> hist = a1.history();
         try {
-            hist.add(null);  // should throw — unmodifiable list
+            hist.add(null);  // should throw - unmodifiable list
         } catch (UnsupportedOperationException e) {
-            System.out.println("Defensive copy works — history is unmodifiable");
+            System.out.println("Defensive copy works - history is unmodifiable");
         }
     }
 

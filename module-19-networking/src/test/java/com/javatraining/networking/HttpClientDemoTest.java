@@ -68,7 +68,7 @@ class HttpClientDemoTest {
         @Test void isSuccess_true_for_200() throws Exception {
             // Use a minimal mock-like approach via a real request to a local server
             // We can verify the logic directly by examining status codes through
-            // the static method — we build a real response via reflection is complex,
+            // the static method - we build a real response via reflection is complex,
             // so we test the boundary conditions via a small local server approach.
             // Since this is a unit-style test, we verify the API compiles and the
             // boundary values are correct using a lightweight approach:

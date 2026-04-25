@@ -4,23 +4,23 @@ import java.lang.reflect.*;
 import java.util.*;
 
 /**
- * Module 21 — Reflection: Inspecting Classes
+ * Module 21 - Reflection: Inspecting Classes
  *
  * java.lang.Class is the entry point to reflection.
  * Every loaded type has exactly one Class object.
  *
  * Ways to obtain a Class object:
- *   ClassName.class           — compile-time literal
- *   object.getClass()         — runtime type of an instance
- *   Class.forName("pkg.Name") — dynamic lookup by fully-qualified name
+ *   ClassName.class           - compile-time literal
+ *   object.getClass()         - runtime type of an instance
+ *   Class.forName("pkg.Name") - dynamic lookup by fully-qualified name
  *
  * Key reflection types:
- *   Class<T>       — type metadata
- *   Field          — instance/static field
- *   Method         — instance/static method
- *   Constructor<T> — constructor
- *   Parameter      — method/constructor parameter
- *   Modifier       — int bitmask of access flags
+ *   Class<T>       - type metadata
+ *   Field          - instance/static field
+ *   Method         - instance/static method
+ *   Constructor<T> - constructor
+ *   Parameter      - method/constructor parameter
+ *   Modifier       - int bitmask of access flags
  */
 public class ClassInspector {
 

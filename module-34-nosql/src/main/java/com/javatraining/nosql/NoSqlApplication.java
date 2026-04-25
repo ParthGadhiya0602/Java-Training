@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Entry point — required for {@code @DataMongoTest} to resolve the base package
+ * Entry point - required for {@code @DataMongoTest} to resolve the base package
  * for document and repository scanning.
  */
 @SpringBootApplication

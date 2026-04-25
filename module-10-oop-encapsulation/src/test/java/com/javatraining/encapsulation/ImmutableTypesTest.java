@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ImmutableTypesTest {
 
     // -----------------------------------------------------------------------
-    // ImmutableSchedule — defensive copy in & out
+    // ImmutableSchedule - defensive copy in & out
     // -----------------------------------------------------------------------
     @Test
     void mutating_source_list_does_not_affect_schedule() {
@@ -61,7 +61,7 @@ class ImmutableTypesTest {
     }
 
     // -----------------------------------------------------------------------
-    // Money — immutable arithmetic
+    // Money - immutable arithmetic
     // -----------------------------------------------------------------------
     @Test
     void add_creates_new_instance_originals_unchanged() {

@@ -33,8 +33,8 @@ public interface UserMapper {
     /**
      * Maps a creation request to a User entity.
      *
-     * <p>{@code id} is ignored — it will be assigned by the persistence layer.
-     * {@code address} is ignored — not present in the creation request.
+     * <p>{@code id} is ignored - it will be assigned by the persistence layer.
+     * {@code address} is ignored - not present in the creation request.
      */
     @Mapping(target = "id",      ignore = true)
     @Mapping(target = "address", ignore = true)
@@ -61,12 +61,12 @@ public interface UserMapper {
      * Maps a list of users to a list of DTOs.
      *
      * <p>MapStruct auto-generates this from the single-item {@link #userToDto} method.
-     * No body needed — the framework infers the element mapping automatically.
+     * No body needed - the framework infers the element mapping automatically.
      */
     List<UserDto> usersToDtos(List<User> users);
 
     /**
-     * Partial update — applies non-null fields from {@code request} onto {@code user}.
+     * Partial update - applies non-null fields from {@code request} onto {@code user}.
      *
      * <p>{@code NullValuePropertyMappingStrategy.IGNORE} means: if a field in
      * {@code request} is null, the corresponding field on {@code user} is

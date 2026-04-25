@@ -3,7 +3,7 @@ package com.javatraining.enums;
 import java.util.*;
 
 /**
- * TOPIC: EnumSet and EnumMap — specialized, high-performance collections
+ * TOPIC: EnumSet and EnumMap - specialized, high-performance collections
  * for enum types. Both are backed by simple data structures (bitset and array)
  * rather than hash tables, making them significantly faster than HashSet/HashMap.
  */
@@ -16,7 +16,7 @@ public class EnumCollections {
     enum Quarter    { Q1, Q2, Q3, Q4 }
 
     // -------------------------------------------------------------------------
-    // EnumSet — backed by a single long bitmask for up to 64 constants
+    // EnumSet - backed by a single long bitmask for up to 64 constants
     // -------------------------------------------------------------------------
     static void enumSetDemo() {
         System.out.println("=== EnumSet ===");
@@ -29,11 +29,11 @@ public class EnumCollections {
         EnumSet<Permission> adminFull = EnumSet.of(Permission.READ, Permission.WRITE,
                                                    Permission.DELETE, Permission.ADMIN);
 
-        // Range — all constants between two endpoints (inclusive, by ordinal order)
+        // Range - all constants between two endpoints (inclusive, by ordinal order)
         EnumSet<Permission> basic = EnumSet.range(Permission.READ, Permission.DELETE);
         // { READ, WRITE, DELETE }
 
-        // Complement — everything NOT in the given set
+        // Complement - everything NOT in the given set
         EnumSet<Permission> nonPrivileged = EnumSet.complementOf(
             EnumSet.of(Permission.DELETE, Permission.ADMIN)
         );
@@ -46,7 +46,7 @@ public class EnumCollections {
         System.out.println("basic (range): " + basic);
         System.out.println("nonPrivileged: " + nonPrivileged);
 
-        // Membership operations — O(1) bitwise
+        // Membership operations - O(1) bitwise
         System.out.println("\ncontains READ:   " + userPerms.contains(Permission.READ));   // true
         System.out.println("contains DELETE: " + userPerms.contains(Permission.DELETE)); // false
 
@@ -99,7 +99,7 @@ public class EnumCollections {
     }
 
     // -------------------------------------------------------------------------
-    // EnumMap — backed by a plain array indexed by ordinal
+    // EnumMap - backed by a plain array indexed by ordinal
     // -------------------------------------------------------------------------
     static void enumMapDemo() {
         System.out.println("\n=== EnumMap ===");
@@ -120,10 +120,10 @@ public class EnumCollections {
         }
         System.out.printf("  Total: ₹%,.0f%n", total);
 
-        // getOrDefault — useful for missing keys
+        // getOrDefault - useful for missing keys
         System.out.println("Q1 revenue: " + revenue.getOrDefault(Quarter.Q1, 0.0));
 
-        // forEach — cleaner than entrySet iteration
+        // forEach - cleaner than entrySet iteration
         System.out.println("\nWeekday work hours:");
         EnumMap<Weekday, Integer> hours = new EnumMap<>(Weekday.class);
         hours.put(Weekday.MON, 8); hours.put(Weekday.TUE, 8);

@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Demonstrates Spring Data JPA auditing — automatic population of
+ * Demonstrates Spring Data JPA auditing - automatic population of
  * {@code @CreatedDate} and {@code @LastModifiedDate} fields.
  *
  * <p>{@code @DataJpaTest} does NOT load {@code JpaAuditingConfig} from
@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AuditingTest {
 
     /**
-     * Inner test configuration — supplements the slice context rather than
+     * Inner test configuration - supplements the slice context rather than
      * replacing it.  {@code @TestConfiguration} tells Spring Boot this class
      * is additive; the auto-configuration (entity scan, datasource, etc.)
      * is still bootstrapped from {@code SpringDataApplication}.
@@ -102,7 +102,7 @@ class AuditingTest {
 
     @Test
     void created_at_is_not_updatable() {
-        // Column is mapped with updatable = false — this is structural verification.
+        // Column is mapped with updatable = false - this is structural verification.
         // If updatable were accidentally removed, the column mapping would update it.
         Department dept = tem.persist(new Department("Finance5"));
         Employee emp = new Employee("Immutable Ts", "imm@test.com", new BigDecimal("50000"));

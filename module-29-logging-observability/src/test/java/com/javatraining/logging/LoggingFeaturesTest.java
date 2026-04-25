@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *   Logback Logger (singleton per name)
  *         │
  *         ├── ConsoleAppender  (writes to stdout)
- *         └── ListAppender     (holds events in memory — attached by tests)
+ *         └── ListAppender     (holds events in memory - attached by tests)
  *                  └── listAppender.list  ←  we assert on these
  * </pre>
  *
@@ -42,7 +42,7 @@ class LoggingFeaturesTest {
         processor   = new OrderProcessor();
         userService = new UserService();
 
-        // Loggers are singletons — same instance every call for the same name.
+        // Loggers are singletons - same instance every call for the same name.
         processorLog   = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(OrderProcessor.class);
         userServiceLog = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(UserService.class);
 
@@ -56,7 +56,7 @@ class LoggingFeaturesTest {
     void detachAndClearMdc() {
         processorLog.detachAppender(appender);
         userServiceLog.detachAppender(appender);
-        MDC.clear();   // defensive — ensures no MDC leaks between tests
+        MDC.clear();   // defensive - ensures no MDC leaks between tests
     }
 
     // ── Log level tests ───────────────────────────────────────────────────────

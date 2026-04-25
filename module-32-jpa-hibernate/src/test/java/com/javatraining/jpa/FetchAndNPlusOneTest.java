@@ -17,8 +17,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Demonstrates fetch types and the N+1 query problem — the most common JPA
- * performance trap — using Hibernate's {@link Statistics} to count SQL statements.
+ * Demonstrates fetch types and the N+1 query problem - the most common JPA
+ * performance trap - using Hibernate's {@link Statistics} to count SQL statements.
  *
  * <p>Setup: 3 authors, each with 2 books.  Statistics are cleared before each
  * measurement so counts reflect only the code under test.
@@ -80,7 +80,7 @@ class FetchAndNPlusOneTest {
 
     @Test
     void lazy_association_triggers_extra_select_on_first_access() {
-        // Load a book — author is LAZY, so only the book row is fetched initially
+        // Load a book - author is LAZY, so only the book row is fetched initially
         Book book = JpaUtil.inTransaction(em, e -> {
             return e.createQuery("SELECT b FROM Book b", Book.class)
                     .setMaxResults(1).getSingleResult();

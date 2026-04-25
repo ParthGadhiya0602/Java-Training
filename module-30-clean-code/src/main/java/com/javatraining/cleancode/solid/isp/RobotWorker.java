@@ -1,6 +1,6 @@
 package com.javatraining.cleancode.solid.isp;
 
-/** Implements only the interfaces that make sense for a robot — no forced eat() stub. */
+/** Implements only the interfaces that make sense for a robot - no forced eat() stub. */
 public class RobotWorker implements Workable, Rechargeable {
 
     private final String model;

@@ -15,20 +15,20 @@ import static org.mockito.Mockito.*;
  * A guided tour of Mockito 5 with JUnit Jupiter.
  *
  * Topics covered:
- *   @Mock / @InjectMocks  — create and wire collaborator mocks
- *   @Spy                  — partial mock that calls real methods by default
- *   @Captor               — capture arguments passed to a mock method
- *   when/thenReturn        — stub a return value
- *   thenReturn chaining    — different return value on consecutive calls
- *   thenThrow              — stub an exception
- *   thenAnswer             — dynamic response via lambda
- *   doReturn / doThrow     — alternative stubbing syntax for void/spy
- *   verify                 — assert a method was called with specific arguments
- *   times / never / atLeastOnce — verify call count
- *   InOrder                — assert ordering of cross-mock calls
- *   verifyNoInteractions   — assert a mock was never touched
- *   ArgumentCaptor         — inspect values passed to a mock
- *   Argument matchers      — any(), eq(), anyString(), argThat()
+ *   @Mock / @InjectMocks  - create and wire collaborator mocks
+ *   @Spy                  - partial mock that calls real methods by default
+ *   @Captor               - capture arguments passed to a mock method
+ *   when/thenReturn        - stub a return value
+ *   thenReturn chaining    - different return value on consecutive calls
+ *   thenThrow              - stub an exception
+ *   thenAnswer             - dynamic response via lambda
+ *   doReturn / doThrow     - alternative stubbing syntax for void/spy
+ *   verify                 - assert a method was called with specific arguments
+ *   times / never / atLeastOnce - verify call count
+ *   InOrder                - assert ordering of cross-mock calls
+ *   verifyNoInteractions   - assert a mock was never touched
+ *   ArgumentCaptor         - inspect values passed to a mock
+ *   Argument matchers      - any(), eq(), anyString(), argThat()
  *
  * MockitoExtension uses STRICT_STUBS by default:
  *   - unused stubbings fail the test

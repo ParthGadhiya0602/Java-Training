@@ -7,14 +7,14 @@ import java.util.stream.*;
 /**
  * TOPIC: Collectors in depth
  *
- * Collectors.groupingBy    — partition into Map<K, List<T>>
- * Collectors.partitioningBy — special case: Map<Boolean, List<T>>
- * Collectors.toMap         — Map<K, V> with explicit key/value extractors
- * Collectors.joining       — concatenate strings
- * Collectors.counting      — count elements in a group
- * Collectors.summarizingInt/Long/Double — min/max/sum/count/average in one pass
- * Collectors.teeing        — apply two collectors to the same stream, merge results
- * Downstream collectors    — groupingBy(fn, downstream) chains collectors
+ * Collectors.groupingBy    - partition into Map<K, List<T>>
+ * Collectors.partitioningBy - special case: Map<Boolean, List<T>>
+ * Collectors.toMap         - Map<K, V> with explicit key/value extractors
+ * Collectors.joining       - concatenate strings
+ * Collectors.counting      - count elements in a group
+ * Collectors.summarizingInt/Long/Double - min/max/sum/count/average in one pass
+ * Collectors.teeing        - apply two collectors to the same stream, merge results
+ * Downstream collectors    - groupingBy(fn, downstream) chains collectors
  */
 public class CollectorsDeep {
 
@@ -22,7 +22,7 @@ public class CollectorsDeep {
                  double amount, boolean paid) {}
 
     // -------------------------------------------------------------------------
-    // 1. groupingBy — the most important collector
+    // 1. groupingBy - the most important collector
     // -------------------------------------------------------------------------
 
     /** Groups orders by category. */
@@ -62,7 +62,7 @@ public class CollectorsDeep {
     }
 
     // -------------------------------------------------------------------------
-    // 2. partitioningBy — two groups: true and false
+    // 2. partitioningBy - two groups: true and false
     // -------------------------------------------------------------------------
 
     /** Splits orders into paid and unpaid. */
@@ -80,7 +80,7 @@ public class CollectorsDeep {
     }
 
     // -------------------------------------------------------------------------
-    // 3. toMap — build a lookup map
+    // 3. toMap - build a lookup map
     // -------------------------------------------------------------------------
 
     /** Builds an id→order lookup map. Throws on duplicate keys. */
@@ -109,7 +109,7 @@ public class CollectorsDeep {
     }
 
     // -------------------------------------------------------------------------
-    // 5. summarizingInt/Double — min/max/sum/count/average in one pass
+    // 5. summarizingInt/Double - min/max/sum/count/average in one pass
     // -------------------------------------------------------------------------
 
     static DoubleSummaryStatistics amountStats(List<Order> orders) {
@@ -118,7 +118,7 @@ public class CollectorsDeep {
     }
 
     // -------------------------------------------------------------------------
-    // 6. teeing — apply two collectors to the SAME stream, merge results (Java 12+)
+    // 6. teeing - apply two collectors to the SAME stream, merge results (Java 12+)
     //    Classic use: compute sum AND count to get average in one pass;
     //    or collect two separate lists from one stream traversal.
     // -------------------------------------------------------------------------

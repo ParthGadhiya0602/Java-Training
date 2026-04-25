@@ -1,14 +1,16 @@
 ---
-title: "24 — JVM Internals"
-parent: "Phase 2 — Core APIs"
+title: "24 - JVM Internals"
+parent: "Phase 2 - Core APIs"
 nav_order: 24
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-24-jvm-internals/src){: .btn .btn-outline }
 
-# Module 24 — JVM Internals: GC, JIT, ClassLoaders
+# Module 24 - JVM Internals: GC, JIT, ClassLoaders
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -101,13 +103,13 @@ Non-Heap
 
 ### GC algorithms (Java 11–21)
 
-| Collector | Pauses | Use case |
-|---|---|---|
-| Serial GC | Stop-the-world | Small heaps, embedded |
-| Parallel GC | Stop-the-world, parallel | Maximum throughput |
-| G1 GC (default) | Short, predictable | Balanced latency/throughput |
-| ZGC | Sub-millisecond (Java 15+) | Large heaps, low latency |
-| Shenandoah | Concurrent compaction | Low pause, any heap size |
+| Collector       | Pauses                     | Use case                    |
+| --------------- | -------------------------- | --------------------------- |
+| Serial GC       | Stop-the-world             | Small heaps, embedded       |
+| Parallel GC     | Stop-the-world, parallel   | Maximum throughput          |
+| G1 GC (default) | Short, predictable         | Balanced latency/throughput |
+| ZGC             | Sub-millisecond (Java 15+) | Large heaps, low latency    |
+| Shenandoah      | Concurrent compaction      | Low pause, any heap size    |
 
 ### JVM flags
 
@@ -147,12 +149,12 @@ for (GarbageCollectorMXBean gc : ManagementFactory.getGarbageCollectorMXBeans())
 
 ### Reference types
 
-| Type | Cleared when | Use case |
-|---|---|---|
-| Strong | Never (while reachable) | Normal variables |
-| `SoftReference<T>` | Before OutOfMemoryError | Memory-sensitive caches |
-| `WeakReference<T>` | Next GC cycle | `WeakHashMap` keys, canonicalization |
-| `PhantomReference<T>` | After finalisation (`get()` always null) | Resource cleanup |
+| Type                  | Cleared when                             | Use case                             |
+| --------------------- | ---------------------------------------- | ------------------------------------ |
+| Strong                | Never (while reachable)                  | Normal variables                     |
+| `SoftReference<T>`    | Before OutOfMemoryError                  | Memory-sensitive caches              |
+| `WeakReference<T>`    | Next GC cycle                            | `WeakHashMap` keys, canonicalization |
+| `PhantomReference<T>` | After finalisation (`get()` always null) | Resource cleanup                     |
 
 ```java
 SoftReference<byte[]> cache  = new SoftReference<>(largeArray);
@@ -163,7 +165,7 @@ byte[] arr = cache.get();   // null if GC'd
 Object o   = weak.get();    // null if GC'd
 ```
 
-### Cleaner (Java 9+) — replacement for finalize()
+### Cleaner (Java 9+) - replacement for finalize()
 
 ```java
 private static final Cleaner CLEANER = Cleaner.create();
@@ -188,15 +190,15 @@ Cleaner.Cleanable cleanable = CLEANER.register(this, state);
 
 ### Compilation tiers (HotSpot Tiered Compilation)
 
-| Tier | Compiler | Trigger | Optimisations |
-|---|---|---|---|
-| 0 | Interpreter | Always | None |
-| 1–3 | C1 (client) | ~1,500 invocations | Fast compile, limited |
-| 4 | C2 (server) | ~10,000–15,000 invocations | Aggressive, profile-guided |
+| Tier | Compiler    | Trigger                    | Optimisations              |
+| ---- | ----------- | -------------------------- | -------------------------- |
+| 0    | Interpreter | Always                     | None                       |
+| 1–3  | C1 (client) | ~1,500 invocations         | Fast compile, limited      |
+| 4    | C2 (server) | ~10,000–15,000 invocations | Aggressive, profile-guided |
 
 ### Key optimisations
 
-**Inlining** — replaces a method call with the method body at the call site. The single most impactful optimisation; enables all others.
+**Inlining** - replaces a method call with the method body at the call site. The single most impactful optimisation; enables all others.
 
 ```java
 // Before inlining:
@@ -206,7 +208,7 @@ int result = Math.abs(x);
 int result = x < 0 ? -x : x;
 ```
 
-**Escape analysis** — if an object never leaves the method (doesn't escape to heap), allocate it on the stack or replace it with scalar variables:
+**Escape analysis** - if an object never leaves the method (doesn't escape to heap), allocate it on the stack or replace it with scalar variables:
 
 ```java
 void compute() {
@@ -215,9 +217,9 @@ void compute() {
 }
 ```
 
-**Devirtualisation** — if a virtual call site is always called with the same concrete type (monomorphic), replace the virtual dispatch with a direct call.
+**Devirtualisation** - if a virtual call site is always called with the same concrete type (monomorphic), replace the virtual dispatch with a direct call.
 
-**Loop unrolling / vectorisation** — duplicate loop body to reduce branch count; use SIMD instructions where available.
+**Loop unrolling / vectorisation** - duplicate loop body to reduce branch count; use SIMD instructions where available.
 
 ### Warmup effect
 
@@ -232,7 +234,7 @@ Round 10 (C2):   1,200 ns  ← C2 fully optimised
 
 **Consequence:** never benchmark cold code. Always warm up for 1,000–10,000+ iterations before measuring.
 
-### Dead code elimination — the benchmark trap
+### Dead code elimination - the benchmark trap
 
 ```java
 // JIT may eliminate this entirely if result is never used!
@@ -276,12 +278,12 @@ comp.isCompilationTimeMonitoringSupported();
 ### Auto-boxing overhead
 
 ```java
-// Bad — autoboxes every element
+// Bad - autoboxes every element
 List<Integer> list = new ArrayList<>();
 long sum = 0;
 for (Integer i : list) sum += i;   // unbox on every iteration
 
-// Good — no boxing
+// Good - no boxing
 long sum = 0;
 for (int i = 0; i < n; i++) sum += i;
 // Or: IntStream.range(0, n).sum()
@@ -290,11 +292,11 @@ for (int i = 0; i < n; i++) sum += i;
 ### String building
 
 ```java
-// Bad — O(n²) allocations
+// Bad - O(n²) allocations
 String s = "";
 for (int i = 0; i < n; i++) s += i;
 
-// Good — O(n)
+// Good - O(n)
 StringBuilder sb = new StringBuilder(n * 3);  // pre-size if known
 for (int i = 0; i < n; i++) sb.append(i);
 return sb.toString();
@@ -313,17 +315,18 @@ finally { pool.release(obj); }
 
 ## Summary
 
-| Concept | Key point |
-|---|---|
-| ClassLoader hierarchy | Bootstrap → Platform → Application; parent-first delegation |
-| Class identity | Same name + same ClassLoader = same class |
-| Custom loader | Override `findClass()`; call `defineClass()` with bytecode |
-| GC generations | Young (Eden + Survivors) → Old; Metaspace for class metadata |
-| G1 GC | Default since Java 9; region-based; predictable short pauses |
-| ZGC / Shenandoah | Sub-millisecond pauses; Java 15+ production |
-| Reference strength | Strong → Soft (pre-OOM) → Weak (next GC) → Phantom (post-finalise) |
-| Cleaner | Java 9+ replacement for `finalize()`; deterministic with `close()` |
-| JIT tiers | C1 (~1.5k calls) → C2 (~15k calls); inlining enables everything else |
-| Warmup | Benchmark only after JIT has compiled the hot path |
-| Dead code trap | Return/consume results; use JMH for serious benchmarking |
+| Concept               | Key point                                                            |
+| --------------------- | -------------------------------------------------------------------- |
+| ClassLoader hierarchy | Bootstrap → Platform → Application; parent-first delegation          |
+| Class identity        | Same name + same ClassLoader = same class                            |
+| Custom loader         | Override `findClass()`; call `defineClass()` with bytecode           |
+| GC generations        | Young (Eden + Survivors) → Old; Metaspace for class metadata         |
+| G1 GC                 | Default since Java 9; region-based; predictable short pauses         |
+| ZGC / Shenandoah      | Sub-millisecond pauses; Java 15+ production                          |
+| Reference strength    | Strong → Soft (pre-OOM) → Weak (next GC) → Phantom (post-finalise)   |
+| Cleaner               | Java 9+ replacement for `finalize()`; deterministic with `close()`   |
+| JIT tiers             | C1 (~1.5k calls) → C2 (~15k calls); inlining enables everything else |
+| Warmup                | Benchmark only after JIT has compiled the hot path                   |
+| Dead code trap        | Return/consume results; use JMH for serious benchmarking             |
+
 {% endraw %}

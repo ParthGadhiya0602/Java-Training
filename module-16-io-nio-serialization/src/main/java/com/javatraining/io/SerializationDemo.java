@@ -4,19 +4,19 @@ import java.io.*;
 import java.util.List;
 
 /**
- * Module 16 — Java Serialization
+ * Module 16 - Java Serialization
  *
  * Java serialization converts an object graph to bytes and back.
- * It is the foundation of RMI, JMX, and some caching systems —
+ * It is the foundation of RMI, JMX, and some caching systems -
  * but is largely replaced by JSON/Protobuf in modern code.
  *
  * Key concepts:
- *   Serializable         — marker interface; JVM handles field serialization
- *   serialVersionUID     — version guard; prevent accidental incompatibility
- *   transient            — exclude a field from serialization
- *   Externalizable       — full manual control over read/writeExternal()
- *   readObject/writeObject — custom hook inside Serializable classes
- *   ObjectInputFilter    — defend against deserialization attacks (Java 9+)
+ *   Serializable         - marker interface; JVM handles field serialization
+ *   serialVersionUID     - version guard; prevent accidental incompatibility
+ *   transient            - exclude a field from serialization
+ *   Externalizable       - full manual control over read/writeExternal()
+ *   readObject/writeObject - custom hook inside Serializable classes
+ *   ObjectInputFilter    - defend against deserialization attacks (Java 9+)
  *
  * WARNING: Never deserialize data from untrusted sources without a filter.
  */
@@ -26,7 +26,7 @@ public class SerializationDemo {
 
     /**
      * Any Serializable class should declare serialVersionUID explicitly.
-     * Without it the JVM generates one from class structure — a field rename
+     * Without it the JVM generates one from class structure - a field rename
      * silently breaks deserialization of stored data.
      */
     public static class Product implements Serializable {
@@ -36,7 +36,7 @@ public class SerializationDemo {
         private final String name;
         private final double price;
         private final String category;
-        private transient double cachedTax;   // transient — not serialized
+        private transient double cachedTax;   // transient - not serialized
 
         public Product(String name, double price, String category) {
             this.name     = name;
@@ -94,7 +94,7 @@ public class SerializationDemo {
         public int    getPort()          { return port; }
         public String getPlainPassword() { return plainPassword; }
 
-        /** ROT13 — trivial reversible transform for demo only. */
+        /** ROT13 - trivial reversible transform for demo only. */
         static String rot13(String s) {
             StringBuilder sb = new StringBuilder(s.length());
             for (char c : s.toCharArray()) {
@@ -168,7 +168,7 @@ public class SerializationDemo {
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(byte[] data, Class<T> expected) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data))) {
-            // Allowlist filter — reject anything not explicitly permitted
+            // Allowlist filter - reject anything not explicitly permitted
             ois.setObjectInputFilter(filterInfo -> {
                 Class<?> clazz = filterInfo.serialClass();
                 if (clazz == null) return ObjectInputFilter.Status.UNDECIDED;
@@ -214,7 +214,7 @@ public class SerializationDemo {
     // ── Deep copy via serialization ───────────────────────────────────────────
 
     /**
-     * Serialization can clone an entire object graph — every reachable
+     * Serialization can clone an entire object graph - every reachable
      * Serializable object is copied.  Slow, but works for any depth.
      * Only use this as a last resort; prefer copy constructors.
      */

@@ -4,7 +4,7 @@ FROM maven:3.9-eclipse-temurin-21 AS builder
 WORKDIR /app
 
 # Copy POM first and resolve dependencies separately so this layer is cached
-# as long as pom.xml doesn't change — even if source code changes.
+# as long as pom.xml doesn't change - even if source code changes.
 COPY pom.xml .
 RUN mvn dependency:go-offline -q
 
@@ -17,7 +17,7 @@ RUN mvn package -DskipTests -q
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Run as a non-root user — principle of least privilege
+# Run as a non-root user - principle of least privilege
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring
 

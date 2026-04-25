@@ -15,19 +15,19 @@ import static org.junit.jupiter.api.Assumptions.*;
  * A guided tour of JUnit 5 (Jupiter) features.
  *
  * Topics covered:
- *   Lifecycle       — @BeforeAll / @AfterAll / @BeforeEach / @AfterEach
- *   Basic assertions — assertEquals, assertFalse, assertNotNull
- *   assertAll        — grouped assertions (all branches checked on failure)
- *   assertThrows     — exception type and message
- *   assertTimeout    — performance bounds
- *   @Nested          — logical grouping of related tests
- *   @ParameterizedTest — @ValueSource / @CsvSource / @MethodSource / @EnumSource / @NullSource
- *   @RepeatedTest    — run the same test N times
- *   Assumptions      — assumeTrue / assumingThat (conditional test execution)
- *   @Disabled        — mark a test as intentionally skipped
- *   @Tag             — categorise tests for selective execution
- *   @TestMethodOrder — deterministic method ordering
- *   @DisplayName     — human-readable names in reports
+ *   Lifecycle       - @BeforeAll / @AfterAll / @BeforeEach / @AfterEach
+ *   Basic assertions - assertEquals, assertFalse, assertNotNull
+ *   assertAll        - grouped assertions (all branches checked on failure)
+ *   assertThrows     - exception type and message
+ *   assertTimeout    - performance bounds
+ *   @Nested          - logical grouping of related tests
+ *   @ParameterizedTest - @ValueSource / @CsvSource / @MethodSource / @EnumSource / @NullSource
+ *   @RepeatedTest    - run the same test N times
+ *   Assumptions      - assumeTrue / assumingThat (conditional test execution)
+ *   @Disabled        - mark a test as intentionally skipped
+ *   @Tag             - categorise tests for selective execution
+ *   @TestMethodOrder - deterministic method ordering
+ *   @DisplayName     - human-readable names in reports
  */
 @DisplayName("JUnit 5 Features")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -212,7 +212,7 @@ class JUnit5FeaturesTest {
     // ── Assumptions ───────────────────────────────────────────────────────────
 
     /**
-     * assumeTrue(false) aborts the test — it shows as "skipped" in the report,
+     * assumeTrue(false) aborts the test - it shows as "skipped" in the report,
      * not as a failure.  Use this to skip tests when preconditions aren't met
      * (e.g. external service unavailable, wrong OS).
      */

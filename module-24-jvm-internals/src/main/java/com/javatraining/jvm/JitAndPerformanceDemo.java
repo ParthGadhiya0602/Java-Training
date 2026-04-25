@@ -7,27 +7,27 @@ import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
 /**
- * Module 24 — JIT Compiler & Performance
+ * Module 24 - JIT Compiler & Performance
  *
  * JIT (Just-In-Time) compilation pipeline:
  *   1. Bytecode interpreted by the JVM interpreter (cold code)
- *   2. C1 (client) compiler — fast compilation, limited optimisation
+ *   2. C1 (client) compiler - fast compilation, limited optimisation
  *      Triggered after ~1,500 invocations (tiered: level 1–3)
- *   3. C2 (server) compiler — aggressive optimisation after profiling
+ *   3. C2 (server) compiler - aggressive optimisation after profiling
  *      Triggered after ~10,000–15,000 invocations (tiered: level 4)
  *
  * Key JIT optimisations:
- *   Inlining         — replace method call with method body
- *   Loop unrolling   — duplicate loop body to reduce branch overhead
- *   Escape analysis  — allocate on stack if object doesn't escape
- *   Devirtualisation — convert virtual calls to direct calls (monomorphic sites)
- *   Dead code elim.  — remove unreachable branches
- *   Scalar replacement — decompose object fields directly onto stack
+ *   Inlining         - replace method call with method body
+ *   Loop unrolling   - duplicate loop body to reduce branch overhead
+ *   Escape analysis  - allocate on stack if object doesn't escape
+ *   Devirtualisation - convert virtual calls to direct calls (monomorphic sites)
+ *   Dead code elim.  - remove unreachable branches
+ *   Scalar replacement - decompose object fields directly onto stack
  *
  * Measuring performance:
- *   System.nanoTime()  — monotonic clock, high resolution, no wall-clock meaning
- *   System.currentTimeMillis() — wall clock, lower resolution
- *   JMH (Java Microbenchmark Harness) — correct benchmarking tool
+ *   System.nanoTime()  - monotonic clock, high resolution, no wall-clock meaning
+ *   System.currentTimeMillis() - wall clock, lower resolution
+ *   JMH (Java Microbenchmark Harness) - correct benchmarking tool
  *
  * Common performance pitfalls:
  *   - Benchmarking before JIT warms up (cold code numbers are misleading)
@@ -87,7 +87,7 @@ public class JitAndPerformanceDemo {
      * later invocations are faster (JIT-compiled).
      *
      * Returns an array of elapsed times for each round.
-     * NOT a precise benchmark — illustrates the concept.
+     * NOT a precise benchmark - illustrates the concept.
      */
     public static long[] measureWarmup(int rounds) {
         long[] times = new long[rounds];
@@ -105,14 +105,14 @@ public class JitAndPerformanceDemo {
 
     // ── Auto-boxing cost ──────────────────────────────────────────────────────
 
-    /** Sum using primitive int array — no boxing. */
+    /** Sum using primitive int array - no boxing. */
     public static long sumPrimitive(int n) {
         long sum = 0;
         for (int i = 0; i < n; i++) sum += i;
         return sum;
     }
 
-    /** Sum using Integer list — every element is boxed. */
+    /** Sum using Integer list - every element is boxed. */
     public static long sumBoxed(List<Integer> list) {
         long sum = 0;
         for (Integer i : list) sum += i;   // unboxing on every iteration
@@ -149,7 +149,7 @@ public class JitAndPerformanceDemo {
 
     /**
      * If the JIT determines a Point never escapes this method, it may
-     * allocate it on the stack (scalar replacement) — zero heap allocation.
+     * allocate it on the stack (scalar replacement) - zero heap allocation.
      * This is invisible to the programmer but improves throughput significantly.
      */
     public static double computeDistance(int x1, int y1, int x2, int y2) {
@@ -199,7 +199,7 @@ public class JitAndPerformanceDemo {
         System.gc();
         long before = rt.totalMemory() - rt.freeMemory();
 
-        // Allocate objects — prevent dead-code elimination by touching them
+        // Allocate objects - prevent dead-code elimination by touching them
         int[] sizes = new int[objectCount];
         for (int i = 0; i < objectCount; i++) {
             byte[] arr = new byte[100];

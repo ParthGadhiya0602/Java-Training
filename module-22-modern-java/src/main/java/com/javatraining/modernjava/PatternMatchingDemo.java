@@ -3,14 +3,14 @@ package com.javatraining.modernjava;
 import java.util.*;
 
 /**
- * Module 22 — Pattern Matching (Java 14–21)
+ * Module 22 - Pattern Matching (Java 14–21)
  *
  * Pattern matching eliminates repetitive casting and null checks.
  *
  * Features by version:
- *   Java 14 preview / Java 16 final — instanceof pattern variable
- *   Java 17 preview / Java 21 final — sealed classes + switch patterns
- *   Java 21 final                   — record patterns, guarded patterns
+ *   Java 14 preview / Java 16 final - instanceof pattern variable
+ *   Java 17 preview / Java 21 final - sealed classes + switch patterns
+ *   Java 21 final                   - record patterns, guarded patterns
  *
  * instanceof pattern (Java 16):
  *   if (obj instanceof String s) { use s directly }
@@ -52,7 +52,7 @@ public class PatternMatchingDemo {
         return "unknown";
     }
 
-    /** New style: pattern variable — no explicit cast needed. */
+    /** New style: pattern variable - no explicit cast needed. */
     public static String describe(Object obj) {
         if (obj instanceof String s)   return "String of length " + s.length();
         if (obj instanceof Integer i)  return "Integer: " + i;

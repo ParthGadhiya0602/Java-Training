@@ -3,7 +3,7 @@ package com.javatraining.cleancode.solid.lsp;
 import java.util.List;
 
 /**
- * Works with any {@link Shape} — LSP guarantee: Rectangle and Square
+ * Works with any {@link Shape} - LSP guarantee: Rectangle and Square
  * are substitutable here without any special-casing.
  */
 public class ShapeCalculator {

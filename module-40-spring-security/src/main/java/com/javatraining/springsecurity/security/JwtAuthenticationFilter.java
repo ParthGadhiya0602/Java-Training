@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     }
                 }
             } catch (Exception ignored) {
-                // Invalid/expired/malformed token — proceed without authentication.
+                // Invalid/expired/malformed token - proceed without authentication.
                 // The SecurityContext remains empty → downstream filter chain returns 401.
             }
         }

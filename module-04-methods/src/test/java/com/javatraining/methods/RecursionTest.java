@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("RecursionDemo — correctness of recursive algorithms")
+@DisplayName("RecursionDemo - correctness of recursive algorithms")
 class RecursionTest {
 
     @ParameterizedTest(name = "{0}! = {1}")

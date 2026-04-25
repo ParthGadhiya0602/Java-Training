@@ -23,11 +23,11 @@ import com.javatraining.batch.repository.ProductRepository;
  * Batch job configuration.
  *
  * Spring Boot 3.x conventions:
- *   - NO @EnableBatchProcessing — Spring Boot auto-configures JobRepository, JobLauncher,
+ *   - NO @EnableBatchProcessing - Spring Boot auto-configures JobRepository, JobLauncher,
  *     JobExplorer automatically. Adding @EnableBatchProcessing disables the auto-config.
- *   - Use new JobBuilder(name, jobRepository) — JobBuilderFactory is deprecated in Batch 5.
- *   - Use new StepBuilder(name, jobRepository) — StepBuilderFactory is deprecated in Batch 5.
- *   - PlatformTransactionManager is injected directly — no longer a JobBuilderFactory detail.
+ *   - Use new JobBuilder(name, jobRepository) - JobBuilderFactory is deprecated in Batch 5.
+ *   - Use new StepBuilder(name, jobRepository) - StepBuilderFactory is deprecated in Batch 5.
+ *   - PlatformTransactionManager is injected directly - no longer a JobBuilderFactory detail.
  *
  * Chunk-oriented processing flow (per chunk of size N):
  *
@@ -49,14 +49,14 @@ import com.javatraining.batch.repository.ProductRepository;
 public class ProductImportJobConfig {
 
     /**
-     * FlatFileItemReader — reads one line at a time, tokenizes it, maps to ProductCsvRow.
+     * FlatFileItemReader - reads one line at a time, tokenizes it, maps to ProductCsvRow.
      *
      * @StepScope: bean is created fresh for each StepExecution (not at application startup).
      *   Required when the bean uses job/step parameters via @Value("#{jobParameters[...]}").
      *   The bean is a scoped proxy at startup; the real instance is created when the step runs.
      *
      * @Value("#{jobParameters['input.file'] ?: 'products.csv'}"):
-     *   Late binding — the SpEL expression is evaluated when the step scope activates, not
+     *   Late binding - the SpEL expression is evaluated when the step scope activates, not
      *   when the application context starts. The ?: operator provides a fallback so tests
      *   can launch the step without explicitly providing the parameter.
      */
@@ -68,14 +68,14 @@ public class ProductImportJobConfig {
                 .name("productReader")
                 .resource(new ClassPathResource(fileName))
                 .delimited()
-                .names("name", "category", "price")   // column names — must match CSV header
+                .names("name", "category", "price")   // column names - must match CSV header
                 .targetType(ProductCsvRow.class)       // BeanWrapperFieldSetMapper target
                 .linesToSkip(1)                        // skip the header row
                 .build();
     }
 
     /**
-     * RepositoryItemWriter — delegates to ProductRepository.save() for each item in the chunk.
+     * RepositoryItemWriter - delegates to ProductRepository.save() for each item in the chunk.
      * Participates in the chunk's transaction automatically (same EntityManager / tx context).
      */
     @Bean
@@ -87,7 +87,7 @@ public class ProductImportJobConfig {
     }
 
     /**
-     * Step — the unit of work.
+     * Step - the unit of work.
      *
      * chunk(10, transactionManager):
      *   Read up to 10 items, process them, write them all in one transaction.
@@ -121,7 +121,7 @@ public class ProductImportJobConfig {
     }
 
     /**
-     * Job — the top-level batch unit.
+     * Job - the top-level batch unit.
      *
      * A Job is a container for Steps. Steps execute in the order declared.
      * The Job tracks its own execution state in the BATCH_JOB_INSTANCE and

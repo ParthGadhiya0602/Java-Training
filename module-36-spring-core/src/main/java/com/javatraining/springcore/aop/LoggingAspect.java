@@ -17,10 +17,10 @@ import java.util.List;
  *   execution( [modifier] returnType [declaring-type] method-name(params) [throws] )
  *
  *   execution(* com.javatraining.springcore.service.*.*(..))
- *     *     — any return type
- *     com…service.*  — any class in the service package
- *     .*  — any method name
- *     (..) — any number of parameters
+ *     *     - any return type
+ *     com…service.*  - any class in the service package
+ *     .*  - any method name
+ *     (..) - any number of parameters
  * </pre>
  *
  * <p>Advice execution order for a method call (no exception):
@@ -47,7 +47,7 @@ import java.util.List;
 @Component
 public class LoggingAspect {
 
-    // Recorded calls — inspected in tests
+    // Recorded calls - inspected in tests
     private final List<String> log = new ArrayList<>();
 
     // ── Pointcut declarations ─────────────────────────────────────────────────
@@ -63,7 +63,7 @@ public class LoggingAspect {
     // ── Advice ───────────────────────────────────────────────────────────────
 
     /**
-     * @Before — runs before the method.
+     * @Before - runs before the method.
      * Cannot stop the method from executing (use @Around for that).
      */
     @Before("userServiceMethods()")
@@ -72,7 +72,7 @@ public class LoggingAspect {
     }
 
     /**
-     * @AfterReturning — runs after successful return.
+     * @AfterReturning - runs after successful return.
      * The 'returning' binding captures the actual return value.
      */
     @AfterReturning(pointcut = "userServiceMethods()", returning = "result")
@@ -81,17 +81,17 @@ public class LoggingAspect {
     }
 
     /**
-     * @AfterThrowing — runs when the method throws an exception.
+     * @AfterThrowing - runs when the method throws an exception.
      * The 'throwing' binding captures the actual exception.
-     * Does NOT suppress the exception — it still propagates.
+     * Does NOT suppress the exception - it still propagates.
      */
     @AfterThrowing(pointcut = "serviceLayer()", throwing = "ex")
     public void logAfterThrowing(JoinPoint jp, Throwable ex) {
-        log.add("AFTER_THROWING " + jp.getSignature().getName() + " — " + ex.getMessage());
+        log.add("AFTER_THROWING " + jp.getSignature().getName() + " - " + ex.getMessage());
     }
 
     /**
-     * @After — runs after the method regardless of outcome (like finally).
+     * @After - runs after the method regardless of outcome (like finally).
      * Use for cleanup that must always happen.
      */
     @After("userServiceMethods()")
@@ -100,11 +100,11 @@ public class LoggingAspect {
     }
 
     /**
-     * @Around — wraps the entire method invocation.
+     * @Around - wraps the entire method invocation.
      * {@code pjp.proceed()} delegates to the actual method.
      * Can modify args, modify the return value, or suppress the exception.
      *
-     * <p>@Around is the most powerful advice — use it for timing, transactions,
+     * <p>@Around is the most powerful advice - use it for timing, transactions,
      * retries, or security checks where you need full control.
      */
     @Around("execution(* com.javatraining.springcore.service.ReportService.*(..))")

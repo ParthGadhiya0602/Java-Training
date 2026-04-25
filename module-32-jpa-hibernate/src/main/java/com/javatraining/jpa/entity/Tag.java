@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A label/category that can be applied to many books — inverse side of the
+ * A label/category that can be applied to many books - inverse side of the
  * Book ↔ Tag {@code @ManyToMany} relationship.
  *
  * <p>The join table ({@code book_tags}) is owned by {@link Book#tags}.

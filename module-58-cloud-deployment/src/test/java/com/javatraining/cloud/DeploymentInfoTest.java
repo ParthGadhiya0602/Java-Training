@@ -34,7 +34,7 @@ class DeploymentInfoTest {
 
     @Test
     void actuator_info_endpoint_exposes_app_metadata() throws Exception {
-        // /actuator/info surfaces info.* properties — driven by app.* via property references
+        // /actuator/info surfaces info.* properties - driven by app.* via property references
         mockMvc.perform(get("/actuator/info"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.app.name").value("cloud-deployment-demo"))

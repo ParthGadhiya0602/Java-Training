@@ -27,18 +27,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
- * @WebMvcTest — web layer slice for an MVC (non-REST) controller.
+ * @WebMvcTest - web layer slice for an MVC (non-REST) controller.
  *
  * Thymeleaf IS included in @WebMvcTest: templates are actually rendered.
  * This lets us assert on the HTML output (view name, model attributes, rendered content).
  *
  * Assertions available for MVC controllers:
- *   view().name(...)            — the logical view name returned by the handler
- *   model().attributeExists(..) — model contains an attribute with the given name
- *   model().attribute(name, value) — model attribute equals the value
- *   model().attributeHasFieldErrors(attr, field) — BindingResult has errors for field
- *   redirectedUrl(url)          — response is a redirect to the given URL
- *   content().string(...)       — raw response body assertion (HTML)
+ *   view().name(...)            - the logical view name returned by the handler
+ *   model().attributeExists(..) - model contains an attribute with the given name
+ *   model().attribute(name, value) - model attribute equals the value
+ *   model().attributeHasFieldErrors(attr, field) - BindingResult has errors for field
+ *   redirectedUrl(url)          - response is a redirect to the given URL
+ *   content().string(...)       - raw response body assertion (HTML)
  */
 @WebMvcTest(ProductController.class)
 class ProductControllerTest {
@@ -58,7 +58,7 @@ class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("products/list"))
                 .andExpect(model().attributeExists("products"))
-                // Template is rendered — assert the HTML contains the product names
+                // Template is rendered - assert the HTML contains the product names
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Laptop")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Mouse")));
     }
@@ -110,7 +110,7 @@ class ProductControllerTest {
     @Test
     void create_invalid_name_returns_form_with_binding_errors() throws Exception {
         mockMvc.perform(post("/products")
-                        .param("name", "")          // blank — fails @NotBlank
+                        .param("name", "")          // blank - fails @NotBlank
                         .param("price", "999.00")
                         .param("category", "Electronics"))
                 .andExpect(status().isOk())

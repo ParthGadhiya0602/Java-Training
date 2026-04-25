@@ -1,4 +1,4 @@
--- V5: Zero-downtime step 2 — backfill existing rows with a default department.
+-- V5: Zero-downtime step 2 - backfill existing rows with a default department.
 --
 -- All existing employees are assigned to Engineering (id = 1).
 -- After this migration every row has a non-null department_id,

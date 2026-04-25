@@ -7,7 +7,7 @@ import lombok.*;
  *
  * <p>Prefer individual annotations over @Data for entities because:
  * <ul>
- *   <li>@Data's @EqualsAndHashCode includes ALL fields by default — on a JPA entity
+ *   <li>@Data's @EqualsAndHashCode includes ALL fields by default - on a JPA entity
  *       this traverses lazy collections and breaks equals/hashCode contracts when the
  *       id is null (two unsaved instances are equal even if they represent different rows)</li>
  *   <li>@Data's @ToString can trigger lazy-load exceptions in JPA sessions</li>

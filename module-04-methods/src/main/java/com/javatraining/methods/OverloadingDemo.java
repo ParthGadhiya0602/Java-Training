@@ -31,7 +31,7 @@ public class OverloadingDemo {
     }
 
     public static String format(Object value) {
-        if (value == null) return "—";
+        if (value == null) return "-";
         return value.toString();
     }
 
@@ -39,7 +39,7 @@ public class OverloadingDemo {
     // Overload resolution demonstration
     // -------------------------------------------------------------------------
 
-    // Four overloads — compiler picks one based on argument type
+    // Four overloads - compiler picks one based on argument type
     static String whichOverload(int n)     { return "int";     }
     static String whichOverload(long n)    { return "long";    }
     static String whichOverload(double n)  { return "double";  }
@@ -53,25 +53,25 @@ public class OverloadingDemo {
         System.out.println("double arg → " + whichOverload(5.0));   // double (exact)
         System.out.println("Integer arg→ " + whichOverload(Integer.valueOf(5))); // Integer (exact)
         System.out.println("int literal→ " + whichOverload(5));
-        // int wins over Integer for literal 5 — exact match before autoboxing
+        // int wins over Integer for literal 5 - exact match before autoboxing
     }
 
     // -------------------------------------------------------------------------
-    // Null ambiguity — a compile-time problem
+    // Null ambiguity - a compile-time problem
     // -------------------------------------------------------------------------
     static void printName(String name)     { System.out.println("String: "  + name); }
     static void printName(StringBuilder sb){ System.out.println("SB: " + sb); }
 
     static void demonstrateNullAmbiguity() {
-        printName("Alice");                    // String — exact match
-        printName(new StringBuilder("Bob"));   // StringBuilder — exact match
-        // printName(null);   ← COMPILE ERROR: ambiguous — both accept null
+        printName("Alice");                    // String - exact match
+        printName(new StringBuilder("Bob"));   // StringBuilder - exact match
+        // printName(null);   ← COMPILE ERROR: ambiguous - both accept null
         // Resolve by casting:
         printName((String) null);              // explicitly choose String overload
     }
 
     // -------------------------------------------------------------------------
-    // Overloading for a Logger utility — realistic example
+    // Overloading for a Logger utility - realistic example
     // -------------------------------------------------------------------------
     static void log(String message) {
         System.out.printf("[INFO ] %s%n", message);

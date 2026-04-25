@@ -5,26 +5,26 @@ import java.util.*;
 /**
  * TOPIC: List and Queue family
  *
- * List — ordered, indexed, duplicates allowed
- *   ArrayList  — backed by an array; O(1) random access, O(n) insert/remove in middle
- *   LinkedList — doubly-linked; O(1) front/back ops, O(n) random access; also implements Deque
+ * List - ordered, indexed, duplicates allowed
+ *   ArrayList  - backed by an array; O(1) random access, O(n) insert/remove in middle
+ *   LinkedList - doubly-linked; O(1) front/back ops, O(n) random access; also implements Deque
  *
- * Queue / Deque — first-in-first-out (or double-ended)
- *   ArrayDeque  — resizable array; O(1) amortised push/pop/offer/poll from both ends
+ * Queue / Deque - first-in-first-out (or double-ended)
+ *   ArrayDeque  - resizable array; O(1) amortised push/pop/offer/poll from both ends
  *                 Preferred over Stack (legacy) and LinkedList for both stack and queue use
- *   PriorityQueue — min-heap; poll() always returns the smallest element (natural order
+ *   PriorityQueue - min-heap; poll() always returns the smallest element (natural order
  *                   or a custom Comparator)
  *
- * Queue method pairs — two flavours for each operation:
+ * Queue method pairs - two flavours for each operation:
  *   throws exception   returns special value
- *   add(e)             offer(e)       — insert
- *   remove()           poll()         — remove head
- *   element()          peek()         — inspect head
+ *   add(e)             offer(e)       - insert
+ *   remove()           poll()         - remove head
+ *   element()          peek()         - inspect head
  */
 public class ListsAndQueues {
 
     // -------------------------------------------------------------------------
-    // 1. ArrayList — random access, bulk operations
+    // 1. ArrayList - random access, bulk operations
     // -------------------------------------------------------------------------
 
     /**
@@ -56,7 +56,7 @@ public class ListsAndQueues {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Deque (ArrayDeque) — stack and queue operations
+    // 2. Deque (ArrayDeque) - stack and queue operations
     //    ArrayDeque is preferred over java.util.Stack (which is synchronized/legacy)
     //    and over LinkedList (better cache locality, no node overhead).
     // -------------------------------------------------------------------------
@@ -105,7 +105,7 @@ public class ListsAndQueues {
     }
 
     // -------------------------------------------------------------------------
-    // 3. PriorityQueue — always poll the "best" element
+    // 3. PriorityQueue - always poll the "best" element
     //    Default: natural order (min-heap for numbers, lexicographic for strings)
     //    Custom:  pass a Comparator to the constructor
     // -------------------------------------------------------------------------

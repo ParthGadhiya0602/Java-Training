@@ -1,14 +1,16 @@
 ---
-title: "23 — Algorithms & Data Structures"
-parent: "Phase 2 — Core APIs"
+title: "23 - Algorithms & Data Structures"
+parent: "Phase 2 - Core APIs"
 nav_order: 23
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-23-algorithms/src){: .btn .btn-outline }
 
-# Module 23 — Algorithms & Data Structures
+# Module 23 - Algorithms & Data Structures
+
 {: .no_toc }
 
 <details open markdown="block">
@@ -22,17 +24,17 @@ render_with_liquid: false
 
 ## Sorting Algorithms
 
-| Algorithm | Best | Average | Worst | Space | Stable |
-|---|---|---|---|---|---|
-| Bubble | O(n) | O(n²) | O(n²) | O(1) | yes |
-| Selection | O(n²) | O(n²) | O(n²) | O(1) | no |
-| Insertion | O(n) | O(n²) | O(n²) | O(1) | yes |
-| Merge | O(n log n) | O(n log n) | O(n log n) | O(n) | yes |
-| Quick | O(n log n) | O(n log n) | O(n²) | O(log n) | no |
-| Heap | O(n log n) | O(n log n) | O(n log n) | O(1) | no |
-| Counting | O(n+k) | O(n+k) | O(n+k) | O(k) | yes |
+| Algorithm | Best       | Average    | Worst      | Space    | Stable |
+| --------- | ---------- | ---------- | ---------- | -------- | ------ |
+| Bubble    | O(n)       | O(n²)      | O(n²)      | O(1)     | yes    |
+| Selection | O(n²)      | O(n²)      | O(n²)      | O(1)     | no     |
+| Insertion | O(n)       | O(n²)      | O(n²)      | O(1)     | yes    |
+| Merge     | O(n log n) | O(n log n) | O(n log n) | O(n)     | yes    |
+| Quick     | O(n log n) | O(n log n) | O(n²)      | O(log n) | no     |
+| Heap      | O(n log n) | O(n log n) | O(n log n) | O(1)     | no     |
+| Counting  | O(n+k)     | O(n+k)     | O(n+k)     | O(k)     | yes    |
 
-**Java's Arrays.sort():** Dual-pivot Quicksort for primitives; TimSort (merge + insertion) for objects — stable, O(n log n).
+**Java's Arrays.sort():** Dual-pivot Quicksort for primitives; TimSort (merge + insertion) for objects - stable, O(n log n).
 
 ### Insertion sort
 
@@ -44,7 +46,7 @@ for (int i = 1; i < arr.length; i++) {
 }
 ```
 
-Best case O(n) — excellent for nearly-sorted data; TimSort's base case.
+Best case O(n) - excellent for nearly-sorted data; TimSort's base case.
 
 ### Merge sort
 
@@ -103,7 +105,7 @@ return -1;
 ### Binary search bounds
 
 ```java
-// Left bound — first occurrence
+// Left bound - first occurrence
 int lo = 0, hi = n - 1, result = -1;
 while (lo <= hi) {
     int mid = lo + (hi - lo) / 2;
@@ -112,7 +114,7 @@ while (lo <= hi) {
     else                        hi = mid - 1;
 }
 
-// Lower bound — first index where arr[i] >= target (like C++ lower_bound)
+// Lower bound - first index where arr[i] >= target (like C++ lower_bound)
 int lo = 0, hi = n;
 while (lo < hi) {
     int mid = lo + (hi - lo) / 2;
@@ -177,7 +179,7 @@ dequeue: value = data[head]; head = (head + 1) % capacity; size--;
 ```java
 addFirst: node.next = head; head = node;
 reverse:  Node prev = null; while (cur != null) { next = cur.next; cur.next = prev; prev = cur; cur = next; }
-hasCycle: Floyd's tortoise and hare — slow/fast pointers meet iff cycle exists
+hasCycle: Floyd's tortoise and hare - slow/fast pointers meet iff cycle exists
 ```
 
 ### Binary Search Tree
@@ -214,7 +216,7 @@ bucketIndex = (key.hashCode() & 0x7fff_ffff) % capacity
 ### Two Pointers
 
 ```java
-// Pair sum in sorted array — O(n)
+// Pair sum in sorted array - O(n)
 int lo = 0, hi = n - 1;
 while (lo < hi) {
     int sum = arr[lo] + arr[hi];
@@ -223,7 +225,7 @@ while (lo < hi) {
     else                   hi--;
 }
 
-// Sliding window max sum — O(n)
+// Sliding window max sum - O(n)
 for (int i = k; i < n; i++) {
     sum += arr[i] - arr[i - k];
     max = Math.max(max, sum);
@@ -243,18 +245,18 @@ for (int i = 1; i < n; i++) {
 ### Dynamic Programming
 
 ```java
-// LCS — O(m*n)
+// LCS - O(m*n)
 dp[i][j] = a[i-1]==b[j-1] ? dp[i-1][j-1]+1 : max(dp[i-1][j], dp[i][j-1]);
 
-// Knapsack 0/1 — O(n * W)
+// Knapsack 0/1 - O(n * W)
 dp[i][w] = weight[i] <= w
     ? max(dp[i-1][w], dp[i-1][w-weight[i]] + value[i])
     : dp[i-1][w];
 
-// LIS — O(n log n) patience sorting
+// LIS - O(n log n) patience sorting
 for each x: binary search tails[] for insertion point; extend or replace
 
-// Edit distance — O(m*n), O(min(m,n)) space with rolling array
+// Edit distance - O(m*n), O(min(m,n)) space with rolling array
 if s[i-1]==t[j-1]: curr[j] = prev[j-1]
 else:              curr[j] = 1 + min(prev[j-1], prev[j], curr[j-1])
 ```
@@ -262,9 +264,9 @@ else:              curr[j] = 1 + min(prev[j-1], prev[j], curr[j-1])
 ### Greedy
 
 ```java
-// Activity selection — sort by end time, greedily pick non-overlapping
+// Activity selection - sort by end time, greedily pick non-overlapping
 Arrays.sort(activities, Comparator.comparingInt(a -> a[1]));
-// Coin change — greedy works for canonical systems (US coins); use DP for arbitrary
+// Coin change - greedy works for canonical systems (US coins); use DP for arbitrary
 ```
 
 ### Backtracking template
@@ -285,12 +287,12 @@ void backtrack(state, choices) {
 ### Graph traversal
 
 ```java
-// BFS — shortest path in unweighted graph
+// BFS - shortest path in unweighted graph
 Queue<Integer> q = new ArrayDeque<>();
 q.add(start); seen.add(start);
 while (!q.isEmpty()) { int n = q.poll(); for (int nb : adj(n)) if (seen.add(nb)) q.add(nb); }
 
-// Topological sort (DFS) — post-order reversal
+// Topological sort (DFS) - post-order reversal
 // Detect cycle: node in current DFS path → cycle
 ```
 
@@ -299,7 +301,7 @@ while (!q.isEmpty()) { int n = q.poll(); for (int nb : adj(n)) if (seen.add(nb))
 ```java
 isPowerOfTwo:  n > 0 && (n & (n-1)) == 0
 countBits:     while (n != 0) { n &= n-1; count++; }   // Brian Kernighan
-singleNumber:  XOR all elements — pairs cancel, lone element remains
+singleNumber:  XOR all elements - pairs cancel, lone element remains
 setBit:        n | (1 << pos)
 clearBit:      n & ~(1 << pos)
 toggleBit:     n ^ (1 << pos)
@@ -309,14 +311,14 @@ toggleBit:     n ^ (1 << pos)
 
 ## Complexity Quick Reference
 
-| Structure | Access | Search | Insert | Delete |
-|---|---|---|---|---|
-| Array | O(1) | O(n) | O(n) | O(n) |
-| Linked list | O(n) | O(n) | O(1) | O(1) |
-| Stack / Queue | O(1) top | O(n) | O(1)* | O(1) |
-| Hash map | — | O(1)* | O(1)* | O(1)* |
+| Structure      | Access   | Search   | Insert   | Delete   |
+| -------------- | -------- | -------- | -------- | -------- |
+| Array          | O(1)     | O(n)     | O(n)     | O(n)     |
+| Linked list    | O(n)     | O(n)     | O(1)     | O(1)     |
+| Stack / Queue  | O(1) top | O(n)     | O(1)\*   | O(1)     |
+| Hash map       | -        | O(1)\*   | O(1)\*   | O(1)\*   |
 | BST (balanced) | O(log n) | O(log n) | O(log n) | O(log n) |
-| Heap | O(1) min | O(n) | O(log n) | O(log n) |
+| Heap           | O(1) min | O(n)     | O(log n) | O(log n) |
 
-*Amortised
+\*Amortised
 {% endraw %}

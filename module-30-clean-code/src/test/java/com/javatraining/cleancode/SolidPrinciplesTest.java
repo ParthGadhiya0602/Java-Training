@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SolidPrinciplesTest {
 
     // ═══════════════════════════════════════════════════════════════
-    // S — Single Responsibility Principle
+    // S - Single Responsibility Principle
     // ═══════════════════════════════════════════════════════════════
     @Nested
     class SingleResponsibility {
@@ -75,7 +75,7 @@ class SolidPrinciplesTest {
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // O — Open/Closed Principle
+    // O - Open/Closed Principle
     // ═══════════════════════════════════════════════════════════════
     @Nested
     class OpenClosed {
@@ -119,7 +119,7 @@ class SolidPrinciplesTest {
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // L — Liskov Substitution Principle
+    // L - Liskov Substitution Principle
     // ═══════════════════════════════════════════════════════════════
     @Nested
     class LiskovSubstitution {
@@ -136,7 +136,7 @@ class SolidPrinciplesTest {
 
         @Test
         void calculator_sums_mixed_shapes_transparently() {
-            // ShapeCalculator works with any Shape — no instanceof checks needed
+            // ShapeCalculator works with any Shape - no instanceof checks needed
             List<Shape> shapes = List.of(
                     new Rectangle(3, 4),   // area = 12
                     new Square(5),         // area = 25
@@ -166,7 +166,7 @@ class SolidPrinciplesTest {
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // I — Interface Segregation Principle
+    // I - Interface Segregation Principle
     // ═══════════════════════════════════════════════════════════════
     @Nested
     class InterfaceSegregation {
@@ -200,7 +200,7 @@ class SolidPrinciplesTest {
 
         @Test
         void robot_implements_workable_interface() {
-            // Both human and robot satisfy Workable — ISP payoff:
+            // Both human and robot satisfy Workable - ISP payoff:
             // code that only needs Workable can accept both
             Workable w = new RobotWorker("Bot", 100);
             assertNotNull(w.work());
@@ -214,7 +214,7 @@ class SolidPrinciplesTest {
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // D — Dependency Inversion Principle
+    // D - Dependency Inversion Principle
     // ═══════════════════════════════════════════════════════════════
     @Nested
     class DependencyInversion {
@@ -236,7 +236,7 @@ class SolidPrinciplesTest {
 
         @Test
         void swapping_sender_requires_zero_changes_to_alert_service() {
-            // Same AlertService class; different behaviour via injection — DIP payoff
+            // Same AlertService class; different behaviour via injection - DIP payoff
             MessageSender spy = (recipient, message) -> "MOCK → " + recipient + ": " + message;
             AlertService service = new AlertService(spy);
             assertTrue(service.sendAlert("x", "y").startsWith("MOCK"));

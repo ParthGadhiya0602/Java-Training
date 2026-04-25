@@ -9,7 +9,7 @@ import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
 
 /**
- * JobExecutionListener — called before and after the entire Job.
+ * JobExecutionListener - called before and after the entire Job.
  *
  * beforeJob: runs after the job is started but before the first Step executes.
  *   Good for: validating preconditions, logging parameters, opening resources.
@@ -31,7 +31,7 @@ public class JobCompletionListener implements JobExecutionListener {
 
     @Override
     public void beforeJob(JobExecution jobExecution) {
-        log.info("Job '{}' starting — parameters: {}",
+        log.info("Job '{}' starting - parameters: {}",
                 jobExecution.getJobInstance().getJobName(),
                 jobExecution.getJobParameters());
     }
@@ -39,11 +39,11 @@ public class JobCompletionListener implements JobExecutionListener {
     @Override
     public void afterJob(JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
-            log.info("Job '{}' completed — total products in DB: {}",
+            log.info("Job '{}' completed - total products in DB: {}",
                     jobExecution.getJobInstance().getJobName(),
                     productRepository.count());
         } else {
-            log.error("Job '{}' ended with status: {} — failures: {}",
+            log.error("Job '{}' ended with status: {} - failures: {}",
                     jobExecution.getJobInstance().getJobName(),
                     jobExecution.getStatus(),
                     jobExecution.getAllFailureExceptions());

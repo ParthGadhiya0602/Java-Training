@@ -21,7 +21,7 @@ import java.math.RoundingMode;
  */
 public class ExpenseCalculator {
 
-    // Expense status as bitmask flags — efficient storage, easy combination
+    // Expense status as bitmask flags - efficient storage, easy combination
     static final int STATUS_PENDING   = 0b0001; // 1
     static final int STATUS_APPROVED  = 0b0010; // 2
     static final int STATUS_REJECTED  = 0b0100; // 4
@@ -41,7 +41,7 @@ public class ExpenseCalculator {
         System.out.println("double: " + total);          // 0.13000000000000001 (WRONG!)
         System.out.println("double == 0.13: " + (total == 0.13)); // false
 
-        // BigDecimal is precise — internally uses integer arithmetic with scale
+        // BigDecimal is precise - internally uses integer arithmetic with scale
         BigDecimal bdPrice = new BigDecimal("0.10");
         BigDecimal bdTax   = new BigDecimal("0.03");
         BigDecimal bdTotal = bdPrice.add(bdTax);
@@ -57,11 +57,11 @@ public class ExpenseCalculator {
         // Convert the raw double input to BigDecimal immediately at the boundary
         BigDecimal amount = BigDecimal.valueOf(amountRaw); // safer than new BigDecimal(double)
 
-        // GST calculation — scale to 2 decimal places (paise precision)
+        // GST calculation - scale to 2 decimal places (paise precision)
         BigDecimal gst   = amount.multiply(GST_RATE).setScale(2, RoundingMode.HALF_UP);
         BigDecimal total = amount.add(gst).setScale(2, RoundingMode.HALF_UP);
 
-        // Per-person split — integer division on BigDecimal also truncates,
+        // Per-person split - integer division on BigDecimal also truncates,
         // so we use HALF_UP rounding
         BigDecimal perPerson = total.divide(
             BigDecimal.valueOf(participants), 2, RoundingMode.HALF_UP
@@ -91,7 +91,7 @@ public class ExpenseCalculator {
     }
 
     // -------------------------------------------------------------------------
-    // Category codes as bit flags — one int can hold multiple categories
+    // Category codes as bit flags - one int can hold multiple categories
     // -------------------------------------------------------------------------
     static final int CAT_TRAVEL  = 1 << 0; // 1
     static final int CAT_FOOD    = 1 << 1; // 2
@@ -106,7 +106,7 @@ public class ExpenseCalculator {
     }
 
     // -------------------------------------------------------------------------
-    // Monthly budget tracker — shows compound assignment in context
+    // Monthly budget tracker - shows compound assignment in context
     // -------------------------------------------------------------------------
     static void trackMonthlyBudget() {
         BigDecimal budget    = new BigDecimal("50000.00"); // ₹50,000 monthly

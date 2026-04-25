@@ -21,20 +21,20 @@ import java.util.function.Supplier;
  *
  * <p>Micrometer is the metrics facade (like SLF4J is the logging facade).
  * In production you swap {@link io.micrometer.core.instrument.simple.SimpleMeterRegistry}
- * for Prometheus, Datadog, CloudWatch etc. — application code never changes.
+ * for Prometheus, Datadog, CloudWatch etc. - application code never changes.
  */
 public class MetricsService {
 
     // Micrometer registers meters lazily; hold the registry to create meters on demand.
     private final MeterRegistry registry;
 
-    // Gauge wraps a live value — it samples the object on each scrape, not at record time.
+    // Gauge wraps a live value - it samples the object on each scrape, not at record time.
     private final AtomicInteger activeConnections = new AtomicInteger(0);
 
     public MetricsService(MeterRegistry registry) {
         this.registry = registry;
 
-        // Register the gauge once at construction — it holds a reference to activeConnections
+        // Register the gauge once at construction - it holds a reference to activeConnections
         // and reads its current value each time the registry is scraped.
         Gauge.builder("app.connections.active", activeConnections, AtomicInteger::get)
              .description("Number of currently open connections")
@@ -66,7 +66,7 @@ public class MetricsService {
     // ── Timer ─────────────────────────────────────────────────────────────────
 
     /**
-     * Wrap an operation with a timer — records both count and total duration.
+     * Wrap an operation with a timer - records both count and total duration.
      * The Timer uses {@code System.nanoTime()} internally.
      */
     public <T> T timeOperation(String name, Supplier<T> operation) {

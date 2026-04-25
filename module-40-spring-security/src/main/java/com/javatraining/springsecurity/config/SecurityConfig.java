@@ -28,26 +28,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    // Main filter chain — defines the HTTP security rules for this application
+    // Main filter chain - defines the HTTP security rules for this application
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http,
                                            JwtAuthenticationFilter jwtFilter) throws Exception {
         return http
-                // Disable CSRF — stateless JWT APIs don't use cookies, so CSRF doesn't apply
+                // Disable CSRF - stateless JWT APIs don't use cookies, so CSRF doesn't apply
                 .csrf(AbstractHttpConfigurer::disable)
 
-                // Stateless — no HttpSession; every request must carry its own credentials
+                // Stateless - no HttpSession; every request must carry its own credentials
                 .sessionManagement(sm ->
                         sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                // Authorization rules — evaluated top-to-bottom, first match wins
+                // Authorization rules - evaluated top-to-bottom, first match wins
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()           // login endpoint
                         .requestMatchers(HttpMethod.GET, "/api/products").permitAll() // public list
                         .anyRequest().authenticated()                          // everything else
                 )
 
-                // Disable HTTP Basic — prevents "WWW-Authenticate: Basic" header on 401 responses,
+                // Disable HTTP Basic - prevents "WWW-Authenticate: Basic" header on 401 responses,
                 // which would cause Apache HttpClient to retry POST requests (non-repeatable stream).
                 .httpBasic(AbstractHttpConfigurer::disable)
 
@@ -75,7 +75,7 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user, admin);
     }
 
-    // BCrypt: adaptive one-way hash — deliberately slow to resist brute-force attacks
+    // BCrypt: adaptive one-way hash - deliberately slow to resist brute-force attacks
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

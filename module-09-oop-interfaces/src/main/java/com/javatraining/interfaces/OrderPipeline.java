@@ -5,7 +5,7 @@ import java.util.function.*;
 import java.util.stream.Collectors;
 
 /**
- * TOPIC: Practical integration — Order processing pipeline
+ * TOPIC: Practical integration - Order processing pipeline
  *
  * Uses every concept from this module:
  *   • @FunctionalInterface for pipeline stages
@@ -65,7 +65,7 @@ public class OrderPipeline {
     }
 
     // -------------------------------------------------------------------------
-    // Strategy interfaces — pluggable behaviour
+    // Strategy interfaces - pluggable behaviour
     // -------------------------------------------------------------------------
     interface TaxStrategy {
         double taxRate(Product product);
@@ -82,7 +82,7 @@ public class OrderPipeline {
     }
 
     // -------------------------------------------------------------------------
-    // Abstract pipeline base — shared audit log + error wrapping
+    // Abstract pipeline base - shared audit log + error wrapping
     // -------------------------------------------------------------------------
     static abstract class AuditedPipeline<I, O> {
 
@@ -165,7 +165,7 @@ public class OrderPipeline {
                 raw.quantity(), subtotal, tax, discount, total,
                 new ArrayList<>(auditLog()));
 
-            // Side-effect stage — Consumer
+            // Side-effect stage - Consumer
             onComplete.accept(order);
             return order;
         }
@@ -234,7 +234,7 @@ public class OrderPipeline {
     }
 
     // -------------------------------------------------------------------------
-    // Functional post-processing — pure Function / Predicate / Collector usage
+    // Functional post-processing - pure Function / Predicate / Collector usage
     // -------------------------------------------------------------------------
     static Map<String, Double> revenueByCategory(List<PricedOrder> orders) {
         return orders.stream()

@@ -1,14 +1,15 @@
 ---
-title: "Module 48 — Messaging"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 48 - Messaging"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 48
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-48-messaging/src){: .btn .btn-outline }
 
-# Module 48 — Messaging
+# Module 48 - Messaging
 
 ## What this module covers
 
@@ -157,7 +158,7 @@ Queue orderQueue = QueueBuilder.durable(ORDER_QUEUE)
 ### Message conversion
 
 A `Jackson2JsonMessageConverter` bean converts POJOs to JSON on publish and back
-on consume — no manual serialization needed.
+on consume - no manual serialization needed.
 
 ### Producing
 
@@ -181,7 +182,7 @@ exhausted the dead-letter arguments route it to `order.dlq`.
 
 ### Unit tests
 
-Both publisher and listener are tested with plain Mockito — no Spring context:
+Both publisher and listener are tested with plain Mockito - no Spring context:
 
 ```java
 @ExtendWith(MockitoExtension.class)
@@ -208,7 +209,7 @@ class OrderNotificationPublisherTest {
 ## Tests
 
 | Class                            | Type              | Count |
-|----------------------------------|-------------------|-------|
+| -------------------------------- | ----------------- | ----- |
 | `KafkaIntegrationTest`           | `@SpringBootTest` | 3     |
 | `OrderNotificationPublisherTest` | Mockito unit      | 2     |
 | `OrderNotificationListenerTest`  | Mockito unit      | 2     |
@@ -220,10 +221,11 @@ Result: **7/7 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `@SpyBean` instead of `@MockBean` for `OrderProcessingService` | Spy wraps the real bean so `verify` works without replacing behaviour |
-| `timeout(5000)` in Kafka assertions | Consumer runs on a separate thread; Mockito must wait for the async call |
-| `RabbitAutoConfiguration` excluded in test properties | No RabbitMQ broker available during CI; `@MockBean RabbitTemplate` covers the dependency |
-| Dead-letter via queue arguments | Keeps routing policy in code alongside the queue declaration |
+| Decision                                                       | Reason                                                                                   |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `@SpyBean` instead of `@MockBean` for `OrderProcessingService` | Spy wraps the real bean so `verify` works without replacing behaviour                    |
+| `timeout(5000)` in Kafka assertions                            | Consumer runs on a separate thread; Mockito must wait for the async call                 |
+| `RabbitAutoConfiguration` excluded in test properties          | No RabbitMQ broker available during CI; `@MockBean RabbitTemplate` covers the dependency |
+| Dead-letter via queue arguments                                | Keeps routing policy in code alongside the queue declaration                             |
+
 {% endraw %}

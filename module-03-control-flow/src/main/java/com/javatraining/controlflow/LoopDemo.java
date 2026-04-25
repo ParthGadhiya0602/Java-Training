@@ -3,7 +3,7 @@ package com.javatraining.controlflow;
 import java.util.List;
 
 /**
- * TOPIC: All loop types — for, for-each, while, do-while — and loop control
+ * TOPIC: All loop types - for, for-each, while, do-while - and loop control
  * with break, continue, and labels.
  *
  * Every example is chosen to show a case where that specific loop is the
@@ -12,7 +12,7 @@ import java.util.List;
 public class LoopDemo {
 
     // -------------------------------------------------------------------------
-    // for loop — known iteration count
+    // for loop - known iteration count
     // -------------------------------------------------------------------------
     static void forLoopExamples() {
         // Classic: iterate over an index range
@@ -22,7 +22,7 @@ public class LoopDemo {
         }
         System.out.println();
 
-        // Reverse iteration — natural for countdown, reverse traversal
+        // Reverse iteration - natural for countdown, reverse traversal
         System.out.print("Countdown: ");
         for (int i = 5; i >= 0; i--) {
             System.out.print(i + " ");
@@ -36,7 +36,7 @@ public class LoopDemo {
         }
         System.out.println();
 
-        // Modifying array elements — must use index-based for (not for-each)
+        // Modifying array elements - must use index-based for (not for-each)
         int[] arr = {1, 2, 3, 4, 5};
         for (int i = 0; i < arr.length; i++) {
             arr[i] *= 2;            // double each element in-place
@@ -45,7 +45,7 @@ public class LoopDemo {
         for (int n : arr) System.out.print(n + " ");
         System.out.println();
 
-        // Nested for loops — multiplication table
+        // Nested for loops - multiplication table
         System.out.println("3x3 multiplication table:");
         for (int i = 1; i <= 3; i++) {
             for (int j = 1; j <= 3; j++) {
@@ -56,7 +56,7 @@ public class LoopDemo {
     }
 
     // -------------------------------------------------------------------------
-    // Enhanced for-each — iterating collections and arrays (no index needed)
+    // Enhanced for-each - iterating collections and arrays (no index needed)
     // -------------------------------------------------------------------------
     static void forEachExamples() {
         List<String> cities = List.of("Mumbai", "Delhi", "Bengaluru", "Chennai");
@@ -76,7 +76,7 @@ public class LoopDemo {
     }
 
     // -------------------------------------------------------------------------
-    // while loop — iteration count unknown, check condition before each round
+    // while loop - iteration count unknown, check condition before each round
     // -------------------------------------------------------------------------
     static void whileExamples() {
         // Collatz sequence: keep applying rules until you reach 1
@@ -102,7 +102,7 @@ public class LoopDemo {
     }
 
     // -------------------------------------------------------------------------
-    // do-while loop — body must run at least once
+    // do-while loop - body must run at least once
     // -------------------------------------------------------------------------
     static void doWhileExample() {
         // Simulate a menu-driven interaction (without real user input)
@@ -130,7 +130,7 @@ public class LoopDemo {
                 default -> System.out.println("Invalid choice.");
             }
         } while (choice != 0);
-        // The menu always shows at least once — even if choice==0 on first input
+        // The menu always shows at least once - even if choice==0 on first input
     }
 
     static long factorial(int n) {
@@ -140,12 +140,12 @@ public class LoopDemo {
     }
 
     // -------------------------------------------------------------------------
-    // break — exit the loop early
+    // break - exit the loop early
     // -------------------------------------------------------------------------
     static void breakExample() {
         int[] data = {3, 7, 1, 9, -4, 6, 2, -8, 5};
 
-        // Linear search — stop as soon as we find what we need
+        // Linear search - stop as soon as we find what we need
         int target = -4;
         int foundAt = -1;
 
@@ -157,7 +157,7 @@ public class LoopDemo {
         }
         System.out.println("Found " + target + " at index: " + foundAt);
 
-        // break in while — process a stream until a sentinel value
+        // break in while - process a stream until a sentinel value
         int sum = 0;
         int[] stream = {5, 3, 8, 0, 2, 7};  // 0 is the sentinel: "stop here"
         int idx = 0;
@@ -169,7 +169,7 @@ public class LoopDemo {
     }
 
     // -------------------------------------------------------------------------
-    // continue — skip this iteration, move to the next
+    // continue - skip this iteration, move to the next
     // -------------------------------------------------------------------------
     static void continueExample() {
         // Skip invalid entries and process only valid ones
@@ -200,11 +200,11 @@ public class LoopDemo {
     }
 
     // -------------------------------------------------------------------------
-    // Labels — target break/continue at a specific outer loop
+    // Labels - target break/continue at a specific outer loop
     // -------------------------------------------------------------------------
     static void labelExamples() {
         // PROBLEM: Find first (row, col) pair in a matrix where value > threshold.
-        // Plain break only exits the inner loop — outer keeps running.
+        // Plain break only exits the inner loop - outer keeps running.
         int[][] matrix = {
             {1,  3,  5},
             {7,  9,  2},
@@ -228,7 +228,7 @@ public class LoopDemo {
         System.out.printf("First value > %d: matrix[%d][%d] = %d%n",
             threshold, foundRow, foundCol, matrix[foundRow][foundCol]);
 
-        // continue with a label — skip to the next row when a condition is met
+        // continue with a label - skip to the next row when a condition is met
         System.out.println("Rows that contain no negative numbers:");
         rowLoop:
         for (int row = 0; row < matrix.length; row++) {

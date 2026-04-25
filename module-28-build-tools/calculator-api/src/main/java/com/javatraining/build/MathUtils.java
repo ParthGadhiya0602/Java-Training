@@ -2,7 +2,7 @@ package com.javatraining.build;
 
 /**
  * Pure mathematical utilities.
- * Stateless — all methods are static, no dependencies.
+ * Stateless - all methods are static, no dependencies.
  */
 public final class MathUtils {
 

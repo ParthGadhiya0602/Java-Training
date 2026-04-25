@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 /**
- * Raw HTTP client — propagates RestClientException on any 4xx/5xx or network error.
+ * Raw HTTP client - propagates RestClientException on any 4xx/5xx or network error.
  * Resilience4j aspects on InventoryService intercept those exceptions to apply
  * circuit-breaking and retry logic before they reach the caller.
  */

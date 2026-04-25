@@ -6,16 +6,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * TOPIC: Regular Expressions — Pattern, Matcher, groups, named groups,
+ * TOPIC: Regular Expressions - Pattern, Matcher, groups, named groups,
  * common patterns, and production best practices.
  *
  * KEY RULE: Compile Pattern objects once as static finals.
- * Pattern.compile() parses the regex — doing it on every call wastes CPU.
+ * Pattern.compile() parses the regex - doing it on every call wastes CPU.
  */
 public class RegexDemo {
 
     // -------------------------------------------------------------------------
-    // Pre-compiled patterns — static finals so compilation happens ONCE
+    // Pre-compiled patterns - static finals so compilation happens ONCE
     // -------------------------------------------------------------------------
 
     // Email: simplified but covers 99% of real addresses
@@ -55,12 +55,12 @@ public class RegexDemo {
     // 1. matches() vs find()
     // -------------------------------------------------------------------------
     static void matchesVsFind() {
-        String text = "My email is alice@example.com — please write to me.";
+        String text = "My email is alice@example.com - please write to me.";
 
-        // matches() — checks the ENTIRE string against the pattern
+        // matches() - checks the ENTIRE string against the pattern
         System.out.println("matches full string: " + EMAIL.matcher(text).matches()); // false
 
-        // find() — searches for the pattern ANYWHERE in the string
+        // find() - searches for the pattern ANYWHERE in the string
         Matcher m = EMAIL.matcher(text);
         if (m.find()) {
             System.out.println("found in string:     " + m.group());  // alice@example.com
@@ -95,7 +95,7 @@ public class RegexDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Capturing groups — extract sub-parts of a match
+    // 3. Capturing groups - extract sub-parts of a match
     // -------------------------------------------------------------------------
     static void capturingGroups() {
         // Extract date parts using numbered groups
@@ -111,7 +111,7 @@ public class RegexDemo {
             System.out.println("  Day        : " + m.group(3)); // 15
         }
 
-        // Named groups — self-documenting, order-independent
+        // Named groups - self-documenting, order-independent
         Matcher nm = DATE_YMD.matcher("2024-04-15");
         if (nm.matches()) {
             System.out.println("\nNamed groups:");
@@ -122,7 +122,7 @@ public class RegexDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Back-references in replacements — rearrange captured groups
+    // 4. Back-references in replacements - rearrange captured groups
     // -------------------------------------------------------------------------
     static void backreferences() {
         // Convert YYYY-MM-DD to DD/MM/YYYY
@@ -158,7 +158,7 @@ public class RegexDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 6. split() with regex — more powerful than plain String.split
+    // 6. split() with regex - more powerful than plain String.split
     // -------------------------------------------------------------------------
     static void splitWithRegex() {
         // Split on one-or-more whitespace
@@ -181,14 +181,14 @@ public class RegexDemo {
     }
 
     // -------------------------------------------------------------------------
-    // 7. Flags — CASE_INSENSITIVE, MULTILINE, DOTALL
+    // 7. Flags - CASE_INSENSITIVE, MULTILINE, DOTALL
     // -------------------------------------------------------------------------
     static void patternFlags() {
-        // CASE_INSENSITIVE — match regardless of case
+        // CASE_INSENSITIVE - match regardless of case
         Pattern p = Pattern.compile("hello", Pattern.CASE_INSENSITIVE);
         System.out.println("\nCase insensitive: " + p.matcher("HELLO World").find()); // true
 
-        // MULTILINE — ^ and $ match start/end of each LINE (not just the whole string)
+        // MULTILINE - ^ and $ match start/end of each LINE (not just the whole string)
         Pattern multiLine = Pattern.compile("^\\d+", Pattern.MULTILINE);
         String text = "100 apples\n200 oranges\n300 bananas";
         Matcher m = multiLine.matcher(text);
@@ -196,7 +196,7 @@ public class RegexDemo {
         while (m.find()) System.out.print(m.group() + " ");
         System.out.println();  // 100 200 300
 
-        // DOTALL — . also matches newlines (by default it doesn't)
+        // DOTALL - . also matches newlines (by default it doesn't)
         String block = "START\nsome content\nEND";
         System.out.println("DOTALL match: " +
             Pattern.compile("START.*END", Pattern.DOTALL).matcher(block).find()); // true

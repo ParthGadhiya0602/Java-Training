@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Spring Boot 3.x batch application.
  *
- * Do NOT add @EnableBatchProcessing — it conflicts with Spring Boot's batch
+ * Do NOT add @EnableBatchProcessing - it conflicts with Spring Boot's batch
  * auto-configuration in 3.x. Boot auto-configures JobRepository, JobLauncher,
  * JobExplorer, and the metadata schema automatically.
  */

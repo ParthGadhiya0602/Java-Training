@@ -22,11 +22,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * <p>Key differences from derived queries:
  * <ul>
- *   <li>JPQL {@code @Query} — full control over the HQL/JPQL string; references
+ *   <li>JPQL {@code @Query} - full control over the HQL/JPQL string; references
  *       entity/field names (not table/column names)</li>
- *   <li>Native {@code @Query} — raw SQL; useful for DB-specific syntax or
+ *   <li>Native {@code @Query} - raw SQL; useful for DB-specific syntax or
  *       functions not available in JPQL</li>
- *   <li>{@code @Modifying} — required for UPDATE/DELETE; clears persistence context
+ *   <li>{@code @Modifying} - required for UPDATE/DELETE; clears persistence context
  *       by default to avoid stale state</li>
  * </ul>
  */
@@ -86,7 +86,7 @@ class CustomQueryTest {
     void findByDepartmentNameFetched_returns_employees_with_department_loaded() {
         List<Employee> result = employees.findByDepartmentNameFetched("Engineering");
         assertThat(result).hasSize(2);
-        // Department is JOIN FETCH'd — accessing it should NOT trigger a lazy load
+        // Department is JOIN FETCH'd - accessing it should NOT trigger a lazy load
         result.forEach(e ->
             assertThat(e.getDepartment().getName()).isEqualTo("Engineering")
         );
@@ -103,7 +103,7 @@ class CustomQueryTest {
                         jpql.stream().map(Employee::getName).toList());
     }
 
-    // ── @Modifying — bulk UPDATE ─────────────────────────────────────────────
+    // ── @Modifying - bulk UPDATE ─────────────────────────────────────────────
 
     @Test
     void deactivateByDepartmentId_updates_all_employees_in_department() {
@@ -123,7 +123,7 @@ class CustomQueryTest {
         assertThat(updated).isEqualTo(0);
     }
 
-    // ── @Modifying — bulk DELETE ─────────────────────────────────────────────
+    // ── @Modifying - bulk DELETE ─────────────────────────────────────────────
 
     @Test
     void deleteInactiveBelow_removes_qualifying_employees() {

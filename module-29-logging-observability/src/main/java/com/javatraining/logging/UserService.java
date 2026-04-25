@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 /**
- * Demonstrates Mapped Diagnostic Context (MDC) — thread-local key/value pairs
+ * Demonstrates Mapped Diagnostic Context (MDC) - thread-local key/value pairs
  * that are automatically included in every log line emitted from the same thread.
  *
  * <p>MDC is useful in web servers: set {@code userId} and {@code requestId} once at
@@ -20,7 +20,7 @@ import org.slf4j.MDC;
  * </pre>
  *
  * <p><strong>Critical:</strong> always call {@link MDC#clear()} in a {@code finally}
- * block.  MDC is thread-local — if threads are pooled (servlet containers, virtual
+ * block.  MDC is thread-local - if threads are pooled (servlet containers, virtual
  * threads), stale values leak into the next request on that thread.
  */
 public class UserService {

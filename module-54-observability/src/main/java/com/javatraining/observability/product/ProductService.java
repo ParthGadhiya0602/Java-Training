@@ -13,12 +13,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Demonstrates three Micrometer instrument types:
  *
- *  Counter  — monotonically increasing count of lookups
- *  Timer    — latency distribution for each findById call
- *  Gauge    — point-in-time snapshot of how many products have been created
+ *  Counter  - monotonically increasing count of lookups
+ *  Timer    - latency distribution for each findById call
+ *  Gauge    - point-in-time snapshot of how many products have been created
  *
  * For automatic span + metric creation, annotate the class or individual methods
- * with @Observed(name = "product.service") — requires spring-boot-starter-aop so
+ * with @Observed(name = "product.service") - requires spring-boot-starter-aop so
  * Spring proxies the class and fires ObservationAspect around each call.
  */
 @Slf4j

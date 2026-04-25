@@ -1,14 +1,15 @@
 ---
-title: "Module 57 — Security Hardening"
-parent: "Phase 6 — Production & Architecture"
+title: "Module 57 - Security Hardening"
+parent: "Phase 6 - Production & Architecture"
 nav_order: 57
 render_with_liquid: false
 ---
+
 {% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-57-security-hardening/src){: .btn .btn-outline }
 
-# Module 57 — Security Hardening
+# Module 57 - Security Hardening
 
 ## What this module covers
 
@@ -28,10 +29,10 @@ src/main/java/com/javatraining/security/
 │   └── SecurityConfig.java      # Spring Security: auth, authz, headers, BCrypt
 └── api/
     ├── RegisterRequest.java     # record with @NotBlank, @Size validation
-    ├── PublicController.java    # GET /api/public/info  — no auth
-    ├── AuthController.java      # POST /api/auth/register — no auth, @Valid
-    ├── UserController.java      # GET /api/user/me — USER or ADMIN
-    └── AdminController.java     # DELETE /api/admin/users/{id} — ADMIN only
+    ├── PublicController.java    # GET /api/public/info  - no auth
+    ├── AuthController.java      # POST /api/auth/register - no auth, @Valid
+    ├── UserController.java      # GET /api/user/me - USER or ADMIN
+    └── AdminController.java     # DELETE /api/admin/users/{id} - ADMIN only
 
 src/test/java/com/javatraining/security/
 ├── AccessControlTest.java       # @WithMockUser: 401, 403, 200 (3 tests)
@@ -42,14 +43,14 @@ src/test/java/com/javatraining/security/
 
 ## OWASP Top 10 coverage
 
-| # | Vulnerability | Defence in this module |
-|---|---|---|
-| A01 | Broken Access Control | `hasRole("ADMIN")` on admin paths; 401 for unauthenticated, 403 for wrong role |
-| A02 | Cryptographic Failures | `BCryptPasswordEncoder(12)` — ~300ms per hash, rainbow tables impractical |
-| A03 | Injection | Bean Validation on `RegisterRequest`; Spring Data JPA uses parameterized queries |
-| A05 | Security Misconfiguration | `headers(Customizer.withDefaults())` — DENY framing, nosniff, cache control |
-| A07 | Identification & Auth Failures | Spring Security rejects unauthenticated requests before reaching controllers |
-| A09 | Security Logging & Monitoring | Spring Security logs auth failures; add audit log in `AuthenticationEventPublisher` |
+| #   | Vulnerability                  | Defence in this module                                                              |
+| --- | ------------------------------ | ----------------------------------------------------------------------------------- |
+| A01 | Broken Access Control          | `hasRole("ADMIN")` on admin paths; 401 for unauthenticated, 403 for wrong role      |
+| A02 | Cryptographic Failures         | `BCryptPasswordEncoder(12)` - ~300ms per hash, rainbow tables impractical           |
+| A03 | Injection                      | Bean Validation on `RegisterRequest`; Spring Data JPA uses parameterized queries    |
+| A05 | Security Misconfiguration      | `headers(Customizer.withDefaults())` - DENY framing, nosniff, cache control         |
+| A07 | Identification & Auth Failures | Spring Security rejects unauthenticated requests before reaching controllers        |
+| A09 | Security Logging & Monitoring  | Spring Security logs auth failures; add audit log in `AuthenticationEventPublisher` |
 
 ---
 
@@ -66,7 +67,7 @@ SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             .anyRequest().authenticated()           // all other paths need a valid user
         )
         .httpBasic(Customizer.withDefaults())
-        .csrf(AbstractHttpConfigurer::disable)      // stateless API — no session cookies
+        .csrf(AbstractHttpConfigurer::disable)      // stateless API - no session cookies
         .headers(Customizer.withDefaults())         // all security headers enabled
         .build();
 }
@@ -75,23 +76,23 @@ SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 ### CSRF note
 
 CSRF attacks exploit session cookies. Stateless APIs authenticating with tokens
-(Bearer JWT, Basic Auth header) are not vulnerable to CSRF — disabling CSRF protection
+(Bearer JWT, Basic Auth header) are not vulnerable to CSRF - disabling CSRF protection
 is safe and removes the overhead of CSRF token synchronisation. Session-based apps
 (Thymeleaf, MVC form submissions) **must** keep CSRF enabled.
 
 ### Security headers set by `headers(Customizer.withDefaults())`
 
-| Header | Value | Protects against |
-|---|---|---|
-| `X-Content-Type-Options` | `nosniff` | MIME-type confusion attacks |
-| `X-Frame-Options` | `DENY` | Clickjacking (iframes) |
-| `X-XSS-Protection` | `0` | Disabled — modern browsers use CSP; this header is obsolete |
-| `Cache-Control` | `no-store` | Sensitive data cached in browser history |
-| `Strict-Transport-Security` | `max-age=31536000` | HTTP downgrade (added for HTTPS requests only) |
+| Header                      | Value              | Protects against                                            |
+| --------------------------- | ------------------ | ----------------------------------------------------------- |
+| `X-Content-Type-Options`    | `nosniff`          | MIME-type confusion attacks                                 |
+| `X-Frame-Options`           | `DENY`             | Clickjacking (iframes)                                      |
+| `X-XSS-Protection`          | `0`                | Disabled - modern browsers use CSP; this header is obsolete |
+| `Cache-Control`             | `no-store`         | Sensitive data cached in browser history                    |
+| `Strict-Transport-Security` | `max-age=31536000` | HTTP downgrade (added for HTTPS requests only)              |
 
 ---
 
-## Password hashing — BCrypt
+## Password hashing - BCrypt
 
 ```java
 @Bean
@@ -100,17 +101,17 @@ PasswordEncoder passwordEncoder() {
 }
 ```
 
-BCrypt is a **one-way adaptive hash** — the work factor (cost) increases hashing time,
+BCrypt is a **one-way adaptive hash** - the work factor (cost) increases hashing time,
 and can be raised as hardware speeds up without invalidating existing hashes
 (the factor is stored in the hash string).
 
 ### What not to use
 
-| Algorithm | Problem |
-|---|---|
-| MD5, SHA-1 | Not designed for passwords — microseconds to hash, rainbow tables exist |
-| SHA-256 (unsalted) | Same: fast, no salt by default |
-| Plain text | Obviously never |
+| Algorithm          | Problem                                                                 |
+| ------------------ | ----------------------------------------------------------------------- |
+| MD5, SHA-1         | Not designed for passwords - microseconds to hash, rainbow tables exist |
+| SHA-256 (unsalted) | Same: fast, no salt by default                                          |
+| Plain text         | Obviously never                                                         |
 
 `PasswordEncoderFactories.createDelegatingPasswordEncoder()` returns a delegating encoder
 that stores the algorithm ID in the hash (`{bcrypt}$2a$12$...`), enabling migration to
@@ -118,7 +119,7 @@ stronger algorithms without forcing a password reset.
 
 ---
 
-## Input validation — OWASP A03 (Injection prevention)
+## Input validation - OWASP A03 (Injection prevention)
 
 ```java
 public record RegisterRequest(
@@ -138,8 +139,9 @@ public Map<String, String> register(@Valid @RequestBody RegisterRequest request)
 `@Valid` triggers `MethodArgumentNotValidException` before the method body runs.
 Spring Boot's default error handler maps this to **HTTP 400 Bad Request**.
 
-Beyond this, JPA's parameterized queries prevent SQL injection — user input is always
+Beyond this, JPA's parameterized queries prevent SQL injection - user input is always
 bound as a parameter, never concatenated into SQL:
+
 ```java
 userRepository.findByUsername(username);     // safe: Spring Data generates a prepared statement
 // Never: entityManager.createQuery("... WHERE u.name = '" + username + "'");
@@ -176,7 +178,7 @@ class AccessControlTest {
 }
 ```
 
-`@WithMockUser` injects a synthetic `SecurityContext` directly — no HTTP credentials
+`@WithMockUser` injects a synthetic `SecurityContext` directly - no HTTP credentials
 are submitted, the `UserDetailsService` is not called. This isolates the **access-control
 policy** under test from the **authentication mechanism**.
 
@@ -199,7 +201,8 @@ policy** under test from the **authentication mechanism**.
 </plugin>
 ```
 
-Run in CI (not bound to `mvn test` — it downloads the NVD database on first run):
+Run in CI (not bound to `mvn test` - it downloads the NVD database on first run):
+
 ```bash
 mvn dependency-check:check
 ```
@@ -209,11 +212,12 @@ Output: `target/dependency-check-report.html` with each dependency's CVE list.
 ### Suppression file
 
 When a CVE is a false positive or has been mitigated:
+
 ```xml
 <!-- dependency-check-suppressions.xml -->
 <suppressions>
     <suppress>
-        <notes>CVE-2023-XXXXX: not exploitable — we don't use the affected feature</notes>
+        <notes>CVE-2023-XXXXX: not exploitable - we don't use the affected feature</notes>
         <cve>CVE-2023-XXXXX</cve>
     </suppress>
 </suppressions>
@@ -222,10 +226,11 @@ When a CVE is a false positive or has been mitigated:
 ### CI integration
 
 Add to `ci.yml` as a separate step that runs after `mvn verify`:
+
 ```yaml
 - name: Dependency vulnerability scan
   run: mvn dependency-check:check
-  continue-on-error: false   # block merges on unacknowledged High/Critical CVEs
+  continue-on-error: false # block merges on unacknowledged High/Critical CVEs
 ```
 
 ---
@@ -253,14 +258,15 @@ spring:
     vault:
       host: vault
       port: 8200
-      token: ${VAULT_TOKEN}           # never hardcode
+      token: ${VAULT_TOKEN} # never hardcode
       kv:
         enabled: true
         backend: secret
-        default-context: security-demo  # reads secret/security-demo
+        default-context: security-demo # reads secret/security-demo
 ```
 
 Vault path `secret/security-demo` contains:
+
 ```bash
 vault kv put secret/security-demo \
   db.password=s3cr3t-db-pw \
@@ -268,6 +274,7 @@ vault kv put secret/security-demo \
 ```
 
 Spring Cloud Vault makes these available as Spring properties:
+
 ```java
 @Value("${db.password}")
 private String dbPassword;
@@ -276,6 +283,7 @@ private String dbPassword;
 ### Testing without a running Vault
 
 Use `@TestPropertySource` to supply mock values:
+
 ```java
 @SpringBootTest
 @TestPropertySource(properties = {
@@ -286,6 +294,7 @@ class MyServiceTest { ... }
 ```
 
 Or, disable Vault for the test profile in `application-test.properties`:
+
 ```properties
 spring.cloud.vault.enabled=false
 ```
@@ -293,6 +302,7 @@ spring.cloud.vault.enabled=false
 ### Dynamic secrets (advanced)
 
 Vault can generate short-lived, auto-rotating database credentials:
+
 ```bash
 vault secrets enable database
 vault write database/roles/myapp \
@@ -308,10 +318,10 @@ Compromised credentials expire without manual rotation.
 
 ## Tests
 
-| Class | OWASP | Tests |
-|---|---|---|
-| `AccessControlTest` | A01 | 3 |
-| `SecurityFeaturesTest` | A03, A05 | 2 |
+| Class                  | OWASP    | Tests |
+| ---------------------- | -------- | ----- |
+| `AccessControlTest`    | A01      | 3     |
+| `SecurityFeaturesTest` | A03, A05 | 2     |
 
 Run: `JAVA_HOME=/opt/homebrew/opt/openjdk@21 mvn test`
 Result: **5/5 pass**
@@ -320,11 +330,12 @@ Result: **5/5 pass**
 
 ## Key decisions
 
-| Decision | Reason |
-|---|---|
-| `@WithMockUser` over `httpBasic()` + real credentials in tests | Isolates the authorization policy from the authentication mechanism; no need to store real test passwords |
-| `BCryptPasswordEncoder(12)` over default strength (10) | Strength 12 ≈ 300ms; raises the cost of brute force from the default 100ms without being noticeable to users |
-| `csrf(AbstractHttpConfigurer::disable)` | Stateless API — CSRF requires browser-managed session cookies, which this API doesn't use |
-| `headers(Customizer.withDefaults())` | Enables all Spring Security headers in one call; explicit `withDefaults()` makes intent clear and prevents accidental omission |
-| OWASP Dependency Check NOT bound to `mvn test` | First run downloads the NVD CVE database (~few hundred MB); binding to test would make every local build slow — run in CI explicitly |
+| Decision                                                       | Reason                                                                                                                               |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `@WithMockUser` over `httpBasic()` + real credentials in tests | Isolates the authorization policy from the authentication mechanism; no need to store real test passwords                            |
+| `BCryptPasswordEncoder(12)` over default strength (10)         | Strength 12 ≈ 300ms; raises the cost of brute force from the default 100ms without being noticeable to users                         |
+| `csrf(AbstractHttpConfigurer::disable)`                        | Stateless API - CSRF requires browser-managed session cookies, which this API doesn't use                                            |
+| `headers(Customizer.withDefaults())`                           | Enables all Spring Security headers in one call; explicit `withDefaults()` makes intent clear and prevents accidental omission       |
+| OWASP Dependency Check NOT bound to `mvn test`                 | First run downloads the NVD CVE database (~few hundred MB); binding to test would make every local build slow - run in CI explicitly |
+
 {% endraw %}

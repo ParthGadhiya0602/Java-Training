@@ -5,7 +5,7 @@
         </encoder>
     </appender>
 
-    <!-- Show generated SQL — helpful for learning what Spring Data produces -->
+    <!-- Show generated SQL - helpful for learning what Spring Data produces -->
     <logger name="org.hibernate.SQL"                        level="DEBUG"/>
     <logger name="org.hibernate.orm.jdbc.bind"              level="TRACE"/>
 

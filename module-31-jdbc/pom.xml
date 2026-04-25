@@ -22,7 +22,7 @@
     </properties>
 
     <dependencies>
-        <!-- Force SLF4J 2.x — HikariCP 5.x pulls in 1.7.x transitively,
+        <!-- Force SLF4J 2.x - HikariCP 5.x pulls in 1.7.x transitively,
              but Logback 1.5.x requires 2.x; this explicit declaration wins -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -30,7 +30,7 @@
             <version>${slf4j.version}</version>
         </dependency>
 
-        <!-- H2 in-memory database — driver + embedded server -->
+        <!-- H2 in-memory database - driver + embedded server -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -44,7 +44,7 @@
             <version>${hikari.version}</version>
         </dependency>
 
-        <!-- Logback — satisfies HikariCP's SLF4J dependency at runtime -->
+        <!-- Logback - satisfies HikariCP's SLF4J dependency at runtime -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

@@ -1,4 +1,4 @@
--- V4: Zero-downtime step 1 — add the FK column as NULLABLE.
+-- V4: Zero-downtime step 1 - add the FK column as NULLABLE.
 --
 -- Why nullable first?
 --   Existing rows already have no department assignment.

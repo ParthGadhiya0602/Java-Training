@@ -10,19 +10,19 @@ import java.util.function.Function;
  * Those parameters act as placeholders that callers fill in at the use site.
  *
  * Benefits:
- *   • Compile-time type safety — ClassCastException moves from runtime to compile
+ *   • Compile-time type safety - ClassCastException moves from runtime to compile
  *   • Eliminates manual casts
  *   • Enables one implementation to serve many types (parametric polymorphism)
  *
  * Naming conventions (by tradition):
- *   T — general type                 E — element (collections)
- *   K, V — key / value (maps)        R — return type
- *   A, B, C — distinct type params   N — number
+ *   T - general type                 E - element (collections)
+ *   K, V - key / value (maps)        R - return type
+ *   A, B, C - distinct type params   N - number
  */
 public class GenericClasses {
 
     // -------------------------------------------------------------------------
-    // 1. Generic class — Pair<A, B>
+    // 1. Generic class - Pair<A, B>
     //    Holds two values of potentially different types.
     //    swap() shows a generic method that returns a new type.
     // -------------------------------------------------------------------------
@@ -57,7 +57,7 @@ public class GenericClasses {
     }
 
     // -------------------------------------------------------------------------
-    // 2. Generic method — operates on a type parameter independent of the class
+    // 2. Generic method - operates on a type parameter independent of the class
     //    The type parameter is declared on the METHOD, not the class.
     // -------------------------------------------------------------------------
 
@@ -84,7 +84,7 @@ public class GenericClasses {
     }
 
     // -------------------------------------------------------------------------
-    // 3. Bounded type parameter — <T extends Comparable<T>>
+    // 3. Bounded type parameter - <T extends Comparable<T>>
     //    Constrains T to types that can be compared to themselves.
     //    Enables use of compareTo() inside the method body.
     // -------------------------------------------------------------------------
@@ -114,7 +114,7 @@ public class GenericClasses {
     }
 
     // -------------------------------------------------------------------------
-    // 4. Multiple bounds — <T extends Number & Comparable<T>>
+    // 4. Multiple bounds - <T extends Number & Comparable<T>>
     //    A type parameter can extend at most one class and multiple interfaces.
     //    The class must come first.
     // -------------------------------------------------------------------------

@@ -9,11 +9,11 @@ import java.util.StringJoiner;
 public class StringsDemo {
 
     // -------------------------------------------------------------------------
-    // Immutability — every "modifying" operation returns a NEW String
+    // Immutability - every "modifying" operation returns a NEW String
     // -------------------------------------------------------------------------
     static void immutability() {
         String s = "hello";
-        s.toUpperCase();                  // result discarded — s unchanged
+        s.toUpperCase();                  // result discarded - s unchanged
         System.out.println("After toUpperCase() without assignment: " + s); // hello
 
         String upper = s.toUpperCase();   // capture the new String
@@ -28,7 +28,7 @@ public class StringsDemo {
     }
 
     // -------------------------------------------------------------------------
-    // String Pool — == vs equals()
+    // String Pool - == vs equals()
     // -------------------------------------------------------------------------
     static void stringPool() {
         String s1 = "java";                    // pool
@@ -36,18 +36,18 @@ public class StringsDemo {
         String s3 = new String("java");        // new heap object, bypasses pool
         String s4 = s3.intern();               // intern: put in pool, return pool ref
 
-        System.out.println("s1 == s2: " + (s1 == s2));   // true  — same pool ref
-        System.out.println("s1 == s3: " + (s1 == s3));   // false — different objects
-        System.out.println("s1 == s4: " + (s1 == s4));   // true  — s4 is interned
+        System.out.println("s1 == s2: " + (s1 == s2));   // true  - same pool ref
+        System.out.println("s1 == s3: " + (s1 == s3));   // false - different objects
+        System.out.println("s1 == s4: " + (s1 == s4));   // true  - s4 is interned
 
         // Compile-time constant folding
         String s5 = "ja" + "va";               // compiler folds to "java" at compile time
-        System.out.println("s1 == s5: " + (s1 == s5));   // true — compiler-folded
+        System.out.println("s1 == s5: " + (s1 == s5));   // true - compiler-folded
 
         String part = "ja";
-        String s6 = part + "va";               // runtime concat — new heap object
-        System.out.println("s1 == s6: " + (s1 == s6));   // false — runtime result
-        System.out.println("s1.equals(s6): " + s1.equals(s6)); // true — same content
+        String s6 = part + "va";               // runtime concat - new heap object
+        System.out.println("s1 == s6: " + (s1 == s6));   // false - runtime result
+        System.out.println("s1.equals(s6): " + s1.equals(s6)); // true - same content
     }
 
     // -------------------------------------------------------------------------
@@ -135,7 +135,7 @@ public class StringsDemo {
     static void stringBuilderAPI() {
         StringBuilder sb = new StringBuilder();
 
-        // Chaining — each method returns 'this'
+        // Chaining - each method returns 'this'
         sb.append("Hello")
           .append(", ")
           .append("World")
@@ -158,7 +158,7 @@ public class StringsDemo {
         System.out.println("indexOf Java:   " + sb.indexOf("Java")); // 7
         System.out.println("length:         " + sb.length());
 
-        // capacity — internal buffer, resizes automatically
+        // capacity - internal buffer, resizes automatically
         StringBuilder sized = new StringBuilder(256);   // pre-allocated
         System.out.println("initial capacity: " + sized.capacity()); // 256
     }
@@ -178,7 +178,7 @@ public class StringsDemo {
         empty.setEmptyValue("(none)");
         System.out.println("Empty joiner:   " + empty);         // (none)
 
-        // merge — append another StringJoiner's content
+        // merge - append another StringJoiner's content
         StringJoiner first  = new StringJoiner(", ");
         StringJoiner second = new StringJoiner(", ");
         first.add("A").add("B");
@@ -217,7 +217,7 @@ public class StringsDemo {
         System.out.println("SQL query:");
         System.out.println(sql);
 
-        // Formatted text block (Java 14+) — uses String.format-style %s
+        // Formatted text block (Java 14+) - uses String.format-style %s
         String name = "Bob";
         int count = 5;
         String msg = """

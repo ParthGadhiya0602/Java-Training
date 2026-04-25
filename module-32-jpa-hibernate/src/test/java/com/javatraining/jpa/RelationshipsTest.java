@@ -21,7 +21,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Demonstrates all three JPA relationship types — OneToMany, OneToOne, ManyToMany —
+ * Demonstrates all three JPA relationship types - OneToMany, OneToOne, ManyToMany -
  * plus the effects of cascade operations and orphan removal.
  *
  * <p>Domain used:
@@ -236,6 +236,6 @@ class RelationshipsTest {
         assertEquals(0, book.getTags().size(), "Tag removed from book");
         assertEquals(1L,
                 em.createQuery("SELECT COUNT(t) FROM Tag t", Long.class).getSingleResult(),
-                "Tag entity itself is not deleted — only the join-table row");
+                "Tag entity itself is not deleted - only the join-table row");
     }
 }

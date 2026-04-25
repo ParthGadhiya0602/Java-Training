@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * End-to-end JWT flow tests — full Spring context with MockMvc.
+ * End-to-end JWT flow tests - full Spring context with MockMvc.
  *
  * No @MockBean: the real ProductService (in-memory store) is used so we can
  * test the full create → read cycle. Each test class gets its own Spring context
@@ -49,14 +49,14 @@ class JwtFlowTest {
                 .andReturn().getResponse().getContentAsString();
 
         String token = objectMapper.readTree(body).get("token").asText();
-        // JWT format: header.payload.signature — three dot-separated base64url segments
+        // JWT format: header.payload.signature - three dot-separated base64url segments
         assertThat(token.split("\\.")).hasSize(3);
     }
 
     @Test
     void login_with_wrong_password_returns_401_problem_detail() throws Exception {
         // AuthController.login() throws BadCredentialsException → GlobalExceptionHandler
-        // returns ProblemDetail with 401. MockMvc sees the response directly — no HTTP
+        // returns ProblemDetail with 401. MockMvc sees the response directly - no HTTP
         // client auth-retry behavior.
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ class JwtFlowTest {
         // Login → get token → use token on protected endpoint
         String token = loginAndGetToken("user", "password");
 
-        // GET /api/products/999 — no such product, but 404 (not 401) proves JWT validated
+        // GET /api/products/999 - no such product, but 404 (not 401) proves JWT validated
         mockMvc.perform(get("/api/products/999")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isNotFound());

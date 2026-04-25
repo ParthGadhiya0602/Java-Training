@@ -5,40 +5,40 @@ import java.lang.ref.*;
 import java.util.*;
 
 /**
- * Module 24 — JVM Memory & Garbage Collection
+ * Module 24 - JVM Memory & Garbage Collection
  *
  * JVM Memory layout:
  *
  *   Heap (managed by GC)
  *     Young Generation
- *       Eden space       — new objects allocated here
- *       Survivor S0/S1   — objects that survived at least one minor GC
- *     Old (Tenured) Gen  — objects that survived many minor GCs
+ *       Eden space       - new objects allocated here
+ *       Survivor S0/S1   - objects that survived at least one minor GC
+ *     Old (Tenured) Gen  - objects that survived many minor GCs
  *
  *   Non-Heap
- *     Metaspace          — class metadata (replaced PermGen in Java 8)
- *     Code Cache         — JIT-compiled native code
- *     Thread stacks      — one per thread
+ *     Metaspace          - class metadata (replaced PermGen in Java 8)
+ *     Code Cache         - JIT-compiled native code
+ *     Thread stacks      - one per thread
  *
  * GC algorithms (Java 11–21):
- *   Serial GC     — single-threaded; for small heaps, embedded
- *   Parallel GC   — throughput-optimised; multi-threaded stop-the-world
- *   G1 GC         — default since Java 9; balanced latency/throughput
- *   ZGC           — sub-millisecond pauses; Java 15+ production-ready
- *   Shenandoah    — concurrent compaction; low pause
+ *   Serial GC     - single-threaded; for small heaps, embedded
+ *   Parallel GC   - throughput-optimised; multi-threaded stop-the-world
+ *   G1 GC         - default since Java 9; balanced latency/throughput
+ *   ZGC           - sub-millisecond pauses; Java 15+ production-ready
+ *   Shenandoah    - concurrent compaction; low pause
  *
  * Reference types (strength):
- *   Strong  — normal reference; prevents GC
- *   Soft    — cleared when JVM needs memory (before OOM); good for caches
- *   Weak    — cleared at next GC (no strong refs); WeakHashMap keys
- *   Phantom — cleared after finalisation; used for cleanup actions
+ *   Strong  - normal reference; prevents GC
+ *   Soft    - cleared when JVM needs memory (before OOM); good for caches
+ *   Weak    - cleared at next GC (no strong refs); WeakHashMap keys
+ *   Phantom - cleared after finalisation; used for cleanup actions
  *
  * JVM flags:
- *   -Xms<size>  — initial heap size
- *   -Xmx<size>  — maximum heap size
- *   -Xss<size>  — thread stack size
+ *   -Xms<size>  - initial heap size
+ *   -Xmx<size>  - maximum heap size
+ *   -Xss<size>  - thread stack size
  *   -XX:+UseG1GC / -XX:+UseZGC / -XX:+UseShenandoahGC
- *   -XX:+PrintGCDetails -Xlog:gc*   — GC logging
+ *   -XX:+PrintGCDetails -Xlog:gc*   - GC logging
  */
 public class MemoryDemo {
 
@@ -118,7 +118,7 @@ public class MemoryDemo {
 
     /**
      * SoftReference: JVM clears it before throwing OutOfMemoryError.
-     * Good for caches — grows when memory is available, shrinks under pressure.
+     * Good for caches - grows when memory is available, shrinks under pressure.
      */
     public static <T> SoftReference<T> softRef(T value) {
         return new SoftReference<>(value);
@@ -126,7 +126,7 @@ public class MemoryDemo {
 
     /**
      * WeakReference: cleared at the NEXT garbage collection when no strong refs exist.
-     * Used in WeakHashMap — keys don't prevent GC of their entries.
+     * Used in WeakHashMap - keys don't prevent GC of their entries.
      */
     public static <T> WeakReference<T> weakRef(T value) {
         return new WeakReference<>(value);
@@ -208,7 +208,7 @@ public class MemoryDemo {
         private final java.lang.ref.Cleaner.Cleanable cleanable;
         private volatile boolean closed = false;
 
-        // State held separately — the cleaner action must not reference 'this'
+        // State held separately - the cleaner action must not reference 'this'
         private static class State implements Runnable {
             private final String name;
             volatile boolean cleanerRan = false;

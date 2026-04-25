@@ -1,12 +1,12 @@
 package com.javatraining.cleancode.solid.lsp;
 
 /**
- * LSP — Liskov Substitution Principle.
+ * LSP - Liskov Substitution Principle.
  *
  * <p>Any code that works with a {@code Shape} must work correctly with any
  * subtype of Shape, without knowing the concrete type.
  *
- * <p><strong>Classic LSP violation — Square extends Rectangle:</strong>
+ * <p><strong>Classic LSP violation - Square extends Rectangle:</strong>
  * <pre>
  *   class Rectangle { int width, height; }
  *   class Square extends Rectangle {

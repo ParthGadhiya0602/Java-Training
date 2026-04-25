@@ -32,7 +32,7 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- Bean Validation: @NotBlank, @Size — OWASP A03 (Injection) defense -->
+        <!-- Bean Validation: @NotBlank, @Size - OWASP A03 (Injection) defense -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
@@ -75,7 +75,7 @@
 
             <!--
                 OWASP Dependency Check: scans all dependencies for known CVEs.
-                Not bound to the test lifecycle — run explicitly in CI:
+                Not bound to the test lifecycle - run explicitly in CI:
                   mvn dependency-check:check
                 Fails the build when a dependency has CVSS score >= 7 (High).
             -->

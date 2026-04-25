@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PolymorphismDemoTest {
 
     // -----------------------------------------------------------------------
-    // Dynamic dispatch — right sound() for each concrete type
+    // Dynamic dispatch - right sound() for each concrete type
     // -----------------------------------------------------------------------
     @Test
     void dog_sound_is_woof() {
@@ -61,7 +61,7 @@ class PolymorphismDemoTest {
     }
 
     // -----------------------------------------------------------------------
-    // LSP violation — Square breaks Rectangle contract
+    // LSP violation - Square breaks Rectangle contract
     // -----------------------------------------------------------------------
     @Test
     void rectangle_area_is_width_times_height() {
@@ -77,7 +77,7 @@ class PolymorphismDemoTest {
         r.setWidth(5);
         r.setHeight(3);
         // setHeight forces width=3 too → area=9, not 15
-        assertNotEquals(15, r.area(), "Square violates LSP — area should be 15 but isn't");
+        assertNotEquals(15, r.area(), "Square violates LSP - area should be 15 but isn't");
     }
 
     // -----------------------------------------------------------------------
