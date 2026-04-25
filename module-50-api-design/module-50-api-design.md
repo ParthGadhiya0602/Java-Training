@@ -3,6 +3,7 @@ title: "Module 50 — API Design"
 nav_order: 50
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-50-api-design/src){: .btn .btn-outline }
 
@@ -232,3 +233,4 @@ Result: **6/6 pass**
 | `runOrder=alphabetical` in Surefire | Guarantees consumer test (file generation) runs before provider test (file reading) in the same Maven build |
 | Type matchers in pact DSL (`numberType`, `stringType`) | Contract survives value changes — only field existence and type are enforced |
 | In-memory `ProductRepository` | Module focuses on API concerns; no JPA/H2 overhead |
+{% endraw %}

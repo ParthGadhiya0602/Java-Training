@@ -3,6 +3,7 @@ title: "Module 41 — Spring Testing"
 nav_order: 41
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-41-spring-testing/src){: .btn .btn-outline }
 
@@ -321,3 +322,4 @@ Spring startup.
   and retry logic all run as in production.
 - `@DynamicPropertySource` runs after extensions but before context creation — the correct seam
   for injecting dynamic infrastructure coordinates (ports, connection strings) into Spring.
+{% endraw %}

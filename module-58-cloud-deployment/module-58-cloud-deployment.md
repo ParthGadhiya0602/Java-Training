@@ -3,6 +3,7 @@ title: "Module 58 — Cloud Deployment"
 nav_order: 58
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-58-cloud-deployment/src){: .btn .btn-outline }
 
@@ -268,3 +269,4 @@ Result: **6/6 pass**
 | `terminationGracePeriodSeconds` > drain timeout + preStop sleep | If grace period ≤ drain timeout, Kubernetes force-kills the pod before requests finish — silent data loss |
 | Liveness vs readiness as separate probes | Mixing them causes a restart loop during normal startup; readiness DOWN during shutdown is correct, liveness DOWN means the pod is broken |
 | `APP_DB_PASSWORD` via ECS secrets / K8s secretKeyRef, not environment block | Plaintext env vars appear in `docker inspect`, ECS describe-tasks, and process listings; secrets-manager references do not |
+{% endraw %}

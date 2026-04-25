@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 15
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-15-functional-programming/src){: .btn .btn-outline }
 
@@ -266,3 +267,4 @@ Config c = config.get(); // loaded once here, cached for all subsequent calls
 
 {: .tip }
 > **Unbound vs bound:** `String::toUpperCase` as `Function<String,String>` is **unbound** — the string is the receiver. `myString::toUpperCase` as `Supplier<String>` is **bound** — `myString` is captured. Same syntax, different semantics depending on the target functional interface.
+{% endraw %}

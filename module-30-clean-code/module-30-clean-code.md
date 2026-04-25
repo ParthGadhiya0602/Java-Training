@@ -3,6 +3,7 @@ title: "Module 30 — Clean Code & Refactoring"
 nav_order: 30
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-30-clean-code/src){: .btn .btn-outline }
 
@@ -364,3 +365,4 @@ double tax = total * VAT_RATE;
 ```
 
 Total: **55 tests**, all passing.
+{% endraw %}

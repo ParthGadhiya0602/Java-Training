@@ -3,6 +3,7 @@ title: "Module 35 — Database Migration"
 nav_order: 35
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-35-db-migration/src){: .btn .btn-outline }
 
@@ -376,3 +377,4 @@ Total: **16 passing**.
   Isolation trick   Give each test class its own H2 URL (mem:flywaydb vs mem:liquibasedb)
                     to prevent Flyway and Liquibase from interfering with each other
 ```
+{% endraw %}

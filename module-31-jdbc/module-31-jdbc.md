@@ -3,6 +3,7 @@ title: "Module 31 — JDBC"
 nav_order: 31
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-31-jdbc/src){: .btn .btn-outline }
 
@@ -336,3 +337,4 @@ Total: **40 tests**, all passing.
   restore autoCommit       — in finally; pool safety
   addBatch/executeBatch    — 10–100× faster for bulk DML
 ```
+{% endraw %}

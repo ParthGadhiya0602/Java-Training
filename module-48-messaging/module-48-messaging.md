@@ -3,6 +3,7 @@ title: "Module 48 — Messaging"
 nav_order: 48
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-48-messaging/src){: .btn .btn-outline }
 
@@ -224,3 +225,4 @@ Result: **7/7 pass**
 | `timeout(5000)` in Kafka assertions | Consumer runs on a separate thread; Mockito must wait for the async call |
 | `RabbitAutoConfiguration` excluded in test properties | No RabbitMQ broker available during CI; `@MockBean RabbitTemplate` covers the dependency |
 | Dead-letter via queue arguments | Keeps routing policy in code alongside the queue declaration |
+{% endraw %}

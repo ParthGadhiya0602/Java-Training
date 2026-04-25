@@ -3,6 +3,7 @@ title: "Module 29 — Logging & Observability"
 nav_order: 29
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-29-logging-observability/src){: .btn .btn-outline }
 
@@ -397,3 +398,4 @@ logger.detachAppender(listAppender);
 ```
 
 Total: **28 tests**, all passing.
+{% endraw %}

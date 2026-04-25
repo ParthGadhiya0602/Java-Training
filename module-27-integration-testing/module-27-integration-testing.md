@@ -3,6 +3,7 @@ title: "Module 27 — Integration Testing"
 nav_order: 27
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-27-integration-testing/src){: .btn .btn-outline }
 
@@ -299,3 +300,4 @@ and fast by using containers instead of shared test databases.
 | Wraps `SQLException` in `RuntimeException` | Keeps the `ProductRepository` interface clean |
 | Uses `RETURNING id` instead of `getGeneratedKeys()` | More explicit; shows PostgreSQL-specific SQL |
 | Maps rows with a private `mapRow()` helper | Single point of change if column names change |
+{% endraw %}

@@ -3,6 +3,7 @@ title: "Module 34 — NoSQL"
 nav_order: 34
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-34-nosql/src){: .btn .btn-outline }
 
@@ -396,3 +397,4 @@ Redis tests: **17 skipped** (require Docker; pass when Docker is running).
   Redis Set          — SADD/SMEMBERS for unique member tracking, tag unions
   TTL                — EXPIRE makes any key self-destruct; foundation of all caching
 ```
+{% endraw %}

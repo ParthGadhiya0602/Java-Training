@@ -3,6 +3,7 @@ title: "Module 47 — Spring Cloud"
 nav_order: 47
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-47-spring-cloud/src){: .btn .btn-outline }
 
@@ -456,3 +457,4 @@ resilience4j.retry.instances.inventory.enable-exponential-backoff=false
   each retry batch counts as a single failure observation for the CB
 - Test with tight thresholds in `src/test/resources/application.properties` and reset
   `CircuitBreakerRegistry` in `@BeforeEach` to keep tests independent
+{% endraw %}

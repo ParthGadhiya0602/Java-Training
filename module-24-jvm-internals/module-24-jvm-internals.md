@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 24
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-24-jvm-internals/src){: .btn .btn-outline }
 
@@ -325,3 +326,4 @@ finally { pool.release(obj); }
 | JIT tiers | C1 (~1.5k calls) → C2 (~15k calls); inlining enables everything else |
 | Warmup | Benchmark only after JIT has compiled the hot path |
 | Dead code trap | Return/consume results; use JMH for serious benchmarking |
+{% endraw %}

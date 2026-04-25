@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 12
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-12-generics/src){: .btn .btn-outline }
 
@@ -100,3 +101,4 @@ Consequences:
 cd module-12-generics
 mvn test
 ```
+{% endraw %}

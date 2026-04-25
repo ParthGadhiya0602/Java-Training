@@ -3,6 +3,7 @@ title: "Module 38 — Lombok & MapStruct"
 nav_order: 38
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-38-lombok-mapstruct/src){: .btn .btn-outline }
 
@@ -396,3 +397,4 @@ All tests: **23 passing** (requires Java 21; MapStruct processor is incompatible
   IGNORE strategy  Null source fields skip the target field — PATCH semantics
   @MappingTarget   Write into existing object instead of creating a new one
 ```
+{% endraw %}

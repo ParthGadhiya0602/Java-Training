@@ -3,6 +3,7 @@ title: "Module 54 — Observability"
 nav_order: 54
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-54-observability/src){: .btn .btn-outline }
 
@@ -266,3 +267,4 @@ Result: **5/5 pass**
 | `AtomicInteger` for Gauge vs `productRepository::count` | Avoids a DB call per scrape; appropriate for an instance-level count. Use `productRepository::count` when the gauge must reflect real DB state |
 | `management.tracing.sampling.probability=1.0` | 100% sampling for dev/test; reduce to 0.1–0.01 in production to limit overhead and storage |
 | MDC with `%X{traceId:-}` in Logback | `-` fallback makes the pattern safe when no trace context exists (unit tests, startup) |
+{% endraw %}

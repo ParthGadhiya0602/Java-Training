@@ -4,6 +4,7 @@ parent: "Phase 1 — Fundamentals"
 nav_order: 4
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-04-methods/src){: .btn .btn-outline }
 
@@ -713,3 +714,4 @@ static int sumDigits(int n) {
 ## Next
 
 [Module 05 — Arrays, Strings & Regex](../module-05-arrays-strings/)
+{% endraw %}

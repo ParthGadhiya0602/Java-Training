@@ -3,6 +3,7 @@ title: "Module 33 — Spring Data JPA"
 nav_order: 33
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-33-spring-data/src){: .btn .btn-outline }
 
@@ -376,3 +377,4 @@ Total: **39 tests**, all passing.
   @DataJpaTest          — JPA slice; transactional rollback; import auditing config
   @TestConfiguration    — supplements slice context; does NOT replace auto-config
 ```
+{% endraw %}

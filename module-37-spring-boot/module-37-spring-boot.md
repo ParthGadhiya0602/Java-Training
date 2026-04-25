@@ -3,6 +3,7 @@ title: "Module 37 — Spring Boot"
 nav_order: 37
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-37-spring-boot/src){: .btn .btn-outline }
 
@@ -453,3 +454,4 @@ All tests: **27 passing**.
   Stale test resources  target/test-classes/application.properties shadows main properties.
                         Always mvn clean test after deleting resource files.
 ```
+{% endraw %}

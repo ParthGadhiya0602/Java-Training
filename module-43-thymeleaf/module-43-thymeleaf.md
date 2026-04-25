@@ -3,6 +3,7 @@ title: "Module 43 — Thymeleaf"
 nav_order: 43
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-43-thymeleaf/src){: .btn .btn-outline }
 
@@ -324,3 +325,4 @@ When `thymeleaf-extras-springsecurity6` is on the classpath, templates gain `sec
 - `BindingResult` must immediately follow `@ModelAttribute` in the method signature
 - `@WebMvcTest` renders Thymeleaf templates — assert on `view()`, `model()`, and `content()` for
   complete controller + template coverage
+{% endraw %}

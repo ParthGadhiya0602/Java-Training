@@ -3,6 +3,7 @@ title: "Module 55 — CI/CD"
 nav_order: 55
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-55-ci-cd/src){: .btn .btn-outline }
 
@@ -260,3 +261,4 @@ Result: **14/14 pass**
 | `fetch-depth: 0` in CI checkout | SonarQube blame requires full git history; shallow clones break the annotation feature |
 | Semver regex in service, not controller | Business rule belongs in the service layer; controller stays thin and delegates validation |
 | `prerelease: ${{ contains(github.ref_name, '-') }}` | Tags with `-` (e.g., `-rc.1`, `-beta`) are pre-releases by convention; the expression detects this automatically |
+{% endraw %}

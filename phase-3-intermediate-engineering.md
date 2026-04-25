@@ -4,6 +4,7 @@ nav_order: 3
 has_children: true
 permalink: /phase-3-intermediate-engineering
 ---
+{% raw %}
 
 # Phase 3 — Intermediate Engineering
 
@@ -18,3 +19,4 @@ and the tooling that professional projects use every day.
 | [28](module-28-build-tools/module-28-build-tools)                 | Build Tools — Maven deep-dive, Gradle intro              | ✅     |
 | [29](module-29-logging-observability/module-29-logging-observability) | Logging & Observability — SLF4J, Logback, Micrometer | ✅     |
 | [30](module-30-clean-code/module-30-clean-code)                   | Clean Code & Refactoring — SOLID, code smells, IDE tools | ✅     |
+{% endraw %}

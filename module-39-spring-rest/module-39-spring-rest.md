@@ -3,6 +3,7 @@ title: "Module 39 — Spring REST APIs"
 nav_order: 39
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-39-spring-rest/src){: .btn .btn-outline }
 
@@ -407,3 +408,4 @@ All tests: **12 passing**.
   MockMvc                      mock HTTP requests without a real server
   BDDMockito                   given/willReturn, willThrow, willDoNothing patterns
 ```
+{% endraw %}

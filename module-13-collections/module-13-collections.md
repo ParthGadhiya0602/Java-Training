@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 13
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-13-collections/src){: .btn .btn-outline }
 
@@ -86,3 +87,4 @@ Map<String,Integer> big  = Map.ofEntries(                 // immutable, any size
 cd module-13-collections
 mvn test
 ```
+{% endraw %}

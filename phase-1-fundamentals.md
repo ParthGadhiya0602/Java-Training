@@ -4,6 +4,7 @@ nav_order: 1
 has_children: true
 permalink: /phase-1-fundamentals
 ---
+{% raw %}
 
 # Phase 1 — Java Fundamentals
 
@@ -23,3 +24,4 @@ and exception handling before touching any library or framework.
 | [09](module-09-oop-interfaces/module-09-oop-interfaces) | OOP: Interfaces & Abstract Classes — functional interfaces | ✅ |
 | [10](module-10-oop-encapsulation/module-10-oop-encapsulation) | OOP: Encapsulation — immutability, builder pattern | ✅ |
 | [11](module-11-nested-classes/module-11-nested-classes) | Nested & Inner Classes — static nested, inner, local, anonymous | ✅ |
+{% endraw %}

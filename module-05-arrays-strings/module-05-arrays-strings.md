@@ -4,6 +4,7 @@ parent: "Phase 1 — Fundamentals"
 nav_order: 5
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-05-arrays-strings/src){: .btn .btn-outline }
 
@@ -811,3 +812,4 @@ Write a method that extracts all URLs from a block of HTML text using
 ## Next
 
 [Module 06 — Enums](../module-06-enums/)
+{% endraw %}

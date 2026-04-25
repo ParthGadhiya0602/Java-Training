@@ -3,6 +3,7 @@ title: "Module 59 — Capstone"
 nav_order: 59
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-59-capstone/src){: .btn .btn-outline }
 
@@ -253,3 +254,4 @@ Result: **7/7 pass**
 | `Awaitility.await()` for Kafka assertion | Kafka consumer runs asynchronously; `Thread.sleep` is fragile; Awaitility polls until the condition is met (included in `spring-boot-starter-test`) |
 | `AtomicInteger processedCount` in `NotificationListener` | Observable without coupling the test to Kafka internals (no raw consumer / `KafkaTestUtils`) |
 | `spring.threads.virtual.enabled=true` | Every Tomcat request thread is virtual; gRPC and Kafka I/O blocks unmount the carrier thread — higher throughput with the same resource footprint |
+{% endraw %}

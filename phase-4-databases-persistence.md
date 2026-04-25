@@ -4,6 +4,7 @@ nav_order: 4
 has_children: true
 permalink: /phase-4-databases-persistence
 ---
+{% raw %}
 
 # Phase 4 — Databases & Persistence
 
@@ -19,3 +20,4 @@ explain exactly what SQL every layer generates.
 | [33](module-33-spring-data/module-33-spring-data)                   | Spring Data JPA — repositories, derived queries, @Query, projections, pagination         | ✅     |
 | [34](module-34-nosql/module-34-nosql)                               | NoSQL — MongoDB documents & aggregations, Redis hash/list/pub-sub                        | ✅     |
 | [35](module-35-db-migration/module-35-db-migration)                 | Database Migration — Flyway versioned migrations, Liquibase changeSets, zero-downtime    | ✅     |
+{% endraw %}

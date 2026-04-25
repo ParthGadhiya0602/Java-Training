@@ -4,6 +4,7 @@ nav_order: 0
 description: "Beginner to Production-Ready — 59 modules covering core Java through cloud deployment."
 permalink: /
 ---
+{% raw %}
 
 # Java Training — Beginner to Production-Ready
 {: .no_toc }
@@ -57,3 +58,4 @@ records, sealed classes, switch expressions, text blocks, virtual threads, patte
 
 {: .tip }
 > **Start here →** [Module 01 — Environment Setup](module-01-environment-setup/module-01-environment-setup)
+{% endraw %}

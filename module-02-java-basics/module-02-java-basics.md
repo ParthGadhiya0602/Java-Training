@@ -4,6 +4,7 @@ parent: "Phase 1 — Fundamentals"
 nav_order: 2
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-02-java-basics/src){: .btn .btn-outline }
 
@@ -679,3 +680,4 @@ Design a bitmask permission system for a user role that supports:
 ## Next
 
 [Module 03 — Control Flow](../module-03-control-flow/)
+{% endraw %}

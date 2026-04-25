@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 18
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-18-jmm-advanced-concurrency/src){: .btn .btn-outline }
 
@@ -251,3 +252,4 @@ Each worker thread has a deque. When idle, it steals tasks from the *tail* of a 
 
 {: .tip }
 > **Prefer init-on-demand holder over DCL.** It is simpler, has no volatile overhead, and is guaranteed correct by the class-loading specification.
+{% endraw %}

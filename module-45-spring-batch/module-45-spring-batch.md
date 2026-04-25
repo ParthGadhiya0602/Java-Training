@@ -3,6 +3,7 @@ title: "Module 45 — Spring Batch"
 nav_order: 45
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-45-spring-batch/src){: .btn .btn-outline }
 
@@ -411,3 +412,4 @@ return type — inline the stream logic instead.
   runs the full job, `launchStep("name")` runs one step in isolation
 - Clean up between tests with `jobRepositoryTestUtils.removeJobExecutions()` and
   `repository.deleteAll()` — no `@Transactional` on the test class
+{% endraw %}

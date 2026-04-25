@@ -3,6 +3,7 @@ title: "Module 52 — gRPC with Spring Boot"
 nav_order: 52
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-52-grpc/src){: .btn .btn-outline }
 
@@ -210,3 +211,4 @@ Result: **4/4 pass**
 | `grpc-server-spring-boot-starter` over manual `ServerBuilder` | Auto-configures port, TLS, health check, and interceptor discovery from Spring beans |
 | `@GrpcGlobalServerInterceptor` over per-service registration | Interceptor applies automatically to all current and future services; zero wiring |
 | `Status.NOT_FOUND.asRuntimeException()` | gRPC status codes are the standard error signalling mechanism; clients check `StatusRuntimeException.getStatus().getCode()` |
+{% endraw %}

@@ -3,6 +3,7 @@ title: "Module 56 — Performance & Profiling"
 nav_order: 56
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-56-performance/src){: .btn .btn-outline }
 
@@ -348,3 +349,4 @@ Result: **4/4 pass**
 | Explicit `annotationProcessorPaths` with both Lombok and JMH | `annotationProcessorPaths` replaces classpath scanning — omitting Lombok silently breaks `@Slf4j`, `@Data`, etc. |
 | `spring.threads.virtual.enabled=true` as the only config | Spring Boot 3.2+ plumbing change; zero application code changes demonstrates the "drop-in" nature of virtual thread adoption |
 | Wall-clock profiling (`-e wall`) for virtual threads | CPU profiling misses parked virtual threads; wall-clock shows all threads including those blocked on I/O or locks |
+{% endraw %}

@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 20
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-20-annotations/src){: .btn .btn-outline }
 
@@ -282,3 +283,4 @@ for (Field f : clazz.getDeclaredFields()) {
 | Suppress warnings | `@SuppressWarnings("unchecked")` |
 | Read at runtime | `getAnnotation()`, `getAnnotationsByType()`, `getDeclaredAnnotations()` |
 | Field injection | `field.setAccessible(true); field.set(obj, value)` |
+{% endraw %}

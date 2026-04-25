@@ -3,6 +3,7 @@ title: "Module 36 — Spring Core"
 nav_order: 36
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-36-spring-core/src){: .btn .btn-outline }
 
@@ -440,3 +441,4 @@ All tests: **26 passing**.
   @After           Runs always (like finally)
   @Around          Full control: proceed(), modify return, suppress exception
 ```
+{% endraw %}

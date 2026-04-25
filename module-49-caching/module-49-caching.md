@@ -3,6 +3,7 @@ title: "Module 49 — Caching"
 nav_order: 49
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-49-caching/src){: .btn .btn-outline }
 
@@ -235,3 +236,4 @@ Result: **4/4 pass**
 | `@CachePut` with `#result.id` key | Result-based key means the ID is set by the database (auto-increment) and known only after the insert |
 | `@Caching` on `save` and `deleteById` | Single annotation site that keeps both the per-item cache and the list cache in sync |
 | `disableCachingNullValues()` | Prevents a deleted entity from occupying cache space and masking a later re-insert |
+{% endraw %}

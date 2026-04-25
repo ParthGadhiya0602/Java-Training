@@ -4,6 +4,7 @@ parent: "Phase 1 — Fundamentals"
 nav_order: 3
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-03-control-flow/src){: .btn .btn-outline }
 
@@ -850,3 +851,4 @@ It must not crash on invalid input.
 ## Next
 
 [Module 04 — Methods](../module-04-methods/)
+{% endraw %}

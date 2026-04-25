@@ -4,6 +4,7 @@ parent: "Phase 1 — Fundamentals"
 nav_order: 6
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-06-enums/src){: .btn .btn-outline }
 
@@ -679,3 +680,4 @@ counting how many times each season appears, maintaining declaration order.
 ## Next
 
 [Module 07 — OOP: Classes & Objects](../module-07-oop-classes/)
+{% endraw %}

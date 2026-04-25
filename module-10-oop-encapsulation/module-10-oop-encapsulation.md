@@ -4,6 +4,7 @@ parent: "Phase 1 — Fundamentals"
 nav_order: 10
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-10-oop-encapsulation/src){: .btn .btn-outline }
 
@@ -109,3 +110,4 @@ User user = User.builder()
 cd module-10-oop-encapsulation
 mvn test
 ```
+{% endraw %}

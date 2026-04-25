@@ -3,6 +3,7 @@ title: "Module 57 — Security Hardening"
 nav_order: 57
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-57-security-hardening/src){: .btn .btn-outline }
 
@@ -325,3 +326,4 @@ Result: **5/5 pass**
 | `csrf(AbstractHttpConfigurer::disable)` | Stateless API — CSRF requires browser-managed session cookies, which this API doesn't use |
 | `headers(Customizer.withDefaults())` | Enables all Spring Security headers in one call; explicit `withDefaults()` makes intent clear and prevents accidental omission |
 | OWASP Dependency Check NOT bound to `mvn test` | First run downloads the NVD CVE database (~few hundred MB); binding to test would make every local build slow — run in CI explicitly |
+{% endraw %}

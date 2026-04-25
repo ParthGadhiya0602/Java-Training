@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 21
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-21-reflection/src){: .btn .btn-outline }
 
@@ -285,3 +286,4 @@ T plugin = (T) ctor.newInstance();
 | Dynamic proxy | `Proxy.newProxyInstance(loader, interfaces, handler)` |
 | Generic type arg | `(ParameterizedType) field.getGenericType()` |
 | Check proxy | `Proxy.isProxyClass(obj.getClass())` |
+{% endraw %}

@@ -3,6 +3,7 @@ title: "Module 25 — Design Patterns"
 nav_order: 25
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-25-design-patterns/src){: .btn .btn-outline }
 
@@ -362,3 +363,4 @@ Reduces N² direct connections to N connections (each user ↔ room only).
 | Behavioural | State                   | Behaviour changes with internal state                  |
 | Behavioural | Visitor                 | Add operations to a hierarchy without modifying it     |
 | Behavioural | Mediator                | Centralise complex communications                      |
+{% endraw %}

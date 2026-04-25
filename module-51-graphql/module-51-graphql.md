@@ -3,6 +3,7 @@ title: "Module 51 — GraphQL with Spring"
 nav_order: 51
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-51-graphql/src){: .btn .btn-outline }
 
@@ -273,3 +274,4 @@ Result: **7/7 pass**
 | `Sinks.many().multicast().onBackpressureBuffer()` | Hot source that buffers for each slow subscriber; replaces the old `EmitterProcessor` (deprecated in Reactor 3.5) |
 | Subscription mock returns `Flux.just(...)` | Finite flux that completes immediately keeps `StepVerifier` tests synchronous and deterministic |
 | Schema-first over annotation-first | Schema file is language-agnostic documentation; implementation auto-validated against it at startup |
+{% endraw %}

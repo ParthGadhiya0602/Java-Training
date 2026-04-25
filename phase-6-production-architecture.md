@@ -4,6 +4,7 @@ nav_order: 6
 has_children: true
 permalink: /phase-6-production-architecture
 ---
+{% raw %}
 
 # Phase 6 — Production & Architecture
 
@@ -28,3 +29,4 @@ in production, and reason about reliability, performance, and security.
 | [57](module-57-security-hardening/module-57-security-hardening)                   | Security Hardening — OWASP Top 10, dependency scanning, HashiCorp Vault                                                                    | ✅     |
 | [58](module-58-cloud-deployment/module-58-cloud-deployment)                       | Cloud Deployment — Spring Boot on AWS/GCP, 12-factor app, environment parity                                                               | ✅     |
 | [59](module-59-capstone/module-59-capstone)                                       | Capstone — end-to-end production system: multi-service, REST + gRPC + Kafka, Dockerized, CI/CD                                            | ✅     |
+{% endraw %}

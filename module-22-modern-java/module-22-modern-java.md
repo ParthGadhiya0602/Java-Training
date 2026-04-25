@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 22
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-22-modern-java/src){: .btn .btn-outline }
 
@@ -322,3 +323,4 @@ map.reversed()       // reversed view
 | Java 16 | Records (final), `instanceof` patterns (final), `Stream.toList()` |
 | Java 17 | Sealed classes (final) |
 | Java 21 | Pattern matching for switch (final), record patterns, guarded patterns, sequenced collections, virtual threads |
+{% endraw %}

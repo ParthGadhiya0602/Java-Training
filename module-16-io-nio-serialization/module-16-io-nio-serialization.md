@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 16
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-16-io-nio-serialization/src){: .btn .btn-outline }
 
@@ -286,3 +287,4 @@ byte b = mbb.get(offset);  // random access without read() call
 
 {: .tip }
 > **Prefer `Files.readAllLines` for small files, `Files.lines` for large ones.** `readAllLines` loads everything into memory; `Files.lines` is lazy but must be closed.
+{% endraw %}

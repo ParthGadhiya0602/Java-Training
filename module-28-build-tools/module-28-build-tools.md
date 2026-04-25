@@ -3,6 +3,7 @@ title: "Module 28 — Build Tools"
 nav_order: 28
 render_with_liquid: false
 ---
+{% raw %}
 
 # Module 28 — Build Tools
 
@@ -415,3 +416,4 @@ Run it with `./gradlew build` if Gradle is installed, or generate the wrapper:
 gradle wrapper --gradle-version 8.8
 ./gradlew build
 ```
+{% endraw %}

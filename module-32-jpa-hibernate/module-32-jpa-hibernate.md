@@ -3,6 +3,7 @@ title: "Module 32 — JPA & Hibernate"
 nav_order: 32
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-32-jpa-hibernate/src){: .btn .btn-outline }
 
@@ -386,3 +387,4 @@ Total: **34 tests**, all passing.
   Criteria API          — programmatic queries (useful for dynamic conditions)
   Bean Validation       — constraints on entity fields; validated before flush
 ```
+{% endraw %}

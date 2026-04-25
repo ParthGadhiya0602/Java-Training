@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 17
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-17-multithreading/src){: .btn .btn-outline }
 
@@ -259,3 +260,4 @@ ExecutorService exec = Executors.newVirtualThreadPerTaskExecutor();
 
 {: .tip }
 > **Virtual threads for I/O, platform threads for CPU.** A CPU-bound task on a virtual thread still occupies a carrier thread and blocks other virtual threads on that carrier. Use `ForkJoinPool` or a bounded fixed pool for CPU work.
+{% endraw %}

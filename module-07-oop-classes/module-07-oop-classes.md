@@ -4,6 +4,7 @@ parent: "Phase 1 — Fundamentals"
 nav_order: 7
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-07-oop-classes/src){: .btn .btn-outline }
 
@@ -139,3 +140,4 @@ cd module-07-oop-classes
 mvn test          # compile + run all JUnit 5 tests
 mvn compile exec:java -Dexec.mainClass=com.javatraining.oop.ClassAnatomy
 ```
+{% endraw %}

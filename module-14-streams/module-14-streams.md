@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 14
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-14-streams/src){: .btn .btn-outline }
 
@@ -96,3 +97,4 @@ Collectors.teeing(c1, c2, merger)        → merges results of two collectors
 cd module-14-streams
 mvn test
 ```
+{% endraw %}

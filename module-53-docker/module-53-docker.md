@@ -3,6 +3,7 @@ title: "Module 53 — Docker & Containers"
 nav_order: 53
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-53-docker/src){: .btn .btn-outline }
 
@@ -207,3 +208,4 @@ Result: **4/4 pass**
 | `UseContainerSupport` + `MaxRAMPercentage` | JVM reads cgroup limits, not host RAM — prevents OOM kills when the container has a memory limit |
 | Jib alongside Dockerfile | Jib is the faster, daemon-free path for CI; Dockerfile gives full control and is universal |
 | `ResponseEntity.created(location)` for POST | Returns 201 + Location header — the standard HTTP contract for resource creation |
+{% endraw %}

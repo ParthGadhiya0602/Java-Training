@@ -4,6 +4,7 @@ nav_order: 2
 has_children: true
 permalink: /phase-2-core-apis
 ---
+{% raw %}
 
 # Phase 2 — Core Java APIs
 
@@ -25,3 +26,4 @@ streams, concurrency, and JVM internals.
 | [22](module-22-modern-java/module-22-modern-java) | Modern Java (9–21) — records, pattern matching, sealed classes, text blocks, var | ✅ |
 | [23](module-23-algorithms/module-23-algorithms) | Algorithms & Data Structures — sorting, search, DS implementations, patterns | ✅ |
 | [24](module-24-jvm-internals/module-24-jvm-internals) | JVM Internals — GC, JIT, ClassLoaders, reference types, performance | ✅ |
+{% endraw %}

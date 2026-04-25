@@ -4,6 +4,7 @@ parent: "Phase 2 — Core APIs"
 nav_order: 19
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-19-networking/src){: .btn .btn-outline }
 
@@ -343,3 +344,4 @@ InetAddress.getByName(host).isReachable(ms) // ICMP ping-like probe
 | HTTP | `HttpClient` | Reuse instances; prefer `sendAsync` |
 | NIO | `Selector` + `SocketChannel` | Single thread, many connections |
 | In-process | `Pipe` | `sink()` write / `source()` read |
+{% endraw %}

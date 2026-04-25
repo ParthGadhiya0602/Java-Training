@@ -3,6 +3,7 @@ title: "Module 46 — Microservices Architecture"
 nav_order: 46
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-46-microservices/src){: .btn .btn-outline }
 
@@ -320,3 +321,4 @@ class OutboxPatternTest {
   to the broker. This gives at-least-once delivery without a distributed transaction coordinator
 - Consumers of outbox-published events must be **idempotent**: the same event may arrive
   more than once if the publisher crashes between sending and marking the event as published
+{% endraw %}

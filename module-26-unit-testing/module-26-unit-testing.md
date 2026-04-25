@@ -3,6 +3,7 @@ title: "Module 26 — Unit Testing"
 nav_order: 26
 render_with_liquid: false
 ---
+{% raw %}
 
 [View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-26-unit-testing/src){: .btn .btn-outline }
 
@@ -386,3 +387,4 @@ static final double INITIAL_BALANCE = 500.0;
 assertEquals(INITIAL_BALANCE + depositAmount, account.balance());
 // vs: assertEquals(700.0, account.balance())  — cryptic and brittle
 ```
+{% endraw %}

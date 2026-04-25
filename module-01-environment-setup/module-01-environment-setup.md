@@ -4,6 +4,7 @@ parent: "Phase 1 — Fundamentals"
 nav_order: 1
 render_with_liquid: false
 ---
+{% raw %}
 
 # Module 01 — Environment Setup
 
@@ -281,3 +282,4 @@ Before moving to Module 02, confirm you can:
 ## Next
 
 [Module 02 — Java Basics](../module-02-java-basics/)
+{% endraw %}
