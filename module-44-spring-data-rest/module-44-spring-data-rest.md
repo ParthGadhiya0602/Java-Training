@@ -1,5 +1,6 @@
 ---
 title: "Module 44 — Spring Data REST"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 44
 render_with_liquid: false
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Module 28 — Build Tools"
+parent: "Phase 3 — Intermediate Engineering"
 nav_order: 28
 render_with_liquid: false
 ---

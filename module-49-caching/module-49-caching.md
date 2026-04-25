@@ -1,5 +1,6 @@
 ---
 title: "Module 49 — Caching"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 49
 render_with_liquid: false
 ---

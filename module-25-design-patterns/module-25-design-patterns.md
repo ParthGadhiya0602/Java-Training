@@ -1,5 +1,6 @@
 ---
 title: "Module 25 — Design Patterns"
+parent: "Phase 3 — Intermediate Engineering"
 nav_order: 25
 render_with_liquid: false
 ---

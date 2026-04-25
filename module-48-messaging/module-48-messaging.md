@@ -1,5 +1,6 @@
 ---
 title: "Module 48 — Messaging"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 48
 render_with_liquid: false
 ---

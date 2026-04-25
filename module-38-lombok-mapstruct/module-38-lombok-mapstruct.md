@@ -1,5 +1,6 @@
 ---
 title: "Module 38 — Lombok & MapStruct"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 38
 render_with_liquid: false
 ---

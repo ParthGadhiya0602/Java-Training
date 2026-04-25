@@ -1,5 +1,6 @@
 ---
 title: "Module 53 — Docker & Containers"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 53
 render_with_liquid: false
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Module 37 — Spring Boot"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 37
 render_with_liquid: false
 ---

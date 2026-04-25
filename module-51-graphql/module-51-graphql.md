@@ -1,5 +1,6 @@
 ---
 title: "Module 51 — GraphQL with Spring"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 51
 render_with_liquid: false
 ---

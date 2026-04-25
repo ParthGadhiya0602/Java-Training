@@ -1,5 +1,6 @@
 ---
 title: "Module 52 — gRPC with Spring Boot"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 52
 render_with_liquid: false
 ---

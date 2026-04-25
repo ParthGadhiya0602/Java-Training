@@ -1,5 +1,6 @@
 ---
 title: "Module 47 — Spring Cloud"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 47
 render_with_liquid: false
 ---

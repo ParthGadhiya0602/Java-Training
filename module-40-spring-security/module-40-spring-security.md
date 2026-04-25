@@ -1,5 +1,6 @@
 ---
 title: "Module 40 — Spring Security"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 40
 render_with_liquid: false
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Module 42 — Spring WebFlux & Reactive"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 42
 render_with_liquid: false
 ---

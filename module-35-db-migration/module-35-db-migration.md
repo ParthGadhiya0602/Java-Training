@@ -1,5 +1,6 @@
 ---
 title: "Module 35 — Database Migration"
+parent: "Phase 4 — Databases & Persistence"
 nav_order: 35
 render_with_liquid: false
 ---

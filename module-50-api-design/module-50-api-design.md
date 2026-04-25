@@ -1,5 +1,6 @@
 ---
 title: "Module 50 — API Design"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 50
 render_with_liquid: false
 ---

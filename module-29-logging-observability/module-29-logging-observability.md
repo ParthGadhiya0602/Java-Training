@@ -1,5 +1,6 @@
 ---
 title: "Module 29 — Logging & Observability"
+parent: "Phase 3 — Intermediate Engineering"
 nav_order: 29
 render_with_liquid: false
 ---

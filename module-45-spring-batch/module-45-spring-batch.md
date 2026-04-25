@@ -1,5 +1,6 @@
 ---
 title: "Module 45 — Spring Batch"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 45
 render_with_liquid: false
 ---

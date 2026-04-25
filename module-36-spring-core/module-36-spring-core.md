@@ -1,5 +1,6 @@
 ---
 title: "Module 36 — Spring Core"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 36
 render_with_liquid: false
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Module 55 — CI/CD"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 55
 render_with_liquid: false
 ---

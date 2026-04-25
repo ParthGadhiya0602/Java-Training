@@ -1,5 +1,6 @@
 ---
 title: "Module 43 — Thymeleaf"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 43
 render_with_liquid: false
 ---

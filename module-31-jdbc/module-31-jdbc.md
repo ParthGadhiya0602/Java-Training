@@ -1,5 +1,6 @@
 ---
 title: "Module 31 — JDBC"
+parent: "Phase 4 — Databases & Persistence"
 nav_order: 31
 render_with_liquid: false
 ---

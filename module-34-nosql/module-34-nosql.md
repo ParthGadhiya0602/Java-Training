@@ -1,5 +1,6 @@
 ---
 title: "Module 34 — NoSQL"
+parent: "Phase 4 — Databases & Persistence"
 nav_order: 34
 render_with_liquid: false
 ---

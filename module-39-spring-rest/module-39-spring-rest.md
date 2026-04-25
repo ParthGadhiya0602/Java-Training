@@ -1,5 +1,6 @@
 ---
 title: "Module 39 — Spring REST APIs"
+parent: "Phase 5 — Spring Ecosystem"
 nav_order: 39
 render_with_liquid: false
 ---

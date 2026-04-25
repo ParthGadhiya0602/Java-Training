@@ -1,5 +1,6 @@
 ---
 title: "Module 56 — Performance & Profiling"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 56
 render_with_liquid: false
 ---

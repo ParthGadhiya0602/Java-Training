@@ -1,5 +1,6 @@
 ---
 title: "Module 30 — Clean Code & Refactoring"
+parent: "Phase 3 — Intermediate Engineering"
 nav_order: 30
 render_with_liquid: false
 ---

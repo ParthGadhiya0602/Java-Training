@@ -1,5 +1,6 @@
 ---
 title: "Module 32 — JPA & Hibernate"
+parent: "Phase 4 — Databases & Persistence"
 nav_order: 32
 render_with_liquid: false
 ---

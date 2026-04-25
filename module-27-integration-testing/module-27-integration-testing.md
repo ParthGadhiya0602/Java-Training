@@ -1,5 +1,6 @@
 ---
 title: "Module 27 — Integration Testing"
+parent: "Phase 3 — Intermediate Engineering"
 nav_order: 27
 render_with_liquid: false
 ---

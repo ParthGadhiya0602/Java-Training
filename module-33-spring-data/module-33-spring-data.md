@@ -1,5 +1,6 @@
 ---
 title: "Module 33 — Spring Data JPA"
+parent: "Phase 4 — Databases & Persistence"
 nav_order: 33
 render_with_liquid: false
 ---

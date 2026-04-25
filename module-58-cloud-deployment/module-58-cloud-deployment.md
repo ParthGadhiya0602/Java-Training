@@ -1,5 +1,6 @@
 ---
 title: "Module 58 — Cloud Deployment"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 58
 render_with_liquid: false
 ---

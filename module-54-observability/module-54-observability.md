@@ -1,5 +1,6 @@
 ---
 title: "Module 54 — Observability"
+parent: "Phase 6 — Production & Architecture"
 nav_order: 54
 render_with_liquid: false
 ---
