@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-deployment-demo
+  labels:
+    app: cloud-deployment-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloud-deployment-demo
+  template:
+    metadata:
+      labels:
+        app: cloud-deployment-demo
+    spec:
+      containers:
+        - name: app
+          image: cloud-deployment-demo:latest
+          ports:
+            - containerPort: 8080
+
+          # 12-factor Factor III — Config: injected as env vars, not baked into the image
+          env:
+            - name: APP_ENVIRONMENT
+              value: "prod"
+            - name: APP_REGION
+              value: "us-east-1"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: APP_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: db-password
+
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+          # Liveness probe: if this fails, Kubernetes restarts the pod
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            failureThreshold: 3
+
+          # Readiness probe: if this fails, Kubernetes stops routing traffic to the pod
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+
+          lifecycle:
+            # preStop sleep gives the load balancer time to deregister the pod
+            # before Spring Boot starts refusing new connections (graceful shutdown)
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 5"]
+
+      # Must exceed spring.lifecycle.timeout-per-shutdown-phase (30s) + preStop sleep (5s)
+      terminationGracePeriodSeconds: 60

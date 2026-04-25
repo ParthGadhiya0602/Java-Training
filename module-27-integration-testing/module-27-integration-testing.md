@@ -4,6 +4,8 @@ nav_order: 27
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-27-integration-testing/src){: .btn .btn-outline }
+
 # Module 27 — Integration Testing
 
 Integration tests verify that components work correctly together with real

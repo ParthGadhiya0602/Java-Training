@@ -10,11 +10,17 @@ plugins:
 # ── Site identity ──────────────────────────────────────────────────────────────
 logo: "/assets/images/logo.png"   # optional: add a logo to assets/images/
 
-# Uncomment and set your repo URL after pushing to GitHub
-# aux_links:
-#   "GitHub":
-#     - "https://github.com/YOUR_USERNAME/java-training"
-# aux_links_new_tab: true
+aux_links:
+  "GitHub":
+    - "https://github.com/ParthGadhiya0602/Java-Training"
+aux_links_new_tab: true
+
+# ── Edit / source links on every page ─────────────────────────────────────────
+gh_edit_link: true
+gh_edit_link_text: "Edit this page"
+gh_edit_repository: "https://github.com/ParthGadhiya0602/Java-Training"
+gh_edit_branch: "main"
+gh_edit_view_mode: "tree"
 
 # ── Search ─────────────────────────────────────────────────────────────────────
 search_enabled: true

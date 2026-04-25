@@ -1,3 +1,11 @@
+---
+title: "Module 45 — Spring Batch"
+nav_order: 45
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-45-spring-batch/src){: .btn .btn-outline }
+
 # Module 45 — Spring Batch
 
 ## Overview

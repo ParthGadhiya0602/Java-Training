@@ -1,3 +1,11 @@
+---
+title: "Module 37 — Spring Boot"
+nav_order: 37
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-37-spring-boot/src){: .btn .btn-outline }
+
 # Module 37 — Spring Boot
 
 Spring Boot makes Spring-based applications runnable with minimal configuration:

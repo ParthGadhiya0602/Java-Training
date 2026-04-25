@@ -1,3 +1,11 @@
+---
+title: "Module 38 — Lombok & MapStruct"
+nav_order: 38
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-38-lombok-mapstruct/src){: .btn .btn-outline }
+
 # Module 38 — Lombok & MapStruct
 
 Two annotation-processing tools that eliminate boilerplate without runtime cost:

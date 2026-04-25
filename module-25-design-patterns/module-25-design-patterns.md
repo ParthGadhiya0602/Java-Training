@@ -4,6 +4,8 @@ nav_order: 25
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-25-design-patterns/src){: .btn .btn-outline }
+
 # Module 25 — Design Patterns
 
 Design patterns are reusable solutions to recurring software design problems.

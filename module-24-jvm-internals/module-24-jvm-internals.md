@@ -5,6 +5,8 @@ nav_order: 24
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-24-jvm-internals/src){: .btn .btn-outline }
+
 # Module 24 — JVM Internals: GC, JIT, ClassLoaders
 {: .no_toc }
 

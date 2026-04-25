@@ -5,6 +5,8 @@ nav_order: 14
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-14-streams/src){: .btn .btn-outline }
+
 # Module 14 — Streams API
 
 ## What You Will Learn

@@ -5,6 +5,8 @@ nav_order: 15
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-15-functional-programming/src){: .btn .btn-outline }
+
 # Module 15 — Functional Programming: Optional & Method References
 {: .no_toc }
 

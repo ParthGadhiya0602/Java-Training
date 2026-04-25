@@ -4,6 +4,8 @@ nav_order: 30
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-30-clean-code/src){: .btn .btn-outline }
+
 # Module 30 — Clean Code & Refactoring
 
 Clean code is not about style preferences — it is about reducing the cost of change.

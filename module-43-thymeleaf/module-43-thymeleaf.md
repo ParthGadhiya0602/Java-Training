@@ -1,3 +1,11 @@
+---
+title: "Module 43 — Thymeleaf"
+nav_order: 43
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-43-thymeleaf/src){: .btn .btn-outline }
+
 # Module 43 — Thymeleaf
 
 ## Overview

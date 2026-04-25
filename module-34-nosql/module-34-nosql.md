@@ -4,6 +4,8 @@ nav_order: 34
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-34-nosql/src){: .btn .btn-outline }
+
 # Module 34 — NoSQL
 
 Two NoSQL stores that cover the most common non-relational patterns:

@@ -1,3 +1,11 @@
+---
+title: "Module 48 — Messaging"
+nav_order: 48
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-48-messaging/src){: .btn .btn-outline }
+
 # Module 48 — Messaging
 
 ## What this module covers

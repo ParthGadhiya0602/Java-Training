@@ -1,3 +1,11 @@
+---
+title: "Module 39 — Spring REST APIs"
+nav_order: 39
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-39-spring-rest/src){: .btn .btn-outline }
+
 # Module 39 — Spring REST APIs
 
 Building a fully-featured REST API with Spring MVC:

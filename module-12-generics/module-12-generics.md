@@ -5,6 +5,8 @@ nav_order: 12
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-12-generics/src){: .btn .btn-outline }
+
 # Module 12 — Generics
 
 ## What You Will Learn

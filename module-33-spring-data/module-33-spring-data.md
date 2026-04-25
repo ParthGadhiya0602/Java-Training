@@ -4,6 +4,8 @@ nav_order: 33
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-33-spring-data/src){: .btn .btn-outline }
+
 # Module 33 — Spring Data JPA
 
 Spring Data JPA sits on top of JPA/Hibernate and eliminates most boilerplate.

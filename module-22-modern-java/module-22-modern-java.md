@@ -5,6 +5,8 @@ nav_order: 22
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-22-modern-java/src){: .btn .btn-outline }
+
 # Module 22 — Modern Java (Java 9–21)
 {: .no_toc }
 

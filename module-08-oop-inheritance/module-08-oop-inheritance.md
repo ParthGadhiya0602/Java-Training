@@ -5,6 +5,8 @@ nav_order: 8
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-08-oop-inheritance/src){: .btn .btn-outline }
+
 # Module 08 — OOP: Inheritance & Polymorphism
 
 ## What You Will Learn

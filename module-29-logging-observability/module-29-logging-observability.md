@@ -4,6 +4,8 @@ nav_order: 29
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-29-logging-observability/src){: .btn .btn-outline }
+
 # Module 29 — Logging & Observability
 
 SLF4J provides a vendor-neutral logging API; Logback is the reference implementation.

@@ -5,6 +5,8 @@ nav_order: 23
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-23-algorithms/src){: .btn .btn-outline }
+
 # Module 23 — Algorithms & Data Structures
 {: .no_toc }
 

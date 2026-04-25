@@ -1,3 +1,11 @@
+---
+title: "Module 40 — Spring Security"
+nav_order: 40
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-40-spring-security/src){: .btn .btn-outline }
+
 # Module 40 — Spring Security
 
 Securing a Spring Boot REST API layer by layer:

@@ -5,6 +5,8 @@ nav_order: 5
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-05-arrays-strings/src){: .btn .btn-outline }
+
 # Module 05 — Arrays, Strings & Regex
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

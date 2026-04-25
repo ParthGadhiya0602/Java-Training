@@ -5,6 +5,8 @@ nav_order: 4
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-04-methods/src){: .btn .btn-outline }
+
 # Module 04 — Methods
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

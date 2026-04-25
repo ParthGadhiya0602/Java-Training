@@ -1,3 +1,11 @@
+---
+title: "Module 44 — Spring Data REST"
+nav_order: 44
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-44-spring-data-rest/src){: .btn .btn-outline }
+
 # Module 44 — Spring Data REST
 
 ## Overview

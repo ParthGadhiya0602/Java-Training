@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.javatraining.grpc.proto";
+option java_outer_classname = "BookServiceProto";
+
+package book;
+
+service BookService {
+    // Unary RPC: fetch a single book by id
+    rpc GetBook(GetBookRequest) returns (BookResponse);
+
+    // Server-streaming RPC: stream all books matching a genre filter
+    rpc ListBooks(ListBooksRequest) returns (stream BookResponse);
+}
+
+message GetBookRequest {
+    int64 id = 1;
+}
+
+message ListBooksRequest {
+    string genre = 1;
+}
+
+message BookResponse {
+    int64  id     = 1;
+    string title  = 2;
+    string genre  = 3;
+    string author = 4;
+}

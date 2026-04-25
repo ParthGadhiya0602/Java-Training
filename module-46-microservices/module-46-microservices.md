@@ -1,3 +1,11 @@
+---
+title: "Module 46 — Microservices Architecture"
+nav_order: 46
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-46-microservices/src){: .btn .btn-outline }
+
 # Module 46 — Microservices Architecture
 
 ## Overview

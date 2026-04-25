@@ -4,6 +4,8 @@ nav_order: 32
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-32-jpa-hibernate/src){: .btn .btn-outline }
+
 # Module 32 — JPA & Hibernate
 
 JPA (Jakarta Persistence API) is an abstraction over JDBC.  Instead of writing

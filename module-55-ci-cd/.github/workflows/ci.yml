@@ -1,0 +1,72 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, "release/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test-scan:
+    name: Build · Test · Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Full history required for SonarQube blame annotations
+          fetch-depth: 0
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: temurin
+          # Cache ~/.m2/repository — skips re-downloading dependencies on every run
+          cache: maven
+
+      - name: Build, test, and generate coverage report
+        # `verify` runs: compile → test → JaCoCo report (target/site/jacoco/)
+        run: mvn --batch-mode verify
+
+      - name: SonarQube scan
+        # Only on push — pull requests from forks cannot access repo secrets
+        if: github.event_name == 'push'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: mvn --batch-mode sonar:sonar
+
+      - name: Upload JaCoCo coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+          retention-days: 7
+
+  docker:
+    name: Build Docker image
+    needs: build-test-scan
+    runs-on: ubuntu-latest
+    # Only build images from main — not from pull requests
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image (no push)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: |
+            java-training/module-55:${{ github.sha }}
+            java-training/module-55:latest
+          # Layer cache — reuses layers from the most recent main-branch build
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

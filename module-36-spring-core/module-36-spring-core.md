@@ -1,3 +1,11 @@
+---
+title: "Module 36 — Spring Core"
+nav_order: 36
+render_with_liquid: false
+---
+
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-36-spring-core/src){: .btn .btn-outline }
+
 # Module 36 — Spring Core
 
 The foundation that every other Spring module builds on:

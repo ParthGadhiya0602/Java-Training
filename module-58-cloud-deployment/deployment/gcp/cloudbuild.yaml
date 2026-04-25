@@ -1,0 +1,35 @@
+steps:
+  # Step 1: Run tests
+  - name: 'maven:3.9-eclipse-temurin-21'
+    entrypoint: mvn
+    args: ['--batch-mode', 'verify']
+
+  # Step 2: Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - -t
+      - gcr.io/$PROJECT_ID/cloud-deployment-demo:$SHORT_SHA
+      - -t
+      - gcr.io/$PROJECT_ID/cloud-deployment-demo:latest
+      - .
+
+  # Step 3: Push to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '--all-tags', 'gcr.io/$PROJECT_ID/cloud-deployment-demo']
+
+  # Step 4: Deploy to GKE (if cluster is configured)
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    args:
+      - run
+      - --filename=deployment/k8s/
+      - --image=gcr.io/$PROJECT_ID/cloud-deployment-demo:$SHORT_SHA
+      - --location=us-central1
+      - --cluster=production-cluster
+
+images:
+  - gcr.io/$PROJECT_ID/cloud-deployment-demo:$SHORT_SHA
+  - gcr.io/$PROJECT_ID/cloud-deployment-demo:latest
+
+options:
+  logging: CLOUD_LOGGING_ONLY

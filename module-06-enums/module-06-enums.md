@@ -5,6 +5,8 @@ nav_order: 6
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-06-enums/src){: .btn .btn-outline }
+
 # Module 06 — Enums
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

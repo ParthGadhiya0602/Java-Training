@@ -5,6 +5,8 @@ nav_order: 2
 render_with_liquid: false
 ---
 
+[View source on GitHub](https://github.com/ParthGadhiya0602/Java-Training/tree/main/module-02-java-basics/src){: .btn .btn-outline }
+
 # Module 02 — Java Basics
 
 > **Phase:** Fundamentals | **Build tool:** Maven | **Java:** 21

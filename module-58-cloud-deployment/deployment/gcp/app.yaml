@@ -1,0 +1,39 @@
+# GCP App Engine Flexible environment
+runtime: java
+env: flex
+
+runtime_config:
+  jdk: openjdk21
+
+env_variables:
+  APP_ENVIRONMENT: prod
+  APP_REGION: us-central1
+  SPRING_PROFILES_ACTIVE: prod
+  SERVER_PORT: "8080"
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 10
+  cpu_utilization:
+    target_utilization: 0.65
+
+resources:
+  cpu: 1
+  memory_gb: 1.0
+  disk_size_gb: 10
+
+readiness_check:
+  path: /actuator/health/readiness
+  check_interval_sec: 5
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+  app_start_timeout_sec: 300
+
+liveness_check:
+  path: /actuator/health/liveness
+  check_interval_sec: 30
+  timeout_sec: 4
+  failure_threshold: 4
+  success_threshold: 2
+  initial_delay_sec: 300
