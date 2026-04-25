@@ -1,6 +1,9 @@
 title: "Java Training"
 description: "Beginner to Production-Ready — 59 modules covering core Java through cloud deployment."
 
+url: "https://parthgadhiya0602.github.io"
+baseurl: "/Java-Training"
+
 remote_theme: just-the-docs/just-the-docs@v0.10.0
 
 plugins:
