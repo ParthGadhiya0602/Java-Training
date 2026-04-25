@@ -11,7 +11,7 @@ plugins:
   - jekyll-seo-tag
 
 # ── Site identity ──────────────────────────────────────────────────────────────
-logo: "/assets/images/logo.png"   # optional: add a logo to assets/images/
+logo: "/assets/images/logo.png" # optional: add a logo to assets/images/
 
 aux_links:
   "GitHub":
@@ -32,16 +32,16 @@ search:
   previews: 3
 
 # ── Navigation ─────────────────────────────────────────────────────────────────
-nav_sort: order          # order by nav_order front-matter field
+nav_sort: order # order by nav_order front-matter field
 nav_external_links:
   - title: Java 21 Docs
     url: https://docs.oracle.com/en/java/javase/21/docs/api/
 
 # ── Colour scheme ──────────────────────────────────────────────────────────────
-color_scheme: light      # light | dark
+color_scheme: light # light | dark
 
 # ── Footer ─────────────────────────────────────────────────────────────────────
-footer_content: "Java Training &mdash; 59 modules, beginner to production-ready."
+footer_content: 'Java Training &mdash; 59 modules, beginner to production-ready. Built by <a href="https://github.com/ParthGadhiya0602">Parth Gadhiya</a>'
 
 # ── Callouts (used for tip/warning blocks) ─────────────────────────────────────
 callouts_level: loud
